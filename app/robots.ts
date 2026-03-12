@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://lightspi.dev/sitemap.xml',
+    sitemap: 'https://lights.griffen.codes/sitemap.xml',
   }
 }

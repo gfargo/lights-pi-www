@@ -12,7 +12,7 @@ import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lightspi.dev'),
+  metadataBase: new URL('https://lights.griffen.codes'),
   title: "Lights Pi - Professional Studio Lighting Control for $35",
   description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
   keywords: ["Raspberry Pi lighting controller", "DMX controller", "QLC+", "studio lighting", "open source"],
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Lights Pi - Professional Studio Lighting Control for $35",
     description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
     type: "website",
-    url: "https://lightspi.dev",
+    url: "https://lights.griffen.codes",
     siteName: "Lights Pi",
     images: [
       {

@@ -2,7 +2,7 @@
 
 ## ✅ Sitemap.xml - WORKING
 
-**URL:** http://localhost:3001/sitemap.xml (will be https://lightspi.dev/sitemap.xml in production)
+**URL:** http://localhost:3001/sitemap.xml (will be https://lights.griffen.codes/sitemap.xml in production)
 
 **Status:** ✅ Fully functional
 
@@ -28,7 +28,7 @@
 
 ## ✅ Robots.txt - WORKING
 
-**URL:** http://localhost:3001/robots.txt (will be https://lightspi.dev/robots.txt in production)
+**URL:** http://localhost:3001/robots.txt (will be https://lights.griffen.codes/robots.txt in production)
 
 **Status:** ✅ Fully functional
 
@@ -37,7 +37,7 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://lightspi.dev/sitemap.xml
+Sitemap: https://lights.griffen.codes/sitemap.xml
 ```
 
 **Configuration:**
@@ -63,7 +63,7 @@ All pages include:
 **Schemas Included:**
 1. ✅ Organization schema
    - Name: Lights Pi
-   - URL: https://lightspi.dev
+   - URL: https://lights.griffen.codes
    - Logo reference
    - Social media links
 
@@ -129,7 +129,7 @@ Based on implementation:
 curl http://localhost:3001/sitemap.xml
 
 # Production (after deployment)
-curl https://lightspi.dev/sitemap.xml
+curl https://lights.griffen.codes/sitemap.xml
 ```
 
 ### 2. Robots.txt
@@ -138,7 +138,7 @@ curl https://lightspi.dev/sitemap.xml
 curl http://localhost:3001/robots.txt
 
 # Production (after deployment)
-curl https://lightspi.dev/robots.txt
+curl https://lights.griffen.codes/robots.txt
 ```
 
 ### 3. Meta Tags

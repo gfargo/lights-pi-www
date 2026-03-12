@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { resolveAllFlags } from '@/lib/flags/runtime'
  
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://lightspi.dev'
+  const baseUrl = 'https://lights.griffen.codes'
   const flags = await resolveAllFlags()
   
   const routes: MetadataRoute.Sitemap = [

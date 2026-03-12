@@ -3,12 +3,11 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Lights Pi",
-    "url": "https://lightspi.dev",
-    "logo": "https://lightspi.dev/logo.png",
+    "url": "https://lights.griffen.codes",
+    "logo": "https://lights.griffen.codes/og-image.svg",
     "description": "Open source Raspberry Pi lighting controller for DMX fixtures",
     "sameAs": [
-      "https://github.com/yourusername/lights-pi",
-      "https://discord.gg/yourserver"
+      "https://github.com/gfargo/lights-pi"
     ]
   };
 
