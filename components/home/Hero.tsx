@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { Play, Github, Star } from "lucide-react";
 import { FadeIn } from '../animations/FadeIn';
+import { trackEvent } from '@/lib/analytics';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Animated background elements - QLC+ inspired */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-9000/10 rounded-full blur-3xl animate-pulse" />
@@ -39,15 +40,20 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Link
               href="/quick-start"
-              className="group bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              onClick={() => trackEvent.clickGetStarted('hero')}
+              className="group bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               Get Started in 10 Minutes
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </Link>
-            <button className="flex items-center space-x-2 bg-gray-800 text-gray-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-700 transition border border-gray-700">
+            <Link
+              href="/demo"
+              onClick={() => trackEvent.demoInteraction('hero_demo_click')}
+              className="flex items-center space-x-2 bg-gray-800 text-gray-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-700 transition border border-gray-700"
+            >
               <Play className="w-5 h-5" />
-              <Link href="/demo">Try Demo</Link>
-            </button>
+              <span>Try Demo</span>
+            </Link>
           </div>
         </FadeIn>
 
@@ -68,7 +74,7 @@ export function Hero() {
         <FadeIn delay={0.6}>
           <div className="mt-16 relative">
             <div className="relative mx-auto max-w-5xl rounded-2xl shadow-2xl overflow-hidden border-8 border-gray-800">
-              <div className="aspect-video bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+              <div className="aspect-video bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center">
                 <div className="text-center">
                   <div className="inline-flex space-x-4 mb-4">
                     <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse" />
@@ -79,8 +85,8 @@ export function Hero() {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-orange-500 to-blue-500 rounded-full blur-3xl opacity-30" />
-            <div className="absolute -top-4 -left-4 w-32 h-32 bg-gradient-to-br from-blue-500 to-green-500 rounded-full blur-3xl opacity-30" />
+            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-linear-to-br from-orange-500 to-blue-500 rounded-full blur-3xl opacity-30" />
+            <div className="absolute -top-4 -left-4 w-32 h-32 bg-linear-to-br from-blue-500 to-green-500 rounded-full blur-3xl opacity-30" />
           </div>
         </FadeIn>
       </div>

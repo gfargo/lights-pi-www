@@ -158,7 +158,7 @@ const roadmap = [
 
 export default function RoadmapPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
@@ -192,7 +192,7 @@ export default function RoadmapPage() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-200 via-blue-200 to-purple-200" />
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-linear-to-b from-green-200 via-blue-200 to-purple-200" />
 
           <div className="space-y-12">
             {roadmap.map((quarter, qIndex) => (
@@ -240,7 +240,7 @@ export default function RoadmapPage() {
                               </div>
                               <div className="w-full bg-gray-700 rounded-full h-2">
                                 <div
-                                  className="bg-gradient-to-r from-orange-500 to-blue-500 h-2 rounded-full transition-all duration-500"
+                                  className="bg-linear-to-r from-orange-500 to-blue-500 h-2 rounded-full transition-all duration-500"
                                   style={{ width: `${item.progress}%` }}
                                 />
                               </div>
@@ -257,7 +257,7 @@ export default function RoadmapPage() {
         </div>
 
         {/* Community Input CTA */}
-        <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
+        <div className="mt-20 bg-linear-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Have Ideas?</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             We&apos;d love to hear your feature requests and ideas for Lights Pi
@@ -265,7 +265,7 @@ export default function RoadmapPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://github.com/yourusername/lights-pi/discussions"
-              className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
+              className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
             >
               Share Your Ideas
             </a>

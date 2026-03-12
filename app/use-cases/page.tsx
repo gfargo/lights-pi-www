@@ -118,7 +118,7 @@ const useCases = [
 
 export default function UseCasesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
@@ -139,7 +139,7 @@ export default function UseCasesPage() {
                 <div className={`grid md:grid-cols-2 gap-12 items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}>
                   {/* Content */}
                   <div className={isEven ? 'md:order-1' : 'md:order-2'}>
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-orange-500 to-blue-500 rounded-2xl mb-6">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                     <h2 className="text-4xl font-bold mb-3 text-white">{useCase.title}</h2>
@@ -171,7 +171,7 @@ export default function UseCasesPage() {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+                    <div className="bg-linear-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
                       <h4 className="font-bold text-white mb-2">Real-World Example</h4>
                       <p className="text-gray-300 italic">{useCase.example}</p>
                     </div>
@@ -179,7 +179,7 @@ export default function UseCasesPage() {
 
                   {/* Visual */}
                   <div className={isEven ? 'md:order-2' : 'md:order-1'}>
-                    <div className="aspect-square bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center text-8xl shadow-2xl">
+                    <div className="aspect-square bg-linear-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center text-8xl shadow-2xl">
                       <Icon className="w-32 h-32 text-white" />
                     </div>
                   </div>
@@ -190,7 +190,7 @@ export default function UseCasesPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-12 text-center text-white">
+        <div className="mt-20 bg-linear-to-r from-orange-500 to-blue-500 rounded-2xl p-12 text-center text-white">
           <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl mb-8 text-white/90">
             Build your Lights Pi controller and start controlling your lights today

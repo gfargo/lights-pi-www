@@ -19,7 +19,7 @@ export function CostComparison() {
               <tr className="border-b-2 border-gray-700">
                 <th className="text-left py-4 px-6 font-bold text-white">Feature</th>
                 <th className="text-center py-4 px-6 font-bold text-gray-400">Commercial</th>
-                <th className="text-center py-4 px-6 font-bold bg-gradient-to-r from-orange-500 to-blue-500 text-white rounded-t-xl">
+                <th className="text-center py-4 px-6 font-bold bg-linear-to-r from-orange-500 to-blue-500 text-white rounded-t-xl">
                   Lights Pi
                 </th>
               </tr>
@@ -73,7 +73,7 @@ export function CostComparison() {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="inline-block bg-gradient-to-r from-orange-500/20 to-blue-500/20 rounded-2xl p-8 border border-orange-500/50">
+          <div className="inline-block bg-linear-to-r from-orange-500/20 to-blue-500/20 rounded-2xl p-8 border border-orange-500/50">
             <p className="text-3xl font-bold text-white mb-2">
               Save up to <span className="text-gradient">$4,850+</span>
             </p>

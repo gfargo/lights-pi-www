@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-purple-50 flex items-center justify-center px-4">
       <div className="max-w-2xl mx-auto text-center">
         {/* Animated 404 */}
         <div className="mb-8">
@@ -39,7 +39,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <Link
             href="/"
-            className="group flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+            className="group flex items-center space-x-2 bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
           >
             <Home className="w-5 h-5" />
             <span>Go Home</span>

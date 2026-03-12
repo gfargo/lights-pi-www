@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function SystemRequirementsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/docs" className="text-orange-500 hover:text-orange-400 mb-6 inline-block">
           ← Back to Documentation
@@ -155,7 +155,7 @@ export default function SystemRequirementsPage() {
             </ul>
           </div>
 
-          <div className="bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
+          <div className="bg-linear-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
             <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-white/90 mb-6">
               Follow our quick start guide to set up your Lights Pi

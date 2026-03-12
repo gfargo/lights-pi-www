@@ -64,7 +64,7 @@ export function ProblemSolution() {
 
           {/* The Result */}
           <FadeIn delay={0.3} direction="right">
-            <div className="bg-gradient-to-br from-orange-900/30 to-blue-900/30 rounded-2xl p-8 border border-orange-900/50">
+            <div className="bg-linear-to-br from-orange-900/30 to-blue-900/30 rounded-2xl p-8 border border-orange-900/50">
               <div className="w-12 h-12 bg-orange-900/50 rounded-lg flex items-center justify-center mb-6">
                 <Sparkles className="w-6 h-6 text-orange-500" />
               </div>

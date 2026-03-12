@@ -51,7 +51,7 @@ const colorClasses: Record<string, { bg: string; icon: string; border: string }>
 
 export function KeyFeatures() {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-800 to-gray-900">
+    <section className="py-24 bg-linear-to-b from-gray-800 to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">

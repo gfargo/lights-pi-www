@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 interface CodeBlockProps {
   code: string;
@@ -16,6 +17,7 @@ export function CodeBlock({ code, language = "bash", filename }: CodeBlockProps)
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
+      trackEvent.copyCode(filename || language);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy:", err);

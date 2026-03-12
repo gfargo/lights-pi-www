@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Github, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFlag } from "@/components/flags/flags-provider";
+import { trackEvent } from "@/lib/analytics";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,7 +53,7 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2 z-50" aria-label="Lights Pi home">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-blue-500 rounded-lg" aria-hidden="true" />
+              <div className="w-8 h-8 bg-linear-to-br from-orange-500 to-blue-500 rounded-lg" aria-hidden="true" />
               <span className="font-bold text-xl text-white">Lights Pi</span>
             </Link>
 
@@ -75,6 +76,7 @@ export function Navigation() {
                 href="https://github.com/gfargo/lights-pi"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent.clickViewGitHub('navigation')}
                 className="text-gray-300 hover:text-orange-500 transition"
                 aria-label="View Lights Pi on GitHub"
               >
@@ -82,7 +84,8 @@ export function Navigation() {
               </a>
               <Link
                 href="/quick-start"
-                className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-6 py-2 rounded-lg hover:shadow-lg transition"
+                onClick={() => trackEvent.clickGetStarted('navigation')}
+                className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-6 py-2 rounded-lg hover:shadow-lg transition"
               >
                 Get Started
               </Link>
@@ -170,6 +173,7 @@ export function Navigation() {
                     href="https://github.com/gfargo/lights-pi"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent.clickViewGitHub('mobile_navigation')}
                     className="flex items-center justify-center space-x-2 px-6 py-3 text-gray-300 border border-gray-700 rounded-lg hover:bg-gray-800 transition"
                     aria-label="View Lights Pi on GitHub"
                   >
@@ -178,8 +182,11 @@ export function Navigation() {
                   </a>
                   <Link
                     href="/quick-start"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-center bg-gradient-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-lg hover:shadow-lg transition"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      trackEvent.clickGetStarted('mobile_navigation');
+                    }}
+                    className="block text-center bg-linear-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-lg hover:shadow-lg transition"
                   >
                     Get Started
                   </Link>

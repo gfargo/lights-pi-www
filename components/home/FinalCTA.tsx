@@ -1,11 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Github } from "lucide-react";
+import { trackEvent } from '@/lib/analytics';
 
 export function FinalCTA() {
   return (
     <section className="relative py-24 overflow-hidden bg-gray-950">
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-blue-500/20 to-purple-500/10" />
+      <div className="absolute inset-0 bg-linear-to-br from-orange-500/20 via-blue-500/20 to-purple-500/10" />
       
       {/* Animated elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -26,15 +29,17 @@ export function FinalCTA() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
           <Link
             href="/quick-start"
+            onClick={() => trackEvent.clickGetStarted('final_cta')}
             className="group bg-gray-900 text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center"
           >
             Get Started Now
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <a
-            href="https://github.com/yourusername/lights-pi"
+            href="https://github.com/gfargo/lights-pi"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent.clickViewGitHub('final_cta')}
             className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/20 transition border border-white/20"
           >
             <Github className="w-5 h-5" />

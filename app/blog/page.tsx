@@ -25,7 +25,7 @@ export default async function BlogPage() {
 
   const featuredPost = posts.find(p => p.featured) || posts[0];
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
@@ -54,7 +54,7 @@ export default async function BlogPage() {
 
         {/* Featured Post */}
         <div className="mb-16">
-          <div className="bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-linear-to-br from-orange-500 to-blue-500 rounded-2xl overflow-hidden shadow-2xl">
             <div className="grid md:grid-cols-2">
               <div className="p-12 text-white">
                 <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold mb-4">
@@ -82,7 +82,7 @@ export default async function BlogPage() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </div>
-              <div className="bg-gradient-to-br from-orange-500 to-blue-500 flex items-center justify-center text-9xl p-12">
+              <div className="bg-linear-to-br from-orange-500 to-blue-500 flex items-center justify-center text-9xl p-12">
                 🚀
               </div>
             </div>
@@ -93,7 +93,7 @@ export default async function BlogPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.slice(1).map((post, index) => (
             <article key={index} className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="aspect-video bg-gradient-to-br from-orange-500 to-blue-500 flex items-center justify-center text-6xl">
+              <div className="aspect-video bg-linear-to-br from-orange-500 to-blue-500 flex items-center justify-center text-6xl">
                 {post.category === "Tutorials" ? "📚" : 
                  post.category === "Community" ? "👥" :
                  post.category === "Use Cases" ? "💡" : "📢"}
@@ -138,7 +138,7 @@ export default async function BlogPage() {
         </div>
 
         {/* Newsletter CTA */}
-        <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
+        <div className="mt-20 bg-linear-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Stay Updated</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Get the latest Lights Pi news, tutorials, and community stories delivered to your inbox
@@ -149,7 +149,7 @@ export default async function BlogPage() {
               placeholder="Enter your email"
               className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-orange-500/50 outline-none"
             />
-            <button className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition whitespace-nowrap">
+            <button className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition whitespace-nowrap">
               Subscribe
             </button>
           </div>

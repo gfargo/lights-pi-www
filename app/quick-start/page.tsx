@@ -69,7 +69,7 @@ const steps = [
 
 export default function QuickStartPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -124,13 +124,13 @@ export default function QuickStartPage() {
               <div key={index} className="relative pb-12">
                 {/* Timeline connector */}
                 {!isLast && (
-                  <div className="absolute left-8 top-24 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 via-blue-500 to-purple-500" />
+                  <div className="absolute left-8 top-24 bottom-0 w-0.5 bg-linear-to-b from-orange-500 via-blue-500 to-purple-500" />
                 )}
                 
                 <div className="relative bg-gray-900 rounded-2xl border border-gray-700 p-8 shadow-sm hover:shadow-md transition">
                   <div className="flex items-start">
                     <div className="shrink-0 mr-6 relative z-10">
-                      <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
+                      <div className="w-16 h-16 bg-linear-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
                         <Icon className="w-8 h-8 text-white" />
                       </div>
                     </div>
@@ -201,7 +201,7 @@ WIFI2_SSID="StudioNet" WIFI2_PSK="studio-pass" \\
         </div>
 
         {/* Next Steps */}
-        <div className="mt-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 border border-purple-500/50">
+        <div className="mt-16 bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 border border-purple-500/50">
           <h2 className="text-2xl font-bold mb-4 text-white">🎉 You&apos;re All Set!</h2>
           <p className="text-gray-300 mb-6">
             Your Lights Pi controller is ready. Here&apos;s what to do next:

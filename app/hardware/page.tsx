@@ -1,9 +1,7 @@
-import { ShoppingCart, Cpu, Usb, Cable, Wifi, Shield } from "lucide-react";
+"use client";
 
-export const metadata = {
-  title: "Hardware Guide - Lights Pi",
-  description: "Complete shopping list and hardware recommendations for building your Lights Pi controller",
-};
+import { ShoppingCart, Cpu, Usb, Cable, Wifi, Shield } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const shoppingList = [
   {
@@ -151,7 +149,13 @@ export default function HardwarePage() {
                         </span>
                       </td>
                       <td className="py-4 px-6 text-center">
-                        <a href={item.link} className="text-orange-500 hover:text-orange-500 font-medium">
+                        <a 
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackEvent.clickShoppingItem(item.item, item.price)}
+                          className="text-orange-500 hover:text-orange-400 font-medium inline-block"
+                        >
                           <ShoppingCart className="w-5 h-5 inline" />
                         </a>
                       </td>
@@ -302,6 +306,7 @@ export default function HardwarePage() {
           </p>
           <a
             href="/quick-start"
+            onClick={() => trackEvent.clickGetStarted('hardware_cta')}
             className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
           >
             View Quick Start Guide

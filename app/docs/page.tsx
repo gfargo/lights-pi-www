@@ -81,7 +81,7 @@ const categories = [
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -131,7 +131,7 @@ export default function DocsPage() {
             const Icon = category.icon;
             return (
               <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8 hover:shadow-lg transition">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
+                <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-white">{category.title}</h3>
@@ -151,7 +151,7 @@ export default function DocsPage() {
         </div>
 
         {/* Help CTA */}
-        <div className="mt-16 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
+        <div className="mt-16 bg-linear-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Need Help?</h2>
           <p className="text-xl mb-6 text-white/90">
             Join our community for support and discussions

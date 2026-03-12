@@ -36,7 +36,7 @@ export async function SocialProof() {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-900 to-gray-800">
+    <section className="py-24 bg-linear-to-b from-gray-900 to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -53,7 +53,7 @@ export async function SocialProof() {
             const Icon = stat.icon;
             return (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-500 rounded-xl mb-4">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-orange-500 to-blue-500 rounded-xl mb-4">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
@@ -74,7 +74,7 @@ export async function SocialProof() {
               </div>
               <p className="text-gray-300 mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
                   {testimonial.avatar}
                 </div>
                 <div>
