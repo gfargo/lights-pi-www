@@ -9,7 +9,7 @@ export function CostComparison() {
             Save Thousands, <span className="text-gradient">Keep the Quality</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Professional lighting control shouldn't break the bank
+            Professional lighting control shouldn&apos;t break the bank
           </p>
         </div>
 

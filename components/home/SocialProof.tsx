@@ -1,3 +1,4 @@
+import { getGitHubRepoStats } from '@/lib/github';
 import { Star, Users, Download, Heart } from "lucide-react";
 
 const testimonials = [
@@ -71,7 +72,7 @@ export async function SocialProof() {
                   <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
-              <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
+              <p className="text-gray-700 mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
                   {testimonial.avatar}

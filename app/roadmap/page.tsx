@@ -165,7 +165,7 @@ export default function RoadmapPage() {
             Product <span className="text-gradient">Roadmap</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            See what we're building and what's coming next for Lights Pi
+            See what we&apos;re building and what&apos;s coming next for Lights Pi
           </p>
         </div>
 
@@ -260,7 +260,7 @@ export default function RoadmapPage() {
         <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-purple-100 text-center">
           <h2 className="text-3xl font-bold mb-4 text-gray-900">Have Ideas?</h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            We'd love to hear your feature requests and ideas for Lights Pi
+            We&apos;d love to hear your feature requests and ideas for Lights Pi
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

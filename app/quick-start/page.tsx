@@ -1,4 +1,5 @@
 import { CheckCircle, Download, Terminal, Plug, Sparkles, AlertCircle } from "lucide-react";
+import { CodeBlock } from "@/components/CodeBlock";
 
 export const metadata = {
   title: "Quick Start - Lights Pi",
@@ -86,7 +87,7 @@ export default function QuickStartPage() {
           <div className="flex items-start">
             <AlertCircle className="w-6 h-6 text-blue-600 mr-3 flex-shrink-0 mt-1" />
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">What You'll Build</h3>
+              <h3 className="font-bold text-gray-900 mb-2">What You&apos;ll Build</h3>
               <p className="text-gray-700 mb-2">A fully functional web-based DMX lighting controller</p>
               <div className="flex items-center space-x-4 text-sm text-gray-600">
                 <span>⏱ Time: ~15 minutes</span>
@@ -197,9 +198,9 @@ WIFI2_SSID="StudioNet" WIFI2_PSK="studio-pass" \\
 
         {/* Next Steps */}
         <div className="mt-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">🎉 You're All Set!</h2>
+          <h2 className="text-2xl font-bold mb-4 text-gray-900">🎉 You&apos;re All Set!</h2>
           <p className="text-gray-700 mb-6">
-            Your Lights Pi controller is ready. Here's what to do next:
+            Your Lights Pi controller is ready. Here&apos;s what to do next:
           </p>
           <ul className="space-y-3 mb-6">
             <li className="flex items-start">

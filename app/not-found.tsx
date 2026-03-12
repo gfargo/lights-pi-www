@@ -32,7 +32,7 @@ export default function NotFound() {
           Page Not Found
         </h2>
         <p className="text-xl text-gray-600 mb-12 max-w-lg mx-auto">
-          Looks like this page is in the dark. Let's get you back to the light!
+          Looks like this page is in the dark. Let&apos;s get you back to the light!
         </p>
 
         {/* Action Buttons */}

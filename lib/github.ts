@@ -82,7 +82,12 @@ export async function getGitHubReleases(): Promise<GitHubRelease[]> {
 
     const releases = await response.json();
     
-    return releases.map((release: any) => ({
+    return releases.map((release: {
+      tag_name: string;
+      name: string;
+      published_at: string;
+      body?: string;
+    }) => ({
       tagName: release.tag_name,
       name: release.name,
       publishedAt: release.published_at,

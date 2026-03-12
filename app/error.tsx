@@ -40,7 +40,7 @@ export default function Error({
           Something Went Wrong
         </h2>
         <p className="text-xl text-gray-600 mb-12 max-w-lg mx-auto">
-          Our lights flickered and something broke. We're working on fixing it!
+          Our lights flickered and something broke. We&apos;re working on fixing it!
         </p>
 
         {/* Action Buttons */}

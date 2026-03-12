@@ -233,7 +233,7 @@ export default function HardwarePage() {
                     <div>
                       <h4 className="font-bold text-gray-900 mb-2">Choose Pi 3B+ if:</h4>
                       <ul className="space-y-2 text-gray-700">
-                        <li>• You're on a budget</li>
+                        <li>• You&apos;re on a budget</li>
                         <li>• You have fewer than 10 fixtures</li>
                         <li>• You want to minimize power consumption</li>
                       </ul>
@@ -250,7 +250,7 @@ export default function HardwarePage() {
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-gray-900">ENTTEC DMX USB Pro</h3>
                 <p className="text-gray-700 mb-4">
-                  The ENTTEC DMX USB Pro is the recommended DMX interface. It's reliable, well-supported by QLC+,
+                  The ENTTEC DMX USB Pro is the recommended DMX interface. It&apos;s reliable, well-supported by QLC+,
                   and widely available. Make sure to buy from authorized dealers to avoid counterfeits.
                 </p>
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
