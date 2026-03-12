@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Github } from "lucide-react";
+import { useFlag } from "@/components/flags/flags-provider";
 
 export function Footer() {
+  const showShowcase = useFlag("enable-showcase");
+
   return (
     <footer className="bg-gray-900 text-white border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -22,7 +27,9 @@ export function Footer() {
             <ul className="space-y-2">
               <li><a href="https://github.com/gfargo/lights-pi" className="text-gray-400 hover:text-orange-500 transition">GitHub</a></li>
               <li><a href="https://discord.gg/yourserver" className="text-gray-400 hover:text-orange-500 transition">Discord</a></li>
-              <li><Link href="/showcase" className="text-gray-400 hover:text-orange-500 transition">Showcase Gallery</Link></li>
+              {showShowcase && (
+                <li><Link href="/showcase" className="text-gray-400 hover:text-orange-500 transition">Showcase Gallery</Link></li>
+              )}
               <li><Link href="/contributing" className="text-gray-400 hover:text-orange-500 transition">Contributing</Link></li>
             </ul>
           </div>

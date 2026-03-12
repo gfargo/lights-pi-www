@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next'
+import { resolveAllFlags } from '@/lib/flags/runtime'
  
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://lightspi.dev'
+  const flags = await resolveAllFlags()
   
-  return [
+  const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -27,12 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/showcase`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
     },
     {
       url: `${baseUrl}/docs`,
@@ -77,4 +73,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
   ]
+
+  // Conditionally add showcase if enabled
+  if (flags['enable-showcase']) {
+    routes.push({
+      url: `${baseUrl}/showcase`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    })
+  }
+
+  return routes
 }

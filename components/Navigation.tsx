@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Github, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from 'framer-motion';
+import { useFlag } from "@/components/flags/flags-provider";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const showShowcase = useFlag("enable-showcase");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +34,7 @@ export function Navigation() {
     { href: "/quick-start", label: "Quick Start" },
     { href: "/hardware", label: "Hardware" },
     { href: "/demo", label: "Demo" },
-    { href: "/showcase", label: "Showcase" },
+    ...(showShowcase ? [{ href: "/showcase", label: "Showcase" }] : []),
     { href: "/docs", label: "Docs" },
     { href: "/blog", label: "Blog" },
   ];

@@ -6,6 +6,8 @@ import { Footer } from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { FlagsProvider } from "@/components/flags/flags-provider";
+import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,29 +30,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Resolve all flags on server
+  const serverFlags = await resolveAllFlags();
+  const clientFlags = pickClientFlags(serverFlags);
+
   return (
     <html lang="en" className="scroll-smooth dark">
       <head>
         <StructuredData />
       </head>
       <body className={`${inter.className} bg-gray-900 text-white`}>
-        {/* Skip to content link for keyboard navigation */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-orange-500 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-        >
-          Skip to main content
-        </a>
-        <Navigation />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
+        <FlagsProvider flags={clientFlags}>
+          {/* Skip to content link for keyboard navigation */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-orange-500 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          >
+            Skip to main content
+          </a>
+          <Navigation />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <Analytics />
+          <SpeedInsights />
+        </FlagsProvider>
       </body>
     </html>
   );
