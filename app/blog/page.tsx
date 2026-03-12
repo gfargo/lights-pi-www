@@ -25,13 +25,13 @@ export default async function BlogPage() {
 
   const featuredPost = posts.find(p => p.featured) || posts[0];
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
             Lights Pi <span className="text-gradient">Blog</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Latest updates, tutorials, and community stories
           </p>
         </div>
@@ -43,8 +43,8 @@ export default async function BlogPage() {
               key={index}
               className={`px-4 py-2 rounded-lg font-medium transition ${
                 index === 0
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-blue-300"
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-900 text-gray-300 border border-gray-700 hover:border-orange-500"
               }`}
             >
               {category.name} ({category.count})
@@ -54,7 +54,7 @@ export default async function BlogPage() {
 
         {/* Featured Post */}
         <div className="mb-16">
-          <div className="bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl overflow-hidden shadow-2xl">
             <div className="grid md:grid-cols-2">
               <div className="p-12 text-white">
                 <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold mb-4">
@@ -76,13 +76,13 @@ export default async function BlogPage() {
                   href={`https://github.com/gfargo/lights-pi/releases/tag/${featuredPost.version || featuredPost.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+                  className="inline-flex items-center bg-gray-900 text-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
                   Read More
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </div>
-              <div className="bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-9xl p-12">
+              <div className="bg-gradient-to-br from-orange-500 to-blue-500 flex items-center justify-center text-9xl p-12">
                 🚀
               </div>
             </div>
@@ -92,23 +92,23 @@ export default async function BlogPage() {
         {/* Blog Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.slice(1).map((post, index) => (
-            <article key={index} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-6xl">
+            <article key={index} className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="aspect-video bg-gradient-to-br from-orange-500 to-blue-500 flex items-center justify-center text-6xl">
                 {post.category === "Tutorials" ? "📚" : 
                  post.category === "Community" ? "👥" :
                  post.category === "Use Cases" ? "💡" : "📢"}
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
+                  <span className="inline-block bg-blue-100 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full">
                     {post.category}
                   </span>
-                  <span className="text-sm text-gray-500">{post.readTime}</span>
+                  <span className="text-sm text-gray-400">{post.readTime}</span>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-gray-900 line-clamp-2">{post.title}</h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <div className="flex items-center text-sm text-gray-600">
+                <h3 className="text-xl font-bold mb-3 text-white line-clamp-2">{post.title}</h3>
+                <p className="text-gray-400 mb-4 line-clamp-3">{post.excerpt}</p>
+                <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+                  <div className="flex items-center text-sm text-gray-400">
                     <Calendar className="w-4 h-4 mr-1" />
                     {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </div>
@@ -117,7 +117,7 @@ export default async function BlogPage() {
                       href={`https://github.com/gfargo/lights-pi/releases/tag/${post.version}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center"
+                      className="text-orange-500 hover:text-orange-500 font-medium text-sm flex items-center"
                     >
                       Read More
                       <ArrowRight className="ml-1 w-4 h-4" />
@@ -125,7 +125,7 @@ export default async function BlogPage() {
                   ) : (
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center"
+                      className="text-orange-500 hover:text-orange-500 font-medium text-sm flex items-center"
                     >
                       Read More
                       <ArrowRight className="ml-1 w-4 h-4" />
@@ -138,22 +138,22 @@ export default async function BlogPage() {
         </div>
 
         {/* Newsletter CTA */}
-        <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-purple-100 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-gray-900">Stay Updated</h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-white">Stay Updated</h2>
+          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Get the latest Lights Pi news, tutorials, and community stories delivered to your inbox
           </p>
           <div className="max-w-md mx-auto flex gap-3">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-orange-500/50 outline-none"
             />
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition whitespace-nowrap">
+            <button className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition whitespace-nowrap">
               Subscribe
             </button>
           </div>
-          <p className="text-sm text-gray-500 mt-4">No spam. Unsubscribe anytime.</p>
+          <p className="text-sm text-gray-400 mt-4">No spam. Unsubscribe anytime.</p>
         </div>
       </div>
     </div>

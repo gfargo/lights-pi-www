@@ -6,23 +6,23 @@ import { FadeIn } from "@/components/animations/FadeIn";
 
 // Lazy load below-the-fold components
 const UseCases = dynamic(() => import("@/components/home/UseCases").then(mod => ({ default: mod.UseCases })), {
-  loading: () => <div className="h-96 bg-slate-50 animate-pulse" />
+  loading: () => <div className="h-96 bg-gray-800 animate-pulse" />
 });
 
 const HowItWorks = dynamic(() => import("@/components/home/HowItWorks").then(mod => ({ default: mod.HowItWorks })), {
-  loading: () => <div className="h-96 bg-white animate-pulse" />
+  loading: () => <div className="h-96 bg-gray-900 animate-pulse" />
 });
 
 const CostComparison = dynamic(() => import("@/components/home/CostComparison").then(mod => ({ default: mod.CostComparison })), {
-  loading: () => <div className="h-96 bg-white animate-pulse" />
+  loading: () => <div className="h-96 bg-gray-900 animate-pulse" />
 });
 
 const SocialProof = dynamic(() => import("@/components/home/SocialProof").then(mod => ({ default: mod.SocialProof })), {
-  loading: () => <div className="h-96 bg-slate-50 animate-pulse" />
+  loading: () => <div className="h-96 bg-gray-800 animate-pulse" />
 });
 
 const FinalCTA = dynamic(() => import("@/components/home/FinalCTA").then(mod => ({ default: mod.FinalCTA })), {
-  loading: () => <div className="h-96 bg-white animate-pulse" />
+  loading: () => <div className="h-96 bg-gray-900 animate-pulse" />
 });
 
 export default function Home() {

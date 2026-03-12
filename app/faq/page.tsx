@@ -94,13 +94,13 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
             Frequently Asked <span className="text-gradient">Questions</span>
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-400">
             Everything you need to know about Lights Pi
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function FAQPage() {
         <div className="space-y-12">
           {faqs.map((category, catIndex) => (
             <div key={catIndex}>
-              <h2 className="text-2xl font-bold mb-6 text-gray-900">{category.category}</h2>
+              <h2 className="text-2xl font-bold mb-6 text-white">{category.category}</h2>
               <div className="space-y-4">
                 {category.questions.map((faq, qIndex) => {
                   const index = catIndex * 100 + qIndex;
@@ -116,21 +116,21 @@ export default function FAQPage() {
                   return (
                     <div
                       key={qIndex}
-                      className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition"
+                      className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden hover:shadow-md transition"
                     >
                       <button
                         onClick={() => setOpenIndex(isOpen ? null : index)}
-                        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition"
+                        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-800 transition"
                       >
-                        <span className="font-semibold text-gray-900 pr-4">{faq.q}</span>
+                        <span className="font-semibold text-white pr-4">{faq.q}</span>
                         <ChevronDown
-                          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
+                          className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${
                             isOpen ? "rotate-180" : ""
                           }`}
                         />
                       </button>
                       {isOpen && (
-                        <div className="px-6 pb-4 text-gray-700">
+                        <div className="px-6 pb-4 text-gray-300">
                           {faq.a}
                         </div>
                       )}
@@ -142,21 +142,21 @@ export default function FAQPage() {
           ))}
         </div>
 
-        <div className="mt-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">Still Have Questions?</h2>
-          <p className="text-gray-600 mb-6">
+        <div className="mt-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-gray-800 text-center">
+          <h2 className="text-2xl font-bold mb-4 text-white">Still Have Questions?</h2>
+          <p className="text-gray-400 mb-6">
             Join our community for help and support
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/community"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
+              className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
             >
               Join Discord
             </a>
             <a
               href="/docs"
-              className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition border border-purple-200"
+              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
             >
               View Documentation
             </a>

@@ -48,13 +48,13 @@ const cloudServices = [
 
 export default function ComparisonPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
             How Lights Pi <span className="text-gradient">Compares</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             See how Lights Pi stacks up against commercial controllers and cloud services
           </p>
         </div>
@@ -62,79 +62,79 @@ export default function ComparisonPage() {
         {/* Feature Matrix */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-8">Feature Comparison</h2>
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-blue-50 to-purple-50">
                   <tr>
-                    <th className="text-left py-4 px-6 font-bold text-gray-900">Feature</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-500">Commercial</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-500">Cloud Service</th>
-                    <th className="text-center py-4 px-6 font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                    <th className="text-left py-4 px-6 font-bold text-white">Feature</th>
+                    <th className="text-center py-4 px-6 font-bold text-gray-400">Commercial</th>
+                    <th className="text-center py-4 px-6 font-bold text-gray-400">Cloud Service</th>
+                    <th className="text-center py-4 px-6 font-bold bg-gradient-to-r from-orange-500 to-blue-500 text-white">
                       Lights Pi
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Initial Cost</td>
-                    <td className="py-4 px-6 text-center text-gray-600">$500-$5,000</td>
-                    <td className="py-4 px-6 text-center text-gray-600">$0-$100</td>
-                    <td className="py-4 px-6 text-center font-bold text-green-600 bg-green-50">$35-$150</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Initial Cost</td>
+                    <td className="py-4 px-6 text-center text-gray-400">$500-$5,000</td>
+                    <td className="py-4 px-6 text-center text-gray-400">$0-$100</td>
+                    <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">$35-$150</td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Monthly Cost</td>
-                    <td className="py-4 px-6 text-center text-gray-600">$0</td>
-                    <td className="py-4 px-6 text-center text-gray-600">$10-$50</td>
-                    <td className="py-4 px-6 text-center font-bold text-green-600 bg-green-50">$0</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Monthly Cost</td>
+                    <td className="py-4 px-6 text-center text-gray-400">$0</td>
+                    <td className="py-4 px-6 text-center text-gray-400">$10-$50</td>
+                    <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">$0</td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Self-Hosted</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Self-Hosted</td>
                     <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Open Source</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Open Source</td>
                     <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
                     <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Web Interface</td>
-                    <td className="py-4 px-6 text-center text-gray-600">Varies</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Web Interface</td>
+                    <td className="py-4 px-6 text-center text-gray-400">Varies</td>
                     <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Mobile Control</td>
-                    <td className="py-4 px-6 text-center text-gray-600">Varies</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Mobile Control</td>
+                    <td className="py-4 px-6 text-center text-gray-400">Varies</td>
                     <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Offline Operation</td>
-                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Any DMX Fixture</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Offline Operation</td>
                     <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">Customizable</td>
-                    <td className="py-4 px-6 text-center text-gray-600">Limited</td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Any DMX Fixture</td>
+                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="py-4 px-6 font-medium text-gray-900">API Access</td>
-                    <td className="py-4 px-6 text-center text-gray-600">Varies</td>
-                    <td className="py-4 px-6 text-center text-gray-600">Limited</td>
-                    <td className="py-4 px-6 text-center bg-green-50"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">Customizable</td>
+                    <td className="py-4 px-6 text-center text-gray-400">Limited</td>
+                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                  </tr>
+                  <tr className="hover:bg-gray-800">
+                    <td className="py-4 px-6 font-medium text-white">API Access</td>
+                    <td className="py-4 px-6 text-center text-gray-400">Varies</td>
+                    <td className="py-4 px-6 text-center text-gray-400">Limited</td>
+                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
                 </tbody>
               </table>
@@ -147,11 +147,11 @@ export default function ComparisonPage() {
           <h2 className="text-3xl font-bold mb-8">vs Commercial Controllers</h2>
           <div className="space-y-6">
             {commercialControllers.map((controller, index) => (
-              <div key={index} className="bg-white rounded-2xl border border-gray-200 p-8">
+              <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{controller.name}</h3>
-                    <div className="flex items-center text-gray-600">
+                    <h3 className="text-2xl font-bold text-white mb-2">{controller.name}</h3>
+                    <div className="flex items-center text-gray-400">
                       <DollarSign className="w-5 h-5 mr-1" />
                       <span className="font-semibold">{controller.price}</span>
                     </div>
@@ -162,7 +162,7 @@ export default function ComparisonPage() {
                     <h4 className="font-bold text-green-700 mb-3">Pros</h4>
                     <ul className="space-y-2">
                       {controller.pros.map((pro, i) => (
-                        <li key={i} className="flex items-start text-gray-700">
+                        <li key={i} className="flex items-start text-gray-300">
                           <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                           {pro}
                         </li>
@@ -173,16 +173,16 @@ export default function ComparisonPage() {
                     <h4 className="font-bold text-red-700 mb-3">Cons</h4>
                     <ul className="space-y-2">
                       {controller.cons.map((con, i) => (
-                        <li key={i} className="flex items-start text-gray-700">
+                        <li key={i} className="flex items-start text-gray-300">
                           <X className="w-4 h-4 text-red-500 mr-2 flex-shrink-0 mt-0.5" />
                           {con}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-100">
+                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-900/50">
                     <h4 className="font-bold text-blue-900 mb-2">Lights Pi Advantage</h4>
-                    <p className="text-gray-700">{controller.lightsPiAdvantage}</p>
+                    <p className="text-gray-300">{controller.lightsPiAdvantage}</p>
                   </div>
                 </div>
               </div>
@@ -195,11 +195,11 @@ export default function ComparisonPage() {
           <h2 className="text-3xl font-bold mb-8">vs Cloud Services</h2>
           <div className="space-y-6">
             {cloudServices.map((service, index) => (
-              <div key={index} className="bg-white rounded-2xl border border-gray-200 p-8">
+              <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.name}</h3>
-                    <div className="flex items-center text-gray-600">
+                    <h3 className="text-2xl font-bold text-white mb-2">{service.name}</h3>
+                    <div className="flex items-center text-gray-400">
                       <DollarSign className="w-5 h-5 mr-1" />
                       <span className="font-semibold">{service.price}</span>
                     </div>
@@ -210,7 +210,7 @@ export default function ComparisonPage() {
                     <h4 className="font-bold text-green-700 mb-3">Pros</h4>
                     <ul className="space-y-2">
                       {service.pros.map((pro, i) => (
-                        <li key={i} className="flex items-start text-gray-700">
+                        <li key={i} className="flex items-start text-gray-300">
                           <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                           {pro}
                         </li>
@@ -221,16 +221,16 @@ export default function ComparisonPage() {
                     <h4 className="font-bold text-red-700 mb-3">Cons</h4>
                     <ul className="space-y-2">
                       {service.cons.map((con, i) => (
-                        <li key={i} className="flex items-start text-gray-700">
+                        <li key={i} className="flex items-start text-gray-300">
                           <X className="w-4 h-4 text-red-500 mr-2 flex-shrink-0 mt-0.5" />
                           {con}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-100">
+                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-900/50">
                     <h4 className="font-bold text-blue-900 mb-2">Lights Pi Advantage</h4>
-                    <p className="text-gray-700">{service.lightsPiAdvantage}</p>
+                    <p className="text-gray-300">{service.lightsPiAdvantage}</p>
                   </div>
                 </div>
               </div>
@@ -260,7 +260,7 @@ export default function ComparisonPage() {
           </div>
           <a
             href="/quick-start"
-            className="inline-block bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+            className="inline-block bg-gray-900 text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
           >
             Get Started Now
           </a>

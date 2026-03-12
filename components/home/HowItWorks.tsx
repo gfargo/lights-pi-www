@@ -33,13 +33,13 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-24 bg-gradient-to-b from-gray-900 to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Up and Running in <span className="text-gradient">10 Minutes</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Simple setup process, no technical expertise required
           </p>
         </div>
@@ -53,17 +53,17 @@ export function HowItWorks() {
               const Icon = step.icon;
               return (
                 <div key={index} className="relative">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                    <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl mb-6 mx-auto">
+                  <div className="bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl mb-6 mx-auto">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                     <div className="text-center">
-                      <div className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                      <div className="inline-block bg-blue-100 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">
                         Step {index + 1}
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-gray-900">{step.title}</h3>
-                      <p className="text-gray-600 mb-4">{step.description}</p>
-                      <div className="inline-flex items-center text-sm font-semibold text-purple-600">
+                      <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>
+                      <p className="text-gray-400 mb-4">{step.description}</p>
+                      <div className="inline-flex items-center text-sm font-semibold text-orange-500">
                         <span className="mr-1">⏱</span>
                         {step.time}
                       </div>

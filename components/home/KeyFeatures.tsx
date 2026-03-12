@@ -41,24 +41,24 @@ const features = [
 ];
 
 const colorClasses: Record<string, { bg: string; icon: string; border: string }> = {
-  blue: { bg: "bg-blue-50", icon: "text-blue-600", border: "border-blue-100" },
-  purple: { bg: "bg-purple-50", icon: "text-purple-600", border: "border-purple-100" },
-  pink: { bg: "bg-pink-50", icon: "text-pink-600", border: "border-pink-100" },
-  green: { bg: "bg-green-50", icon: "text-green-600", border: "border-green-100" },
-  orange: { bg: "bg-orange-50", icon: "text-orange-600", border: "border-orange-100" },
-  indigo: { bg: "bg-indigo-50", icon: "text-indigo-600", border: "border-indigo-100" }
+  blue: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-blue-900/50" },
+  purple: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-gray-800" },
+  pink: { bg: "bg-gray-900", icon: "text-pink-600", border: "border-gray-800" },
+  green: { bg: "bg-gray-900", icon: "text-green-600", border: "border-green-900/50" },
+  orange: { bg: "bg-gray-900", icon: "text-orange-600", border: "border-orange-100" },
+  indigo: { bg: "bg-gray-900", icon: "text-indigo-600", border: "border-indigo-100" }
 };
 
 export function KeyFeatures() {
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-slate-50">
+    <section className="py-24 bg-gradient-to-b from-gray-800 to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Everything You Need, <span className="text-gradient">Out of the Box</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Professional features without the professional price tag
             </p>
           </div>
@@ -73,11 +73,11 @@ export function KeyFeatures() {
                 <div
                   className={`${colors.bg} rounded-2xl p-8 border ${colors.border} hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}
                 >
-                  <div className={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center mb-6 ring-2 ring-white`}>
+                  <div className={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center mb-6 ring-2 ring-gray-700`}>
                     <Icon className={`w-6 h-6 ${colors.icon}`} />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <h3 className="text-xl font-bold mb-3 text-white">{feature.title}</h3>
+                  <p className="text-gray-400">{feature.description}</p>
                 </div>
               </FadeIn>
             );

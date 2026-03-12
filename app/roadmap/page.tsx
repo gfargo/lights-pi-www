@@ -158,13 +158,13 @@ const roadmap = [
 
 export default function RoadmapPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
             Product <span className="text-gradient">Roadmap</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             See what we&apos;re building and what&apos;s coming next for Lights Pi
           </p>
         </div>
@@ -172,20 +172,20 @@ export default function RoadmapPage() {
         {/* Legend */}
         <div className="flex flex-wrap justify-center gap-6 mb-12 text-sm">
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-green-500 rounded-full mr-2" />
-            <span className="text-gray-700">Completed</span>
+            <div className="w-3 h-3 bg-gray-9000 rounded-full mr-2" />
+            <span className="text-gray-300">Completed</span>
           </div>
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-blue-500 rounded-full mr-2" />
-            <span className="text-gray-700">In Progress</span>
+            <div className="w-3 h-3 bg-gray-9000 rounded-full mr-2" />
+            <span className="text-gray-300">In Progress</span>
           </div>
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-purple-500 rounded-full mr-2" />
-            <span className="text-gray-700">Planned</span>
+            <div className="w-3 h-3 bg-gray-9000 rounded-full mr-2" />
+            <span className="text-gray-300">Planned</span>
           </div>
           <div className="flex items-center">
             <div className="w-3 h-3 bg-gray-300 rounded-full mr-2" />
-            <span className="text-gray-700">Future</span>
+            <span className="text-gray-300">Future</span>
           </div>
         </div>
 
@@ -200,9 +200,9 @@ export default function RoadmapPage() {
                 {/* Quarter marker */}
                 <div className="flex items-center mb-6">
                   <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                    quarter.status === "completed" ? "bg-green-500" :
-                    quarter.status === "in-progress" ? "bg-blue-500" :
-                    quarter.status === "planned" ? "bg-purple-500" :
+                    quarter.status === "completed" ? "bg-gray-9000" :
+                    quarter.status === "in-progress" ? "bg-gray-9000" :
+                    quarter.status === "planned" ? "bg-gray-9000" :
                     "bg-gray-300"
                   } shadow-lg z-10`}>
                     {quarter.status === "completed" ? <Check className="w-8 h-8 text-white" /> :
@@ -211,8 +211,8 @@ export default function RoadmapPage() {
                      <Sparkles className="w-8 h-8 text-white" />}
                   </div>
                   <div className="ml-6">
-                    <h2 className="text-2xl font-bold text-gray-900">{quarter.quarter}</h2>
-                    <p className="text-gray-600 capitalize">{quarter.status.replace('-', ' ')}</p>
+                    <h2 className="text-2xl font-bold text-white">{quarter.quarter}</h2>
+                    <p className="text-gray-400 capitalize">{quarter.status.replace('-', ' ')}</p>
                   </div>
                 </div>
 
@@ -221,7 +221,7 @@ export default function RoadmapPage() {
                   {quarter.items.map((item, iIndex) => (
                     <div
                       key={iIndex}
-                      className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition"
+                      className="bg-gray-900 rounded-xl border border-gray-700 p-6 hover:shadow-lg transition"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -229,18 +229,18 @@ export default function RoadmapPage() {
                             {item.completed && (
                               <Check className="w-5 h-5 text-green-500 mr-2" />
                             )}
-                            <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
+                            <h3 className="text-lg font-bold text-white">{item.title}</h3>
                           </div>
-                          <p className="text-gray-600">{item.description}</p>
+                          <p className="text-gray-400">{item.description}</p>
                           {item.progress !== undefined && !item.completed && (
                             <div className="mt-4">
-                              <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+                              <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
                                 <span>Progress</span>
                                 <span className="font-semibold">{item.progress}%</span>
                               </div>
                               <div className="w-full bg-gray-200 rounded-full h-2">
                                 <div
-                                  className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
+                                  className="bg-gradient-to-r from-orange-500 to-blue-500 h-2 rounded-full transition-all duration-500"
                                   style={{ width: `${item.progress}%` }}
                                 />
                               </div>
@@ -257,21 +257,21 @@ export default function RoadmapPage() {
         </div>
 
         {/* Community Input CTA */}
-        <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-purple-100 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-gray-900">Have Ideas?</h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <div className="mt-20 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-white">Have Ideas?</h2>
+          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             We&apos;d love to hear your feature requests and ideas for Lights Pi
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://github.com/yourusername/lights-pi/discussions"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
+              className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
             >
               Share Your Ideas
             </a>
             <a
               href="https://github.com/yourusername/lights-pi/issues"
-              className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition border border-purple-200"
+              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
             >
               Report Issues
             </a>
@@ -279,7 +279,7 @@ export default function RoadmapPage() {
         </div>
 
         {/* Note */}
-        <div className="mt-12 text-center text-sm text-gray-500">
+        <div className="mt-12 text-center text-sm text-gray-400">
           <p>This roadmap is subject to change based on community feedback and priorities.</p>
           <p className="mt-2">Last updated: March 2026</p>
         </div>

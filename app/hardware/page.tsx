@@ -106,7 +106,7 @@ const setups = [
 
 export default function HardwarePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -114,7 +114,7 @@ export default function HardwarePage() {
           <h1 className="text-5xl font-bold mb-4">
             Hardware <span className="text-gradient">Guide</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Everything you need to build your Lights Pi controller
           </p>
         </div>
@@ -122,36 +122,36 @@ export default function HardwarePage() {
         {/* Shopping List */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-8">Complete Shopping List</h2>
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-blue-50 to-purple-50">
                   <tr>
-                    <th className="text-left py-4 px-6 font-bold text-gray-900">Item</th>
-                    <th className="text-left py-4 px-6 font-bold text-gray-900">Purpose</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-900">Price</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-900">Priority</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-900">Buy</th>
+                    <th className="text-left py-4 px-6 font-bold text-white">Item</th>
+                    <th className="text-left py-4 px-6 font-bold text-white">Purpose</th>
+                    <th className="text-center py-4 px-6 font-bold text-white">Price</th>
+                    <th className="text-center py-4 px-6 font-bold text-white">Priority</th>
+                    <th className="text-center py-4 px-6 font-bold text-white">Buy</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {shoppingList.map((item, index) => (
-                    <tr key={index} className="hover:bg-gray-50 transition">
-                      <td className="py-4 px-6 font-medium text-gray-900">{item.item}</td>
-                      <td className="py-4 px-6 text-gray-600">{item.purpose}</td>
-                      <td className="py-4 px-6 text-center text-gray-900 font-semibold">{item.price}</td>
+                    <tr key={index} className="hover:bg-gray-800 transition">
+                      <td className="py-4 px-6 font-medium text-white">{item.item}</td>
+                      <td className="py-4 px-6 text-gray-400">{item.purpose}</td>
+                      <td className="py-4 px-6 text-center text-white font-semibold">{item.price}</td>
                       <td className="py-4 px-6 text-center">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                           item.priority === "Required" ? "bg-red-100 text-red-700" :
-                          item.priority === "Recommended" ? "bg-blue-100 text-blue-700" :
+                          item.priority === "Recommended" ? "bg-blue-100 text-orange-500" :
                           item.priority === "Alternative" ? "bg-yellow-100 text-yellow-700" :
-                          "bg-gray-100 text-gray-700"
+                          "bg-gray-100 text-gray-300"
                         }`}>
                           {item.priority}
                         </span>
                       </td>
                       <td className="py-4 px-6 text-center">
-                        <a href={item.link} className="text-blue-600 hover:text-blue-700 font-medium">
+                        <a href={item.link} className="text-orange-500 hover:text-orange-500 font-medium">
                           <ShoppingCart className="w-5 h-5 inline" />
                         </a>
                       </td>
@@ -164,20 +164,20 @@ export default function HardwarePage() {
 
           {/* Cost Summary */}
           <div className="mt-8 grid md:grid-cols-3 gap-6">
-            <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+            <div className="bg-gray-900 rounded-xl p-6 border border-green-200">
               <div className="text-sm text-green-700 font-semibold mb-1">Minimum Setup</div>
               <div className="text-3xl font-bold text-green-900">~$200</div>
               <div className="text-sm text-green-600 mt-1">Pi 3 + basic setup</div>
             </div>
-            <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-              <div className="text-sm text-blue-700 font-semibold mb-1">Recommended Setup</div>
+            <div className="bg-gray-900 rounded-xl p-6 border border-blue-200">
+              <div className="text-sm text-orange-500 font-semibold mb-1">Recommended Setup</div>
               <div className="text-3xl font-bold text-blue-900">~$250</div>
-              <div className="text-sm text-blue-600 mt-1">Pi 4 + case</div>
+              <div className="text-sm text-orange-500 mt-1">Pi 4 + case</div>
             </div>
-            <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
+            <div className="bg-gray-900 rounded-xl p-6 border border-purple-200">
               <div className="text-sm text-purple-700 font-semibold mb-1">With Wireless DMX</div>
               <div className="text-3xl font-bold text-purple-900">~$450-750</div>
-              <div className="text-sm text-purple-600 mt-1">Full wireless setup</div>
+              <div className="text-sm text-orange-500 mt-1">Full wireless setup</div>
             </div>
           </div>
         </div>
@@ -189,16 +189,16 @@ export default function HardwarePage() {
             {setups.map((setup, index) => {
               const Icon = setup.icon;
               return (
-                <div key={index} className="bg-white rounded-2xl border border-gray-200 p-8 hover:shadow-lg transition">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-6">
+                <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8 hover:shadow-lg transition">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">{setup.name}</h3>
+                  <h3 className="text-2xl font-bold mb-2 text-white">{setup.name}</h3>
                   <div className="text-3xl font-bold text-gradient mb-6">{setup.price}</div>
                   <ul className="space-y-3">
                     {setup.items.map((item, i) => (
-                      <li key={i} className="flex items-start text-gray-700">
-                        <span className="text-blue-500 mr-2">✓</span>
+                      <li key={i} className="flex items-start text-gray-300">
+                        <span className="text-blue-400 mr-2">✓</span>
                         {item}
                       </li>
                     ))}
@@ -211,28 +211,28 @@ export default function HardwarePage() {
 
         {/* Hardware Deep Dives */}
         <div className="space-y-12">
-          <div className="bg-white rounded-2xl border border-gray-200 p-8">
+          <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
             <div className="flex items-start">
-              <Cpu className="w-8 h-8 text-blue-600 mr-4 flex-shrink-0" />
+              <Cpu className="w-8 h-8 text-orange-500 mr-4 flex-shrink-0" />
               <div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Raspberry Pi Selection</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">Raspberry Pi Selection</h3>
                 <div className="prose prose-gray max-w-none">
-                  <p className="text-gray-700 mb-4">
+                  <p className="text-gray-300 mb-4">
                     Both the Raspberry Pi 3B+ and Pi 4 work great for Lights Pi. The Pi 4 offers better performance
                     and more RAM, but the Pi 3B+ is perfectly capable for most setups.
                   </p>
                   <div className="grid md:grid-cols-2 gap-6 mt-6">
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-2">Choose Pi 4 if:</h4>
-                      <ul className="space-y-2 text-gray-700">
+                      <h4 className="font-bold text-white mb-2">Choose Pi 4 if:</h4>
+                      <ul className="space-y-2 text-gray-300">
                         <li>• You have 10+ fixtures</li>
                         <li>• You want faster web interface</li>
                         <li>• You plan to run additional services</li>
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-2">Choose Pi 3B+ if:</h4>
-                      <ul className="space-y-2 text-gray-700">
+                      <h4 className="font-bold text-white mb-2">Choose Pi 3B+ if:</h4>
+                      <ul className="space-y-2 text-gray-300">
                         <li>• You&apos;re on a budget</li>
                         <li>• You have fewer than 10 fixtures</li>
                         <li>• You want to minimize power consumption</li>
@@ -244,12 +244,12 @@ export default function HardwarePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-gray-200 p-8">
+          <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
             <div className="flex items-start">
-              <Usb className="w-8 h-8 text-purple-600 mr-4 flex-shrink-0" />
+              <Usb className="w-8 h-8 text-orange-500 mr-4 flex-shrink-0" />
               <div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">ENTTEC DMX USB Pro</h3>
-                <p className="text-gray-700 mb-4">
+                <h3 className="text-2xl font-bold mb-4 text-white">ENTTEC DMX USB Pro</h3>
+                <p className="text-gray-300 mb-4">
                   The ENTTEC DMX USB Pro is the recommended DMX interface. It&apos;s reliable, well-supported by QLC+,
                   and widely available. Make sure to buy from authorized dealers to avoid counterfeits.
                 </p>
@@ -266,16 +266,16 @@ export default function HardwarePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-gray-200 p-8">
+          <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
             <div className="flex items-start">
               <Cable className="w-8 h-8 text-pink-600 mr-4 flex-shrink-0" />
               <div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">DMX Cables</h3>
-                <p className="text-gray-700 mb-4">
+                <h3 className="text-2xl font-bold mb-4 text-white">DMX Cables</h3>
+                <p className="text-gray-300 mb-4">
                   Use quality DMX cables for reliable operation. Most fixtures use 3-pin XLR, but some professional
                   fixtures use 5-pin. Cable quality matters for longer runs.
                 </p>
-                <ul className="space-y-2 text-gray-700">
+                <ul className="space-y-2 text-gray-300">
                   <li className="flex items-start">
                     <span className="text-pink-500 mr-2">•</span>
                     Maximum cable length: 300-500 feet total
@@ -295,14 +295,14 @@ export default function HardwarePage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white">
+        <div className="mt-16 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Ready to Build?</h2>
           <p className="text-xl mb-6 text-white/90">
             Get your hardware and follow our quick start guide
           </p>
           <a
             href="/quick-start"
-            className="inline-block bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+            className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
           >
             View Quick Start Guide
           </a>

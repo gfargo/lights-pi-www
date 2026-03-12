@@ -58,7 +58,7 @@ export function UseCases() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Built for <span className="text-gradient">Your Workflow</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             From content creation to live events, Lights Pi adapts to your needs
           </p>
         </div>
@@ -73,17 +73,17 @@ export function UseCases() {
                 onClick={() => setActiveIndex(index)}
                 className={`cursor-pointer rounded-2xl p-8 border-2 transition-all duration-300 ${
                   isActive
-                    ? "border-blue-500 bg-blue-50 shadow-lg scale-105"
-                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-md"
+                    ? "border-blue-500 bg-gray-900 shadow-lg scale-105"
+                    : "border-gray-700 bg-gray-900 hover:border-gray-300 hover:shadow-md"
                 }`}
               >
-                <Icon className={`w-10 h-10 mb-4 ${isActive ? "text-blue-600" : "text-gray-400"}`} />
-                <h3 className="text-xl font-bold mb-2 text-gray-900">{useCase.title}</h3>
-                <p className="text-gray-600 mb-4">{useCase.description}</p>
+                <Icon className={`w-10 h-10 mb-4 ${isActive ? "text-orange-500" : "text-gray-400"}`} />
+                <h3 className="text-xl font-bold mb-2 text-white">{useCase.title}</h3>
+                <p className="text-gray-400 mb-4">{useCase.description}</p>
                 <ul className="space-y-2">
                   {useCase.features.map((feature, i) => (
-                    <li key={i} className="flex items-start text-sm text-gray-600">
-                      <span className="text-blue-500 mr-2">✓</span>
+                    <li key={i} className="flex items-start text-sm text-gray-400">
+                      <span className="text-blue-400 mr-2">✓</span>
                       {feature}
                     </li>
                   ))}

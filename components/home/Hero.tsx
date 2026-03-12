@@ -9,8 +9,8 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Animated background elements - QLC+ inspired */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-9000/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-9000/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
@@ -71,9 +71,9 @@ export function Hero() {
               <div className="aspect-video bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
                 <div className="text-center">
                   <div className="inline-flex space-x-4 mb-4">
-                    <div className="w-16 h-16 rounded-full bg-orange-500 animate-pulse" />
-                    <div className="w-16 h-16 rounded-full bg-blue-500 animate-pulse delay-200" />
-                    <div className="w-16 h-16 rounded-full bg-green-500 animate-pulse delay-500" />
+                    <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse" />
+                    <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse delay-200" />
+                    <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse delay-500" />
                   </div>
                   <p className="text-gray-400">Interactive demo coming soon</p>
                 </div>

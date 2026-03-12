@@ -61,7 +61,7 @@ export default function DemoPage() {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
             Try controlling virtual DMX lights. Imagine doing this with real fixtures!
           </p>
-          <div className="inline-flex items-center bg-blue-500/20 border border-blue-400/30 text-blue-300 px-4 py-2 rounded-lg text-sm">
+          <div className="inline-flex items-center bg-gray-9000/20 border border-blue-400/30 text-blue-300 px-4 py-2 rounded-lg text-sm">
             <Zap className="w-4 h-4 mr-2" />
             This is a simplified demo. Real Lights Pi has many more features!
           </div>
@@ -172,7 +172,7 @@ export default function DemoPage() {
 
               <button
                 onClick={applyToAll}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
+                className="w-full bg-orange-500 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
               >
                 Apply to All Lights
               </button>
@@ -200,7 +200,7 @@ export default function DemoPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
+        <div className="mt-16 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-12 text-center text-white">
           <h2 className="text-4xl font-bold mb-4">Ready to Control Real Lights?</h2>
           <p className="text-xl mb-8 text-white/90">
             Build your own Lights Pi controller and control actual DMX fixtures
@@ -208,7 +208,7 @@ export default function DemoPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/quick-start"
-              className="inline-flex items-center justify-center bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="inline-flex items-center justify-center bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
             >
               Get Started Now
               <ArrowRight className="ml-2 w-5 h-5" />

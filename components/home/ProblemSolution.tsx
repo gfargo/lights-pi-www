@@ -38,24 +38,24 @@ export function ProblemSolution() {
           <FadeIn delay={0.2}>
             <div className="bg-gray-900 rounded-2xl p-8 border border-blue-900/50">
               <div className="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-6">
-                <CheckCircle className="w-6 h-6 text-blue-500" />
+                <CheckCircle className="w-6 h-6 text-blue-400" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white">The Solution</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">✓</span>
+                  <span className="text-blue-400 mr-2">✓</span>
                   Raspberry Pi + open source software
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">✓</span>
+                  <span className="text-blue-400 mr-2">✓</span>
                   One-time hardware cost (~$35)
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">✓</span>
+                  <span className="text-blue-400 mr-2">✓</span>
                   Complete control from your network
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">✓</span>
+                  <span className="text-blue-400 mr-2">✓</span>
                   10-minute setup process
                 </li>
               </ul>

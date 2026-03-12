@@ -118,13 +118,13 @@ const useCases = [
 
 export default function UseCasesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
             Lights Pi Adapts to <span className="text-gradient">Your Workflow</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             From content creation to live events, discover how Lights Pi fits your needs
           </p>
         </div>
@@ -139,20 +139,20 @@ export default function UseCasesPage() {
                 <div className={`grid md:grid-cols-2 gap-12 items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}>
                   {/* Content */}
                   <div className={isEven ? 'md:order-1' : 'md:order-2'}>
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl mb-6">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
-                    <h2 className="text-4xl font-bold mb-3 text-gray-900">{useCase.title}</h2>
-                    <p className="text-xl text-gray-600 mb-6">{useCase.tagline}</p>
-                    <p className="text-gray-700 mb-8">{useCase.description}</p>
+                    <h2 className="text-4xl font-bold mb-3 text-white">{useCase.title}</h2>
+                    <p className="text-xl text-gray-400 mb-6">{useCase.tagline}</p>
+                    <p className="text-gray-300 mb-8">{useCase.description}</p>
 
                     <div className="space-y-6 mb-8">
                       <div>
-                        <h3 className="font-bold text-gray-900 mb-3">Key Features</h3>
+                        <h3 className="font-bold text-white mb-3">Key Features</h3>
                         <ul className="space-y-2">
                           {useCase.features.map((feature, i) => (
-                            <li key={i} className="flex items-start text-gray-700">
-                              <span className="text-blue-500 mr-2">✓</span>
+                            <li key={i} className="flex items-start text-gray-300">
+                              <span className="text-blue-400 mr-2">✓</span>
                               {feature}
                             </li>
                           ))}
@@ -160,26 +160,26 @@ export default function UseCasesPage() {
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                          <div className="text-sm text-blue-700 font-semibold mb-1">Typical Budget</div>
+                        <div className="bg-gray-900 rounded-xl p-4 border border-blue-900/50">
+                          <div className="text-sm text-orange-500 font-semibold mb-1">Typical Budget</div>
                           <div className="text-2xl font-bold text-blue-900">{useCase.budget}</div>
                         </div>
-                        <div className="bg-purple-50 rounded-xl p-4 border border-purple-100">
+                        <div className="bg-gray-900 rounded-xl p-4 border border-gray-800">
                           <div className="text-sm text-purple-700 font-semibold mb-1">Fixtures</div>
                           <div className="text-sm text-purple-900">{useCase.fixtures.join(", ")}</div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200">
-                      <h4 className="font-bold text-gray-900 mb-2">Real-World Example</h4>
-                      <p className="text-gray-700 italic">{useCase.example}</p>
+                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-700">
+                      <h4 className="font-bold text-white mb-2">Real-World Example</h4>
+                      <p className="text-gray-300 italic">{useCase.example}</p>
                     </div>
                   </div>
 
                   {/* Visual */}
                   <div className={isEven ? 'md:order-2' : 'md:order-1'}>
-                    <div className="aspect-square bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-8xl shadow-2xl">
+                    <div className="aspect-square bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center text-8xl shadow-2xl">
                       <Icon className="w-32 h-32 text-white" />
                     </div>
                   </div>
@@ -190,7 +190,7 @@ export default function UseCasesPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
+        <div className="mt-20 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-12 text-center text-white">
           <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl mb-8 text-white/90">
             Build your Lights Pi controller and start controlling your lights today
@@ -198,7 +198,7 @@ export default function UseCasesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/quick-start"
-              className="inline-flex items-center justify-center bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="inline-flex items-center justify-center bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
             >
               Quick Start Guide
               <ArrowRight className="ml-2 w-5 h-5" />
