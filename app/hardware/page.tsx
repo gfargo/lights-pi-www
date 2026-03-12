@@ -11,56 +11,56 @@ const shoppingList = [
     purpose: "Main controller",
     price: "$55",
     priority: "Required",
-    link: "#"
+    link: "https://www.raspberrypi.com/products/raspberry-pi-4-model-b/"
   },
   {
     item: "Raspberry Pi 3B+",
     purpose: "Budget alternative",
     price: "$35",
     priority: "Alternative",
-    link: "#"
+    link: "https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/"
   },
   {
     item: "MicroSD Card 32GB",
     purpose: "OS storage",
     price: "$8",
     priority: "Required",
-    link: "#"
+    link: "https://www.amazon.com/s?k=microsd+card+32gb"
   },
   {
     item: "ENTTEC DMX USB Pro",
     purpose: "DMX interface",
     price: "$150",
     priority: "Required",
-    link: "#"
+    link: "https://www.enttec.com/product/lighting-communication-protocols/dmx512/dmx-usb-pro/"
   },
   {
     item: "Power Supply (USB-C/Micro)",
     purpose: "Pi power",
     price: "$8",
     priority: "Required",
-    link: "#"
+    link: "https://www.raspberrypi.com/products/type-c-power-supply/"
   },
   {
     item: "DMX Cable (3-pin)",
     purpose: "Fixture connection",
     price: "$10-20",
     priority: "Required",
-    link: "#"
+    link: "https://www.amazon.com/s?k=dmx+cable+3+pin"
   },
   {
     item: "Wireless DMX System",
     purpose: "Cable-free setup",
     price: "$200-500",
     priority: "Optional",
-    link: "#"
+    link: "https://www.amazon.com/s?k=wireless+dmx"
   },
   {
     item: "Case for Pi",
     purpose: "Protection",
     price: "$10-20",
     priority: "Recommended",
-    link: "#"
+    link: "https://www.amazon.com/s?k=raspberry+pi+case"
   }
 ];
 
@@ -106,7 +106,7 @@ const setups = [
 
 export default function HardwarePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -125,7 +125,7 @@ export default function HardwarePage() {
           <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-orange-500/20 to-blue-500/20">
+                <thead className="bg-linear-to-r from-orange-500/20 to-blue-500/20">
                   <tr>
                     <th className="text-left py-4 px-6 font-bold text-white">Item</th>
                     <th className="text-left py-4 px-6 font-bold text-white">Purpose</th>
@@ -190,7 +190,7 @@ export default function HardwarePage() {
               const Icon = setup.icon;
               return (
                 <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8 hover:shadow-lg transition">
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
+                  <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold mb-2 text-white">{setup.name}</h3>
@@ -295,7 +295,7 @@ export default function HardwarePage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
+        <div className="mt-16 bg-linear-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Ready to Build?</h2>
           <p className="text-xl mb-6 text-white/90">
             Get your hardware and follow our quick start guide

@@ -48,7 +48,7 @@ const cloudServices = [
 
 export default function ComparisonPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
@@ -65,12 +65,12 @@ export default function ComparisonPage() {
           <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-orange-500/20 to-blue-500/20">
+                <thead className="bg-linear-to-r from-orange-500/20 to-blue-500/20">
                   <tr>
                     <th className="text-left py-4 px-6 font-bold text-white">Feature</th>
                     <th className="text-center py-4 px-6 font-bold text-gray-400">Commercial</th>
                     <th className="text-center py-4 px-6 font-bold text-gray-400">Cloud Service</th>
-                    <th className="text-center py-4 px-6 font-bold bg-gradient-to-r from-orange-500 to-blue-500 text-white">
+                    <th className="text-center py-4 px-6 font-bold bg-linear-to-r from-orange-500 to-blue-500 text-white">
                       Lights Pi
                     </th>
                   </tr>
@@ -163,7 +163,7 @@ export default function ComparisonPage() {
                     <ul className="space-y-2">
                       {controller.pros.map((pro, i) => (
                         <li key={i} className="flex items-start text-gray-300">
-                          <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-green-500 mr-2 shrink-0 mt-0.5" />
                           {pro}
                         </li>
                       ))}
@@ -174,13 +174,13 @@ export default function ComparisonPage() {
                     <ul className="space-y-2">
                       {controller.cons.map((con, i) => (
                         <li key={i} className="flex items-start text-gray-300">
-                          <X className="w-4 h-4 text-red-500 mr-2 flex-shrink-0 mt-0.5" />
+                          <X className="w-4 h-4 text-red-500 mr-2 shrink-0 mt-0.5" />
                           {con}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gradient-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
+                  <div className="bg-linear-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
                     <h4 className="font-bold text-orange-500 mb-2">Lights Pi Advantage</h4>
                     <p className="text-gray-300">{controller.lightsPiAdvantage}</p>
                   </div>
@@ -211,7 +211,7 @@ export default function ComparisonPage() {
                     <ul className="space-y-2">
                       {service.pros.map((pro, i) => (
                         <li key={i} className="flex items-start text-gray-300">
-                          <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-green-500 mr-2 shrink-0 mt-0.5" />
                           {pro}
                         </li>
                       ))}
@@ -222,13 +222,13 @@ export default function ComparisonPage() {
                     <ul className="space-y-2">
                       {service.cons.map((con, i) => (
                         <li key={i} className="flex items-start text-gray-300">
-                          <X className="w-4 h-4 text-red-500 mr-2 flex-shrink-0 mt-0.5" />
+                          <X className="w-4 h-4 text-red-500 mr-2 shrink-0 mt-0.5" />
                           {con}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gradient-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
+                  <div className="bg-linear-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
                     <h4 className="font-bold text-orange-500 mb-2">Lights Pi Advantage</h4>
                     <p className="text-gray-300">{service.lightsPiAdvantage}</p>
                   </div>
@@ -239,7 +239,7 @@ export default function ComparisonPage() {
         </div>
 
         {/* Cost Savings */}
-        <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-12 text-center text-white">
+        <div className="bg-linear-to-r from-green-600 to-emerald-600 rounded-2xl p-12 text-center text-white">
           <h2 className="text-4xl font-bold mb-4">Save Thousands</h2>
           <p className="text-2xl mb-8 text-white/90">
             Lights Pi can save you <span className="font-bold">$4,850+</span> in the first year
