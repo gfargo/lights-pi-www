@@ -70,7 +70,7 @@ export function Navigation() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center space-x-4">
               <a
-                href="https://github.com/yourusername/lights-pi"
+                href="https://github.com/gfargo/lights-pi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-600 transition"
@@ -165,7 +165,7 @@ export function Navigation() {
                   className="space-y-4 pt-6 border-t border-gray-200"
                 >
                   <a
-                    href="https://github.com/yourusername/lights-pi"
+                    href="https://github.com/gfargo/lights-pi"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center space-x-2 px-6 py-3 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
