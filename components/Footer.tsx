@@ -11,6 +11,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li><Link href="/quick-start" className="text-gray-400 hover:text-white transition">Quick Start</Link></li>
               <li><Link href="/hardware" className="text-gray-400 hover:text-white transition">Hardware Guide</Link></li>
+              <li><Link href="/demo" className="text-gray-400 hover:text-white transition">Interactive Demo</Link></li>
               <li><Link href="/docs" className="text-gray-400 hover:text-white transition">Documentation</Link></li>
               <li><Link href="/roadmap" className="text-gray-400 hover:text-white transition">Roadmap</Link></li>
             </ul>
@@ -29,10 +30,10 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Resources</h3>
             <ul className="space-y-2">
+              <li><Link href="/blog" className="text-gray-400 hover:text-white transition">Blog</Link></li>
+              <li><Link href="/use-cases" className="text-gray-400 hover:text-white transition">Use Cases</Link></li>
               <li><Link href="/comparison" className="text-gray-400 hover:text-white transition">Comparison</Link></li>
               <li><Link href="/faq" className="text-gray-400 hover:text-white transition">FAQ</Link></li>
-              <li><a href="https://github.com/yourusername/lights-pi/blob/main/CONTRIBUTING.md" className="text-gray-400 hover:text-white transition">Contributing</a></li>
-              <li><a href="https://github.com/yourusername/lights-pi/blob/main/LICENSE" className="text-gray-400 hover:text-white transition">License</a></li>
             </ul>
           </div>
 

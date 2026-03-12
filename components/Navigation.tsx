@@ -37,14 +37,17 @@ export function Navigation() {
             <Link href="/hardware" className="text-gray-700 hover:text-blue-600 transition">
               Hardware
             </Link>
+            <Link href="/demo" className="text-gray-700 hover:text-blue-600 transition">
+              Demo
+            </Link>
             <Link href="/showcase" className="text-gray-700 hover:text-blue-600 transition">
               Showcase
             </Link>
             <Link href="/docs" className="text-gray-700 hover:text-blue-600 transition">
               Docs
             </Link>
-            <Link href="/community" className="text-gray-700 hover:text-blue-600 transition">
-              Community
+            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition">
+              Blog
             </Link>
           </div>
 

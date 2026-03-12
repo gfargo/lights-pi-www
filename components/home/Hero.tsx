@@ -38,7 +38,7 @@ export function Hero() {
           </Link>
           <button className="flex items-center space-x-2 bg-white text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition border border-gray-200">
             <Play className="w-5 h-5" />
-            <span>Watch Demo</span>
+            <Link href="/demo">Try Demo</Link>
           </button>
         </div>
 
