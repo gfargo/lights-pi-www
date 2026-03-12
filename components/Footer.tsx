@@ -29,10 +29,10 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Resources</h3>
             <ul className="space-y-2">
-              <li><Link href="/blog" className="text-gray-400 hover:text-white transition">Blog</Link></li>
-              <li><Link href="/use-cases" className="text-gray-400 hover:text-white transition">Use Cases</Link></li>
               <li><Link href="/comparison" className="text-gray-400 hover:text-white transition">Comparison</Link></li>
               <li><Link href="/faq" className="text-gray-400 hover:text-white transition">FAQ</Link></li>
+              <li><a href="https://github.com/yourusername/lights-pi/blob/main/CONTRIBUTING.md" className="text-gray-400 hover:text-white transition">Contributing</a></li>
+              <li><a href="https://github.com/yourusername/lights-pi/blob/main/LICENSE" className="text-gray-400 hover:text-white transition">License</a></li>
             </ul>
           </div>
 
