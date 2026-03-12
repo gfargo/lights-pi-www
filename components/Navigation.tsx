@@ -44,16 +44,17 @@ export function Navigation() {
             ? "bg-white/80 backdrop-blur-lg shadow-sm"
             : "bg-transparent"
         }`}
+        aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2 z-50">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg" />
+            <Link href="/" className="flex items-center space-x-2 z-50" aria-label="Lights Pi home">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg" aria-hidden="true" />
               <span className="font-bold text-xl">Lights Pi</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Primary navigation">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -72,8 +73,9 @@ export function Navigation() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-600 transition"
+                aria-label="View Lights Pi on GitHub"
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-5 h-5" aria-hidden="true" />
               </a>
               <Link
                 href="/quick-start"
@@ -87,12 +89,14 @@ export function Navigation() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden z-50 p-2 text-gray-700 hover:text-blue-600 transition"
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -108,6 +112,10 @@ export function Navigation() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
           >
             {/* Backdrop */}
             <motion.div
@@ -116,6 +124,7 @@ export function Navigation() {
               exit={{ opacity: 0 }}
               className="absolute inset-0 bg-black/50 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
+              aria-hidden="true"
             />
 
             {/* Menu Panel */}
@@ -128,7 +137,7 @@ export function Navigation() {
             >
               <div className="flex flex-col h-full pt-20 px-6 pb-6">
                 {/* Navigation Links */}
-                <div className="flex-1 space-y-1">
+                <nav className="flex-1 space-y-1" aria-label="Mobile navigation">
                   {navLinks.map((link, index) => (
                     <motion.div
                       key={link.href}
@@ -145,7 +154,7 @@ export function Navigation() {
                       </Link>
                     </motion.div>
                   ))}
-                </div>
+                </nav>
 
                 {/* Mobile CTA */}
                 <motion.div
@@ -159,8 +168,9 @@ export function Navigation() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center space-x-2 px-6 py-3 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                    aria-label="View Lights Pi on GitHub"
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-5 h-5" aria-hidden="true" />
                     <span>View on GitHub</span>
                   </a>
                   <Link
