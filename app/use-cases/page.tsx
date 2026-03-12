@@ -2,8 +2,13 @@ import Link from "next/link";
 import { Video, Camera, Radio, Music, GraduationCap, Home, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Use Cases - Lights Pi",
-  description: "Discover how Lights Pi adapts to your workflow - from content creation to live events",
+  title: "Use Cases - Lights Pi | Real-World Applications",
+  description: "Discover how Lights Pi adapts to your workflow - from YouTube studios to live events. See real examples, budgets, and fixture recommendations.",
+  openGraph: {
+    title: "Use Cases - Lights Pi",
+    description: "Discover how Lights Pi adapts to your workflow - from content creation to live events",
+    type: "website",
+  },
 };
 
 const useCases = [

@@ -4,6 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { Lightbulb, Palette, Zap, ArrowRight } from "lucide-react";
 
+// Note: metadata export doesn't work in client components
+// SEO is handled by parent layout and can be added via next/head if needed
+
 export default function DemoPage() {
   const [lights, setLights] = useState([
     { id: 1, name: "Light 1", r: 255, g: 100, b: 50, brightness: 100 },

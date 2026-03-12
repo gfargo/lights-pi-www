@@ -2,8 +2,13 @@ import Link from "next/link";
 import { Calendar, User, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Blog - Lights Pi",
-  description: "Latest updates, tutorials, and community stories from Lights Pi",
+  title: "Blog - Lights Pi | Latest Updates & Tutorials",
+  description: "Latest updates, tutorials, and community stories from Lights Pi. Learn about new features, setup guides, and real-world use cases.",
+  openGraph: {
+    title: "Blog - Lights Pi",
+    description: "Latest updates, tutorials, and community stories from Lights Pi",
+    type: "website",
+  },
 };
 
 const categories = [

@@ -1,8 +1,13 @@
 import { Check, Clock, Sparkles, Zap } from "lucide-react";
 
 export const metadata = {
-  title: "Roadmap - Lights Pi",
-  description: "See what's coming next for Lights Pi",
+  title: "Roadmap - Lights Pi | Product Development Timeline",
+  description: "See what's coming next for Lights Pi. View completed features, work in progress, and planned updates for the open-source lighting controller.",
+  openGraph: {
+    title: "Roadmap - Lights Pi",
+    description: "See what's coming next for Lights Pi",
+    type: "website",
+  },
 };
 
 const roadmap = [
