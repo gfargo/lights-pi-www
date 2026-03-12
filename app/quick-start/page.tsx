@@ -115,18 +115,22 @@ export default function QuickStartPage() {
         </div>
 
         {/* Steps */}
-        <div className="space-y-12">
+        <div className="relative space-y-0">
           {steps.map((step, index) => {
             const Icon = step.icon;
+            const isLast = index === steps.length - 1;
+            
             return (
-              <div key={index} className="relative">
-                {index < steps.length - 1 && (
-                  <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-orange-500/50 to-blue-500/50" />
+              <div key={index} className="relative pb-12">
+                {/* Timeline connector */}
+                {!isLast && (
+                  <div className="absolute left-8 top-24 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 via-blue-500 to-purple-500" />
                 )}
-                <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8 shadow-sm hover:shadow-md transition">
+                
+                <div className="relative bg-gray-900 rounded-2xl border border-gray-700 p-8 shadow-sm hover:shadow-md transition">
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center">
+                    <div className="shrink-0 mr-6 relative z-10">
+                      <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
                         <Icon className="w-8 h-8 text-white" />
                       </div>
                     </div>
