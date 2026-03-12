@@ -6,7 +6,7 @@ A modern, beautiful marketing website for Lights Pi - the open-source Raspberry 
 
 ## What We Built
 
-### Pages (8 total)
+### Pages (12 total)
 
 1. **Homepage** (`/`)
    - Hero section with animated gradients
@@ -62,14 +62,39 @@ A modern, beautiful marketing website for Lights Pi - the open-source Raspberry 
    - vs Cloud services (2 products)
    - Cost savings calculator
 
+9. **Use Cases** (`/use-cases`)
+   - 6 detailed use case pages
+   - Real-world examples
+   - Budget and fixture recommendations
+   - Feature highlights
+
+10. **Blog** (`/blog`)
+    - 12 blog posts
+    - Category filtering
+    - Featured post section
+    - Newsletter signup
+
+11. **Roadmap** (`/roadmap`)
+    - Product timeline
+    - Completed, in-progress, and planned features
+    - Progress indicators
+    - Community input CTA
+
+12. **Interactive Demo** (`/demo`)
+    - Virtual DMX light simulator
+    - RGB color control
+    - Brightness adjustment
+    - Color presets
+    - Real-time visual feedback
+
 ### Components
 
 **Layout Components:**
-- `Navigation.tsx` - Sticky header with scroll effect
-- `Footer.tsx` - 4-column footer with links
+- `Navigation.tsx` - Sticky header with scroll effect (updated with new pages)
+- `Footer.tsx` - 4-column footer with links (updated with new pages)
 
 **Homepage Sections:**
-- `Hero.tsx` - Animated hero with gradient background
+- `Hero.tsx` - Animated hero with gradient background (links to demo)
 - `ProblemSolution.tsx` - 3-column comparison
 - `KeyFeatures.tsx` - 6-feature grid with icons
 - `UseCases.tsx` - Interactive use case cards
