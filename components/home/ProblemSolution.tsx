@@ -1,4 +1,5 @@
 import { XCircle, CheckCircle, Sparkles } from "lucide-react";
+import { FadeIn } from '../animations/FadeIn';
 
 export function ProblemSolution() {
   return (

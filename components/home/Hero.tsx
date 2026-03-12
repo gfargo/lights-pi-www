@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Play, Github, Star } from "lucide-react";
+import { FadeIn } from '../animations/FadeIn';
 
 export function Hero() {
   return (

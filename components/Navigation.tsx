@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Github } from "lucide-react";
+import { Github, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from 'framer-motion';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);

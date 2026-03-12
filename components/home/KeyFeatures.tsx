@@ -1,4 +1,5 @@
 import { Globe, Zap, Wifi, Shield, Database, Code } from "lucide-react";
+import { FadeIn } from '../animations/FadeIn';
 
 const features = [
   {

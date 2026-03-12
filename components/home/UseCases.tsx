@@ -1,6 +1,7 @@
 "use client";
 
 import { Video, Camera, Radio, Music, GraduationCap, Home } from "lucide-react";
+import { useState } from 'react';
 
 const useCases = [
   {

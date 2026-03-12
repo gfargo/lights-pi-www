@@ -1,12 +1,29 @@
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/home/Hero";
 import { ProblemSolution } from "@/components/home/ProblemSolution";
 import { KeyFeatures } from "@/components/home/KeyFeatures";
-import { UseCases } from "@/components/home/UseCases";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { CostComparison } from "@/components/home/CostComparison";
-import { SocialProof } from "@/components/home/SocialProof";
-import { FinalCTA } from "@/components/home/FinalCTA";
 import { FadeIn } from "@/components/animations/FadeIn";
+
+// Lazy load below-the-fold components
+const UseCases = dynamic(() => import("@/components/home/UseCases").then(mod => ({ default: mod.UseCases })), {
+  loading: () => <div className="h-96 bg-slate-50 animate-pulse" />
+});
+
+const HowItWorks = dynamic(() => import("@/components/home/HowItWorks").then(mod => ({ default: mod.HowItWorks })), {
+  loading: () => <div className="h-96 bg-white animate-pulse" />
+});
+
+const CostComparison = dynamic(() => import("@/components/home/CostComparison").then(mod => ({ default: mod.CostComparison })), {
+  loading: () => <div className="h-96 bg-white animate-pulse" />
+});
+
+const SocialProof = dynamic(() => import("@/components/home/SocialProof").then(mod => ({ default: mod.SocialProof })), {
+  loading: () => <div className="h-96 bg-slate-50 animate-pulse" />
+});
+
+const FinalCTA = dynamic(() => import("@/components/home/FinalCTA").then(mod => ({ default: mod.FinalCTA })), {
+  loading: () => <div className="h-96 bg-white animate-pulse" />
+});
 
 export default function Home() {
   return (
