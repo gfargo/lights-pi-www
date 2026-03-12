@@ -1,0 +1,64 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#111827;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1f2937;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative circles with glow -->
+  <circle cx="200" cy="150" r="80" fill="#FF9800" opacity="0.15" filter="url(#glow)"/>
+  <circle cx="1000" cy="480" r="100" fill="#2196F3" opacity="0.15" filter="url(#glow)"/>
+  <circle cx="950" cy="120" r="60" fill="#9C27B0" opacity="0.1" filter="url(#glow)"/>
+  
+  <!-- Lightbulb Icon -->
+  <g transform="translate(100, 200)">
+    <circle cx="50" cy="50" r="45" fill="url(#accentGradient)" opacity="0.2"/>
+    <path d="M50 20 C35 20 25 30 25 45 C25 55 30 63 35 68 L35 80 C35 83 37 85 40 85 L60 85 C63 85 65 83 65 80 L65 68 C70 63 75 55 75 45 C75 30 65 20 50 20 Z M42 90 L58 90 C59 90 60 91 60 92 C60 93 59 94 58 94 L42 94 C41 94 40 93 40 92 C40 91 41 90 42 90 Z" 
+          fill="#FF9800" filter="url(#glow)"/>
+  </g>
+  
+  <!-- Main Text -->
+  <text x="250" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
+    Lights Pi
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="250" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="#9CA3AF">
+    Professional Studio Lighting
+  </text>
+  <text x="250" y="390" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="#9CA3AF">
+    Control for $35
+  </text>
+  
+  <!-- Features -->
+  <g transform="translate(250, 440)">
+    <text y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#FF9800">✓</text>
+    <text x="40" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">Open Source</text>
+    
+    <text x="220" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#2196F3">✓</text>
+    <text x="260" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">Self-Hosted</text>
+    
+    <text x="460" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#9C27B0">✓</text>
+    <text x="500" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">No Subscriptions</text>
+  </g>
+  
+  <!-- URL -->
+  <text x="250" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="url(#accentGradient)" font-weight="600">
+    lightspi.dev
+  </text>
+</svg>

@@ -12,21 +12,38 @@ import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://lightspi.dev'),
   title: "Lights Pi - Professional Studio Lighting Control for $35",
   description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
   keywords: ["Raspberry Pi lighting controller", "DMX controller", "QLC+", "studio lighting", "open source"],
   authors: [{ name: "Lights Pi Team" }],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    apple: "/apple-touch-icon.svg",
+  },
   openGraph: {
     title: "Lights Pi - Professional Studio Lighting Control for $35",
     description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
     type: "website",
     url: "https://lightspi.dev",
     siteName: "Lights Pi",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Lights Pi - Professional Studio Lighting Control",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lights Pi - Professional Studio Lighting Control for $35",
     description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
+    images: ["/twitter-card.svg"],
   },
 };
 
