@@ -6,18 +6,33 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { CostComparison } from "@/components/home/CostComparison";
 import { SocialProof } from "@/components/home/SocialProof";
 import { FinalCTA } from "@/components/home/FinalCTA";
+import { FadeIn } from "@/components/animations/FadeIn";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <ProblemSolution />
-      <KeyFeatures />
-      <UseCases />
-      <HowItWorks />
-      <CostComparison />
-      <SocialProof />
-      <FinalCTA />
+      <FadeIn>
+        <ProblemSolution />
+      </FadeIn>
+      <FadeIn>
+        <KeyFeatures />
+      </FadeIn>
+      <FadeIn>
+        <UseCases />
+      </FadeIn>
+      <FadeIn>
+        <HowItWorks />
+      </FadeIn>
+      <FadeIn>
+        <CostComparison />
+      </FadeIn>
+      <FadeIn>
+        <SocialProof />
+      </FadeIn>
+      <FadeIn>
+        <FinalCTA />
+      </FadeIn>
     </>
   );
 }
