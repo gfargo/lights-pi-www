@@ -22,6 +22,48 @@ export interface BlogPost {
 
 const GITHUB_REPO = "gfargo/lights-pi";
 
+export interface GitHubRepoStats {
+  stars: number;
+  forks: number;
+  watchers: number;
+  openIssues: number;
+}
+
+export async function getGitHubRepoStats(): Promise<GitHubRepoStats> {
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPO}`,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+        },
+        next: { revalidate: 300 }, // Cache for 5 minutes
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+
+    const repo = await response.json();
+    
+    return {
+      stars: repo.stargazers_count || 0,
+      forks: repo.forks_count || 0,
+      watchers: repo.watchers_count || 0,
+      openIssues: repo.open_issues_count || 0,
+    };
+  } catch (error) {
+    console.error("Failed to fetch GitHub repo stats:", error);
+    return {
+      stars: 0,
+      forks: 0,
+      watchers: 0,
+      openIssues: 0,
+    };
+  }
+}
+
 export async function getGitHubReleases(): Promise<GitHubRelease[]> {
   try {
     const response = await fetch(

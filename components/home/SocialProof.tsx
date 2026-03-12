@@ -24,14 +24,16 @@ const testimonials = [
   }
 ];
 
-const stats = [
-  { icon: Star, value: "1.2k+", label: "GitHub Stars" },
-  { icon: Users, value: "500+", label: "Active Users" },
-  { icon: Download, value: "2k+", label: "Downloads" },
-  { icon: Heart, value: "100%", label: "Open Source" }
-];
+export async function SocialProof() {
+  const stats = await getGitHubRepoStats();
+  
+  const displayStats = [
+    { icon: Star, value: `${stats.stars}+`, label: "GitHub Stars" },
+    { icon: Users, value: "500+", label: "Active Users" },
+    { icon: Download, value: "2k+", label: "Downloads" },
+    { icon: Heart, value: "100%", label: "Open Source" }
+  ];
 
-export function SocialProof() {
   return (
     <section className="py-24 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +48,7 @@ export function SocialProof() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          {stats.map((stat, index) => {
+          {displayStats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div key={index} className="text-center">
