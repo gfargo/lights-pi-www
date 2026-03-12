@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --brand-blue: 37 99 235;
-  --brand-purple: 124 58 237;
-  --success-green: 16 185 129;
-  --warning-yellow: 245 158 11;
-  --error-red: 239 68 68;
+  /* QLC+ inspired dark theme colors */
+  --brand-orange: 255 152 0;      /* #FF9800 - Lighting amber/orange */
+  --brand-blue: 33 150 243;       /* #2196F3 - Active element blue */
+  --dark-bg: 45 45 45;            /* #2D2D2D - Main background */
+  --dark-panel: 55 55 55;         /* #373737 - Panel background */
+  --dark-elevated: 70 70 70;      /* #464646 - Elevated elements */
+  --dark-border: 80 80 80;        /* #505050 - Borders */
+  --text-primary: 255 255 255;    /* #FFFFFF - Primary text */
+  --text-secondary: 189 189 189;  /* #BDBDBD - Secondary text */
+  --success-green: 76 175 80;     /* #4CAF50 */
+  --warning-yellow: 255 235 59;   /* #FFEB3B */
+  --error-red: 244 67 54;         /* #F44336 */
 }
 
 @utility text-gradient {
-  background: linear-gradient(to right, rgb(37 99 235), rgb(124 58 237));
+  background: linear-gradient(to right, rgb(255 152 0), rgb(33 150 243));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -38,7 +45,7 @@
 
 /* Accessibility: Focus indicators */
 *:focus-visible {
-  outline: 2px solid rgb(37 99 235);
+  outline: 2px solid rgb(255 152 0);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -77,3 +84,4 @@
     transition-duration: 0.01ms !important;
   }
 }
+

@@ -34,11 +34,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark">
       <head>
         <StructuredData />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gray-900 text-white`}>
         {/* Skip to content link for keyboard navigation */}
         <a
           href="#main-content"
