@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --brand-blue: 37 99 235;
+  --brand-purple: 124 58 237;
+  --success-green: 16 185 129;
+  --warning-yellow: 245 158 11;
+  --error-red: 239 68 68;
+}
+
+@utility text-gradient {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(124 58 237));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
+}
