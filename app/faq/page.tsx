@@ -94,7 +94,7 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">
@@ -124,7 +124,7 @@ export default function FAQPage() {
                       >
                         <span className="font-semibold text-white pr-4">{faq.q}</span>
                         <ChevronDown
-                          className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${
+                          className={`w-5 h-5 text-gray-400 shrink-0 transition-transform ${
                             isOpen ? "rotate-180" : ""
                           }`}
                         />
@@ -142,7 +142,7 @@ export default function FAQPage() {
           ))}
         </div>
 
-        <div className="mt-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-gray-800 text-center">
+        <div className="mt-16 bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 border border-purple-500/50 text-center">
           <h2 className="text-2xl font-bold mb-4 text-white">Still Have Questions?</h2>
           <p className="text-gray-400 mb-6">
             Join our community for help and support
@@ -150,7 +150,7 @@ export default function FAQPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/community"
-              className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
+              className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
             >
               Join Discord
             </a>

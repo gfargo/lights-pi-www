@@ -14,7 +14,7 @@ const stats = [
 
 export default function CommunityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -32,7 +32,7 @@ export default function CommunityPage() {
             const Icon = stat.icon;
             return (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-500 rounded-2xl mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-orange-500 to-blue-500 rounded-2xl mb-4">
                   <Icon className="w-8 h-8 text-white" />
                 </div>
                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
@@ -45,7 +45,7 @@ export default function CommunityPage() {
         {/* Community Channels */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Discord */}
-          <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+          <div className="bg-linear-to-br from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
             <MessageCircle className="w-12 h-12 mb-6" />
             <h2 className="text-3xl font-bold mb-4">Discord Community</h2>
             <p className="text-white/90 mb-6">
@@ -66,7 +66,7 @@ export default function CommunityPage() {
           </div>
 
           {/* GitHub */}
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 text-white">
+          <div className="bg-linear-to-br from-gray-800 to-gray-900 rounded-2xl p-8 text-white">
             <Github className="w-12 h-12 mb-6" />
             <h2 className="text-3xl font-bold mb-4">GitHub Repository</h2>
             <p className="text-white/90 mb-6">
@@ -79,7 +79,7 @@ export default function CommunityPage() {
               <li>✓ Review pull requests</li>
             </ul>
             <a
-              href="https://github.com/yourusername/lights-pi"
+              href="https://github.com/gfargo/lights-pi"
               className="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
             >
               View on GitHub
@@ -130,20 +130,20 @@ export default function CommunityPage() {
         </div>
 
         {/* Contributing CTA */}
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-12 border border-purple-500/50 text-center">
+        <div className="bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-12 border border-purple-500/50 text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Ready to Contribute?</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Check out our contributing guide to learn how you can help make Lights Pi even better
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://github.com/yourusername/lights-pi/blob/main/CONTRIBUTING.md"
-              className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
+              href="https://github.com/gfargo/lights-pi/blob/main/CONTRIBUTING.md"
+              className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
             >
               Contributing Guide
             </a>
             <a
-              href="https://github.com/yourusername/lights-pi/issues"
+              href="https://github.com/gfargo/lights-pi/issues"
               className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               View Open Issues

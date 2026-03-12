@@ -52,7 +52,7 @@ export default function DemoPage() {
   const currentLight = lights[selectedLight];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4 text-white">
@@ -61,7 +61,7 @@ export default function DemoPage() {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
             Try controlling virtual DMX lights. Imagine doing this with real fixtures!
           </p>
-          <div className="inline-flex items-center bg-gray-9000/20 border border-blue-400/30 text-blue-300 px-4 py-2 rounded-lg text-sm">
+          <div className="inline-flex items-center bg-gray-900/20 border border-blue-400/30 text-blue-300 px-4 py-2 rounded-lg text-sm">
             <Zap className="w-4 h-4 mr-2" />
             This is a simplified demo. Real Lights Pi has many more features!
           </div>
@@ -70,7 +70,7 @@ export default function DemoPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Virtual Lights Display */}
           <div className="lg:col-span-2">
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-8">
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 p-8">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <Lightbulb className="w-6 h-6 mr-2" />
                 Virtual Lights
@@ -108,7 +108,7 @@ export default function DemoPage() {
 
           {/* Control Panel */}
           <div className="space-y-6">
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-6">
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center">
                 <Palette className="w-5 h-5 mr-2" />
                 Control: {currentLight.name}
@@ -126,7 +126,7 @@ export default function DemoPage() {
                     max="255"
                     value={currentLight.r}
                     onChange={(e) => updateLight(selectedLight, { r: parseInt(e.target.value) })}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-500"
                   />
                 </div>
                 <div>
@@ -139,7 +139,7 @@ export default function DemoPage() {
                     max="255"
                     value={currentLight.g}
                     onChange={(e) => updateLight(selectedLight, { g: parseInt(e.target.value) })}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-green-500"
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-green-500"
                   />
                 </div>
                 <div>
@@ -152,7 +152,7 @@ export default function DemoPage() {
                     max="255"
                     value={currentLight.b}
                     onChange={(e) => updateLight(selectedLight, { b: parseInt(e.target.value) })}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                 </div>
                 <div>
@@ -165,7 +165,7 @@ export default function DemoPage() {
                     max="100"
                     value={currentLight.brightness}
                     onChange={(e) => updateLight(selectedLight, { brightness: parseInt(e.target.value) })}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
                   />
                 </div>
               </div>
@@ -179,7 +179,7 @@ export default function DemoPage() {
             </div>
 
             {/* Presets */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-6">
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
               <h3 className="text-xl font-bold text-white mb-4">Color Presets</h3>
               <div className="grid grid-cols-2 gap-2">
                 {presets.map((preset, index) => (
@@ -200,7 +200,7 @@ export default function DemoPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 bg-gradient-to-r from-orange-500 to-blue-500 rounded-2xl p-12 text-center text-white">
+        <div className="mt-16 bg-linear-to-r from-orange-500 to-blue-500 rounded-2xl p-12 text-center text-white">
           <h2 className="text-4xl font-bold mb-4">Ready to Control Real Lights?</h2>
           <p className="text-xl mb-8 text-white/90">
             Build your own Lights Pi controller and control actual DMX fixtures
