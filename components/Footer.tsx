@@ -26,7 +26,7 @@ export function Footer() {
             <h3 className="font-bold text-lg mb-4">Community</h3>
             <ul className="space-y-2">
               <li><a href="https://github.com/gfargo/lights-pi" className="text-gray-400 hover:text-orange-500 transition">GitHub</a></li>
-              <li><a href="https://discord.gg/yourserver" className="text-gray-400 hover:text-orange-500 transition">Discord</a></li>
+              <li><a href="https://discord.com/invite/KGu9nE9Ejx" className="text-gray-400 hover:text-orange-500 transition">Discord</a></li>
               {showShowcase && (
                 <li><Link href="/showcase" className="text-gray-400 hover:text-orange-500 transition">Showcase Gallery</Link></li>
               )}

@@ -59,7 +59,7 @@ export default async function CommunityPage() {
               <li>✓ Connect with other creators</li>
             </ul>
             <a
-              href="https://discord.gg/yourserver"
+              href="https://discord.com/invite/KGu9nE9Ejx"
               className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
             >
               Join Discord

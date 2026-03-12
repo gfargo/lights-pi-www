@@ -7,7 +7,8 @@ export function StructuredData() {
     "logo": "https://lights.griffen.codes/og-image.svg",
     "description": "Open source Raspberry Pi lighting controller for DMX fixtures",
     "sameAs": [
-      "https://github.com/gfargo/lights-pi"
+      "https://github.com/gfargo/lights-pi",
+      "https://discord.com/invite/KGu9nE9Ejx"
     ]
   };
 
