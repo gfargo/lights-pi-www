@@ -1,4 +1,6 @@
 import { Users } from "lucide-react";
+import { resolveAllFlags } from "@/lib/flags/runtime";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Showcase - Lights Pi",
@@ -62,9 +64,15 @@ const showcases = [
   }
 ];
 
-export default function ShowcasePage() {
+export default async function ShowcasePage() {
+  // Check if showcase is enabled
+  const flags = await resolveAllFlags();
+  if (!flags["enable-showcase"]) {
+    redirect("/");
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-16">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -90,7 +98,7 @@ export default function ShowcasePage() {
           {showcases.map((showcase, index) => (
             <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               {/* Image placeholder */}
-              <div className="aspect-video bg-gradient-to-br from-orange-500 to-blue-500 flex items-center justify-center text-6xl">
+              <div className="aspect-video bg-linear-to-br from-orange-500 to-blue-500 flex items-center justify-center text-6xl">
                 {showcase.image}
               </div>
               
@@ -121,13 +129,13 @@ export default function ShowcasePage() {
         </div>
 
         {/* Submit CTA */}
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-12 border border-purple-500/50 text-center">
+        <div className="bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-12 border border-purple-500/50 text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Share Your Setup</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Built something cool with Lights Pi? Share it with the community and inspire others!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+            <button className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
               Submit Your Setup
             </button>
             <a
