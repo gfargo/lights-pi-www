@@ -141,7 +141,7 @@ export default function QuickStartPage() {
                           ⏱ {step.time}
                         </div>
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-3 mb-6">
                         {step.content.map((item, i) => (
                           <li key={i} className="flex items-start">
                             <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
@@ -149,6 +149,44 @@ export default function QuickStartPage() {
                           </li>
                         ))}
                       </ul>
+                      
+                      {/* Code examples for specific steps */}
+                      {index === 1 && (
+                        <div className="space-y-4">
+                          <CodeBlock
+                            code="cp .env.example .env
+# Edit .env with your settings"
+                            language="bash"
+                            filename=".env configuration"
+                          />
+                          <CodeBlock
+                            code={`WIFI1_SSID="SetupNet" WIFI1_PSK="setup-pass" \\
+WIFI2_SSID="StudioNet" WIFI2_PSK="studio-pass" \\
+./lightsctl.sh setup-full`}
+                            language="bash"
+                            filename="Full provisioning"
+                          />
+                          <CodeBlock
+                            code={`./lightsctl.sh doctor
+./lightsctl.sh test-dmx`}
+                            language="bash"
+                            filename="Verify installation"
+                          />
+                        </div>
+                      )}
+                      
+                      {index === 3 && (
+                        <div className="space-y-4">
+                          <CodeBlock
+                            code="./lightsctl.sh open-web"
+                            language="bash"
+                            filename="Open web interface"
+                          />
+                          <p className="text-sm text-gray-600 mt-4">
+                            Or manually navigate to: <code className="bg-gray-100 px-2 py-1 rounded">https://lights.local:9999</code>
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
