@@ -160,18 +160,18 @@ export default function UseCasesPage() {
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-gray-900 rounded-xl p-4 border border-blue-900/50">
+                        <div className="bg-gray-900 rounded-xl p-4 border border-orange-500/50">
                           <div className="text-sm text-orange-500 font-semibold mb-1">Typical Budget</div>
-                          <div className="text-2xl font-bold text-blue-900">{useCase.budget}</div>
+                          <div className="text-2xl font-bold text-white">{useCase.budget}</div>
                         </div>
                         <div className="bg-gray-900 rounded-xl p-4 border border-gray-800">
-                          <div className="text-sm text-purple-700 font-semibold mb-1">Fixtures</div>
-                          <div className="text-sm text-purple-900">{useCase.fixtures.join(", ")}</div>
+                          <div className="text-sm text-gray-400 font-semibold mb-1">Fixtures</div>
+                          <div className="text-sm text-gray-300">{useCase.fixtures.join(", ")}</div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-700">
+                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
                       <h4 className="font-bold text-white mb-2">Real-World Example</h4>
                       <p className="text-gray-300 italic">{useCase.example}</p>
                     </div>
@@ -198,7 +198,7 @@ export default function UseCasesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/quick-start"
-              className="inline-flex items-center justify-center bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="inline-flex items-center justify-center bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
             >
               Quick Start Guide
               <ArrowRight className="ml-2 w-5 h-5" />

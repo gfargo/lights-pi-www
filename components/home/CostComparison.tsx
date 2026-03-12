@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 
 export function CostComparison() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -24,7 +24,7 @@ export function CostComparison() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-700">
               <tr className="hover:bg-gray-800 transition">
                 <td className="py-4 px-6 font-medium text-white">Initial Cost</td>
                 <td className="py-4 px-6 text-center text-gray-400">$500-$5,000</td>
@@ -73,7 +73,7 @@ export function CostComparison() {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="inline-block bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-900/50">
+          <div className="inline-block bg-gradient-to-r from-orange-500/20 to-blue-500/20 rounded-2xl p-8 border border-orange-500/50">
             <p className="text-3xl font-bold text-white mb-2">
               Save up to <span className="text-gradient">$4,850+</span>
             </p>

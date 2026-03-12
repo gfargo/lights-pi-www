@@ -80,7 +80,7 @@ export default function Error({
               <span>Report Issue on GitHub</span>
             </a>
             {error.digest && (
-              <p className="text-xs text-gray-400 font-mono bg-gray-100 p-2 rounded">
+              <p className="text-xs text-gray-400 font-mono bg-gray-800 p-2 rounded">
                 Error ID: {error.digest}
               </p>
             )}

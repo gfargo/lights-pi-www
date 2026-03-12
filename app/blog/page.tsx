@@ -76,7 +76,7 @@ export default async function BlogPage() {
                   href={`https://github.com/gfargo/lights-pi/releases/tag/${featuredPost.version || featuredPost.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-gray-900 text-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+                  className="inline-flex items-center bg-gray-900 text-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
                 >
                   Read More
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -100,7 +100,7 @@ export default async function BlogPage() {
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-block bg-blue-100 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full">
+                  <span className="inline-block bg-orange-500/20 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full">
                     {post.category}
                   </span>
                   <span className="text-sm text-gray-400">{post.readTime}</span>

@@ -41,12 +41,12 @@ const features = [
 ];
 
 const colorClasses: Record<string, { bg: string; icon: string; border: string }> = {
-  blue: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-blue-900/50" },
+  blue: { bg: "bg-gray-900", icon: "text-blue-400", border: "border-blue-900/50" },
   purple: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-gray-800" },
-  pink: { bg: "bg-gray-900", icon: "text-pink-600", border: "border-gray-800" },
-  green: { bg: "bg-gray-900", icon: "text-green-600", border: "border-green-900/50" },
-  orange: { bg: "bg-gray-900", icon: "text-orange-600", border: "border-orange-100" },
-  indigo: { bg: "bg-gray-900", icon: "text-indigo-600", border: "border-indigo-100" }
+  pink: { bg: "bg-gray-900", icon: "text-orange-400", border: "border-gray-800" },
+  green: { bg: "bg-gray-900", icon: "text-green-400", border: "border-green-900/50" },
+  orange: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-gray-800" },
+  indigo: { bg: "bg-gray-900", icon: "text-blue-400", border: "border-gray-800" }
 };
 
 export function KeyFeatures() {

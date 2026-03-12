@@ -125,7 +125,7 @@ export default function HardwarePage() {
           <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-blue-50 to-purple-50">
+                <thead className="bg-gradient-to-r from-orange-500/20 to-blue-500/20">
                   <tr>
                     <th className="text-left py-4 px-6 font-bold text-white">Item</th>
                     <th className="text-left py-4 px-6 font-bold text-white">Purpose</th>
@@ -134,7 +134,7 @@ export default function HardwarePage() {
                     <th className="text-center py-4 px-6 font-bold text-white">Buy</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-700">
                   {shoppingList.map((item, index) => (
                     <tr key={index} className="hover:bg-gray-800 transition">
                       <td className="py-4 px-6 font-medium text-white">{item.item}</td>
@@ -142,10 +142,10 @@ export default function HardwarePage() {
                       <td className="py-4 px-6 text-center text-white font-semibold">{item.price}</td>
                       <td className="py-4 px-6 text-center">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                          item.priority === "Required" ? "bg-red-100 text-red-700" :
-                          item.priority === "Recommended" ? "bg-blue-100 text-orange-500" :
-                          item.priority === "Alternative" ? "bg-yellow-100 text-yellow-700" :
-                          "bg-gray-100 text-gray-300"
+                          item.priority === "Required" ? "bg-red-500/20 text-red-400" :
+                          item.priority === "Recommended" ? "bg-orange-500/20 text-orange-500" :
+                          item.priority === "Alternative" ? "bg-yellow-500/20 text-yellow-400" :
+                          "bg-gray-800 text-gray-300"
                         }`}>
                           {item.priority}
                         </span>
@@ -164,19 +164,19 @@ export default function HardwarePage() {
 
           {/* Cost Summary */}
           <div className="mt-8 grid md:grid-cols-3 gap-6">
-            <div className="bg-gray-900 rounded-xl p-6 border border-green-200">
-              <div className="text-sm text-green-700 font-semibold mb-1">Minimum Setup</div>
-              <div className="text-3xl font-bold text-green-900">~$200</div>
+            <div className="bg-gray-900 rounded-xl p-6 border border-green-500/50">
+              <div className="text-sm text-green-400 font-semibold mb-1">Minimum Setup</div>
+              <div className="text-3xl font-bold text-white">~$200</div>
               <div className="text-sm text-green-600 mt-1">Pi 3 + basic setup</div>
             </div>
-            <div className="bg-gray-900 rounded-xl p-6 border border-blue-200">
+            <div className="bg-gray-900 rounded-xl p-6 border border-orange-500/50">
               <div className="text-sm text-orange-500 font-semibold mb-1">Recommended Setup</div>
-              <div className="text-3xl font-bold text-blue-900">~$250</div>
+              <div className="text-3xl font-bold text-white">~$250</div>
               <div className="text-sm text-orange-500 mt-1">Pi 4 + case</div>
             </div>
-            <div className="bg-gray-900 rounded-xl p-6 border border-purple-200">
-              <div className="text-sm text-purple-700 font-semibold mb-1">With Wireless DMX</div>
-              <div className="text-3xl font-bold text-purple-900">~$450-750</div>
+            <div className="bg-gray-900 rounded-xl p-6 border border-purple-500/50">
+              <div className="text-sm text-purple-400 font-semibold mb-1">With Wireless DMX</div>
+              <div className="text-3xl font-bold text-white">~$450-750</div>
               <div className="text-sm text-orange-500 mt-1">Full wireless setup</div>
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function HardwarePage() {
         <div className="space-y-12">
           <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
             <div className="flex items-start">
-              <Cpu className="w-8 h-8 text-orange-500 mr-4 flex-shrink-0" />
+              <Cpu className="w-8 h-8 text-orange-500 mr-4 shrink-0" />
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-white">Raspberry Pi Selection</h3>
                 <div className="prose prose-gray max-w-none">
@@ -246,17 +246,17 @@ export default function HardwarePage() {
 
           <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
             <div className="flex items-start">
-              <Usb className="w-8 h-8 text-orange-500 mr-4 flex-shrink-0" />
+              <Usb className="w-8 h-8 text-orange-500 mr-4 shrink-0" />
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-white">ENTTEC DMX USB Pro</h3>
                 <p className="text-gray-300 mb-4">
                   The ENTTEC DMX USB Pro is the recommended DMX interface. It&apos;s reliable, well-supported by QLC+,
                   and widely available. Make sure to buy from authorized dealers to avoid counterfeits.
                 </p>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4">
                   <div className="flex items-start">
-                    <Shield className="w-5 h-5 text-yellow-600 mr-2 flex-shrink-0 mt-0.5" />
-                    <div className="text-sm text-yellow-800">
+                    <Shield className="w-5 h-5 text-yellow-400 mr-2 shrink-0 mt-0.5" />
+                    <div className="text-sm text-yellow-200">
                       <strong>Avoid counterfeits:</strong> Buy from B&H Photo, Amazon (sold by ENTTEC), or authorized dealers.
                       Counterfeit units may not work properly with QLC+.
                     </div>
@@ -268,7 +268,7 @@ export default function HardwarePage() {
 
           <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
             <div className="flex items-start">
-              <Cable className="w-8 h-8 text-pink-600 mr-4 flex-shrink-0" />
+              <Cable className="w-8 h-8 text-pink-600 mr-4 shrink-0" />
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-white">DMX Cables</h3>
                 <p className="text-gray-300 mb-4">
@@ -302,7 +302,7 @@ export default function HardwarePage() {
           </p>
           <a
             href="/quick-start"
-            className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+            className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
           >
             View Quick Start Guide
           </a>

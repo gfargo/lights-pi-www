@@ -83,9 +83,9 @@ export default function QuickStartPage() {
         </div>
 
         {/* Time estimate */}
-        <div className="bg-gray-900 border border-blue-200 rounded-xl p-6 mb-12">
+        <div className="bg-gray-900 border border-orange-500/50 rounded-xl p-6 mb-12">
           <div className="flex items-start">
-            <AlertCircle className="w-6 h-6 text-orange-500 mr-3 flex-shrink-0 mt-1" />
+            <AlertCircle className="w-6 h-6 text-orange-500 mr-3 shrink-0 mt-1" />
             <div>
               <h3 className="font-bold text-white mb-2">What You&apos;ll Build</h3>
               <p className="text-gray-300 mb-2">A fully functional web-based DMX lighting controller</p>
@@ -121,7 +121,7 @@ export default function QuickStartPage() {
             return (
               <div key={index} className="relative">
                 {index < steps.length - 1 && (
-                  <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 to-purple-200" />
+                  <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-orange-500/50 to-blue-500/50" />
                 )}
                 <div className="bg-gray-900 rounded-2xl border border-gray-700 p-8 shadow-sm hover:shadow-md transition">
                   <div className="flex items-start">
@@ -133,7 +133,7 @@ export default function QuickStartPage() {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <div className="inline-block bg-blue-100 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                          <div className="inline-block bg-orange-500/20 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full mb-2">
                             Step {index + 1}
                           </div>
                           <h3 className="text-2xl font-bold text-white">{step.title}</h3>
@@ -145,7 +145,7 @@ export default function QuickStartPage() {
                       <ul className="space-y-3 mb-6">
                         {step.content.map((item, i) => (
                           <li key={i} className="flex items-start">
-                            <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                            <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
                             <span className="text-gray-300">{item}</span>
                           </li>
                         ))}
@@ -184,7 +184,7 @@ WIFI2_SSID="StudioNet" WIFI2_PSK="studio-pass" \\
                             filename="Open web interface"
                           />
                           <p className="text-sm text-gray-400 mt-4">
-                            Or manually navigate to: <code className="bg-gray-100 px-2 py-1 rounded">https://lights.local:9999</code>
+                            Or manually navigate to: <code className="bg-gray-800 px-2 py-1 rounded">https://lights.local:9999</code>
                           </p>
                         </div>
                       )}
@@ -197,7 +197,7 @@ WIFI2_SSID="StudioNet" WIFI2_PSK="studio-pass" \\
         </div>
 
         {/* Next Steps */}
-        <div className="mt-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-gray-800">
+        <div className="mt-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 border border-purple-500/50">
           <h2 className="text-2xl font-bold mb-4 text-white">🎉 You&apos;re All Set!</h2>
           <p className="text-gray-300 mb-6">
             Your Lights Pi controller is ready. Here&apos;s what to do next:
@@ -229,7 +229,7 @@ WIFI2_SSID="StudioNet" WIFI2_PSK="studio-pass" \\
             </a>
             <a
               href="/community"
-              className="inline-flex items-center justify-center bg-gray-900 text-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
+              className="inline-flex items-center justify-center bg-gray-900 text-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               Join Community
             </a>

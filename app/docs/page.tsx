@@ -106,20 +106,20 @@ export default function DocsPage() {
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-6 text-white">Quick Links</h2>
           <div className="grid md:grid-cols-4 gap-4">
-            <Link href="/quick-start" className="bg-gray-900 border border-blue-200 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-blue-900">Quick Start</div>
+            <Link href="/quick-start" className="bg-gray-900 border border-orange-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
+              <div className="font-semibold text-orange-500">Quick Start</div>
               <div className="text-sm text-orange-500">Get started in 10 min</div>
             </Link>
-            <Link href="/hardware" className="bg-gray-900 border border-purple-200 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-purple-900">Hardware Guide</div>
+            <Link href="/hardware" className="bg-gray-900 border border-blue-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
+              <div className="font-semibold text-blue-400">Hardware Guide</div>
               <div className="text-sm text-orange-500">Shopping list & setup</div>
             </Link>
-            <Link href="#" className="bg-gray-900 border border-pink-200 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-pink-900">Troubleshooting</div>
+            <Link href="#" className="bg-gray-900 border border-pink-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
+              <div className="font-semibold text-pink-400">Troubleshooting</div>
               <div className="text-sm text-pink-600">Common issues</div>
             </Link>
-            <Link href="#" className="bg-gray-900 border border-green-200 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-green-900">API Reference</div>
+            <Link href="#" className="bg-gray-900 border border-green-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
+              <div className="font-semibold text-green-400">API Reference</div>
               <div className="text-sm text-green-600">Integration docs</div>
             </Link>
           </div>
@@ -157,7 +157,7 @@ export default function DocsPage() {
             Join our community for support and discussions
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/community" className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+            <Link href="/community" className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
               Join Discord
             </Link>
             <a href="https://github.com/yourusername/lights-pi/issues" className="inline-block bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/20 transition border border-white/20">

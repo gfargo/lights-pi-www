@@ -238,7 +238,7 @@ export default function RoadmapPage() {
                                 <span>Progress</span>
                                 <span className="font-semibold">{item.progress}%</span>
                               </div>
-                              <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div className="w-full bg-gray-700 rounded-full h-2">
                                 <div
                                   className="bg-gradient-to-r from-orange-500 to-blue-500 h-2 rounded-full transition-all duration-500"
                                   style={{ width: `${item.progress}%` }}
@@ -271,7 +271,7 @@ export default function RoadmapPage() {
             </a>
             <a
               href="https://github.com/yourusername/lights-pi/issues"
-              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
+              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               Report Issues
             </a>

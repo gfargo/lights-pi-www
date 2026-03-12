@@ -59,7 +59,7 @@ export default function CommunityPage() {
             </ul>
             <a
               href="https://discord.gg/yourserver"
-              className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
             >
               Join Discord
             </a>
@@ -80,7 +80,7 @@ export default function CommunityPage() {
             </ul>
             <a
               href="https://github.com/yourusername/lights-pi"
-              className="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
             >
               View on GitHub
             </a>
@@ -130,7 +130,7 @@ export default function CommunityPage() {
         </div>
 
         {/* Contributing CTA */}
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-12 border border-purple-500/50 text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Ready to Contribute?</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Check out our contributing guide to learn how you can help make Lights Pi even better
@@ -144,7 +144,7 @@ export default function CommunityPage() {
             </a>
             <a
               href="https://github.com/yourusername/lights-pi/issues"
-              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
+              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               View Open Issues
             </a>

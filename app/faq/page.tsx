@@ -156,7 +156,7 @@ export default function FAQPage() {
             </a>
             <a
               href="/docs"
-              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
+              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               View Documentation
             </a>

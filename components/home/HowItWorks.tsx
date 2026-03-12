@@ -46,7 +46,7 @@ export function HowItWorks() {
 
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-purple-200 to-green-200 -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-orange-500/30 via-blue-500/30 to-green-500/30 -translate-y-1/2" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {steps.map((step, index) => {
@@ -58,7 +58,7 @@ export function HowItWorks() {
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                     <div className="text-center">
-                      <div className="inline-block bg-blue-100 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                      <div className="inline-block bg-orange-900/50 text-orange-400 text-xs font-semibold px-3 py-1 rounded-full mb-3">
                         Step {index + 1}
                       </div>
                       <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>

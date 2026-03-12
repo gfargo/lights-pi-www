@@ -97,7 +97,7 @@ export default function ShowcasePage() {
               {/* Content */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-block bg-blue-100 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full">
+                  <span className="inline-block bg-orange-500/20 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full">
                     {showcase.useCase}
                   </span>
                   <span className="text-sm font-semibold text-gray-400">{showcase.budget}</span>
@@ -121,7 +121,7 @@ export default function ShowcasePage() {
         </div>
 
         {/* Submit CTA */}
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12 border border-gray-800 text-center">
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-12 border border-purple-500/50 text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Share Your Setup</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Built something cool with Lights Pi? Share it with the community and inspire others!
@@ -132,7 +132,7 @@ export default function ShowcasePage() {
             </button>
             <a
               href="/community"
-              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition border border-purple-200"
+              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               Join Community
             </a>

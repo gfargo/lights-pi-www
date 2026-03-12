@@ -65,7 +65,7 @@ export default function ComparisonPage() {
           <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-blue-50 to-purple-50">
+                <thead className="bg-gradient-to-r from-orange-500/20 to-blue-500/20">
                   <tr>
                     <th className="text-left py-4 px-6 font-bold text-white">Feature</th>
                     <th className="text-center py-4 px-6 font-bold text-gray-400">Commercial</th>
@@ -75,7 +75,7 @@ export default function ComparisonPage() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-700">
                   <tr className="hover:bg-gray-800">
                     <td className="py-4 px-6 font-medium text-white">Initial Cost</td>
                     <td className="py-4 px-6 text-center text-gray-400">$500-$5,000</td>
@@ -159,7 +159,7 @@ export default function ComparisonPage() {
                 </div>
                 <div className="grid md:grid-cols-3 gap-6">
                   <div>
-                    <h4 className="font-bold text-green-700 mb-3">Pros</h4>
+                    <h4 className="font-bold text-green-500 mb-3">Pros</h4>
                     <ul className="space-y-2">
                       {controller.pros.map((pro, i) => (
                         <li key={i} className="flex items-start text-gray-300">
@@ -180,8 +180,8 @@ export default function ComparisonPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-900/50">
-                    <h4 className="font-bold text-blue-900 mb-2">Lights Pi Advantage</h4>
+                  <div className="bg-gradient-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
+                    <h4 className="font-bold text-orange-500 mb-2">Lights Pi Advantage</h4>
                     <p className="text-gray-300">{controller.lightsPiAdvantage}</p>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ export default function ComparisonPage() {
                 </div>
                 <div className="grid md:grid-cols-3 gap-6">
                   <div>
-                    <h4 className="font-bold text-green-700 mb-3">Pros</h4>
+                    <h4 className="font-bold text-green-500 mb-3">Pros</h4>
                     <ul className="space-y-2">
                       {service.pros.map((pro, i) => (
                         <li key={i} className="flex items-start text-gray-300">
@@ -228,8 +228,8 @@ export default function ComparisonPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-900/50">
-                    <h4 className="font-bold text-blue-900 mb-2">Lights Pi Advantage</h4>
+                  <div className="bg-gradient-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
+                    <h4 className="font-bold text-orange-500 mb-2">Lights Pi Advantage</h4>
                     <p className="text-gray-300">{service.lightsPiAdvantage}</p>
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export default function ComparisonPage() {
           </div>
           <a
             href="/quick-start"
-            className="inline-block bg-gray-900 text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+            className="inline-block bg-gray-900 text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
           >
             Get Started Now
           </a>
