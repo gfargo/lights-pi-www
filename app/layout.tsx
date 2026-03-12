@@ -17,13 +17,6 @@ export const metadata: Metadata = {
   description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
   keywords: ["Raspberry Pi lighting controller", "DMX controller", "QLC+", "studio lighting", "open source"],
   authors: [{ name: "Lights Pi Team" }],
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" }
-    ],
-    apple: "/apple-touch-icon.svg",
-  },
   openGraph: {
     title: "Lights Pi - Professional Studio Lighting Control for $35",
     description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
