@@ -13,10 +13,10 @@ const categories = [
     description: "Installation, setup, and first steps",
     links: [
       { name: "Quick Start Guide", href: "/quick-start" },
-      { name: "System Requirements", href: "#" },
-      { name: "SD Card Preparation", href: "#" },
-      { name: "Initial Provisioning", href: "#" },
-      { name: "Network Configuration", href: "#" }
+      { name: "System Requirements", href: "/docs/system-requirements" },
+      { name: "SD Card Preparation", href: "/quick-start#prepare-sd-card" },
+      { name: "Initial Provisioning", href: "/quick-start#provision-pi" },
+      { name: "Network Configuration", href: "/docs/system-requirements#network" }
     ]
   },
   {
@@ -36,11 +36,11 @@ const categories = [
     title: "Command Reference",
     description: "All available commands and scripts",
     links: [
-      { name: "Provisioning Commands", href: "#" },
-      { name: "Service Management", href: "#" },
-      { name: "QLC+ Commands", href: "#" },
-      { name: "Network Commands", href: "#" },
-      { name: "System Commands", href: "#" }
+      { name: "Provisioning Commands", href: "/docs/commands#provisioning" },
+      { name: "Service Management", href: "/docs/commands#service-management" },
+      { name: "QLC+ Commands", href: "/docs/commands#qlc-operations" },
+      { name: "Network Commands", href: "/docs/commands#network-system" },
+      { name: "System Commands", href: "/docs/commands#network-system" }
     ]
   },
   {
@@ -49,10 +49,10 @@ const categories = [
     description: "Hardware setup and troubleshooting",
     links: [
       { name: "Hardware Guide", href: "/hardware" },
-      { name: "ENTTEC Setup", href: "#" },
-      { name: "DMX Troubleshooting", href: "#" },
-      { name: "Wireless DMX", href: "#" },
-      { name: "Multiple Universes", href: "#" }
+      { name: "ENTTEC Setup", href: "/docs/troubleshooting#enttec-not-detected" },
+      { name: "DMX Troubleshooting", href: "/docs/troubleshooting" },
+      { name: "Wireless DMX", href: "/hardware#wireless-dmx" },
+      { name: "Multiple Universes", href: "/hardware#multiple-universes" }
     ]
   },
   {
@@ -114,7 +114,7 @@ export default function DocsPage() {
               <div className="font-semibold text-blue-400">Hardware Guide</div>
               <div className="text-sm text-orange-500">Shopping list & setup</div>
             </Link>
-            <Link href="#" className="bg-gray-900 border border-pink-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
+            <Link href="/docs/troubleshooting" className="bg-gray-900 border border-pink-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
               <div className="font-semibold text-pink-400">Troubleshooting</div>
               <div className="text-sm text-pink-600">Common issues</div>
             </Link>
