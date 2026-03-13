@@ -92,12 +92,12 @@
   </g>
   
   <!-- Main Text - Centered with larger, bolder headline -->
-  <text x="600" y="300" font-family="system-ui, sans-serif" font-size="80" font-weight="900" fill="white" text-anchor="middle">
+  <text x="600" y="300" font-family="system-ui, sans-serif" font-size="80" font-weight="900" fill="white" text-anchor="middle" letter-spacing="2">
     Lights Pi
   </text>
   
   <!-- Subtitle - Centered -->
-  <text x="600" y="370" font-family="system-ui, sans-serif" font-size="36" fill="#9CA3AF" text-anchor="middle">
+  <text x="600" y="370" font-family="system-ui, sans-serif" font-size="36" fill="#9CA3AF" text-anchor="middle" letter-spacing="1">
     QLC+ Lighting Controller for the Raspberry Pi
   </text>
   
