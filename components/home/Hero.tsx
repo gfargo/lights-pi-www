@@ -24,9 +24,9 @@ export function Hero() {
 
         <FadeIn delay={0.2}>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
-            Professional Studio Lighting
+            QLC+ Lighting Controller
             <br />
-            <span className="text-gradient">Control on the Pi</span>
+            <span className="text-gradient">for Pi</span>
           </h1>
         </FadeIn>
 
