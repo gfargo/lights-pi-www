@@ -59,8 +59,8 @@
       <!-- Lens -->
       <circle cx="0" cy="22" r="15" fill="#FF9800" opacity="0.8" filter="url(#glow)"/>
       <circle cx="0" cy="22" r="10" fill="#FFB74D" opacity="0.9"/>
-      <!-- Light beam -->
-      <polygon points="-30,40 30,40 50,200 -50,200" fill="url(#lightBeam1)" opacity="0.4"/>
+      <!-- Light beam - wider and longer -->
+      <polygon points="-30,40 30,40 120,400 -120,400" fill="url(#lightBeam1)" opacity="0.4"/>
     </g>
     
     <!-- Light Fixture 2 (Blue) -->
@@ -73,8 +73,8 @@
       <!-- Lens -->
       <circle cx="0" cy="22" r="15" fill="#2196F3" opacity="0.8" filter="url(#glow)"/>
       <circle cx="0" cy="22" r="10" fill="#64B5F6" opacity="0.9"/>
-      <!-- Light beam -->
-      <polygon points="-30,40 30,40 50,200 -50,200" fill="url(#lightBeam2)" opacity="0.4"/>
+      <!-- Light beam - wider and longer -->
+      <polygon points="-30,40 30,40 120,400 -120,400" fill="url(#lightBeam2)" opacity="0.4"/>
     </g>
     
     <!-- Light Fixture 3 (Purple) -->
@@ -87,8 +87,8 @@
       <!-- Lens -->
       <circle cx="0" cy="22" r="15" fill="#9C27B0" opacity="0.8" filter="url(#glow)"/>
       <circle cx="0" cy="22" r="10" fill="#BA68C8" opacity="0.9"/>
-      <!-- Light beam -->
-      <polygon points="-30,40 30,40 50,200 -50,200" fill="url(#lightBeam3)" opacity="0.4"/>
+      <!-- Light beam - wider and longer -->
+      <polygon points="-30,40 30,40 120,400 -120,400" fill="url(#lightBeam3)" opacity="0.4"/>
     </g>
   </g>
   
