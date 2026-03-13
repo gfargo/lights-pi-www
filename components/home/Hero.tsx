@@ -4,15 +4,13 @@ import Link from "next/link";
 import { Play, Github, Star } from "lucide-react";
 import { FadeIn } from '../animations/FadeIn';
 import { trackEvent } from '@/lib/analytics';
+import { InteractiveLightingRig } from './InteractiveLightingRig';
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Animated background elements - QLC+ inspired */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-9000/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-9000/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
+      {/* Interactive 3D lighting rig background */}
+      <InteractiveLightingRig />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
         <FadeIn delay={0.1} direction="down">
