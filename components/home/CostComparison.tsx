@@ -9,7 +9,7 @@ export function CostComparison() {
             Save Thousands, <span className="text-gradient">Keep the Quality</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Professional lighting control shouldn&apos;t break the bank
+            Compare the costs: commercial controllers vs. open source
           </p>
         </div>
 

@@ -23,7 +23,7 @@ export function FinalCTA() {
           Lighting Controller?
         </h2>
         <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-          Join hundreds of creators using Lights Pi to control their studio lighting
+          Get started in 10 minutes with our step-by-step guide
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">

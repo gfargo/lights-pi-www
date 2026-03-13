@@ -16,7 +16,7 @@ export function Hero() {
         <FadeIn delay={0.1} direction="down">
           <div className="mb-8 inline-flex items-center space-x-2 bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-gray-700">
             <Star className="w-4 h-4 text-orange-500 fill-orange-500" />
-            <span className="text-sm text-gray-300">Open Source • Self-Hosted • No Subscriptions</span>
+            <span className="text-sm text-gray-300">Professional DMX Control • Pi Powered • Control from Anywhere</span>
           </div>
         </FadeIn>
 
@@ -30,7 +30,7 @@ export function Hero() {
 
         <FadeIn delay={0.3}>
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.
+            Transform your Raspberry Pi into a professional lighting controller. Control DMX fixtures from any device on your network with QLC+&apos;s powerful web interface.
           </p>
         </FadeIn>
 
@@ -62,9 +62,7 @@ export function Hero() {
               <span>1.2k+ stars</span>
             </div>
             <div className="w-1 h-4 bg-gray-700" />
-            <span>500+ installations</span>
-            <div className="w-1 h-4 bg-gray-700" />
-            <span>Active community</span>
+            <span>Open Source • Self-Hosted • No Subscriptions</span>
           </div>
         </FadeIn>
 

@@ -59,7 +59,7 @@ export function KeyFeatures() {
               Everything You Need, <span className="text-gradient">Out of the Box</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Professional features without the professional price tag
+              Enterprise-grade features with zero ongoing costs
             </p>
           </div>
         </FadeIn>

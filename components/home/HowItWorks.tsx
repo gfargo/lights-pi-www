@@ -40,7 +40,7 @@ export function HowItWorks() {
             Up and Running in <span className="text-gradient">10 Minutes</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Simple setup process, no technical expertise required
+            Four simple steps from SD card to controlling lights
           </p>
         </div>
 
