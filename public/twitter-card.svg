@@ -91,18 +91,26 @@
     </g>
   </g>
   
-  <!-- Main Text - Centered -->
-  <text x="600" y="320" font-family="system-ui, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="middle">
+  <!-- Main Text - Centered with larger, bolder headline -->
+  <text x="600" y="300" font-family="system-ui, sans-serif" font-size="80" font-weight="900" fill="white" text-anchor="middle">
     Lights Pi
   </text>
   
   <!-- Subtitle - Centered -->
-  <text x="600" y="385" font-family="system-ui, sans-serif" font-size="36" fill="#9CA3AF" text-anchor="middle">
+  <text x="600" y="370" font-family="system-ui, sans-serif" font-size="36" fill="#9CA3AF" text-anchor="middle">
     QLC+ Lighting Controller for the Raspberry Pi
   </text>
   
+  <!-- Call to Action -->
+  <g transform="translate(600, 425)">
+    <rect x="-110" y="-18" width="220" height="46" fill="url(#accent)" rx="8"/>
+    <text x="0" y="10" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="white" text-anchor="middle">
+      Get Started Free
+    </text>
+  </g>
+  
   <!-- Features - Centered -->
-  <g transform="translate(600, 445)">
+  <g transform="translate(600, 510)">
     <text x="-170" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#FF9800">✓</text>
     <text x="-140" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#D1D5DB">Open Source</text>
     
@@ -112,9 +120,4 @@
     <text x="145" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#9C27B0">✓</text>
     <text x="175" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#D1D5DB">No Subscriptions</text>
   </g>
-  
-  <!-- URL - Centered -->
-  <text x="600" y="530" font-family="system-ui, sans-serif" font-size="24" fill="url(#accent)" font-weight="600" text-anchor="middle">
-    lights.griffen.codes
-  </text>
 </svg>

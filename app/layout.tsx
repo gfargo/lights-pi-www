@@ -14,12 +14,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://lights.griffen.codes'),
   title: "Lights Pi - QLC+ Lighting Controller for the Raspberry Pi",
-  description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
+  description: "Open source, self-hosted DMX lighting controller. Control professional fixtures from any device on your network. No subscriptions, unlimited fixtures.",
   keywords: ["Raspberry Pi lighting controller", "DMX controller", "QLC+", "studio lighting", "open source"],
   authors: [{ name: "Lights Pi Team" }],
   openGraph: {
     title: "Lights Pi - QLC+ Lighting Controller for the Raspberry Pi",
-    description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
+    description: "Open source, self-hosted DMX lighting controller. Control professional fixtures from any device on your network. No subscriptions, unlimited fixtures.",
     type: "website",
     url: "https://lights.griffen.codes",
     siteName: "Lights Pi",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Lights Pi - QLC+ Lighting Controller for the Raspberry Pi",
-    description: "Open source, self-hosted, no subscriptions. Control DMX fixtures from any device on your network.",
+    description: "Open source, self-hosted DMX lighting controller. Control professional fixtures from any device on your network. No subscriptions, unlimited fixtures.",
     images: ["/twitter-card.svg"],
   },
 };
