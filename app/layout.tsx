@@ -25,10 +25,11 @@ export const metadata: Metadata = {
     siteName: "Lights Pi",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Lights Pi - QLC+ Lighting Controller",
+        type: "image/png",
       },
     ],
   },
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Lights Pi - QLC+ Lighting Controller for the Raspberry Pi",
     description: "Open source, self-hosted DMX lighting controller. Control professional fixtures from any device on your network. No subscriptions, unlimited fixtures.",
-    images: ["/twitter-card.svg"],
+    images: ["/twitter-card.png"],
   },
 };
 

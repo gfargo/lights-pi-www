@@ -33,3 +33,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated images (built from SVG sources)
+/public/og-image.png
+/public/twitter-card.png
