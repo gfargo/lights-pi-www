@@ -8,39 +8,113 @@
       <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="lightBeam1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#FF9800;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="lightBeam2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#2196F3;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="lightBeam3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:0" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
   <rect width="1200" height="600" fill="url(#bg)"/>
   
-  <circle cx="180" cy="140" r="70" fill="#FF9800" opacity="0.12"/>
-  <circle cx="1020" cy="460" r="90" fill="#2196F3" opacity="0.12"/>
-  
-  <g transform="translate(90, 180)">
-    <circle cx="50" cy="50" r="40" fill="url(#accent)" opacity="0.2"/>
-    <path d="M50 22 C37 22 28 31 28 43 C28 52 32 59 37 64 L37 75 C37 77.5 39 79.5 41.5 79.5 L58.5 79.5 C61 79.5 63 77.5 63 75 L63 64 C68 59 72 52 72 43 C72 31 63 22 50 22 Z M43 83 L57 83 C58 83 59 84 59 85 C59 86 58 87 57 87 L43 87 C42 87 41 86 41 85 C41 84 42 83 43 83 Z" 
-          fill="#FF9800"/>
+  <!-- Lighting Truss/Rack - Centered -->
+  <g transform="translate(400, 60)">
+    <!-- Horizontal truss bar -->
+    <rect x="0" y="0" width="400" height="20" fill="#4B5563" rx="2"/>
+    <rect x="0" y="5" width="400" height="3" fill="#6B7280"/>
+    <rect x="0" y="12" width="400" height="3" fill="#374151"/>
+    
+    <!-- Vertical support brackets -->
+    <rect x="-5" y="-30" width="10" height="50" fill="#374151" rx="2"/>
+    <rect x="395" y="-30" width="10" height="50" fill="#374151" rx="2"/>
+    
+    <!-- Cross bracing -->
+    <line x1="0" y1="-25" x2="50" y2="0" stroke="#4B5563" stroke-width="3"/>
+    <line x1="50" y1="-25" x2="0" y2="0" stroke="#4B5563" stroke-width="3"/>
+    <line x1="350" y1="-25" x2="400" y2="0" stroke="#4B5563" stroke-width="3"/>
+    <line x1="400" y1="-25" x2="350" y2="0" stroke="#4B5563" stroke-width="3"/>
+    
+    <!-- Light Fixture 1 (Orange) -->
+    <g transform="translate(60, 20)">
+      <!-- Mounting clamp -->
+      <rect x="-8" y="-5" width="16" height="10" fill="#374151" rx="2"/>
+      <!-- Fixture body -->
+      <rect x="-25" y="5" width="50" height="35" fill="#1F2937" rx="3"/>
+      <rect x="-20" y="10" width="40" height="25" fill="#111827" rx="2"/>
+      <!-- Lens -->
+      <circle cx="0" cy="22" r="15" fill="#FF9800" opacity="0.8" filter="url(#glow)"/>
+      <circle cx="0" cy="22" r="10" fill="#FFB74D" opacity="0.9"/>
+      <!-- Light beam - wider and longer -->
+      <polygon points="-30,40 30,40 110,380 -110,380" fill="url(#lightBeam1)" opacity="0.4"/>
+    </g>
+    
+    <!-- Light Fixture 2 (Blue) -->
+    <g transform="translate(200, 20)">
+      <!-- Mounting clamp -->
+      <rect x="-8" y="-5" width="16" height="10" fill="#374151" rx="2"/>
+      <!-- Fixture body -->
+      <rect x="-25" y="5" width="50" height="35" fill="#1F2937" rx="3"/>
+      <rect x="-20" y="10" width="40" height="25" fill="#111827" rx="2"/>
+      <!-- Lens -->
+      <circle cx="0" cy="22" r="15" fill="#2196F3" opacity="0.8" filter="url(#glow)"/>
+      <circle cx="0" cy="22" r="10" fill="#64B5F6" opacity="0.9"/>
+      <!-- Light beam - wider and longer -->
+      <polygon points="-30,40 30,40 110,380 -110,380" fill="url(#lightBeam2)" opacity="0.4"/>
+    </g>
+    
+    <!-- Light Fixture 3 (Purple) -->
+    <g transform="translate(340, 20)">
+      <!-- Mounting clamp -->
+      <rect x="-8" y="-5" width="16" height="10" fill="#374151" rx="2"/>
+      <!-- Fixture body -->
+      <rect x="-25" y="5" width="50" height="35" fill="#1F2937" rx="3"/>
+      <rect x="-20" y="10" width="40" height="25" fill="#111827" rx="2"/>
+      <!-- Lens -->
+      <circle cx="0" cy="22" r="15" fill="#9C27B0" opacity="0.8" filter="url(#glow)"/>
+      <circle cx="0" cy="22" r="10" fill="#BA68C8" opacity="0.9"/>
+      <!-- Light beam - wider and longer -->
+      <polygon points="-30,40 30,40 110,380 -110,380" fill="url(#lightBeam3)" opacity="0.4"/>
+    </g>
   </g>
   
-  <text x="230" y="270" font-family="system-ui, sans-serif" font-size="68" font-weight="bold" fill="white">
+  <!-- Main Text - Centered -->
+  <text x="600" y="320" font-family="system-ui, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="middle">
     Lights Pi
   </text>
   
-  <text x="230" y="330" font-family="system-ui, sans-serif" font-size="32" fill="#9CA3AF">
+  <!-- Subtitle - Centered -->
+  <text x="600" y="385" font-family="system-ui, sans-serif" font-size="36" fill="#9CA3AF" text-anchor="middle">
     QLC+ Lighting Controller for the Raspberry Pi
   </text>
   
-  <g transform="translate(230, 390)">
-    <text y="0" font-family="system-ui, sans-serif" font-size="22" fill="#FF9800">✓</text>
-    <text x="35" y="0" font-family="system-ui, sans-serif" font-size="22" fill="#D1D5DB">Open Source</text>
+  <!-- Features - Centered -->
+  <g transform="translate(600, 445)">
+    <text x="-170" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#FF9800">✓</text>
+    <text x="-140" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#D1D5DB">Open Source</text>
     
-    <text x="200" y="0" font-family="system-ui, sans-serif" font-size="22" fill="#2196F3">✓</text>
-    <text x="235" y="0" font-family="system-ui, sans-serif" font-size="22" fill="#D1D5DB">Self-Hosted</text>
+    <text x="-5" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#2196F3">✓</text>
+    <text x="25" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#D1D5DB">Self-Hosted</text>
     
-    <text x="400" y="0" font-family="system-ui, sans-serif" font-size="22" fill="#9C27B0">✓</text>
-    <text x="435" y="0" font-family="system-ui, sans-serif" font-size="22" fill="#D1D5DB">No Subscriptions</text>
+    <text x="145" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#9C27B0">✓</text>
+    <text x="175" y="0" font-family="system-ui, sans-serif" font-size="20" fill="#D1D5DB">No Subscriptions</text>
   </g>
   
-  <text x="230" y="500" font-family="system-ui, sans-serif" font-size="26" fill="url(#accent)" font-weight="600">
+  <!-- URL - Centered -->
+  <text x="600" y="530" font-family="system-ui, sans-serif" font-size="24" fill="url(#accent)" font-weight="600" text-anchor="middle">
     lights.griffen.codes
   </text>
 </svg>
