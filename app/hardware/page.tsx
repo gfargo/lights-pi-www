@@ -1,106 +1,8 @@
 "use client";
 
-import { ShoppingCart, Cpu, Usb, Cable, Wifi, Shield } from "lucide-react";
+import { ShoppingCart, Cpu, Usb, Cable, Shield, Wifi } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
-
-const shoppingList = [
-  {
-    item: "Raspberry Pi 4 (4GB)",
-    purpose: "Main controller",
-    price: "$55",
-    priority: "Required",
-    link: "https://www.raspberrypi.com/products/raspberry-pi-4-model-b/"
-  },
-  {
-    item: "Raspberry Pi 3B+",
-    purpose: "Budget alternative",
-    price: "$35",
-    priority: "Alternative",
-    link: "https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/"
-  },
-  {
-    item: "MicroSD Card 32GB",
-    purpose: "OS storage",
-    price: "$8",
-    priority: "Required",
-    link: "https://www.amazon.com/s?k=microsd+card+32gb"
-  },
-  {
-    item: "ENTTEC DMX USB Pro",
-    purpose: "DMX interface",
-    price: "$150",
-    priority: "Required",
-    link: "https://www.enttec.com/product/lighting-communication-protocols/dmx512/dmx-usb-pro/"
-  },
-  {
-    item: "Power Supply (USB-C/Micro)",
-    purpose: "Pi power",
-    price: "$8",
-    priority: "Required",
-    link: "https://www.raspberrypi.com/products/type-c-power-supply/"
-  },
-  {
-    item: "DMX Cable (3-pin)",
-    purpose: "Fixture connection",
-    price: "$10-20",
-    priority: "Required",
-    link: "https://www.amazon.com/s?k=dmx+cable+3+pin"
-  },
-  {
-    item: "Wireless DMX System",
-    purpose: "Cable-free setup",
-    price: "$200-500",
-    priority: "Optional",
-    link: "https://www.amazon.com/s?k=wireless+dmx"
-  },
-  {
-    item: "Case for Pi",
-    purpose: "Protection",
-    price: "$10-20",
-    priority: "Recommended",
-    link: "https://www.amazon.com/s?k=raspberry+pi+case"
-  }
-];
-
-const setups = [
-  {
-    name: "Budget Setup",
-    price: "$200",
-    icon: Cpu,
-    items: [
-      "Raspberry Pi 3B+",
-      "ENTTEC USB Pro",
-      "2x LED par cans",
-      "Basic cables & power"
-    ],
-    color: "blue"
-  },
-  {
-    name: "Creator Setup",
-    price: "$500",
-    icon: Usb,
-    items: [
-      "Raspberry Pi 4 (4GB)",
-      "ENTTEC USB Pro",
-      "4x RGB LED panels",
-      "Wireless DMX transmitter"
-    ],
-    color: "purple"
-  },
-  {
-    name: "Professional Setup",
-    price: "$1,500",
-    icon: Wifi,
-    items: [
-      "Raspberry Pi 4 (8GB)",
-      "ENTTEC USB Pro",
-      "8+ fixtures (moving heads, pars, strips)",
-      "Wireless DMX system",
-      "Backup Pi"
-    ],
-    color: "pink"
-  }
-];
+import { shoppingList, costSummary, setups } from "@/lib/hardware-catalog";
 
 export default function HardwarePage() {
   return (
@@ -169,19 +71,19 @@ export default function HardwarePage() {
           {/* Cost Summary */}
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             <div className="bg-gray-900 rounded-xl p-6 border border-green-500/50">
-              <div className="text-sm text-green-400 font-semibold mb-1">Minimum Setup</div>
-              <div className="text-3xl font-bold text-white">~$200</div>
-              <div className="text-sm text-green-600 mt-1">Pi 3 + basic setup</div>
+              <div className="text-sm text-green-400 font-semibold mb-1">{costSummary.minimum.label}</div>
+              <div className="text-3xl font-bold text-white">{costSummary.minimum.price}</div>
+              <div className="text-sm text-green-600 mt-1">{costSummary.minimum.note}</div>
             </div>
             <div className="bg-gray-900 rounded-xl p-6 border border-orange-500/50">
-              <div className="text-sm text-orange-500 font-semibold mb-1">Recommended Setup</div>
-              <div className="text-3xl font-bold text-white">~$250</div>
-              <div className="text-sm text-orange-500 mt-1">Pi 4 + case</div>
+              <div className="text-sm text-orange-500 font-semibold mb-1">{costSummary.recommended.label}</div>
+              <div className="text-3xl font-bold text-white">{costSummary.recommended.price}</div>
+              <div className="text-sm text-orange-500 mt-1">{costSummary.recommended.note}</div>
             </div>
             <div className="bg-gray-900 rounded-xl p-6 border border-purple-500/50">
-              <div className="text-sm text-purple-400 font-semibold mb-1">With Wireless DMX</div>
-              <div className="text-3xl font-bold text-white">~$450-750</div>
-              <div className="text-sm text-orange-500 mt-1">Full wireless setup</div>
+              <div className="text-sm text-purple-400 font-semibold mb-1">{costSummary.wireless.label}</div>
+              <div className="text-3xl font-bold text-white">{costSummary.wireless.price}</div>
+              <div className="text-sm text-orange-500 mt-1">{costSummary.wireless.note}</div>
             </div>
           </div>
         </div>
@@ -191,7 +93,8 @@ export default function HardwarePage() {
           <h2 className="text-3xl font-bold mb-8">Example Setups</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {setups.map((setup, index) => {
-              const Icon = setup.icon;
+              const icons = [Cpu, Usb, Wifi];
+              const Icon = icons[index] ?? Cpu;
               return (
                 <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8 hover:shadow-lg transition">
                   <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
@@ -252,12 +155,32 @@ export default function HardwarePage() {
             <div className="flex items-start">
               <Usb className="w-8 h-8 text-orange-500 mr-4 shrink-0" />
               <div>
-                <h3 className="text-2xl font-bold mb-4 text-white">ENTTEC DMX USB Pro</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">ENTTEC DMX Interfaces</h3>
                 <p className="text-gray-300 mb-4">
-                  The ENTTEC DMX USB Pro is the recommended DMX interface. It&apos;s reliable, well-supported by QLC+,
-                  and widely available. Make sure to buy from authorized dealers to avoid counterfeits.
+                  ENTTEC makes the most widely supported USB-to-DMX interfaces for QLC+. They offer two models
+                  depending on your needs and budget.
                 </p>
-                <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4">
+                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <h4 className="font-bold text-white mb-2">Open DMX USB (~$67)</h4>
+                    <ul className="space-y-2 text-gray-300">
+                      <li>• Entry-level, open-source hardware</li>
+                      <li>• Great for small setups and getting started</li>
+                      <li>• Output only, no RDM support</li>
+                      <li>• Works well with QLC+</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white mb-2">DMX USB Pro (~$130)</h4>
+                    <ul className="space-y-2 text-gray-300">
+                      <li>• Professional-grade, faster frame rates</li>
+                      <li>• RDM support for device discovery</li>
+                      <li>• More stable under heavy load</li>
+                      <li>• Recommended for 10+ fixtures</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4 mt-6">
                   <div className="flex items-start">
                     <Shield className="w-5 h-5 text-yellow-400 mr-2 shrink-0 mt-0.5" />
                     <div className="text-sm text-yellow-200">
@@ -291,6 +214,10 @@ export default function HardwarePage() {
                   <li className="flex items-start">
                     <span className="text-pink-500 mr-2">•</span>
                     Avoid running DMX cables parallel to power cables
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-pink-500 mr-2">•</span>
+                    Enttec interfaces use 5-pin connectors — if you're connecting to a 3-pin device like the Chauvet D-Fi Hub 2, you'll need a 5-pin to 3-pin converter cable
                   </li>
                 </ul>
               </div>
