@@ -9,8 +9,20 @@
       <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="lightBeam1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#FF9800;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="lightBeam2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#2196F3;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="lightBeam3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:0" />
+    </linearGradient>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -20,30 +32,78 @@
   
   <rect width="1200" height="630" fill="url(#bgGradient)"/>
   
-  <!-- Decorative circles with glow -->
-  <circle cx="200" cy="150" r="80" fill="#FF9800" opacity="0.15" filter="url(#glow)"/>
-  <circle cx="1000" cy="480" r="100" fill="#2196F3" opacity="0.15" filter="url(#glow)"/>
-  <circle cx="950" cy="120" r="60" fill="#9C27B0" opacity="0.1" filter="url(#glow)"/>
-  
-  <!-- Lightbulb Icon -->
-  <g transform="translate(100, 200)">
-    <circle cx="50" cy="50" r="45" fill="url(#accentGradient)" opacity="0.2"/>
-    <path d="M50 20 C35 20 25 30 25 45 C25 55 30 63 35 68 L35 80 C35 83 37 85 40 85 L60 85 C63 85 65 83 65 80 L65 68 C70 63 75 55 75 45 C75 30 65 20 50 20 Z M42 90 L58 90 C59 90 60 91 60 92 C60 93 59 94 58 94 L42 94 C41 94 40 93 40 92 C40 91 41 90 42 90 Z" 
-          fill="#FF9800" filter="url(#glow)"/>
+  <!-- Lighting Truss/Rack -->
+  <g transform="translate(80, 80)">
+    <!-- Horizontal truss bar -->
+    <rect x="0" y="0" width="400" height="20" fill="#4B5563" rx="2"/>
+    <rect x="0" y="5" width="400" height="3" fill="#6B7280"/>
+    <rect x="0" y="12" width="400" height="3" fill="#374151"/>
+    
+    <!-- Vertical support brackets -->
+    <rect x="-5" y="-30" width="10" height="50" fill="#374151" rx="2"/>
+    <rect x="395" y="-30" width="10" height="50" fill="#374151" rx="2"/>
+    
+    <!-- Cross bracing -->
+    <line x1="0" y1="-25" x2="50" y2="0" stroke="#4B5563" stroke-width="3"/>
+    <line x1="50" y1="-25" x2="0" y2="0" stroke="#4B5563" stroke-width="3"/>
+    <line x1="350" y1="-25" x2="400" y2="0" stroke="#4B5563" stroke-width="3"/>
+    <line x1="400" y1="-25" x2="350" y2="0" stroke="#4B5563" stroke-width="3"/>
+    
+    <!-- Light Fixture 1 (Orange) -->
+    <g transform="translate(60, 20)">
+      <!-- Mounting clamp -->
+      <rect x="-8" y="-5" width="16" height="10" fill="#374151" rx="2"/>
+      <!-- Fixture body -->
+      <rect x="-25" y="5" width="50" height="35" fill="#1F2937" rx="3"/>
+      <rect x="-20" y="10" width="40" height="25" fill="#111827" rx="2"/>
+      <!-- Lens -->
+      <circle cx="0" cy="22" r="15" fill="#FF9800" opacity="0.8" filter="url(#glow)"/>
+      <circle cx="0" cy="22" r="10" fill="#FFB74D" opacity="0.9"/>
+      <!-- Light beam -->
+      <polygon points="-30,40 30,40 50,200 -50,200" fill="url(#lightBeam1)" opacity="0.4"/>
+    </g>
+    
+    <!-- Light Fixture 2 (Blue) -->
+    <g transform="translate(200, 20)">
+      <!-- Mounting clamp -->
+      <rect x="-8" y="-5" width="16" height="10" fill="#374151" rx="2"/>
+      <!-- Fixture body -->
+      <rect x="-25" y="5" width="50" height="35" fill="#1F2937" rx="3"/>
+      <rect x="-20" y="10" width="40" height="25" fill="#111827" rx="2"/>
+      <!-- Lens -->
+      <circle cx="0" cy="22" r="15" fill="#2196F3" opacity="0.8" filter="url(#glow)"/>
+      <circle cx="0" cy="22" r="10" fill="#64B5F6" opacity="0.9"/>
+      <!-- Light beam -->
+      <polygon points="-30,40 30,40 50,200 -50,200" fill="url(#lightBeam2)" opacity="0.4"/>
+    </g>
+    
+    <!-- Light Fixture 3 (Purple) -->
+    <g transform="translate(340, 20)">
+      <!-- Mounting clamp -->
+      <rect x="-8" y="-5" width="16" height="10" fill="#374151" rx="2"/>
+      <!-- Fixture body -->
+      <rect x="-25" y="5" width="50" height="35" fill="#1F2937" rx="3"/>
+      <rect x="-20" y="10" width="40" height="25" fill="#111827" rx="2"/>
+      <!-- Lens -->
+      <circle cx="0" cy="22" r="15" fill="#9C27B0" opacity="0.8" filter="url(#glow)"/>
+      <circle cx="0" cy="22" r="10" fill="#BA68C8" opacity="0.9"/>
+      <!-- Light beam -->
+      <polygon points="-30,40 30,40 50,200 -50,200" fill="url(#lightBeam3)" opacity="0.4"/>
+    </g>
   </g>
   
   <!-- Main Text -->
-  <text x="250" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
+  <text x="550" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
     Lights Pi
   </text>
   
   <!-- Subtitle -->
-  <text x="250" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="42" fill="#9CA3AF">
+  <text x="550" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="42" fill="#9CA3AF">
     QLC+ Lighting Controller for Pi
   </text>
   
   <!-- Features -->
-  <g transform="translate(250, 440)">
+  <g transform="translate(550, 440)">
     <text y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#FF9800">✓</text>
     <text x="40" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">Open Source</text>
     
@@ -55,7 +115,7 @@
   </g>
   
   <!-- URL -->
-  <text x="250" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="url(#accentGradient)" font-weight="600">
+  <text x="550" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="url(#accentGradient)" font-weight="600">
     lights.griffen.codes
   </text>
 </svg>
