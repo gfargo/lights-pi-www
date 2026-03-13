@@ -32,8 +32,8 @@
   
   <rect width="1200" height="630" fill="url(#bgGradient)"/>
   
-  <!-- Lighting Truss/Rack -->
-  <g transform="translate(80, 80)">
+  <!-- Lighting Truss/Rack - Centered -->
+  <g transform="translate(400, 80)">
     <!-- Horizontal truss bar -->
     <rect x="0" y="0" width="400" height="20" fill="#4B5563" rx="2"/>
     <rect x="0" y="5" width="400" height="3" fill="#6B7280"/>
@@ -92,30 +92,30 @@
     </g>
   </g>
   
-  <!-- Main Text -->
-  <text x="550" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
+  <!-- Main Text - Centered -->
+  <text x="600" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">
     Lights Pi
   </text>
   
-  <!-- Subtitle -->
-  <text x="550" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="42" fill="#9CA3AF">
-    QLC+ Lighting Controller for Pi
+  <!-- Subtitle - Centered -->
+  <text x="600" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="38" fill="#9CA3AF" text-anchor="middle">
+    QLC+ Lighting Controller for the Raspberry Pi
   </text>
   
-  <!-- Features -->
-  <g transform="translate(550, 440)">
-    <text y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#FF9800">✓</text>
-    <text x="40" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">Open Source</text>
+  <!-- Features - Centered -->
+  <g transform="translate(600, 470)">
+    <text x="-180" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#FF9800">✓</text>
+    <text x="-145" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#D1D5DB">Open Source</text>
     
-    <text x="220" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#2196F3">✓</text>
-    <text x="260" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">Self-Hosted</text>
+    <text x="-10" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#2196F3">✓</text>
+    <text x="25" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#D1D5DB">Self-Hosted</text>
     
-    <text x="460" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#9C27B0">✓</text>
-    <text x="500" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#D1D5DB">No Subscriptions</text>
+    <text x="155" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#9C27B0">✓</text>
+    <text x="190" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#D1D5DB">No Subscriptions</text>
   </g>
   
-  <!-- URL -->
-  <text x="550" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="url(#accentGradient)" font-weight="600">
+  <!-- URL - Centered -->
+  <text x="600" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="26" fill="url(#accentGradient)" font-weight="600" text-anchor="middle">
     lights.griffen.codes
   </text>
 </svg>

@@ -26,7 +26,7 @@ export function Hero() {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
             QLC+ Lighting Controller
             <br />
-            <span className="text-gradient">for Pi</span>
+            <span className="text-gradient">for the Raspberry Pi</span>
           </h1>
         </FadeIn>
 
