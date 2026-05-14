@@ -17,19 +17,19 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-red-50 to-orange-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 flex items-center justify-center px-4">
       <div className="max-w-2xl mx-auto text-center">
         {/* Animated Error Icon */}
         <div className="mb-8">
           <div className="inline-flex space-x-4 mb-4">
-            <div className="w-20 h-20 rounded-full bg-gray-9000/20 animate-pulse flex items-center justify-center">
-              <AlertTriangle className="w-10 h-10 text-red-600" />
+            <div className="w-20 h-20 rounded-full bg-red-500/20 animate-pulse flex items-center justify-center">
+              <AlertTriangle className="w-10 h-10 text-red-500" />
             </div>
-            <div className="w-20 h-20 rounded-full bg-gray-9000/20 animate-pulse delay-200 flex items-center justify-center">
-              <AlertTriangle className="w-10 h-10 text-orange-600" />
+            <div className="w-20 h-20 rounded-full bg-orange-500/20 animate-pulse delay-200 flex items-center justify-center">
+              <AlertTriangle className="w-10 h-10 text-orange-500" />
             </div>
             <div className="w-20 h-20 rounded-full bg-yellow-500/20 animate-pulse delay-500 flex items-center justify-center">
-              <AlertTriangle className="w-10 h-10 text-yellow-600" />
+              <AlertTriangle className="w-10 h-10 text-yellow-500" />
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function Error({
           </button>
           <Link
             href="/"
-            className="flex items-center space-x-2 bg-gray-900 text-gray-300 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition border border-gray-700"
+            className="flex items-center space-x-2 bg-gray-800 text-gray-300 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition border border-gray-700 hover:bg-gray-700"
           >
             <Home className="w-5 h-5" />
             <span>Go Home</span>
@@ -62,7 +62,7 @@ export default function Error({
         </div>
 
         {/* Error Details & Help */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+        <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
           <h3 className="text-lg font-semibold mb-4 text-white">
             Need Help?
           </h3>
@@ -74,13 +74,13 @@ export default function Error({
               href="https://github.com/gfargo/lights-pi/issues"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-orange-500 hover:text-orange-500 transition p-2 rounded-lg hover:bg-gray-900"
+              className="flex items-center space-x-2 text-orange-500 hover:text-orange-400 transition p-2 rounded-lg hover:bg-gray-700"
             >
               <Github className="w-5 h-5" />
               <span>Report Issue on GitHub</span>
             </a>
             {error.digest && (
-              <p className="text-xs text-gray-400 font-mono bg-gray-800 p-2 rounded">
+              <p className="text-xs text-gray-500 font-mono bg-gray-900 p-2 rounded">
                 Error ID: {error.digest}
               </p>
             )}

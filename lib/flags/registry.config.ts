@@ -7,17 +7,20 @@ import type { FlagDefinition } from "./kit";
  */
 
 // @fargo-flags:imports
+import * as f_enable_demo from "./defs/enable-demo.flag";
 import * as f_enable_showcase from "./defs/enable-showcase.flag";
 // @fargo-flags:imports:end
 
 export const flagSchemas = {
   // @fargo-flags:schemas
+  "enable-demo": f_enable_demo.schema,
   "enable-showcase": f_enable_showcase.schema,
   // @fargo-flags:schemas:end
 } as const;
 
 export const registry = {
   // @fargo-flags:registry
+  "enable-demo": f_enable_demo.default,
   "enable-showcase": f_enable_showcase.default,
   // @fargo-flags:registry:end
 } as const satisfies Record<
@@ -28,6 +31,7 @@ export const registry = {
 /** Keys safe to send to the client (NEXT_PUBLIC-style). */
 export const clientFlagKeys = [
   // @fargo-flags:public
+  "enable-demo",
   "enable-showcase",
   // @fargo-flags:public:end
 ] as const;

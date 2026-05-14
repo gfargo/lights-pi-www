@@ -10,6 +10,7 @@ import { trackEvent } from "@/lib/analytics";
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const showDemo = useFlag("enable-demo");
   const showShowcase = useFlag("enable-showcase");
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export function Navigation() {
   const navLinks = [
     { href: "/quick-start", label: "Quick Start" },
     { href: "/hardware", label: "Hardware" },
-    { href: "/demo", label: "Demo" },
+    ...(showDemo ? [{ href: "/demo", label: "Demo" }] : []),
     ...(showShowcase ? [{ href: "/showcase", label: "Showcase" }] : []),
     { href: "/docs", label: "Docs" },
     { href: "/blog", label: "Blog" },
