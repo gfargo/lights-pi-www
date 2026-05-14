@@ -231,13 +231,21 @@ export default function HardwarePage() {
           <p className="text-xl mb-6 text-white/90">
             Get your hardware and follow our quick start guide
           </p>
-          <a
-            href="/quick-start"
-            onClick={() => trackEvent.clickGetStarted('hardware_cta')}
-            className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
-          >
-            View Quick Start Guide
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/docs/quick-start"
+              onClick={() => trackEvent.clickGetStarted('hardware_cta')}
+              className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
+            >
+              View Quick Start Guide
+            </a>
+            <a
+              href="/docs/hardware-setup"
+              className="inline-block bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/20 transition border border-white/20"
+            >
+              Hardware Setup Docs
+            </a>
+          </div>
         </div>
       </div>
     </div>

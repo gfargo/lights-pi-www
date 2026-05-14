@@ -1,171 +1,172 @@
-import { Book, Terminal, Settings, Wrench, Shield, Code } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link"
+import { Book, ExternalLink, ArrowRight } from "lucide-react"
+import {
+    getCategories,
+    getDocsByCategory,
+    fetchWikiContent,
+    extractDescription,
+    WIKI_BASE_URL,
+} from "@/lib/wiki"
+
+export const revalidate = 3600
 
 export const metadata = {
-  title: "Documentation - Lights Pi",
+  title: "Documentation",
   description: "Complete documentation for Lights Pi lighting controller",
-};
+}
 
-const categories = [
-  {
-    icon: Book,
-    title: "Getting Started",
-    description: "Installation, setup, and first steps",
-    links: [
-      { name: "Quick Start Guide", href: "/quick-start" },
-      { name: "System Requirements", href: "/docs/system-requirements" },
-      { name: "SD Card Preparation", href: "/quick-start#prepare-sd-card" },
-      { name: "Initial Provisioning", href: "/quick-start#provision-pi" },
-      { name: "Network Configuration", href: "/docs/system-requirements#network" }
-    ]
-  },
-  {
-    icon: Settings,
-    title: "Configuration",
-    description: "Customize your Lights Pi setup",
-    links: [
-      { name: "Environment Variables", href: "#" },
-      { name: "Static IP Setup", href: "#" },
-      { name: "WiFi Management", href: "#" },
-      { name: "Firewall Rules", href: "#" },
-      { name: "Service Configuration", href: "#" }
-    ]
-  },
-  {
-    icon: Terminal,
-    title: "Command Reference",
-    description: "All available commands and scripts",
-    links: [
-      { name: "Provisioning Commands", href: "/docs/commands#provisioning" },
-      { name: "Service Management", href: "/docs/commands#service-management" },
-      { name: "QLC+ Commands", href: "/docs/commands#qlc-operations" },
-      { name: "Network Commands", href: "/docs/commands#network-system" },
-      { name: "System Commands", href: "/docs/commands#network-system" }
-    ]
-  },
-  {
-    icon: Wrench,
-    title: "Hardware",
-    description: "Hardware setup and troubleshooting",
-    links: [
-      { name: "Hardware Guide", href: "/hardware" },
-      { name: "ENTTEC Setup", href: "/docs/troubleshooting#enttec-not-detected" },
-      { name: "DMX Troubleshooting", href: "/docs/troubleshooting" },
-      { name: "Wireless DMX", href: "/hardware#wireless-dmx" },
-      { name: "Multiple Universes", href: "/hardware#multiple-universes" }
-    ]
-  },
-  {
-    icon: Shield,
-    title: "Security",
-    description: "HTTPS, SSH, and security best practices",
-    links: [
-      { name: "HTTPS Setup", href: "#" },
-      { name: "SSH Configuration", href: "#" },
-      { name: "Firewall Setup", href: "#" },
-      { name: "Security Best Practices", href: "#" }
-    ]
-  },
-  {
-    icon: Code,
-    title: "Advanced",
-    description: "Custom fixtures, API, and integrations",
-    links: [
-      { name: "Custom Fixture Definitions", href: "#" },
-      { name: "Backup Strategies", href: "#" },
-      { name: "API Access", href: "#" },
-      { name: "Integration Examples", href: "#" }
-    ]
-  }
-];
+export default async function DocsPage() {
+  const categories = await getCategories()
 
-export default function DocsPage() {
+  const categoriesWithDocs = await Promise.all(
+    categories.map(async (cat) => {
+      const docs = await getDocsByCategory(cat.slug)
+      const docsWithDescriptions = await Promise.all(
+        docs.map(async (doc) => {
+          const content = await fetchWikiContent(doc.wikiSlug)
+          return {
+            ...doc,
+            description: extractDescription(content ?? ""),
+          }
+        })
+      )
+      return { ...cat, docs: docsWithDescriptions }
+    })
+  )
+
+  const hasContent = categoriesWithDocs.length > 0
+
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4">
-            <span className="text-gradient">Documentation</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-            Everything you need to know about Lights Pi
+    <div>
+      {/* Hero */}
+      <div className="mb-12">
+        <h1 className="text-4xl font-bold text-white mb-4">Documentation</h1>
+        <p className="text-lg text-gray-400 max-w-2xl mb-6">
+          Everything you need to know about setting up, configuring, and
+          managing your Lights Pi system.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {hasContent && (
+            <Link
+              href="/docs/quick-start"
+              className="inline-flex items-center gap-2 bg-orange-500 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-orange-600 transition"
+            >
+              Get Started
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
+          <a
+            href={WIKI_BASE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 border border-gray-600 text-gray-300 px-5 py-2.5 rounded-lg font-medium hover:border-gray-500 hover:text-white transition"
+          >
+            View Wiki
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
+      {/* Category Grid */}
+      {hasContent ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categoriesWithDocs.map((category) => (
+            <div
+              key={category.slug}
+              className="bg-gray-900 rounded-xl border border-gray-700 p-6 hover:border-gray-600 transition"
+            >
+              <h2 className="text-lg font-bold text-white mb-4">
+                {category.title}
+              </h2>
+              <ul className="space-y-3">
+                {category.docs.map((doc) => (
+                  <li key={doc.slug}>
+                    <Link
+                      href={`/docs/${doc.slug}`}
+                      className="group flex items-start gap-2"
+                    >
+                      <ArrowRight className="w-4 h-4 text-gray-600 group-hover:text-orange-400 mt-0.5 shrink-0 transition" />
+                      <div>
+                        <span className="text-gray-300 group-hover:text-orange-400 transition font-medium text-sm">
+                          {doc.title}
+                        </span>
+                        {doc.description && (
+                          <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">
+                            {doc.description}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        /* Empty state when wiki has no sidebar */
+        <div className="bg-gray-900 rounded-xl border border-gray-700 p-8 text-center">
+          <Book className="w-12 h-12 text-gray-600 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-white mb-2">
+            Documentation Coming Soon
+          </h2>
+          <p className="text-gray-400 mb-6">
+            Documentation is being migrated to the GitHub Wiki. Check back soon
+            or visit the wiki directly.
           </p>
-          
-          {/* Search */}
-          <div className="max-w-2xl mx-auto">
-            <input
-              type="search"
-              placeholder="Search documentation..."
-              className="w-full px-6 py-4 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-orange-500/50 outline-none transition"
-            />
-          </div>
+          <a
+            href={WIKI_BASE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-orange-500 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-orange-600 transition"
+          >
+            Visit Wiki
+            <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
+      )}
 
-        {/* Quick Links */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 text-white">Quick Links</h2>
-          <div className="grid md:grid-cols-4 gap-4">
-            <Link href="/quick-start" className="bg-gray-900 border border-orange-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-orange-500">Quick Start</div>
-              <div className="text-sm text-orange-500">Get started in 10 min</div>
-            </Link>
-            <Link href="/hardware" className="bg-gray-900 border border-blue-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-blue-400">Hardware Guide</div>
-              <div className="text-sm text-orange-500">Shopping list & setup</div>
-            </Link>
-            <Link href="/docs/troubleshooting" className="bg-gray-900 border border-pink-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-pink-400">Troubleshooting</div>
-              <div className="text-sm text-pink-600">Common issues</div>
-            </Link>
-            <Link href="#" className="bg-gray-900 border border-green-500/50 rounded-xl p-4 hover:shadow-md transition text-center">
-              <div className="font-semibold text-green-400">API Reference</div>
-              <div className="text-sm text-green-600">Integration docs</div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Documentation Categories */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category, index) => {
-            const Icon = category.icon;
-            return (
-              <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8 hover:shadow-lg transition">
-                <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-white">{category.title}</h3>
-                <p className="text-gray-400 mb-6">{category.description}</p>
-                <ul className="space-y-2">
-                  {category.links.map((link, i) => (
-                    <li key={i}>
-                      <Link href={link.href} className="text-orange-500 hover:text-orange-500 hover:underline">
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+      {/* Resources */}
+      <div className="mt-12 pt-8 border-t border-gray-700">
+        <h2 className="text-lg font-bold text-white mb-4">Resources</h2>
+        <div className="grid sm:grid-cols-3 gap-4">
+          <a
+            href="https://github.com/gfargo/lights-pi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition"
+          >
+            <div>
+              <div className="font-medium text-white text-sm">
+                GitHub Repository
               </div>
-            );
-          })}
-        </div>
-
-        {/* Help CTA */}
-        <div className="mt-16 bg-linear-to-r from-orange-500 to-blue-500 rounded-2xl p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Need Help?</h2>
-          <p className="text-xl mb-6 text-white/90">
-            Join our community for support and discussions
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/community" className="inline-block bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
-              Join Discord
-            </Link>
-            <a href="https://github.com/yourusername/lights-pi/issues" className="inline-block bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/20 transition border border-white/20">
-              Report Issue
-            </a>
-          </div>
+              <div className="text-xs text-gray-500">Source code & issues</div>
+            </div>
+          </a>
+          <Link
+            href="/community"
+            className="flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition"
+          >
+            <div>
+              <div className="font-medium text-white text-sm">Community</div>
+              <div className="text-xs text-gray-500">
+                Discord & discussions
+              </div>
+            </div>
+          </Link>
+          <a
+            href="https://github.com/gfargo/lights-pi/issues/new"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition"
+          >
+            <div>
+              <div className="font-medium text-white text-sm">Report Issue</div>
+              <div className="text-xs text-gray-500">Found a bug?</div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
-  );
+  )
 }

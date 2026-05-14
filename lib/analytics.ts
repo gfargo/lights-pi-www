@@ -61,4 +61,25 @@ export const trackEvent = {
   startInstallation: () => {
     track('installation_started');
   },
+
+  // Docs
+  viewDocsPage: (slug: string, title: string) => {
+    track('docs_page_view', { slug, title });
+  },
+
+  docsFeedback: (slug: string, rating: 'helpful' | 'not_helpful') => {
+    track('docs_feedback', { slug, rating });
+  },
+
+  docsFeedbackAction: (slug: string, action: 'open_issue' | 'discord' | 'edit_wiki') => {
+    track('docs_feedback_action', { slug, action });
+  },
+
+  clickWikiLink: (slug: string, wikiUrl: string) => {
+    track('docs_wiki_link', { slug, wikiUrl });
+  },
+
+  docsCodeCopy: (slug: string) => {
+    track('docs_code_copy', { slug });
+  },
 };
