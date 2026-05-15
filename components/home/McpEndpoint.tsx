@@ -31,6 +31,20 @@ const MCP_TOOLS = [
   "set_channel",
   "save_scene",
   "snapshot_scene",
+  "blackout",
+  "batch_action",
+  "identify_fixture",
+  // group management
+  "create_group",
+  "delete_group",
+  "update_group",
+  "add_fixtures_to_group",
+  "remove_fixtures_from_group",
+  // scene management
+  "describe_scene",
+  "delete_scene",
+  "rename_scene",
+  "duplicate_scene",
 ];
 
 export function McpEndpoint() {
