@@ -157,95 +157,28 @@ function extractTags(name: string, body: string): string[] {
   return tags.slice(0, 3); // Limit to 3 tags
 }
 
-// Static blog posts (tutorials, community, etc.)
-export const staticPosts: BlogPost[] = [
-  {
-    title: "Building a Portable DJ Rig with Lights Pi",
-    excerpt: "Step-by-step guide to creating a professional mobile lighting setup for events and parties. Includes equipment list and setup tips.",
-    category: "Tutorials",
-    date: "2026-03-05T00:00:00Z",
-    author: "DJ Mike",
-    readTime: "12 min read",
-    tags: ["tutorial", "events", "dj"],
-    featured: false,
-    slug: "portable-dj-rig",
-  },
-  {
-    title: "Community Spotlight: Sarah's YouTube Studio",
-    excerpt: "How one content creator built a professional studio lighting setup for under $500. Interview and setup tour included.",
-    category: "Community",
-    date: "2026-03-01T00:00:00Z",
-    author: "Community Team",
-    readTime: "8 min read",
-    tags: ["community", "youtube", "interview"],
-    featured: false,
-    slug: "youtube-studio-spotlight",
-  },
-  {
-    title: "Getting Started with Wireless DMX",
-    excerpt: "Complete guide to adding wireless DMX to your Lights Pi setup. Hardware recommendations, setup process, and troubleshooting tips.",
-    category: "Tutorials",
-    date: "2026-02-25T00:00:00Z",
-    author: "Tech Guide",
-    readTime: "10 min read",
-    tags: ["tutorial", "wireless", "dmx"],
-    featured: false,
-    slug: "wireless-dmx-guide",
-  },
-  {
-    title: "Lights Pi in Education: Teaching Lighting Design",
-    excerpt: "How schools and universities are using Lights Pi to teach lighting design and theater production on a budget.",
-    category: "Use Cases",
-    date: "2026-02-20T00:00:00Z",
-    author: "Education Team",
-    readTime: "7 min read",
-    tags: ["education", "use-case", "theater"],
-    featured: false,
-    slug: "education-use-case",
-  },
-  {
-    title: "Creating Custom Fixture Definitions",
-    excerpt: "Learn how to add support for any DMX fixture to Lights Pi. Includes examples and best practices.",
-    category: "Tutorials",
-    date: "2026-02-10T00:00:00Z",
-    author: "Tech Guide",
-    readTime: "15 min read",
-    tags: ["tutorial", "advanced", "fixtures"],
-    featured: false,
-    slug: "custom-fixtures",
-  },
-  {
-    title: "Photography Studio Lighting with Lights Pi",
-    excerpt: "Professional photographer shares how they use Lights Pi for client sessions. Setup details and workflow tips.",
-    category: "Use Cases",
-    date: "2026-01-30T00:00:00Z",
-    author: "Pro Photographer",
-    readTime: "9 min read",
-    tags: ["photography", "use-case", "professional"],
-    featured: false,
-    slug: "photography-studio",
-  },
-  {
-    title: "Integrating Lights Pi with Home Assistant",
-    excerpt: "Complete guide to connecting Lights Pi to your smart home. MQTT setup, automation examples, and voice control.",
-    category: "Tutorials",
-    date: "2026-01-25T00:00:00Z",
-    author: "Smart Home Guide",
-    readTime: "11 min read",
-    tags: ["tutorial", "smart-home", "automation"],
-    featured: false,
-    slug: "home-assistant-integration",
-  },
-];
+/**
+ * Static blog posts placeholder.
+ *
+ * The previous version of this file contained seven invented blog posts
+ * (DJ Mike, Sarah, "Tech Guide", "Pro Photographer", "Smart Home Guide", …)
+ * with fabricated authors and content that didn't actually exist anywhere.
+ * Same credibility problem as the homepage testimonials — they were removed.
+ *
+ * Real blog content (tutorials, community spotlights, etc.) can be added
+ * back here when it exists. Until then, the /blog page surfaces real
+ * GitHub release notes only.
+ */
+export const staticPosts: BlogPost[] = [];
 
 export async function getAllPosts(): Promise<BlogPost[]> {
   const releases = await getGitHubReleases();
   const releasePosts = releases.map(releaseToPost);
-  
+
   // Combine and sort by date
   const allPosts = [...releasePosts, ...staticPosts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
-  
+
   return allPosts;
 }
