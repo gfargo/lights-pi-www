@@ -11,6 +11,11 @@ interface DocsCodeBlockProps {
   language: string
 }
 
+/**
+ * Editorial code block — hairline border, mono caption label, copy button
+ * only revealed on hover. Background stays consistent with the docs
+ * surface (steel/30, not the syntax theme's default).
+ */
 export function DocsCodeBlock({ children, language }: DocsCodeBlockProps) {
   const [copied, setCopied] = useState(false)
 
@@ -22,25 +27,33 @@ export function DocsCodeBlock({ children, language }: DocsCodeBlockProps) {
   }
 
   return (
-    <div className="relative group my-4 rounded-lg overflow-hidden border border-gray-700">
-      {language && language !== "text" && (
-        <div className="flex items-center justify-between px-4 py-2 bg-gray-800/50 border-b border-gray-700">
-          <span className="text-xs font-mono text-gray-500">{language}</span>
-        </div>
-      )}
-      <button
-        onClick={handleCopy}
-        className="absolute top-2 right-2 p-2 rounded-md bg-gray-700/50 text-gray-400 hover:text-white hover:bg-gray-700 opacity-0 group-hover:opacity-100 transition-opacity z-10"
-        aria-label="Copy code"
-      >
-        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-      </button>
+    <div className="relative group my-6 border border-rule bg-steel/30 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-rule">
+        <span className="font-mono text-xs uppercase tracking-widest text-paper/50">
+          {language && language !== "text" ? language : "snippet"}
+        </span>
+        <button
+          onClick={handleCopy}
+          className="font-mono text-xs uppercase tracking-widest text-paper/40 hover:text-amber-tungsten transition-colors opacity-0 group-hover:opacity-100 inline-flex items-center gap-1.5"
+          aria-label="Copy code"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3 h-3" /> Copied
+            </>
+          ) : (
+            <>
+              <Copy className="w-3 h-3" /> Copy
+            </>
+          )}
+        </button>
+      </div>
       <SyntaxHighlighter
         language={language}
         style={oneDark}
         customStyle={{
           margin: 0,
-          padding: "1rem",
+          padding: "1rem 1.25rem",
           background: "transparent",
           fontSize: "0.875rem",
         }}

@@ -46,23 +46,21 @@ export function DocsTableOfContents({ content }: DocsTableOfContentsProps) {
   if (headings.length < 3) return null // Don't show TOC for very short pages
 
   return (
-    <aside className="hidden xl:block w-56 shrink-0 sticky top-8 self-start max-h-[calc(100vh-4rem)] overflow-y-auto">
+    <aside className="hidden xl:block w-56 shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pl-4">
       <nav aria-label="Table of contents">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">
-          On this page
-        </h4>
-        <ul className="space-y-1.5">
+        <p className="eyebrow mb-4">On this page</p>
+        <ul className="space-y-2">
           {headings.map((heading) => (
             <li
               key={heading.id}
-              style={{ paddingLeft: `${(heading.level - 2) * 12}px` }}
+              style={{ paddingLeft: `${(heading.level - 2) * 14}px` }}
             >
               <a
                 href={`#${heading.id}`}
-                className={`block text-xs leading-relaxed transition-colors ${
+                className={`block font-sans text-sm leading-snug transition-colors border-l-2 pl-3 -ml-px ${
                   activeId === heading.id
-                    ? "text-orange-400 font-medium"
-                    : "text-gray-500 hover:text-gray-300"
+                    ? "text-amber-tungsten border-amber-tungsten"
+                    : "text-paper/50 hover:text-paper border-transparent"
                 }`}
               >
                 {heading.text}

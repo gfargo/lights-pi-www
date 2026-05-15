@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { Book, ChevronRight, Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 interface SidebarCategory {
   slug: string
@@ -16,6 +16,10 @@ interface DocsSidebarClientProps {
   categories: SidebarCategory[]
 }
 
+/**
+ * Editorial docs sidebar. Hairline rules between categories, mono labels,
+ * an underlined active state in tungsten amber.
+ */
 export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -26,52 +30,48 @@ export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
     <nav aria-label="Documentation navigation">
       <Link
         href="/docs"
-        className="flex items-center gap-2 px-3 py-2 mb-4 text-sm font-medium text-gray-400 hover:text-white transition rounded-lg hover:bg-gray-800"
+        className="block mb-10 group"
       >
-        <Book className="w-4 h-4" />
-        <span>Documentation</span>
+        <p className="eyebrow group-hover:text-amber-tungsten transition-colors">
+          Documentation
+        </p>
+        <span className="font-display text-paper text-2xl leading-tight group-hover:text-amber-tungsten transition-colors mt-1 block">
+          Index ↗
+        </span>
       </Link>
 
-      <div className="space-y-6">
-        {categories.map((category) => {
-          const isActiveCategory = category.docs.some(
-            (d) => d.slug === currentSlug
-          )
-
-          return (
-            <div key={category.slug}>
-              <h3 className="px-3 text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                {category.title}
-              </h3>
-              <ul className="space-y-1">
-                {category.docs.map((doc) => {
-                  const isActive = doc.slug === currentSlug
-                  return (
-                    <li key={doc.slug}>
-                      <Link
-                        href={`/docs/${doc.slug}`}
-                        onClick={() => setMobileOpen(false)}
-                        className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition ${
-                          isActive
-                            ? "bg-orange-500/10 text-orange-400 font-medium border-l-2 border-orange-500 ml-0 pl-2.5"
-                            : "text-gray-400 hover:text-white hover:bg-gray-800 ml-0"
-                        }`}
-                        aria-current={isActive ? "page" : undefined}
-                      >
-                        {isActive && (
-                          <ChevronRight className="w-3 h-3 shrink-0" />
-                        )}
-                        <span className={!isActive ? "ml-5" : ""}>
-                          {doc.title}
-                        </span>
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          )
-        })}
+      <div className="space-y-10">
+        {categories.map((category, ci) => (
+          <div key={category.slug} className="hairline pt-4">
+            <p className="font-mono text-xs uppercase tracking-widest text-paper/40 mb-4 tabular-nums">
+              <span className="text-amber-tungsten/70">
+                {String(ci + 1).padStart(2, "0")}
+              </span>
+              <span className="ml-3">{category.title}</span>
+            </p>
+            <ul className="space-y-1">
+              {category.docs.map((doc) => {
+                const isActive = doc.slug === currentSlug
+                return (
+                  <li key={doc.slug}>
+                    <Link
+                      href={`/docs/${doc.slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`block py-1.5 font-sans text-sm transition-colors ${
+                        isActive
+                          ? "text-amber-tungsten border-l-2 border-amber-tungsten pl-3"
+                          : "text-paper/60 hover:text-paper pl-3 border-l-2 border-transparent"
+                      }`}
+                    >
+                      {doc.title}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        ))}
       </div>
     </nav>
   )
@@ -79,41 +79,50 @@ export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 sticky top-8 self-start max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-4">
         {sidebarContent}
       </aside>
 
       {/* Mobile FAB */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed bottom-6 right-6 z-50 w-12 h-12 bg-orange-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-orange-600 transition"
+        className="lg:hidden fixed bottom-6 right-6 z-50 w-12 h-12 bg-ink border border-amber-tungsten text-amber-tungsten flex items-center justify-center hover:bg-amber-tungsten hover:text-ink transition-colors"
         aria-label="Open documentation menu"
       >
         <Menu className="w-5 h-5" />
       </button>
 
       {/* Mobile overlay */}
-      {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMobileOpen(false)}
-          />
-          <div className="absolute left-0 top-0 bottom-0 w-72 bg-gray-900 border-r border-gray-700 overflow-y-auto">
-            <div className="flex items-center justify-between px-4 py-4 border-b border-gray-700">
-              <span className="font-semibold text-white">Documentation</span>
-              <button
-                onClick={() => setMobileOpen(false)}
-                className="p-1 text-gray-400 hover:text-white"
-                aria-label="Close menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="p-4">{sidebarContent}</div>
+      <div
+        className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-200 ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        <button
+          aria-label="Close menu"
+          tabIndex={mobileOpen ? 0 : -1}
+          className="absolute inset-0 bg-ink/85 backdrop-blur-md"
+          onClick={() => setMobileOpen(false)}
+        />
+        <div
+          className={`absolute left-0 top-0 bottom-0 w-80 bg-ink border-r border-rule overflow-y-auto transition-transform duration-300 ease-out ${
+            mobileOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between px-6 py-5 hairline">
+            <span className="eyebrow">Documentation</span>
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="text-paper/60 hover:text-amber-tungsten transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
+          <div className="p-6">{sidebarContent}</div>
         </div>
-      )}
+      </div>
     </>
   )
 }

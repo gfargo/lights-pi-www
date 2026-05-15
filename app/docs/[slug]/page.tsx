@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ExternalLink, Clock } from "lucide-react"
+import { ArrowUpRight, Clock } from "lucide-react"
 import type { Metadata } from "next"
 import {
     getDocs,
@@ -77,13 +77,11 @@ export default async function DocPage({
     getAdjacentPages(slug),
   ])
 
-  // Process markdown (transform wiki links to internal routes)
   const content = rawContent ? await processMarkdown(rawContent) : null
   const readingTime = rawContent ? getReadingTime(rawContent) : null
 
   return (
-    <div className="flex gap-8">
-      {/* Main content */}
+    <div className="flex gap-12">
       <article className="flex-1 min-w-0">
         {/* JSON-LD Structured Data */}
         <script
@@ -111,21 +109,27 @@ export default async function DocPage({
         />
 
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-          <Link href="/docs" className="hover:text-orange-400 transition">
+        <nav className="flex items-center gap-2 mb-8 font-mono text-xs uppercase tracking-widest">
+          <Link href="/docs" className="text-paper/40 hover:text-amber-tungsten transition-colors">
             Docs
           </Link>
-          <span>/</span>
-          <span className="text-gray-400">{doc.title}</span>
+          <span className="text-paper/20">/</span>
+          <span className="text-paper/70">{doc.title}</span>
         </nav>
 
         {/* Title block */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-3">{doc.title}</h1>
-          <div className="flex items-center gap-4 flex-wrap">
+        <header className="hairline pb-8 mb-12">
+          <p className="eyebrow">Documentation</p>
+          <h1
+            className="font-display text-paper mt-3"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          >
+            {doc.title}
+          </h1>
+          <div className="mt-6 flex items-center gap-x-6 gap-y-2 flex-wrap font-mono text-xs uppercase tracking-widest text-paper/40">
             {readingTime && (
-              <span className="inline-flex items-center gap-1.5 text-sm text-gray-500">
-                <Clock className="w-3.5 h-3.5" />
+              <span className="inline-flex items-center gap-2">
+                <Clock className="w-3 h-3" />
                 {readingTime} min read
               </span>
             )}
@@ -133,10 +137,10 @@ export default async function DocPage({
               href={`${doc.wikiUrl}/_edit`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-400 transition"
+              className="inline-flex items-center gap-1.5 hover:text-amber-tungsten transition-colors"
             >
               Edit on GitHub
-              <ExternalLink className="w-3 h-3" />
+              <ArrowUpRight className="w-3 h-3" />
             </a>
           </div>
         </header>
@@ -145,29 +149,24 @@ export default async function DocPage({
         {content ? (
           <DocsContent content={content} />
         ) : (
-          <div className="bg-gray-900 rounded-xl border border-gray-700 p-8 text-center">
-            <p className="text-gray-400 mb-4">
+          <div className="border border-rule bg-steel/30 p-8 text-center">
+            <p className="font-display italic text-paper/60 text-lg">
               This page&apos;s content couldn&apos;t be loaded from the wiki.
             </p>
             <a
               href={doc.wikiUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-orange-500 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-orange-600 transition"
+              className="mt-6 inline-flex items-center gap-2 font-mono uppercase tracking-widest text-xs text-amber-tungsten border-b border-amber-tungsten pb-1 hover:text-paper hover:border-paper transition-colors"
             >
               View on Wiki
-              <ExternalLink className="w-4 h-4" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
         )}
 
-        {/* Prev / Next navigation */}
         <DocsNavigation prev={prev} next={next} />
-
-        {/* Feedback widget */}
         <DocsFeedback slug={slug} wikiUrl={doc.wikiUrl} />
-
-        {/* Analytics */}
         <DocsPageView slug={slug} title={doc.title} />
       </article>
 

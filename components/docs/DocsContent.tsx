@@ -3,23 +3,29 @@
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { DocsCodeBlock } from "./DocsCodeBlock"
 
 interface DocsContentProps {
   content: string
 }
 
+/**
+ * Editorial prose styling for docs content. Display serif for h1/h2/h3,
+ * mono for h4, generous leading on body, hairline rules on h2 and tables,
+ * tungsten amber for links.
+ */
 export function DocsContent({ content }: DocsContentProps) {
   return (
-    <div className="prose-custom">
+    <div className="docs-prose max-w-3xl">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
             <h1
               id={headingToId(children)}
-              className="text-3xl font-bold tracking-tight text-white mb-6"
+              className="font-display text-paper leading-tight mt-0 mb-8"
+              style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}
             >
               {children}
             </h1>
@@ -27,7 +33,8 @@ export function DocsContent({ content }: DocsContentProps) {
           h2: ({ children }) => (
             <h2
               id={headingToId(children)}
-              className="text-2xl font-semibold text-white mt-10 mb-4 pb-2 border-b border-gray-700 scroll-mt-20"
+              className="font-display text-paper leading-tight mt-16 mb-5 pb-3 border-b border-rule scroll-mt-24"
+              style={{ fontSize: "clamp(1.625rem, 3vw, 2rem)" }}
             >
               {children}
             </h2>
@@ -35,7 +42,8 @@ export function DocsContent({ content }: DocsContentProps) {
           h3: ({ children }) => (
             <h3
               id={headingToId(children)}
-              className="text-xl font-semibold text-white mt-8 mb-3 scroll-mt-20"
+              className="font-display text-paper mt-10 mb-3 scroll-mt-24 leading-tight"
+              style={{ fontSize: "1.375rem" }}
             >
               {children}
             </h3>
@@ -43,13 +51,15 @@ export function DocsContent({ content }: DocsContentProps) {
           h4: ({ children }) => (
             <h4
               id={headingToId(children)}
-              className="text-lg font-semibold text-white mt-6 mb-2 scroll-mt-20"
+              className="font-mono text-xs uppercase tracking-widest text-amber-tungsten mt-8 mb-3 scroll-mt-24"
             >
               {children}
             </h4>
           ),
           p: ({ children }) => (
-            <p className="text-gray-300 leading-7 mb-4">{children}</p>
+            <p className="font-sans text-paper/80 leading-relaxed mb-5 text-[17px]">
+              {children}
+            </p>
           ),
           a: ({ href, children }) => {
             if (!href) return <span>{children}</span>
@@ -59,7 +69,7 @@ export function DocsContent({ content }: DocsContentProps) {
               return (
                 <Link
                   href={href}
-                  className="text-orange-400 underline-offset-2 hover:underline"
+                  className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten transition-colors"
                 >
                   {children}
                 </Link>
@@ -73,10 +83,10 @@ export function DocsContent({ content }: DocsContentProps) {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-orange-400 underline-offset-2 hover:underline inline-flex items-center gap-1"
+                  className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten transition-colors inline-flex items-center gap-1"
                 >
                   {children}
-                  <ExternalLink className="w-3 h-3" />
+                  <ArrowUpRight className="w-3 h-3" />
                 </a>
               )
             }
@@ -85,45 +95,56 @@ export function DocsContent({ content }: DocsContentProps) {
             return (
               <Link
                 href={href}
-                className="text-orange-400 underline-offset-2 hover:underline"
+                className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten transition-colors"
               >
                 {children}
               </Link>
             )
           },
           ul: ({ children }) => (
-            <ul className="list-disc ml-6 mb-4 space-y-1 text-gray-300">
+            <ul className="mb-5 space-y-2 text-paper/80 list-none pl-0">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal ml-6 mb-4 space-y-1 text-gray-300">
+            <ol className="mb-5 space-y-2 text-paper/80 list-decimal pl-6 marker:text-paper/40 marker:font-mono marker:text-sm">
               {children}
             </ol>
           ),
-          li: ({ children }) => <li className="leading-7">{children}</li>,
+          li: ({ children, ...rest }) => {
+            // Check if we're in an ordered list — keep default list marker
+            // Otherwise, render with our custom mono · bullet
+            const isOrdered = (rest as { ordered?: boolean }).ordered;
+            if (isOrdered) {
+              return <li className="leading-relaxed pl-1">{children}</li>;
+            }
+            return (
+              <li className="grid grid-cols-[1.25rem_1fr] gap-2 leading-relaxed">
+                <span aria-hidden className="text-paper/30 font-mono">·</span>
+                <span>{children}</span>
+              </li>
+            );
+          },
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-orange-500 pl-4 italic text-gray-400 my-4">
+            <blockquote className="border-l-2 border-amber-tungsten pl-5 py-1 my-6 font-display italic text-paper/70 text-lg">
               {children}
             </blockquote>
           ),
           table: ({ children }) => (
-            <div className="overflow-x-auto my-6">
-              <table className="w-full border-collapse text-sm">
-                {children}
-              </table>
+            <div className="overflow-x-auto my-8 border-y border-rule">
+              <table className="w-full border-collapse text-sm">{children}</table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="border-b border-gray-700">{children}</thead>
+            <thead className="border-b border-rule">{children}</thead>
           ),
           th: ({ children }) => (
-            <th className="text-left py-2 px-3 font-semibold text-white">
+            <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-paper/60">
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className="py-2 px-3 text-gray-300 border-b border-gray-800">
+            <td className="py-3 px-4 text-paper/80 border-b border-rule">
               {children}
             </td>
           ),
@@ -141,7 +162,7 @@ export function DocsContent({ content }: DocsContentProps) {
 
             return (
               <code
-                className="bg-gray-800 text-orange-300 font-mono text-sm px-1.5 py-0.5 rounded"
+                className="font-mono text-[0.9em] text-amber-tungsten bg-steel/60 px-1.5 py-0.5 border border-rule"
                 {...props}
               >
                 {children}
@@ -154,12 +175,12 @@ export function DocsContent({ content }: DocsContentProps) {
             <img
               src={src}
               alt={alt ?? ""}
-              className="rounded-lg border border-gray-700 my-6 max-w-full"
+              className="border border-rule my-8 max-w-full"
             />
           ),
-          hr: () => <hr className="border-gray-700 my-8" />,
+          hr: () => <hr className="border-rule my-12" />,
           strong: ({ children }) => (
-            <strong className="font-semibold text-white">{children}</strong>
+            <strong className="text-paper font-semibold">{children}</strong>
           ),
         }}
       >

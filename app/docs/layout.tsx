@@ -10,9 +10,9 @@ export const metadata = {
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-10">
+    <div className="min-h-screen bg-ink pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex gap-12">
           <DocsSidebar />
           <main className="flex-1 min-w-0">{children}</main>
         </div>

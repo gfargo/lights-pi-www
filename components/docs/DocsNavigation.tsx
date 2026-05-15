@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import type { DocPage } from "@/lib/wiki"
 
 interface DocsNavigationProps {
@@ -7,46 +6,48 @@ interface DocsNavigationProps {
   next: DocPage | null
 }
 
+/**
+ * Editorial prev/next navigation. No buttons or rounded cards — just two
+ * flat regions of a hairline-bordered grid with margin-style labels.
+ */
 export function DocsNavigation({ prev, next }: DocsNavigationProps) {
   if (!prev && !next) return null
 
   return (
     <nav
-      className="flex items-stretch gap-4 mt-12 pt-8 border-t border-gray-700"
+      className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-rule mt-16 hairline"
       aria-label="Page navigation"
     >
       {prev ? (
         <Link
           href={`/docs/${prev.slug}`}
-          className="flex-1 flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-orange-500/50 hover:bg-gray-800/50 transition group"
+          className="group block bg-ink p-6 hover:bg-steel/30 transition-colors"
         >
-          <ChevronLeft className="w-5 h-5 text-gray-500 group-hover:text-orange-400 transition shrink-0" />
-          <div className="text-right flex-1">
-            <div className="text-xs text-gray-500 mb-1">Previous</div>
-            <div className="font-medium text-white group-hover:text-orange-400 transition">
-              {prev.title}
-            </div>
-          </div>
+          <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
+            ← Previous
+          </p>
+          <p className="font-display text-paper text-xl mt-2 leading-tight group-hover:text-amber-tungsten transition-colors">
+            {prev.title}
+          </p>
         </Link>
       ) : (
-        <div className="flex-1" />
+        <div className="bg-ink" />
       )}
 
       {next ? (
         <Link
           href={`/docs/${next.slug}`}
-          className="flex-1 flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-orange-500/50 hover:bg-gray-800/50 transition group"
+          className="group block bg-ink p-6 hover:bg-steel/30 transition-colors text-right"
         >
-          <div className="flex-1">
-            <div className="text-xs text-gray-500 mb-1">Next</div>
-            <div className="font-medium text-white group-hover:text-orange-400 transition">
-              {next.title}
-            </div>
-          </div>
-          <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-orange-400 transition shrink-0" />
+          <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
+            Next →
+          </p>
+          <p className="font-display text-paper text-xl mt-2 leading-tight group-hover:text-amber-tungsten transition-colors">
+            {next.title}
+          </p>
         </Link>
       ) : (
-        <div className="flex-1" />
+        <div className="bg-ink" />
       )}
     </nav>
   )

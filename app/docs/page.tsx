@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Book, ExternalLink, ArrowRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import {
     getCategories,
     getDocsByCategory,
@@ -35,138 +35,183 @@ export default async function DocsPage() {
   )
 
   const hasContent = categoriesWithDocs.length > 0
+  const totalDocs = categoriesWithDocs.reduce((n, c) => n + c.docs.length, 0)
 
   return (
     <div>
-      {/* Hero */}
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4">Documentation</h1>
-        <p className="text-lg text-gray-400 max-w-2xl mb-6">
-          Everything you need to know about setting up, configuring, and
-          managing your Lights Pi system.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          {hasContent && (
-            <Link
-              href="/docs/quick-start"
-              className="inline-flex items-center gap-2 bg-orange-500 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-orange-600 transition"
-            >
-              Get Started
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          )}
+      {/* ─────────────────────────────────────────── HEADER ─── */}
+      <header className="hairline pb-8 mb-12 grid lg:grid-cols-[1fr_auto] gap-6 items-end">
+        <div>
+          <p className="eyebrow">Documentation</p>
+          <h1
+            className="font-display text-paper mt-3"
+            style={{ fontSize: "var(--text-display-md)" }}
+          >
+            How it works,
+            <span className="block italic text-paper/40">
+              from cable to cue.
+            </span>
+          </h1>
+          <p className="mt-5 text-paper/60 leading-relaxed max-w-2xl text-lg">
+            Setup guides, hardware reference, AI scene generation, MCP server,
+            and operations. Sourced from the project wiki so it stays in sync
+            with the code.
+          </p>
+        </div>
+        <div className="flex flex-col items-start lg:items-end gap-2 font-mono text-xs uppercase tracking-widest text-paper/40 whitespace-nowrap">
+          <span>{totalDocs} pages</span>
           <a
             href={WIKI_BASE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-gray-600 text-gray-300 px-5 py-2.5 rounded-lg font-medium hover:border-gray-500 hover:text-white transition"
+            className="hover:text-amber-tungsten transition-colors inline-flex items-center gap-2"
           >
-            View Wiki
-            <ExternalLink className="w-4 h-4" />
+            View on Wiki
+            <ArrowUpRight className="w-3 h-3" />
           </a>
         </div>
-      </div>
+      </header>
 
-      {/* Category Grid */}
+      {/* Primary CTA — minimal */}
+      {hasContent && (
+        <div className="mb-16">
+          <Link
+            href="/docs/quick-start"
+            className="group inline-flex items-center gap-3 text-paper font-mono uppercase tracking-widest text-sm border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
+          >
+            Quick-start guide
+            <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+        </div>
+      )}
+
+      {/* ──────────────────────────────────────── CATEGORIES ─── */}
       {hasContent ? (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categoriesWithDocs.map((category) => (
-            <div
-              key={category.slug}
-              className="bg-gray-900 rounded-xl border border-gray-700 p-6 hover:border-gray-600 transition"
-            >
-              <h2 className="text-lg font-bold text-white mb-4">
-                {category.title}
-              </h2>
-              <ul className="space-y-3">
-                {category.docs.map((doc) => (
-                  <li key={doc.slug}>
-                    <Link
-                      href={`/docs/${doc.slug}`}
-                      className="group flex items-start gap-2"
-                    >
-                      <ArrowRight className="w-4 h-4 text-gray-600 group-hover:text-orange-400 mt-0.5 shrink-0 transition" />
-                      <div>
-                        <span className="text-gray-300 group-hover:text-orange-400 transition font-medium text-sm">
+        <div className="space-y-12">
+          {categoriesWithDocs.map((category, ci) => (
+            <section key={category.slug} className="hairline pt-6">
+              <div className="grid lg:grid-cols-[8rem_1fr] gap-x-10 gap-y-6">
+                <div className="flex flex-col gap-2">
+                  <p
+                    className="font-mono text-xs uppercase tracking-widest text-amber-tungsten/70 tabular-nums"
+                  >
+                    {String(ci + 1).padStart(2, "0")} / {String(categoriesWithDocs.length).padStart(2, "0")}
+                  </p>
+                  <h2
+                    className="font-display text-paper"
+                    style={{ fontSize: "2rem", lineHeight: 1.05 }}
+                  >
+                    {category.title}
+                  </h2>
+                </div>
+
+                <ul className="divide-y divide-rule">
+                  {category.docs.map((doc) => (
+                    <li key={doc.slug}>
+                      <Link
+                        href={`/docs/${doc.slug}`}
+                        className="group grid lg:grid-cols-[12rem_1fr_2rem] gap-x-6 gap-y-1 py-4 items-baseline hover:bg-steel/30 px-2 -mx-2 transition-colors"
+                      >
+                        <span className="font-mono text-sm text-paper/80 group-hover:text-amber-tungsten transition-colors whitespace-nowrap">
                           {doc.title}
                         </span>
-                        {doc.description && (
-                          <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">
+                        {doc.description ? (
+                          <span className="text-paper/50 text-sm leading-snug line-clamp-2">
                             {doc.description}
-                          </p>
-                        )}
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                          </span>
+                        ) : <span />}
+                        <span aria-hidden className="font-mono text-paper/30 group-hover:text-amber-tungsten transition-colors text-right">
+                          →
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
           ))}
         </div>
       ) : (
-        /* Empty state when wiki has no sidebar */
-        <div className="bg-gray-900 rounded-xl border border-gray-700 p-8 text-center">
-          <Book className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-white mb-2">
-            Documentation Coming Soon
+        /* Empty state */
+        <div className="hairline pt-12">
+          <p className="eyebrow">Stand by</p>
+          <h2
+            className="font-display text-paper mt-3"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+          >
+            Documentation is being migrated to the GitHub Wiki.
           </h2>
-          <p className="text-gray-400 mb-6">
-            Documentation is being migrated to the GitHub Wiki. Check back soon
-            or visit the wiki directly.
+          <p className="mt-4 text-paper/60 max-w-2xl leading-relaxed">
+            Check back soon or visit the wiki directly.
           </p>
           <a
             href={WIKI_BASE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-orange-500 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-orange-600 transition"
+            className="group mt-8 inline-flex items-center gap-3 text-amber-tungsten font-mono uppercase tracking-widest text-sm border-b border-amber-tungsten pb-1 hover:text-paper hover:border-paper transition-colors"
           >
-            Visit Wiki
-            <ExternalLink className="w-4 h-4" />
+            Visit the wiki
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </a>
         </div>
       )}
 
-      {/* Resources */}
-      <div className="mt-12 pt-8 border-t border-gray-700">
-        <h2 className="text-lg font-bold text-white mb-4">Resources</h2>
-        <div className="grid sm:grid-cols-3 gap-4">
-          <a
+      {/* ──────────────────────────────────────── RESOURCES ─── */}
+      <section className="mt-20 hairline pt-8">
+        <p className="eyebrow mb-6">Elsewhere</p>
+        <div className="grid sm:grid-cols-3 gap-px bg-rule">
+          <ResourceLink
             href="https://github.com/gfargo/lights-pi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition"
-          >
-            <div>
-              <div className="font-medium text-white text-sm">
-                GitHub Repository
-              </div>
-              <div className="text-xs text-gray-500">Source code & issues</div>
-            </div>
-          </a>
-          <Link
+            label="GitHub"
+            note="Source code & issues"
+            external
+          />
+          <ResourceLink
             href="/community"
-            className="flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition"
-          >
-            <div>
-              <div className="font-medium text-white text-sm">Community</div>
-              <div className="text-xs text-gray-500">
-                Discord & discussions
-              </div>
-            </div>
-          </Link>
-          <a
+            label="Community"
+            note="Discord & discussions"
+          />
+          <ResourceLink
             href="https://github.com/gfargo/lights-pi/issues/new"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition"
-          >
-            <div>
-              <div className="font-medium text-white text-sm">Report Issue</div>
-              <div className="text-xs text-gray-500">Found a bug?</div>
-            </div>
-          </a>
+            label="Report an issue"
+            note="Found a bug?"
+            external
+          />
         </div>
-      </div>
+      </section>
     </div>
+  )
+}
+
+function ResourceLink({
+  href,
+  label,
+  note,
+  external = false,
+}: {
+  href: string
+  label: string
+  note: string
+  external?: boolean
+}) {
+  const inner = (
+    <div className="block bg-ink p-5 group hover:bg-steel/30 transition-colors">
+      <div className="flex items-center justify-between gap-3">
+        <span className="font-mono text-sm uppercase tracking-widest text-paper group-hover:text-amber-tungsten transition-colors">
+          {label}
+        </span>
+        {external && (
+          <ArrowUpRight className="w-3.5 h-3.5 text-paper/30 group-hover:text-amber-tungsten transition-colors" />
+        )}
+      </div>
+      <p className="font-display italic text-paper/40 mt-1 text-sm">{note}</p>
+    </div>
+  )
+  return external ? (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {inner}
+    </a>
+  ) : (
+    <Link href={href}>{inner}</Link>
   )
 }
