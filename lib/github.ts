@@ -64,6 +64,19 @@ export async function getGitHubRepoStats(): Promise<GitHubRepoStats> {
   }
 }
 
+/**
+ * Latest release tag from GitHub, e.g. "v2.3.0".
+ *
+ * Cached via the shared releases fetch (1 hour TTL). Falls back to a sane
+ * default if the API is unreachable so the site never renders without a
+ * version stamp.
+ */
+export async function getLatestVersion(fallback = "v2.3.0"): Promise<string> {
+  const releases = await getGitHubReleases();
+  return releases[0]?.tagName ?? fallback;
+}
+
+
 export async function getGitHubReleases(): Promise<GitHubRelease[]> {
   try {
     const response = await fetch(

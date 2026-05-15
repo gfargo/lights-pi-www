@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FlagsProvider } from "@/components/flags/flags-provider";
 import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
+import { getLatestVersion } from "@/lib/github";
 
 // Editorial-theatrical type system.
 // Fraunces (variable, with optical-size axis) for display.
@@ -66,8 +67,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Resolve all flags on server
-  const serverFlags = await resolveAllFlags();
+  // Resolve all flags + the latest release tag on the server.
+  // getLatestVersion shares the underlying releases fetch cache with page.tsx
+  // (1 hour TTL), so this is a single shared upstream request.
+  const [serverFlags, version] = await Promise.all([
+    resolveAllFlags(),
+    getLatestVersion(),
+  ]);
   const clientFlags = pickClientFlags(serverFlags);
 
   return (
@@ -89,7 +95,7 @@ export default async function RootLayout({
           </a>
           <Navigation />
           <main id="main-content">{children}</main>
-          <Footer />
+          <Footer version={version} />
           <Analytics />
           <SpeedInsights />
         </FlagsProvider>

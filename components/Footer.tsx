@@ -4,11 +4,16 @@ import Link from "next/link";
 import { Github } from "lucide-react";
 import { useFlag } from "@/components/flags/flags-provider";
 
+interface FooterProps {
+  /** Latest release tag, fetched server-side and passed in by layout.tsx. */
+  version: string;
+}
+
 /**
  * Footer — editorial colophon. Four columns of mono links, hairline rules,
  * masthead-style production credit at the bottom.
  */
-export function Footer() {
+export function Footer({ version }: FooterProps) {
   const showShowcase = useFlag("enable-showcase");
 
   return (
@@ -23,7 +28,7 @@ export function Footer() {
             </span>
           </div>
           <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-            v2.2.0 · Riversway
+            {version} · Riversway
           </p>
         </div>
 

@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { Hero } from "@/components/home/Hero";
 import { McpEndpoint } from "@/components/home/McpEndpoint";
 import { AiConversation } from "@/components/home/AiConversation";
-import { getGitHubRepoStats } from "@/lib/github";
+import { getGitHubRepoStats, getLatestVersion } from "@/lib/github";
 
 // Below-the-fold sections — code-split. Skeleton heights match closely so
 // we don't shift layout on hydration.
@@ -35,13 +35,17 @@ const FinalCTA = dynamic(
 );
 
 export default async function Home() {
-  // Real GitHub stars, fetched server-side. Cached for 5 minutes.
-  const { stars } = await getGitHubRepoStats();
+  // Real GitHub stars + latest release tag, fetched server-side and cached
+  // via the lib/github helpers (5 min for stars, 1 hour for releases).
+  const [{ stars }, version] = await Promise.all([
+    getGitHubRepoStats(),
+    getLatestVersion(),
+  ]);
 
   return (
     <>
       {/* Act I — establishing shot */}
-      <Hero stars={stars} />
+      <Hero stars={stars} version={version} />
 
       {/* Act II — the new capability, named */}
       <McpEndpoint />
@@ -54,7 +58,7 @@ export default async function Home() {
 
       {/* Act V — the paper-cream cue-sheet pivot
           (intentional cinematic break from the all-dark page) */}
-      <CueSheet />
+      <CueSheet version={version} />
 
       {/* Act VI — the practical accounting */}
       <CostComparison />

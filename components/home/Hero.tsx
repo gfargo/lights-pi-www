@@ -8,6 +8,8 @@ import { LightBeams } from "./LightBeams";
 interface HeroProps {
   /** Real-time GitHub star count, fetched server-side. */
   stars: number;
+  /** Latest release tag from GitHub, fetched server-side (e.g. "v2.3.0"). */
+  version: string;
 }
 
 function formatStars(n: number): string {
@@ -29,7 +31,7 @@ function formatStars(n: number): string {
  *  - A single filament pulse in the bottom-right is the only motion that
  *    persists after the load reveal.
  */
-export function Hero({ stars }: HeroProps) {
+export function Hero({ stars, version }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-ink">
       {/* Stage rig — pure SVG, additive blended */}
@@ -44,7 +46,7 @@ export function Hero({ stars }: HeroProps) {
           className="eyebrow load-reveal"
           style={{ "--reveal-delay": "0.4s" } as React.CSSProperties}
         >
-          Riversway · Lights-Pi · v2.2.0
+          Riversway · Lights-Pi · {version}
         </p>
 
         {/* Editorial display headline — staggered to land with the beams */}

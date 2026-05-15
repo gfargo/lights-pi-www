@@ -8,6 +8,11 @@
  * a template, an MCP tool call) in the register of stage directions.
  */
 
+interface CueSheetProps {
+  /** Latest release tag, fetched server-side and passed in by page.tsx. */
+  version: string;
+}
+
 const cues: Cue[] = [
   {
     no: "000",
@@ -84,7 +89,7 @@ interface Cue {
   accent?: boolean;
 }
 
-export function CueSheet() {
+export function CueSheet({ version }: CueSheetProps) {
   return (
     <section className="relative bg-paper text-ink py-28 overflow-hidden">
       {/* Subtle paper grain so the cream doesn't read flat */}
@@ -117,7 +122,7 @@ export function CueSheet() {
           <div className="hidden md:block text-right font-mono text-xs text-paper-muted">
             <div>Riversway Stage</div>
             <div>Production: lights-pi</div>
-            <div>v2.2.0 · Run 1</div>
+            <div>{version} · Run 1</div>
           </div>
         </header>
 
