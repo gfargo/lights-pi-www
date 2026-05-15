@@ -93,6 +93,11 @@ const roadmap = [
         completed: true
       },
       {
+        title: "MCP Server (LLM Agent Access)",
+        description: "Streamable HTTP Model Context Protocol endpoint at :5001/mcp — connect Claude Desktop, ChatGPT, Cursor, or any MCP-capable agent to drive the rig",
+        completed: true
+      },
+      {
         title: "Mobile App (PWA)",
         description: "Progressive Web App for better mobile experience",
         completed: false,

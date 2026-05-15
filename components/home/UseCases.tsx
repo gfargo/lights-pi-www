@@ -1,6 +1,6 @@
 "use client";
 
-import { Video, Camera, Radio, Music, GraduationCap, Home } from "lucide-react";
+import { Video, Camera, Radio, Bot, GraduationCap, Home } from "lucide-react";
 import { useState } from 'react';
 
 const useCases = [
@@ -26,11 +26,11 @@ const useCases = [
     color: "purple"
   },
   {
-    icon: Music,
-    title: "Small Venue/Events",
-    description: "Portable lighting rig",
-    features: ["Event-specific scenes", "Easy setup/teardown", "Wireless control"],
-    color: "pink"
+    icon: Bot,
+    title: "LLM Agent Integration",
+    description: "Let Claude / ChatGPT drive the rig",
+    features: ["Streamable HTTP MCP at :5001/mcp", "Discovery + action tools out of the box", "No custom integration code"],
+    color: "purple"
   },
   {
     icon: GraduationCap,

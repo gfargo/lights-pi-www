@@ -1,4 +1,4 @@
-import { Globe, Zap, Wifi, Shield, Sparkles, Save } from "lucide-react";
+import { Globe, Zap, Wifi, Shield, Sparkles, Save, Bot } from "lucide-react";
 import { FadeIn } from '../animations/FadeIn';
 
 const features = [
@@ -6,6 +6,12 @@ const features = [
     icon: Sparkles,
     title: "AI Scene Generation",
     description: "Describe a mood in plain English. The AI knows your exact fixtures and channels — no accidental strobing.",
+    color: "purple"
+  },
+  {
+    icon: Bot,
+    title: "MCP Server Built In",
+    description: "Streamable HTTP MCP endpoint at :5001/mcp. Connect Claude Desktop, ChatGPT, Cursor, or any agent — the rig becomes a tool.",
     color: "purple"
   },
   {
