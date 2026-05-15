@@ -75,7 +75,7 @@ export default function FAQPage() {
       questions: [
         {
           q: "What is the MCP server?",
-          a: "It's a built-in Model Context Protocol endpoint that exposes the rig to any MCP-capable LLM client — Claude Desktop, ChatGPT, Cursor, custom agents. The agent can list fixtures, activate scenes, adjust color/brightness, fade, and even generate new scenes, all through structured tool calls instead of REST integration code."
+          a: "It's a built-in Model Context Protocol endpoint that exposes the rig to any MCP-capable LLM client — Claude Desktop, ChatGPT, Cursor, custom agents. 28 tools cover discovery, channel control, scene + group lifecycle (create / describe / rename / duplicate / delete), safety primitives (blackout, identify_fixture), and batch dispatch — all through structured tool calls instead of REST integration code."
         },
         {
           q: "How do I connect Claude Desktop?",
@@ -88,6 +88,18 @@ export default function FAQPage() {
         {
           q: "Is the MCP endpoint authenticated?",
           a: "Not by default — it's intended for LAN use, behind your existing firewall. Bearer-token auth scaffolding is plumbed through the systemd unit (MCP_BEARER_TOKEN env var) and ready to wire if you expose the endpoint off-LAN through nginx/stunnel TLS."
+        },
+        {
+          q: "Can an agent build groups from scratch, or only use existing ones?",
+          a: "Both. As of v2.3 the agent can create, rename, delete, and edit fixture groups directly via MCP — so 'group the three front pars as key-lights, then make them warm' is a single conversational turn. Same for scenes: describe, delete, rename, and duplicate are all first-class tools."
+        },
+        {
+          q: "Is there a kill switch if the agent gets it wrong?",
+          a: "Yes — blackout() is a first-class MCP tool. It zeroes every channel on every fixture instantly (or just the named groups), and clears any active strobe / macro / color state — unlike a fade to zero. You can call it from any MCP client, or hit the /api/blackout endpoint directly with curl."
+        },
+        {
+          q: "How do I find which physical fixture is which during setup?",
+          a: "Call identify_fixture(fixture_id) from any MCP client. The fixture pulses on-off four times then restores its previous state. Run it once per fixture during initial setup to map workspace IDs to physical positions on the rig."
         }
       ]
     },

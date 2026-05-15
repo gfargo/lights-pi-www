@@ -23,14 +23,14 @@ interface Turn {
 const transcript: Turn[] = [
   {
     speaker: "user",
-    content: "Dim the key lights to 30% and make them warm.",
+    content: "Group the three front pars as 'key-lights', then make them warm at 30%.",
   },
   {
     speaker: "agent",
-    content: "Adjusting two fixtures in the key-lights group.",
-    call: `adjust_color("warm", "30%", groups: ["key-lights"])`,
-    result: "Applied to 2 fixtures",
-    latency: "47ms",
+    content: "Creating the group, then applying the color.",
+    call: `batch_action([\n  create_group("key-lights", fixtures: [0, 3, 4]),\n  adjust_color("warm", "30%", groups: ["key-lights"])\n])`,
+    result: "2 actions · 3 fixtures lit",
+    latency: "62ms",
   },
   {
     speaker: "user",
