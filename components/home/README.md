@@ -1,34 +1,34 @@
 # Home Page Components
 
-## InteractiveLightingRig
+## LightBeams
 
-An interactive 3D lighting truss visualization built with React Three Fiber that responds to mouse movement.
+Hand-coded SVG light rig used as the hero backdrop on the homepage.
+Three downstage fixtures hang from a hairline truss and project conic
+beams with realistic falloff and halo glow. Additive blending via
+`mix-blend-mode: screen` brightens overlapping beams — the same way a
+real stage wash does.
 
-### Features
+### Bundle
 
-- Professional lighting truss structure with cross bracing and mounting hardware
-- Three colored light fixtures (orange, blue, purple) matching the brand colors
-- Mouse-tracking light beams that smoothly follow cursor movement
-- Subtle intensity pulsing for dynamic effect
-- Optimized performance with smooth animations
+About 9KB of inline SVG. Replaces the previous three.js implementation
+(~145KB gzipped) on the homepage. The three.js rig moved to `/demo`
+(see `components/demo/DemoLightingRig.tsx`), where it earns its weight
+by being genuinely interactive.
 
-### Technical Details
+### Motion
 
-- Built with `@react-three/fiber` and `three.js`
-- Uses `useFrame` hook for smooth 60fps animations
-- Light beam rotation smoothly interpolates towards mouse position
-- Point lights with realistic decay and distance falloff
-- Additive blending for authentic light beam appearance
+All animation is CSS-only and pauses under `prefers-reduced-motion`:
+- House-lights-up reveal staggered across the three fixtures (0.3s / 0.6s / 0.9s)
+- 13–19s sway per beam group
+- 4/5/6s filament breathing per fixture
 
 ### Usage
 
 ```tsx
-import { InteractiveLightingRig } from './InteractiveLightingRig';
+import { LightBeams } from "./LightBeams";
 
 <section className="relative">
-  <InteractiveLightingRig />
-  {/* Your content here */}
+  <LightBeams />
+  {/* hero content */}
 </section>
 ```
-
-The component is positioned absolutely and should be used within a relative container. Adjust opacity via the className prop if needed.
