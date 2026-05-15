@@ -3,20 +3,33 @@ import { getDocs } from "./docs"
 
 /**
  * Processes raw wiki markdown before rendering:
- * 1. Transforms absolute GitHub Wiki links to internal /docs/ routes
- * 2. Transforms [[Wiki-Link]] syntax to internal links
- * 3. Optionally strips emoji from headings
+ * 1. Strips the leading H1 (the wiki convention is "first line = page
+ *    title heading", but the /docs/[slug] page already renders an
+ *    intentional editorial header, so the in-content H1 is a duplicate).
+ * 2. Transforms absolute GitHub Wiki links to internal /docs/ routes
+ * 3. Transforms [[Wiki-Link]] syntax to internal links
+ * 4. Optionally strips emoji from headings
  */
 export async function processMarkdown(
   markdown: string,
   options?: {
     transformLinks?: boolean
     cleanEmoji?: boolean
+    /** Opt-out of leading-H1 removal. Defaults to true. */
+    stripLeadingH1?: boolean
   }
 ): Promise<string> {
-  const { transformLinks = true, cleanEmoji = false } = options ?? {}
+  const {
+    transformLinks = true,
+    cleanEmoji = false,
+    stripLeadingH1: shouldStripH1 = true,
+  } = options ?? {}
 
   let processed = markdown
+
+  if (shouldStripH1) {
+    processed = stripLeadingH1(processed)
+  }
 
   if (transformLinks) {
     processed = await transformWikiLinks(processed)
@@ -31,6 +44,29 @@ export async function processMarkdown(
   }
 
   return processed
+}
+
+/**
+ * Removes the first `# Heading` line from the markdown. Tolerates leading
+ * blank lines. Only matches a single `#` (not `##` etc.) so we don't trim
+ * the wrong heading level. The trailing blank lines that immediately
+ * follow the stripped H1 are also removed so we don't leave a hole.
+ */
+function stripLeadingH1(markdown: string): string {
+  const lines = markdown.split("\n")
+  let i = 0
+  // Skip leading blank lines
+  while (i < lines.length && lines[i].trim() === "") i++
+  // Match a single `# ...` (not `## ...`)
+  if (i < lines.length && /^#\s+\S/.test(lines[i])) {
+    lines.splice(i, 1)
+    // Also drop trailing blank lines immediately after the stripped heading
+    while (i < lines.length && lines[i].trim() === "") {
+      lines.splice(i, 1)
+    }
+    return lines.join("\n")
+  }
+  return markdown
 }
 
 /**
