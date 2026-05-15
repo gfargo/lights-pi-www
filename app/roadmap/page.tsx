@@ -73,27 +73,30 @@ const roadmap = [
     quarter: "Q2 2026",
     items: [
       {
-        title: "Version 2.0 Release",
-        description: "Major update with new features and improvements",
+        title: "Version 2.1 Release",
+        description: "Persistent WebSocket architecture, .qxf fixture parser, enriched AI prompts",
         completed: true
       },
       {
         title: "AI Scene Generation",
-        description: "Generate lighting scenes using AI descriptions",
-        completed: false,
-        progress: 80
+        description: "Generate lighting scenes using natural language with fixture-aware channel mapping",
+        completed: true
+      },
+      {
+        title: "Scene Save & Recall",
+        description: "Save AI-generated scenes permanently to the workspace with one click",
+        completed: true
+      },
+      {
+        title: "Fixture Definition Parser",
+        description: "Reads .qxf files for authoritative channel roles — no more guessing RGB vs warm/cool",
+        completed: true
       },
       {
         title: "Mobile App (PWA)",
         description: "Progressive Web App for better mobile experience",
         completed: false,
         progress: 60
-      },
-      {
-        title: "Multi-Universe Support",
-        description: "Support for multiple DMX universes",
-        completed: false,
-        progress: 40
       }
     ]
   },
@@ -281,7 +284,7 @@ export default function RoadmapPage() {
         {/* Note */}
         <div className="mt-12 text-center text-sm text-gray-400">
           <p>This roadmap is subject to change based on community feedback and priorities.</p>
-          <p className="mt-2">Last updated: March 2026</p>
+          <p className="mt-2">Last updated: May 2026</p>
         </div>
       </div>
     </div>

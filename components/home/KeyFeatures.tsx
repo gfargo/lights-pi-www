@@ -1,41 +1,41 @@
-import { Globe, Zap, Wifi, Shield, Database, Code } from "lucide-react";
+import { Globe, Zap, Wifi, Shield, Sparkles, Save } from "lucide-react";
 import { FadeIn } from '../animations/FadeIn';
 
 const features = [
   {
+    icon: Sparkles,
+    title: "AI Scene Generation",
+    description: "Describe a mood in plain English. The AI knows your exact fixtures and channels — no accidental strobing.",
+    color: "purple"
+  },
+  {
+    icon: Save,
+    title: "Save & Recall",
+    description: "Love a generated scene? Save it permanently with one click. Recall instantly — no AI call needed.",
+    color: "green"
+  },
+  {
     icon: Globe,
     title: "Web-Based Control",
-    description: "Control from any device with a browser. No apps to install. Responsive mobile interface.",
+    description: "Control from any device with a browser. AI chat, channel sliders, and scene buttons. No apps to install.",
     color: "blue"
   },
   {
     icon: Zap,
-    title: "DMX Standard",
-    description: "Works with any DMX fixture. ENTTEC USB Pro support. Wireless DMX compatible.",
-    color: "purple"
+    title: "Fixture-Aware",
+    description: "Reads QLC+ fixture definitions (.qxf) for authoritative channel roles. Warm/cool/amber fixtures just work.",
+    color: "orange"
   },
   {
     icon: Wifi,
     title: "Auto-Discovery",
-    description: "mDNS hostname (lights.local). No IP address configuration. Instant network access.",
+    description: "mDNS hostname (lights.local). WiFi watchdog auto-recovers dropped connections. Zero config networking.",
     color: "pink"
   },
   {
     icon: Shield,
-    title: "Secure by Default",
-    description: "HTTPS with mkcert. Firewall configuration. SSH key authentication.",
-    color: "green"
-  },
-  {
-    icon: Database,
-    title: "Backup & Restore",
-    description: "One-command backups. Version control friendly. Disaster recovery ready.",
-    color: "orange"
-  },
-  {
-    icon: Code,
-    title: "Extensible",
-    description: "Custom fixture definitions. Scene libraries. API access.",
+    title: "Reliable Architecture",
+    description: "Single persistent WebSocket to QLC+. No socket leaks, no connection limits. Fades run in real-time.",
     color: "indigo"
   }
 ];
