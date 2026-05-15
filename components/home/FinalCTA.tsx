@@ -1,54 +1,61 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Github } from "lucide-react";
-import { trackEvent } from '@/lib/analytics';
+import { Github } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
+/**
+ * FinalCTA — the curtain call. Replaces the previous gradient-soup section
+ * (orange + blue + purple animated blobs) with a quiet editorial closing.
+ *
+ * No background gradients. No drop shadows. Two text-forward links.
+ * The single tungsten line is the only color note.
+ */
 export function FinalCTA() {
   return (
-    <section className="relative py-24 overflow-hidden bg-ink">
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-br from-orange-500/20 via-blue-500/20 to-purple-500/10" />
-      
-      {/* Animated elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
+    <section className="relative bg-ink py-32 overflow-hidden">
+      <div className="hairline" />
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-          Ready to Build Your
-          <br />
-          Lighting Controller?
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-24 pb-12 text-center">
+        <p className="eyebrow">Curtain call</p>
+
+        <h2
+          className="font-display text-paper mt-6 leading-tight"
+          style={{ fontSize: "var(--text-display-lg)" }}
+        >
+          Build the rig.
+          <span className="block italic text-amber-tungsten">
+            Run the room.
+          </span>
         </h2>
-        <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-          Get started in 10 minutes with our step-by-step guide
+
+        <p className="mt-10 text-lg text-paper/60 max-w-xl mx-auto leading-relaxed">
+          A Pi, an ENTTEC, and ten minutes. The MCP server is included.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-x-10 gap-y-4">
           <Link
             href="/quick-start"
-            onClick={() => trackEvent.clickGetStarted('final_cta')}
-            className="group bg-steel text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center"
+            onClick={() => trackEvent.clickGetStarted("final_cta")}
+            className="group inline-flex items-center gap-3 text-paper text-base font-mono uppercase tracking-widest border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
           >
-            Get Started Now
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Start the build
+            <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
           <a
             href="https://github.com/gfargo/lights-pi"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent.clickViewGitHub('final_cta')}
-            className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/20 transition border border-white/20"
+            onClick={() => trackEvent.clickViewGitHub("final_cta")}
+            className="group inline-flex items-center gap-3 text-paper/60 text-base font-mono uppercase tracking-widest hover:text-paper transition-colors"
           >
-            <Github className="w-5 h-5" />
-            <span>View on GitHub</span>
+            <Github className="w-4 h-4" aria-hidden />
+            View on GitHub
           </a>
         </div>
 
-        <p className="text-white/80 text-sm">
-          Free forever • Open source • No credit card required
+        <p className="mt-16 font-mono text-xs uppercase tracking-widest text-paper/30">
+          Free forever · MIT · No telemetry
         </p>
       </div>
     </section>

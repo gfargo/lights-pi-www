@@ -1,84 +1,131 @@
-import { Check, X } from "lucide-react";
+/**
+ * CostComparison — editorial two-column spread. Replaces the previous
+ * 7-row comparison table that read like a procurement spec. This version
+ * pits "the rig you build" against "the rig you buy" in display type, with
+ * three line items each, no checkmarks or gradient cells.
+ */
+
+interface Column {
+  label: string;
+  headline: string;
+  setup: string;
+  lineItems: { line: string; cost: string }[];
+  total: string;
+  caveat: string;
+  tone: "us" | "them";
+}
+
+const columns: Column[] = [
+  {
+    label: "The rig you build",
+    headline: "≈ $135",
+    setup: "10 minutes",
+    lineItems: [
+      { line: "Raspberry Pi 4 (4GB)", cost: "$55" },
+      { line: "ENTTEC DMX USB Pro", cost: "$70" },
+      { line: "MicroSD card · 32GB", cost: "$10" },
+    ],
+    total: "Unlimited fixtures · open source · no subscription",
+    caveat: "Bring your own DMX rig",
+    tone: "us",
+  },
+  {
+    label: "The rig you buy",
+    headline: "$500 – $5,000+",
+    setup: "Vendor onboarding",
+    lineItems: [
+      { line: "Console hardware", cost: "$500–3.5k" },
+      { line: "Cloud control plan", cost: "$15–80 / mo" },
+      { line: "Per-fixture license", cost: "$8 each" },
+    ],
+    total: "Locked to vendor · cloud-dependent · per-seat pricing",
+    caveat: "Pricing varies. Pricing always varies.",
+    tone: "them",
+  },
+];
 
 export function CostComparison() {
   return (
-    <section className="py-24 bg-ink">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Save Thousands, <span className="text-gradient">Keep the Quality</span>
+    <section className="relative bg-ink py-32 overflow-hidden">
+      <div className="hairline" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20">
+        {/* Section head */}
+        <div className="mb-20 max-w-4xl">
+          <p className="eyebrow">Two ways to fly it</p>
+          <h2
+            className="font-display text-paper mt-4"
+            style={{ fontSize: "var(--text-display-md)" }}
+          >
+            One you own.
+            <span className="block italic text-paper/40">
+              One you rent.
+            </span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Compare the costs: commercial controllers vs. open source
-          </p>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b-2 border-gray-700">
-                <th className="text-left py-4 px-6 font-bold text-white">Feature</th>
-                <th className="text-center py-4 px-6 font-bold text-gray-400">Commercial</th>
-                <th className="text-center py-4 px-6 font-bold bg-linear-to-r from-orange-500 to-blue-500 text-white rounded-t-xl">
-                  Lights Pi
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-700">
-              <tr className="hover:bg-ink transition">
-                <td className="py-4 px-6 font-medium text-white">Initial Cost</td>
-                <td className="py-4 px-6 text-center text-gray-400">$500-$5,000</td>
-                <td className="py-4 px-6 text-center font-bold text-green-600 bg-steel">$35-$150</td>
-              </tr>
-              <tr className="hover:bg-ink transition">
-                <td className="py-4 px-6 font-medium text-white">Monthly Fee</td>
-                <td className="py-4 px-6 text-center text-gray-400">$10-$50</td>
-                <td className="py-4 px-6 text-center font-bold text-green-600 bg-steel">$0</td>
-              </tr>
-              <tr className="hover:bg-ink transition">
-                <td className="py-4 px-6 font-medium text-white">Fixture Limit</td>
-                <td className="py-4 px-6 text-center text-gray-400">Varies</td>
-                <td className="py-4 px-6 text-center font-bold text-green-600 bg-steel">Unlimited</td>
-              </tr>
+        {/* Two-column editorial spread */}
+        <div className="grid lg:grid-cols-2 gap-px bg-rule">
+          {columns.map((col) => (
+            <div
+              key={col.label}
+              className="bg-ink p-10 lg:p-14"
+            >
+              <p
+                className={`eyebrow ${
+                  col.tone === "us" ? "text-amber-tungsten" : "text-paper/40"
+                }`}
+              >
+                {col.label}
+              </p>
 
-              <tr className="hover:bg-ink transition">
-                <td className="py-4 px-6 font-medium text-white">Customization</td>
-                <td className="py-4 px-6 text-center">
-                  <X className="w-5 h-5 text-red-500 mx-auto" />
-                </td>
-                <td className="py-4 px-6 text-center bg-steel">
-                  <Check className="w-5 h-5 text-green-600 mx-auto" />
-                </td>
-              </tr>
-              <tr className="hover:bg-ink transition">
-                <td className="py-4 px-6 font-medium text-white">Open Source</td>
-                <td className="py-4 px-6 text-center">
-                  <X className="w-5 h-5 text-red-500 mx-auto" />
-                </td>
-                <td className="py-4 px-6 text-center bg-steel">
-                  <Check className="w-5 h-5 text-green-600 mx-auto" />
-                </td>
-              </tr>
-              <tr className="hover:bg-ink transition">
-                <td className="py-4 px-6 font-medium text-white">Self-Hosted</td>
-                <td className="py-4 px-6 text-center">
-                  <X className="w-5 h-5 text-red-500 mx-auto" />
-                </td>
-                <td className="py-4 px-6 text-center bg-steel">
-                  <Check className="w-5 h-5 text-green-600 mx-auto" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              <div
+                className={`font-display mt-6 leading-none ${
+                  col.tone === "us" ? "text-paper" : "text-paper/40"
+                }`}
+                style={{
+                  fontSize: "clamp(3.5rem, 8vw, 6rem)",
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                {col.headline}
+              </div>
+              <p className="font-mono text-xs uppercase tracking-widest text-paper/40 mt-4">
+                Setup · {col.setup}
+              </p>
 
-        <div className="mt-12 text-center">
-          <div className="inline-block bg-linear-to-r from-orange-500/20 to-blue-500/20 rounded-2xl p-8 border border-orange-500/50">
-            <p className="text-3xl font-bold text-white mb-2">
-              Save up to <span className="text-gradient">$4,850+</span>
-            </p>
-            <p className="text-gray-400">in the first year alone</p>
-          </div>
+              <dl className="mt-12 space-y-3">
+                {col.lineItems.map((item, i) => (
+                  <div
+                    key={i}
+                    className="grid grid-cols-[1fr_auto] gap-4 items-baseline pb-3 border-b border-rule"
+                  >
+                    <dt
+                      className={`font-sans ${
+                        col.tone === "us" ? "text-paper/85" : "text-paper/50"
+                      }`}
+                    >
+                      {item.line}
+                    </dt>
+                    <dd className="font-mono text-sm tabular-nums text-paper/60">
+                      {item.cost}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <p
+                className={`mt-10 font-display italic text-lg leading-snug ${
+                  col.tone === "us" ? "text-paper" : "text-paper/40"
+                }`}
+              >
+                {col.total}
+              </p>
+              <p className="font-mono text-xs uppercase tracking-widest text-paper/30 mt-3">
+                {col.caveat}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
