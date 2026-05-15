@@ -71,6 +71,27 @@ export default function FAQPage() {
       ]
     },
     {
+      category: "LLM / MCP",
+      questions: [
+        {
+          q: "What is the MCP server?",
+          a: "It's a built-in Model Context Protocol endpoint that exposes the rig to any MCP-capable LLM client — Claude Desktop, ChatGPT, Cursor, custom agents. The agent can list fixtures, activate scenes, adjust color/brightness, fade, and even generate new scenes, all through structured tool calls instead of REST integration code."
+        },
+        {
+          q: "How do I connect Claude Desktop?",
+          a: "Add { \"mcpServers\": { \"qlc-lights\": { \"url\": \"http://lights.local:5001/mcp\" } } } to your Claude Desktop MCP config. Restart, and the lighting tools appear in the tool picker. Same JSON shape works for Cursor and most other MCP clients."
+        },
+        {
+          q: "Does this require an internet connection?",
+          a: "No. The MCP server runs entirely on the Pi. Your LLM client (Claude Desktop, etc.) may make its own model calls to a cloud provider, but the lighting commands themselves never leave your network."
+        },
+        {
+          q: "Is the MCP endpoint authenticated?",
+          a: "Not by default — it's intended for LAN use, behind your existing firewall. Bearer-token auth scaffolding is plumbed through the systemd unit (MCP_BEARER_TOKEN env var) and ready to wire if you expose the endpoint off-LAN through nginx/stunnel TLS."
+        }
+      ]
+    },
+    {
       category: "Troubleshooting",
       questions: [
         {
