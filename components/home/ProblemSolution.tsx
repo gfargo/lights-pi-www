@@ -3,12 +3,12 @@ import { FadeIn } from '../animations/FadeIn';
 
 export function ProblemSolution() {
   return (
-    <section className="py-24 bg-gray-800">
+    <section className="py-24 bg-ink">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* The Problem */}
           <FadeIn delay={0.1} direction="left">
-            <div className="bg-gray-900 rounded-2xl p-8 border border-red-900/50">
+            <div className="bg-steel rounded-2xl p-8 border border-red-900/50">
               <div className="w-12 h-12 bg-red-900/50 rounded-lg flex items-center justify-center mb-6">
                 <XCircle className="w-6 h-6 text-red-500" />
               </div>
@@ -36,7 +36,7 @@ export function ProblemSolution() {
 
           {/* The Solution */}
           <FadeIn delay={0.2}>
-            <div className="bg-gray-900 rounded-2xl p-8 border border-blue-900/50">
+            <div className="bg-steel rounded-2xl p-8 border border-blue-900/50">
               <div className="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-6">
                 <CheckCircle className="w-6 h-6 text-blue-400" />
               </div>

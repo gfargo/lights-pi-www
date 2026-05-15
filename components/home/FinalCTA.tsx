@@ -6,7 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 
 export function FinalCTA() {
   return (
-    <section className="relative py-24 overflow-hidden bg-gray-950">
+    <section className="relative py-24 overflow-hidden bg-ink">
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-linear-to-br from-orange-500/20 via-blue-500/20 to-purple-500/10" />
       
@@ -30,7 +30,7 @@ export function FinalCTA() {
           <Link
             href="/quick-start"
             onClick={() => trackEvent.clickGetStarted('final_cta')}
-            className="group bg-gray-900 text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center"
+            className="group bg-steel text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center"
           >
             Get Started Now
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Github, Menu, X } from "lucide-react";
-import { AnimatePresence, motion } from 'framer-motion';
 import { useFlag } from "@/components/flags/flags-provider";
 import { trackEvent } from "@/lib/analytics";
 
@@ -14,28 +13,22 @@ export function Navigation() {
   const showShowcase = useFlag("enable-showcase");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { href: "/quick-start", label: "Quick Start" },
+    { href: "/quick-start", label: "Start" },
     { href: "/hardware", label: "Hardware" },
-    ...(showDemo ? [{ href: "/demo", label: "Demo" }] : []),
+    ...(showDemo ? [{ href: "/demo", label: "Playground" }] : []),
     ...(showShowcase ? [{ href: "/showcase", label: "Showcase" }] : []),
     { href: "/docs", label: "Docs" },
     { href: "/blog", label: "Blog" },
@@ -46,25 +39,39 @@ export function Navigation() {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-gray-800"
+            ? "bg-ink/85 backdrop-blur-xl border-b border-rule"
             : "bg-transparent"
         }`}
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2 z-50" aria-label="Lights Pi home">
-              <div className="w-8 h-8 bg-linear-to-br from-orange-500 to-blue-500 rounded-lg" aria-hidden="true" />
-              <span className="font-bold text-xl text-white">Lights Pi</span>
+            <Link
+              href="/"
+              className="flex items-center gap-3 z-50"
+              aria-label="Lights Pi home"
+            >
+              {/* Wordmark — small filament dot + monospaced lockup */}
+              <span
+                aria-hidden
+                className="filament inline-block w-2 h-2 rounded-full bg-amber-tungsten"
+              />
+              <span className="font-mono uppercase tracking-widest text-paper text-sm">
+                lights-pi
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Primary navigation">
+            <div
+              className="hidden md:flex items-center gap-8"
+              role="navigation"
+              aria-label="Primary navigation"
+            >
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-300 hover:text-orange-500 transition"
+                  className="font-mono uppercase tracking-widest text-xs text-paper/60 hover:text-paper transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -72,30 +79,30 @@ export function Navigation() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center gap-6">
               <a
                 href="https://github.com/gfargo/lights-pi"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackEvent.clickViewGitHub('navigation')}
-                className="text-gray-300 hover:text-orange-500 transition"
+                onClick={() => trackEvent.clickViewGitHub("navigation")}
+                className="text-paper/60 hover:text-paper transition-colors"
                 aria-label="View Lights Pi on GitHub"
               >
-                <Github className="w-5 h-5" aria-hidden="true" />
+                <Github className="w-4 h-4" aria-hidden="true" />
               </a>
               <Link
                 href="/quick-start"
-                onClick={() => trackEvent.clickGetStarted('navigation')}
-                className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-6 py-2 rounded-lg hover:shadow-lg transition"
+                onClick={() => trackEvent.clickGetStarted("navigation")}
+                className="font-mono uppercase tracking-widest text-xs text-amber-tungsten border-b border-amber-tungsten pb-0.5 hover:text-paper hover:border-paper transition-colors"
               >
-                Get Started
+                Get started →
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden z-50 p-2 text-gray-300 hover:text-orange-500 transition"
+              className="md:hidden z-50 p-2 text-paper/80 hover:text-amber-tungsten transition-colors"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -110,93 +117,74 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden"
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation menu"
-          >
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
-              aria-hidden="true"
-            />
+      {/* Mobile Menu — CSS-only enter/exit, no framer-motion */}
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
+        aria-hidden={!isMobileMenuOpen}
+        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-200 ${
+          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Backdrop */}
+        <button
+          aria-label="Close menu"
+          tabIndex={isMobileMenuOpen ? 0 : -1}
+          className="absolute inset-0 bg-ink/85 backdrop-blur-md"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
 
-            {/* Menu Panel */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-gray-900 shadow-2xl border-l border-gray-800"
+        {/* Panel — slides in from right */}
+        <div
+          className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-ink border-l border-rule transition-transform duration-300 ease-out ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col h-full pt-24 px-8 pb-8">
+            <nav
+              className="flex-1 flex flex-col gap-1"
+              aria-label="Mobile navigation"
             >
-              <div className="flex flex-col h-full pt-20 px-6 pb-6">
-                {/* Navigation Links */}
-                <nav className="flex-1 space-y-1" aria-label="Mobile navigation">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-3 text-lg font-medium text-gray-300 hover:text-orange-500 hover:bg-gray-800 rounded-lg transition"
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </nav>
-
-                {/* Mobile CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="space-y-4 pt-6 border-t border-gray-800"
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-3xl text-paper hover:text-amber-tungsten transition-colors py-3"
                 >
-                  <a
-                    href="https://github.com/gfargo/lights-pi"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent.clickViewGitHub('mobile_navigation')}
-                    className="flex items-center justify-center space-x-2 px-6 py-3 text-gray-300 border border-gray-700 rounded-lg hover:bg-gray-800 transition"
-                    aria-label="View Lights Pi on GitHub"
-                  >
-                    <Github className="w-5 h-5" aria-hidden="true" />
-                    <span>View on GitHub</span>
-                  </a>
-                  <Link
-                    href="/quick-start"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      trackEvent.clickGetStarted('mobile_navigation');
-                    }}
-                    className="block text-center bg-linear-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-lg hover:shadow-lg transition"
-                  >
-                    Get Started
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="pt-8 hairline flex flex-col gap-4">
+              <a
+                href="https://github.com/gfargo/lights-pi"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent.clickViewGitHub("mobile_navigation")}
+                className="flex items-center gap-3 font-mono uppercase tracking-widest text-xs text-paper/60 hover:text-paper transition-colors"
+                aria-label="View Lights Pi on GitHub"
+              >
+                <Github className="w-4 h-4" aria-hidden="true" />
+                <span>View on GitHub</span>
+              </a>
+              <Link
+                href="/quick-start"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  trackEvent.clickGetStarted("mobile_navigation");
+                }}
+                className="font-mono uppercase tracking-widest text-xs text-amber-tungsten border-b border-amber-tungsten pb-1 self-start hover:text-paper hover:border-paper transition-colors"
+              >
+                Get started →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

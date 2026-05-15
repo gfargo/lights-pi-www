@@ -52,7 +52,7 @@ export function UseCases() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-24 bg-gray-950">
+    <section className="py-24 bg-ink">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -73,8 +73,8 @@ export function UseCases() {
                 onClick={() => setActiveIndex(index)}
                 className={`cursor-pointer rounded-2xl p-8 border-2 transition-all duration-300 ${
                   isActive
-                    ? "border-blue-500 bg-gray-900 shadow-lg scale-105"
-                    : "border-gray-700 bg-gray-900 hover:border-gray-300 hover:shadow-md"
+                    ? "border-blue-500 bg-steel shadow-lg scale-105"
+                    : "border-gray-700 bg-steel hover:border-gray-300 hover:shadow-md"
                 }`}
               >
                 <Icon className={`w-10 h-10 mb-4 ${isActive ? "text-orange-500" : "text-gray-400"}`} />

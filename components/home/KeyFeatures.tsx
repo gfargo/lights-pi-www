@@ -47,17 +47,17 @@ const features = [
 ];
 
 const colorClasses: Record<string, { bg: string; icon: string; border: string }> = {
-  blue: { bg: "bg-gray-900", icon: "text-blue-400", border: "border-blue-900/50" },
-  purple: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-gray-800" },
-  pink: { bg: "bg-gray-900", icon: "text-orange-400", border: "border-gray-800" },
-  green: { bg: "bg-gray-900", icon: "text-green-400", border: "border-green-900/50" },
-  orange: { bg: "bg-gray-900", icon: "text-orange-500", border: "border-gray-800" },
-  indigo: { bg: "bg-gray-900", icon: "text-blue-400", border: "border-gray-800" }
+  blue: { bg: "bg-steel", icon: "text-blue-400", border: "border-blue-900/50" },
+  purple: { bg: "bg-steel", icon: "text-orange-500", border: "border-gray-800" },
+  pink: { bg: "bg-steel", icon: "text-orange-400", border: "border-gray-800" },
+  green: { bg: "bg-steel", icon: "text-green-400", border: "border-green-900/50" },
+  orange: { bg: "bg-steel", icon: "text-orange-500", border: "border-gray-800" },
+  indigo: { bg: "bg-steel", icon: "text-blue-400", border: "border-gray-800" }
 };
 
 export function KeyFeatures() {
   return (
-    <section className="py-24 bg-linear-to-b from-gray-800 to-gray-900">
+    <section className="py-24 bg-linear-to-b from-steel to-ink">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">

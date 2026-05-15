@@ -1,90 +1,132 @@
 "use client";
 
 import Link from "next/link";
-import { Play, Github, Star } from "lucide-react";
-import { FadeIn } from '../animations/FadeIn';
-import { trackEvent } from '@/lib/analytics';
-import { InteractiveLightingRig } from './InteractiveLightingRig';
+import { Github, Star } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
+import { InteractiveLightingRig } from "./InteractiveLightingRig";
 
-export function Hero() {
+interface HeroProps {
+  /** Real-time GitHub star count, fetched server-side. */
+  stars: number;
+}
+
+function formatStars(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(n >= 10_000 ? 0 : 1)}k`;
+  return String(n);
+}
+
+export function Hero({ stars }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Interactive 3D lighting rig background */}
-      <InteractiveLightingRig />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-ink">
+      {/* 3D fixture rig — will be replaced with hand-coded SVG beams in Phase 2.
+          For now it stays, but composition + opacity tuned so it acts as
+          backdrop rather than competing with the editorial type. */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <InteractiveLightingRig />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        <FadeIn delay={0.1} direction="down">
-          <div className="mb-8 inline-flex items-center space-x-2 bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-gray-700">
-            <Star className="w-4 h-4 text-orange-500 fill-orange-500" />
-            <span className="text-sm text-gray-300">Professional DMX Control • Pi Powered • MCP-Ready for LLM Agents</span>
-          </div>
-        </FadeIn>
+      {/* Grain texture overlay */}
+      <div className="grain absolute inset-0" />
 
-        <FadeIn delay={0.2}>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
-            QLC+ Lighting Controller
-            <br />
-            <span className="text-gradient">for the Raspberry Pi</span>
-          </h1>
-        </FadeIn>
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 w-full">
+        {/* Mono eyebrow — sets the editorial register immediately */}
+        <p
+          className="eyebrow load-reveal"
+          style={{ "--reveal-delay": "0.05s" } as React.CSSProperties}
+        >
+          Riversway · Lights-Pi · v2.2.0
+        </p>
 
-        <FadeIn delay={0.3}>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Transform your Raspberry Pi into a professional lighting controller. Control DMX fixtures from any device on your network with QLC+&apos;s powerful web interface — or wire it directly into Claude, ChatGPT, or any MCP-capable LLM agent.
-          </p>
-        </FadeIn>
+        {/* Editorial display headline */}
+        <h1
+          className="font-display text-paper mt-8 max-w-5xl"
+          style={{
+            fontSize: "var(--text-display-xl)",
+            "--reveal-delay": "0.15s",
+          } as React.CSSProperties}
+        >
+          <span className="load-reveal block">Stage lights,</span>
+          <span
+            className="load-reveal block"
+            style={{ "--reveal-delay": "0.3s" } as React.CSSProperties}
+          >
+            on the network.
+          </span>
+          <span
+            className="load-reveal block italic"
+            style={{
+              "--reveal-delay": "0.5s",
+              color: "var(--color-amber-tungsten)",
+            } as React.CSSProperties}
+          >
+            Now they take instructions.
+          </span>
+        </h1>
 
-        <FadeIn delay={0.4}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link
-              href="/quick-start"
-              onClick={() => trackEvent.clickGetStarted('hero')}
-              className="group bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+        {/* Subhead — refined, single-purpose. MCP angle leads. */}
+        <p
+          className="font-sans text-lg md:text-xl text-paper/70 mt-10 max-w-2xl leading-relaxed load-reveal"
+          style={{ "--reveal-delay": "0.7s" } as React.CSSProperties}
+        >
+          A headless QLC+ controller for the Raspberry Pi.
+          Drive your DMX rig from any browser on the network —
+          or hand the keys to{" "}
+          <span className="text-paper">Claude, ChatGPT, or any MCP-capable agent</span>{" "}
+          over the built-in Streamable HTTP endpoint.
+        </p>
+
+        {/* CTAs — text-forward, two flat links rather than two competing buttons */}
+        <div
+          className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-x-10 gap-y-4 load-reveal"
+          style={{ "--reveal-delay": "0.85s" } as React.CSSProperties}
+        >
+          <Link
+            href="/quick-start"
+            onClick={() => trackEvent.clickGetStarted("hero")}
+            className="group inline-flex items-center gap-3 text-paper text-base font-mono uppercase tracking-widest border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
+          >
+            Start here
+            <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+          <Link
+            href="/demo"
+            onClick={() => trackEvent.demoInteraction("hero_demo_click")}
+            className="group inline-flex items-center gap-3 text-paper/60 text-base font-mono uppercase tracking-widest hover:text-arc-cyan transition-colors"
+          >
+            <span className="arc inline-block w-2 h-2 rounded-full bg-arc-cyan" />
+            Try the playground
+          </Link>
+        </div>
+
+        {/* Real GitHub stars — tabular mono number, no fake stats */}
+        <div
+          className="mt-20 hairline pt-6 max-w-2xl flex items-center justify-between gap-6 load-reveal"
+          style={{ "--reveal-delay": "1s" } as React.CSSProperties}
+        >
+          <div className="flex items-center gap-3 text-paper/50">
+            <Github className="w-4 h-4" aria-hidden />
+            <a
+              href="https://github.com/gfargo/lights-pi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-sm uppercase tracking-widest hover:text-paper transition-colors"
             >
-              Get Started in 10 Minutes
-              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
-            </Link>
-            <Link
-              href="/demo"
-              onClick={() => trackEvent.demoInteraction('hero_demo_click')}
-              className="flex items-center space-x-2 bg-gray-800 text-gray-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-700 transition border border-gray-700"
-            >
-              <Play className="w-5 h-5" />
-              <span>Try Demo</span>
-            </Link>
+              gfargo / lights-pi
+            </a>
           </div>
-        </FadeIn>
+          <div className="flex items-center gap-2 text-paper">
+            <Star className="w-3.5 h-3.5 text-amber-tungsten fill-amber-tungsten" aria-hidden />
+            <span className="font-mono text-sm tabular-nums">{formatStars(stars)}</span>
+            <span className="font-mono text-xs uppercase tracking-widest text-paper/40">stars</span>
+          </div>
+        </div>
+      </div>
 
-        <FadeIn delay={0.5}>
-          <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
-            <div className="flex items-center space-x-2">
-              <Github className="w-5 h-5" />
-              <span>1.2k+ stars</span>
-            </div>
-            <div className="w-1 h-4 bg-gray-700" />
-            <span>Open Source • Self-Hosted • No Subscriptions</span>
-          </div>
-        </FadeIn>
-
-        {/* Demo preview placeholder */}
-        <FadeIn delay={0.6}>
-          <div className="mt-16 relative">
-            <div className="relative mx-auto max-w-5xl rounded-2xl shadow-2xl overflow-hidden border-8 border-gray-800">
-              <div className="aspect-video bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="inline-flex space-x-4 mb-4">
-                    <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse" />
-                    <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse delay-200" />
-                    <div className="w-16 h-16 rounded-full bg-gray-9000 animate-pulse delay-500" />
-                  </div>
-                  <p className="text-gray-400">Interactive demo coming soon</p>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-linear-to-br from-orange-500 to-blue-500 rounded-full blur-3xl opacity-30" />
-            <div className="absolute -top-4 -left-4 w-32 h-32 bg-linear-to-br from-blue-500 to-green-500 rounded-full blur-3xl opacity-30" />
-          </div>
-        </FadeIn>
+      {/* Single subtle ambient pulse, bottom-right corner — the only motion that
+          continues post-load. Echoes the cyan playground link above. */}
+      <div className="absolute bottom-10 right-10 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-paper/40 pointer-events-none">
+        <span className="filament inline-block w-1.5 h-1.5 rounded-full bg-amber-tungsten" />
+        live
       </div>
     </section>
   );

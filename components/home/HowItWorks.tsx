@@ -33,7 +33,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24 bg-linear-to-b from-gray-900 to-gray-800">
+    <section className="py-24 bg-linear-to-b from-ink to-steel">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -53,7 +53,7 @@ export function HowItWorks() {
               const Icon = step.icon;
               return (
                 <div key={index} className="relative">
-                  <div className="bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="bg-steel rounded-2xl p-8 shadow-lg border border-gray-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                     <div className="flex items-center justify-center w-16 h-16 bg-linear-to-br from-orange-500 to-blue-500 rounded-2xl mb-6 mx-auto">
                       <Icon className="w-8 h-8 text-white" />
                     </div>

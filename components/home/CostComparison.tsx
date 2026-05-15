@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 
 export function CostComparison() {
   return (
-    <section className="py-24 bg-gray-950">
+    <section className="py-24 bg-ink">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -25,46 +25,46 @@ export function CostComparison() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
-              <tr className="hover:bg-gray-800 transition">
+              <tr className="hover:bg-ink transition">
                 <td className="py-4 px-6 font-medium text-white">Initial Cost</td>
                 <td className="py-4 px-6 text-center text-gray-400">$500-$5,000</td>
-                <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">$35-$150</td>
+                <td className="py-4 px-6 text-center font-bold text-green-600 bg-steel">$35-$150</td>
               </tr>
-              <tr className="hover:bg-gray-800 transition">
+              <tr className="hover:bg-ink transition">
                 <td className="py-4 px-6 font-medium text-white">Monthly Fee</td>
                 <td className="py-4 px-6 text-center text-gray-400">$10-$50</td>
-                <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">$0</td>
+                <td className="py-4 px-6 text-center font-bold text-green-600 bg-steel">$0</td>
               </tr>
-              <tr className="hover:bg-gray-800 transition">
+              <tr className="hover:bg-ink transition">
                 <td className="py-4 px-6 font-medium text-white">Fixture Limit</td>
                 <td className="py-4 px-6 text-center text-gray-400">Varies</td>
-                <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">Unlimited</td>
+                <td className="py-4 px-6 text-center font-bold text-green-600 bg-steel">Unlimited</td>
               </tr>
 
-              <tr className="hover:bg-gray-800 transition">
+              <tr className="hover:bg-ink transition">
                 <td className="py-4 px-6 font-medium text-white">Customization</td>
                 <td className="py-4 px-6 text-center">
                   <X className="w-5 h-5 text-red-500 mx-auto" />
                 </td>
-                <td className="py-4 px-6 text-center bg-gray-900">
+                <td className="py-4 px-6 text-center bg-steel">
                   <Check className="w-5 h-5 text-green-600 mx-auto" />
                 </td>
               </tr>
-              <tr className="hover:bg-gray-800 transition">
+              <tr className="hover:bg-ink transition">
                 <td className="py-4 px-6 font-medium text-white">Open Source</td>
                 <td className="py-4 px-6 text-center">
                   <X className="w-5 h-5 text-red-500 mx-auto" />
                 </td>
-                <td className="py-4 px-6 text-center bg-gray-900">
+                <td className="py-4 px-6 text-center bg-steel">
                   <Check className="w-5 h-5 text-green-600 mx-auto" />
                 </td>
               </tr>
-              <tr className="hover:bg-gray-800 transition">
+              <tr className="hover:bg-ink transition">
                 <td className="py-4 px-6 font-medium text-white">Self-Hosted</td>
                 <td className="py-4 px-6 text-center">
                   <X className="w-5 h-5 text-red-500 mx-auto" />
                 </td>
-                <td className="py-4 px-6 text-center bg-gray-900">
+                <td className="py-4 px-6 text-center bg-steel">
                   <Check className="w-5 h-5 text-green-600 mx-auto" />
                 </td>
               </tr>

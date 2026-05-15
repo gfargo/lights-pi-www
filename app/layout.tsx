@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -9,7 +9,27 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FlagsProvider } from "@/components/flags/flags-provider";
 import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
 
-const inter = Inter({ subsets: ["latin"] });
+// Editorial-theatrical type system.
+// Fraunces (variable, with optical-size axis) for display.
+// Geist Sans for body. Geist Mono for technical / cue-sheet typography.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lights.griffen.codes'),
@@ -51,16 +71,19 @@ export default async function RootLayout({
   const clientFlags = pickClientFlags(serverFlags);
 
   return (
-    <html lang="en" className="scroll-smooth dark">
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable}`}
+    >
       <head>
         <StructuredData />
       </head>
-      <body className={`${inter.className} bg-gray-900 text-white`}>
+      <body className="bg-ink text-paper font-sans antialiased">
         <FlagsProvider flags={clientFlags}>
           {/* Skip to content link for keyboard navigation */}
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-orange-500 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-amber-tungsten focus:text-ink focus:shadow-lg focus:outline-none"
           >
             Skip to main content
           </a>
