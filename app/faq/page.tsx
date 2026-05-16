@@ -122,6 +122,10 @@ export default function FAQPage() {
           a: "Yes — create_cue_list(name, cues, description?) builds an ordered list of cues with absolute timestamps. Each cue has an `at` field (\"0:32\", \"1:45.500\", \"32s\", or raw at_ms) and an action — a scene name, chase name, or any execute_lighting_action call. Press go_cue_list(name) at the moment your audio starts and the server fires every cue on schedule. This is the QLab / ETC Ion 'cue stack' model. Sync-mode only for v1: run your audio in OBS / Logic / Premiere / your phone — whatever — and trigger GO at the same moment. stop_cue_list(name) halts; get_active_cue_lists() shows what's currently running with elapsed time."
         },
         {
+          q: "Does the web UI expose all 48 MCP tools, or just the AI chat?",
+          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover AI Control (chat + scenes + quick chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), and Diagnostics (Pi health cards, test_dmx button, log tail). The Groups drawer is now interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
+        },
+        {
           q: "Can the agent help me debug when something's wrong?",
           a: "Yes — three diagnostics tools ship with the MCP server: test_dmx runs a known-good R→G→B sweep so you can verify the DMX signal actually reaches the fixtures; get_logs pulls recent lines from any of the systemd journals (qlcplus-web, lighting-control, lighting-mcp, nginx); and get_system_info returns Pi-level health (CPU temp, load, memory, disk, uptime, USB devices, service status). Tell the agent 'why aren't the lights responding?' and it can call all three to triage."
         }
