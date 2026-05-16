@@ -66,13 +66,27 @@ const cues: Cue[] = [
   },
   {
     no: "007",
+    act: "II",
+    direction: "Strobe accent — back lights at 12Hz.",
+    target: 'strobe(rate: 12, groups: ["back-lights"])',
+    duration: "00 / 00 / 30",
+  },
+  {
+    no: "008",
+    act: "II",
+    direction: "Stop strobe.",
+    target: 'strobe(rate: "off", groups: ["back-lights"])',
+    duration: "—",
+  },
+  {
+    no: "009",
     act: "III",
     direction: "Emergency — kill everything, instantly.",
     target: 'blackout()',
     duration: "00 / 00 / 00",
   },
   {
-    no: "008",
+    no: "010",
     act: "III",
     direction: "Fade to black. House out.",
     target: 'fade(target: "0", duration: "8")',

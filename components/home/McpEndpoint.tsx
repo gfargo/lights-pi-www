@@ -28,6 +28,7 @@ const MCP_TOOLS = [
   "adjust_color",
   "color_temperature",
   "palette",
+  "strobe",
   "fade",
   "generate_scene",
   "set_channel",

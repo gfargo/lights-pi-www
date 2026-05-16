@@ -110,6 +110,10 @@ export default function FAQPage() {
           a: "Yes — the palette tool does exactly that. palette({ \"key-lights\": 3200, \"fill-lights\": 5600, \"back-lights\": \"magenta\" }) assigns different colors or Kelvin values to different groups in a single round trip. Each value can be a color preset name, a Kelvin number, or an explicit dict with intensity. Use this any time you want to 'set the room' rather than tweak a single light."
         },
         {
+          q: "How does strobe work?",
+          a: "strobe(rate, intensity?, groups?) is a first-class tool — no need to know which channel offset the strobe is on for each fixture model. rate is Hz (0–20, or 'off' to stop). 5–8 Hz is typical party strobe, 12–15 Hz is aggressive accent, 18–20 Hz is pulse-machine territory. Fixtures without a dedicated strobe channel get listed in the response under 'skipped' rather than failing silently."
+        },
+        {
           q: "Can the agent help me debug when something's wrong?",
           a: "Yes — three diagnostics tools ship with the MCP server: test_dmx runs a known-good R→G→B sweep so you can verify the DMX signal actually reaches the fixtures; get_logs pulls recent lines from any of the systemd journals (qlcplus-web, lighting-control, lighting-mcp, nginx); and get_system_info returns Pi-level health (CPU temp, load, memory, disk, uptime, USB devices, service status). Tell the agent 'why aren't the lights responding?' and it can call all three to triage."
         }
