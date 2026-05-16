@@ -128,7 +128,7 @@ export default function DemoPage() {
             {/* Viewport label */}
             <div className="absolute top-4 left-4 font-mono text-xs uppercase tracking-widest text-paper/40 flex items-center gap-3">
               <span className="filament inline-block w-1.5 h-1.5 rounded-full bg-amber-tungsten" />
-              riversway · rehearsal
+              rehearsal · live
             </div>
             <div className="absolute bottom-4 left-4 font-mono text-xs text-paper/30">
               Click a fixture to select

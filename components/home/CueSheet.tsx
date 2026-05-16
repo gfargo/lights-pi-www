@@ -120,7 +120,6 @@ export function CueSheet({ version }: CueSheetProps) {
             </h2>
           </div>
           <div className="hidden md:block text-right font-mono text-xs text-paper-muted">
-            <div>Riversway Stage</div>
             <div>Production: lights-pi</div>
             <div>{version} · Run 1</div>
           </div>

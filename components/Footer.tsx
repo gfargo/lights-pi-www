@@ -28,7 +28,7 @@ export function Footer({ version }: FooterProps) {
             </span>
           </div>
           <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-            {version} · Riversway
+            {version}
           </p>
         </div>
 

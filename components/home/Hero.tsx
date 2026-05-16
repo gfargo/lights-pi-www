@@ -46,7 +46,7 @@ export function Hero({ stars, version }: HeroProps) {
           className="eyebrow load-reveal"
           style={{ "--reveal-delay": "0.4s" } as React.CSSProperties}
         >
-          Riversway · Lights-Pi · {version}
+          Lights-Pi · {version}
         </p>
 
         {/* Editorial display headline — staggered to land with the beams */}
