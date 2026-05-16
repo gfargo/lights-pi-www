@@ -48,6 +48,13 @@ const MCP_TOOLS = [
   "delete_scene",
   "rename_scene",
   "duplicate_scene",
+  // chase management
+  "list_chases",
+  "describe_chase",
+  "create_chase",
+  "delete_chase",
+  "start_chase",
+  "stop_chase",
   // diagnostics
   "test_dmx",
   "get_logs",

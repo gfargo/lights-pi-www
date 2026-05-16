@@ -56,14 +56,14 @@ const transcript: Turn[] = [
   },
   {
     speaker: "user",
-    content: "Now slow fade to black over eight seconds.",
+    content: "Build a 30-second sunset transition from these four scenes and loop it.",
   },
   {
     speaker: "agent",
-    content: "Fading all brightness channels.",
-    call: `fade(target: "0", duration: "8")`,
-    result: "12 channels easing",
-    latency: "ack 9ms · runtime 8.0s",
+    content: "Creating the chase, then starting playback.",
+    call: `batch_action([\n  create_chase(\n    "Sunset",\n    steps: ["Daylight", "Warm", "Amber", "Off"],\n    hold_ms: 7500,\n    fade_in_ms: 1500,\n    run_order: "Loop"\n  ),\n  start_chase("Sunset")\n])`,
+    result: "Chase 18 created · running · 4 steps × 9s",
+    latency: "73ms",
   },
 ];
 

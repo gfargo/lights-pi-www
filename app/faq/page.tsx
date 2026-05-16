@@ -114,6 +114,10 @@ export default function FAQPage() {
           a: "strobe(rate, intensity?, groups?) is a first-class tool — no need to know which channel offset the strobe is on for each fixture model. rate is Hz (0–20, or 'off' to stop). 5–8 Hz is typical party strobe, 12–15 Hz is aggressive accent, 18–20 Hz is pulse-machine territory. Fixtures without a dedicated strobe channel get listed in the response under 'skipped' rather than failing silently."
         },
         {
+          q: "Can I build time-based sequences (chases)?",
+          a: "Yes — create_chase(name, steps, fade_in_ms?, hold_ms?, fade_out_ms?, direction?, run_order?) builds an ordered chase referencing existing saved scenes. Each step can be a scene name string, scene ID, or a dict with per-step timing overrides. Run order can be Loop / SingleShot / PingPong / Random; direction Forward / Backward. Once created, start_chase(name) plays it via QLC+'s native chase engine — loops forever or runs once depending on run_order. stop_chase(name) halts and the fixtures hold their last step. Use case: 'build me a 30-second sunset transition from Daylight → Warm → Amber → Off and loop it.'"
+        },
+        {
           q: "Can the agent help me debug when something's wrong?",
           a: "Yes — three diagnostics tools ship with the MCP server: test_dmx runs a known-good R→G→B sweep so you can verify the DMX signal actually reaches the fixtures; get_logs pulls recent lines from any of the systemd journals (qlcplus-web, lighting-control, lighting-mcp, nginx); and get_system_info returns Pi-level health (CPU temp, load, memory, disk, uptime, USB devices, service status). Tell the agent 'why aren't the lights responding?' and it can call all three to triage."
         }
