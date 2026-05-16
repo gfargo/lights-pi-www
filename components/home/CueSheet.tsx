@@ -144,8 +144,18 @@ export function CueSheet({ version }: CueSheetProps) {
           <div className="hidden md:block text-right font-mono text-xs text-paper-muted">
             <div>Production: lights-pi</div>
             <div>{version} · Run 1</div>
+            <div className="text-amber-tungsten/80 mt-1">create_cue_list(...)</div>
           </div>
         </header>
+
+        {/* Subtitle — name the tool that builds this kind of sheet */}
+        <p className="mt-6 font-display italic text-paper-muted text-base md:text-lg max-w-2xl leading-snug">
+          The whole sheet below is one MCP call —
+          <span className="font-mono not-italic text-ink/70"> create_cue_list </span>
+          with cues at absolute timestamps. Press
+          <span className="font-mono not-italic text-amber-tungsten"> go_cue_list </span>
+          and the rig fires every line on cue.
+        </p>
 
         {/* Sheet body — tabular cue list */}
         <div className="mt-10 reveal">

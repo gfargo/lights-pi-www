@@ -56,14 +56,25 @@ const transcript: Turn[] = [
   },
   {
     speaker: "user",
-    content: "Build a 30-second sunset transition from these four scenes and loop it.",
+    content: "Build me a cue list for a 30-second intro: open on daylight, sunset transition at eight seconds, strobe accent at twenty-two, fade out at twenty-eight.",
   },
   {
     speaker: "agent",
-    content: "Creating the chase, then starting playback.",
-    call: `batch_action([\n  create_chase(\n    "Sunset",\n    steps: ["Daylight", "Warm", "Amber", "Off"],\n    hold_ms: 7500,\n    fade_in_ms: 1500,\n    run_order: "Loop"\n  ),\n  start_chase("Sunset")\n])`,
-    result: "Chase 18 created · running · 4 steps × 9s",
-    latency: "73ms",
+    content: "Building the show. Press GO when your audio rolls.",
+    call: `create_cue_list("Intro", cues: [\n  { at: "0:00",  scene:  "Daylight" },\n  { at: "0:08",  chase:  "Sunset" },\n  { at: "0:22",  action: "strobe", parameters: { rate: 8 } },\n  { at: "0:24",  action: "strobe", parameters: { rate: "off" } },\n  { at: "0:28",  action: "fade",   parameters: { target: "0", duration: "2" } },\n  { at: "0:30",  action: "blackout" }\n])`,
+    result: "Cue list 3 created · 6 cues · 0:30.000 total",
+    latency: "47ms",
+  },
+  {
+    speaker: "user",
+    content: "GO.",
+  },
+  {
+    speaker: "agent",
+    content: "Running.",
+    call: `go_cue_list("Intro")`,
+    result: "Started at 14:07:32 · 6 cues queued · 0:30.000 duration",
+    latency: "ack 11ms · runtime 30.0s",
   },
 ];
 

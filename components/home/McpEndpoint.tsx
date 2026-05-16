@@ -55,6 +55,15 @@ const MCP_TOOLS = [
   "delete_chase",
   "start_chase",
   "stop_chase",
+  // cue lists (audio-synced shows)
+  "list_cue_lists",
+  "describe_cue_list",
+  "get_active_cue_lists",
+  "create_cue_list",
+  "update_cue_list",
+  "delete_cue_list",
+  "go_cue_list",
+  "stop_cue_list",
   // diagnostics
   "test_dmx",
   "get_logs",

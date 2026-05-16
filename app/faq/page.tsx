@@ -118,6 +118,10 @@ export default function FAQPage() {
           a: "Yes — create_chase(name, steps, fade_in_ms?, hold_ms?, fade_out_ms?, direction?, run_order?) builds an ordered chase referencing existing saved scenes. Each step can be a scene name string, scene ID, or a dict with per-step timing overrides. Run order can be Loop / SingleShot / PingPong / Random; direction Forward / Backward. Once created, start_chase(name) plays it via QLC+'s native chase engine — loops forever or runs once depending on run_order. stop_chase(name) halts and the fixtures hold their last step. Use case: 'build me a 30-second sunset transition from Daylight → Warm → Amber → Off and loop it.'"
         },
         {
+          q: "Can I build cue lists that sync to a music track or video timeline?",
+          a: "Yes — create_cue_list(name, cues, description?) builds an ordered list of cues with absolute timestamps. Each cue has an `at` field (\"0:32\", \"1:45.500\", \"32s\", or raw at_ms) and an action — a scene name, chase name, or any execute_lighting_action call. Press go_cue_list(name) at the moment your audio starts and the server fires every cue on schedule. This is the QLab / ETC Ion 'cue stack' model. Sync-mode only for v1: run your audio in OBS / Logic / Premiere / your phone — whatever — and trigger GO at the same moment. stop_cue_list(name) halts; get_active_cue_lists() shows what's currently running with elapsed time."
+        },
+        {
           q: "Can the agent help me debug when something's wrong?",
           a: "Yes — three diagnostics tools ship with the MCP server: test_dmx runs a known-good R→G→B sweep so you can verify the DMX signal actually reaches the fixtures; get_logs pulls recent lines from any of the systemd journals (qlcplus-web, lighting-control, lighting-mcp, nginx); and get_system_info returns Pi-level health (CPU temp, load, memory, disk, uptime, USB devices, service status). Tell the agent 'why aren't the lights responding?' and it can call all three to triage."
         }
