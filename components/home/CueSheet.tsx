@@ -38,8 +38,8 @@ const cues: Cue[] = [
   {
     no: "003",
     act: "I",
-    direction: "Daylight fill from upstage left — 5600K.",
-    target: 'color_temperature(5600, "70%", groups: ["fill-lights"])',
+    direction: "Three-point lighting — tungsten key, daylight fill, magenta back.",
+    target: 'palette({ key: 3200, fill: 5600, back: "magenta" })',
     duration: "00 / 03 / 00",
     accent: true,
   },

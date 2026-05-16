@@ -34,13 +34,24 @@ const transcript: Turn[] = [
   },
   {
     speaker: "user",
+    content: "Set three-point lighting — tungsten key, daylight fill, magenta back.",
+  },
+  {
+    speaker: "agent",
+    content: "Assigning the palette across all three groups in one call.",
+    call: `palette({\n  "key-lights":  3200,\n  "fill-lights": 5600,\n  "back-lights": "magenta"\n})`,
+    result: "3/3 groups · 8 fixtures lit",
+    latency: "54ms",
+  },
+  {
+    speaker: "user",
     content: "Save this as 'evening edit'.",
   },
   {
     speaker: "agent",
     content: "Snapshotting current channel state.",
     call: `snapshot_scene("evening edit")`,
-    result: "Scene 12 saved · workspace updated",
+    result: "Scene 14 saved · workspace updated",
     latency: "18ms",
   },
   {
