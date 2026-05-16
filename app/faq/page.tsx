@@ -75,7 +75,7 @@ export default function FAQPage() {
       questions: [
         {
           q: "What is the MCP server?",
-          a: "It's a built-in Model Context Protocol endpoint that exposes the rig to any MCP-capable LLM client — Claude Desktop, ChatGPT, Cursor, custom agents. 34 tools cover discovery, channel control, scene + group lifecycle (create / describe / rename / duplicate / delete), Kelvin white balance, palette dispatch, strobe, fades, safety primitives (blackout, identify_fixture), diagnostics, and batch action — all through structured tool calls instead of writing control scripts or learning per-fixture DMX addressing."
+          a: "It's a built-in Model Context Protocol endpoint that exposes the rig to any MCP-capable LLM client — Claude Desktop, ChatGPT, Cursor, custom agents. 48 tools cover discovery, channel control, scene + group + chase + cue-list lifecycle (create / describe / rename / duplicate / delete), Kelvin white balance, palette dispatch, strobe, fades, time-based playback (chases + audio-synced cue lists with GO/STOP), safety primitives (blackout, identify_fixture), diagnostics, and batch action — all through structured tool calls instead of writing control scripts or learning per-fixture DMX addressing."
         },
         {
           q: "How do I connect Claude Desktop?",

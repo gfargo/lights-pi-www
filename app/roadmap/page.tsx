@@ -10,7 +10,20 @@ export const metadata = {
   },
 };
 
-const roadmap = [
+interface RoadmapItem {
+  title: string;
+  description: string;
+  completed: boolean;
+  progress?: number;
+}
+
+interface RoadmapQuarter {
+  status: "completed" | "in-progress" | "planned" | "future";
+  quarter: string;
+  items: RoadmapItem[];
+}
+
+const roadmap: RoadmapQuarter[] = [
   {
     status: "completed",
     quarter: "Q4 2025",
@@ -124,15 +137,14 @@ const roadmap = [
     quarter: "Q3 2026",
     items: [
       {
-        title: "Chase / sequence support",
-        description: "Time-based programming — create, start, stop, and chain QLC+ chases. The biggest single capability unlock left in the roadmap. (Issue #4)",
-        completed: false,
-        progress: 0
+        title: "Version 2.8 — Chases / sequence support",
+        description: "Time-based programming via QLC+'s native chase engine — create, start, stop, and chain ordered sequences of saved scenes. Closes #4.",
+        completed: true
       },
       {
-        title: "Scheduled scene activation",
-        description: "Cron-driven scheduling: 'turn on the work-light at 9am weekdays', 'fade to ambient at sunset'. (Issue #8)",
-        completed: false
+        title: "Version 2.9 — Cue lists (audio-synced shows)",
+        description: "QLab / ETC Ion 'cue stack' model — ordered cues at absolute timestamps, press GO to fire them on schedule. Sync your audio in OBS / Logic / Premiere and trigger GO at the moment the track starts. Closes #8.",
+        completed: true
       },
       {
         title: "SSE event stream",
