@@ -100,6 +100,10 @@ export default function FAQPage() {
         {
           q: "How do I find which physical fixture is which during setup?",
           a: "Call identify_fixture(fixture_id) from any MCP client. The fixture pulses on-off four times then restores its previous state. Run it once per fixture during initial setup to map workspace IDs to physical positions on the rig."
+        },
+        {
+          q: "Can the agent help me debug when something's wrong?",
+          a: "Yes — three diagnostics tools ship with the MCP server: test_dmx runs a known-good R→G→B sweep so you can verify the DMX signal actually reaches the fixtures; get_logs pulls recent lines from any of the systemd journals (qlcplus-web, lighting-control, lighting-mcp, nginx); and get_system_info returns Pi-level health (CPU temp, load, memory, disk, uptime, USB devices, service status). Tell the agent 'why aren't the lights responding?' and it can call all three to triage."
         }
       ]
     },

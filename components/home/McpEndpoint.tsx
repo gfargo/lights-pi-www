@@ -45,6 +45,10 @@ const MCP_TOOLS = [
   "delete_scene",
   "rename_scene",
   "duplicate_scene",
+  // diagnostics
+  "test_dmx",
+  "get_logs",
+  "get_system_info",
 ];
 
 export function McpEndpoint() {
