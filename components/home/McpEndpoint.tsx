@@ -26,6 +26,7 @@ const MCP_TOOLS = [
   "apply_template",
   "adjust_brightness",
   "adjust_color",
+  "color_temperature",
   "fade",
   "generate_scene",
   "set_channel",

@@ -102,6 +102,10 @@ export default function FAQPage() {
           a: "Call identify_fixture(fixture_id) from any MCP client. The fixture pulses on-off four times then restores its previous state. Run it once per fixture during initial setup to map workspace IDs to physical positions on the rig."
         },
         {
+          q: "Can the agent control white balance in Kelvin?",
+          a: "Yes — color_temperature(kelvin, intensity?, groups?) accepts 1800K (candle) through 10000K (overcast sky) and resolves to the right channel mix per fixture automatically. WWA fixtures get a warm/cool/amber blend by Kelvin position; RGB and RGBW fixtures get a Tanner-Helland CCT-to-RGB approximation, with the white channel driven separately on RGBW to keep cool whites looking clean. Just say 'set the key to 3200K tungsten' or '5600K daylight'."
+        },
+        {
           q: "Can the agent help me debug when something's wrong?",
           a: "Yes — three diagnostics tools ship with the MCP server: test_dmx runs a known-good R→G→B sweep so you can verify the DMX signal actually reaches the fixtures; get_logs pulls recent lines from any of the systemd journals (qlcplus-web, lighting-control, lighting-mcp, nginx); and get_system_info returns Pi-level health (CPU temp, load, memory, disk, uptime, USB devices, service status). Tell the agent 'why aren't the lights responding?' and it can call all three to triage."
         }
