@@ -71,7 +71,7 @@ export async function getGitHubRepoStats(): Promise<GitHubRepoStats> {
  * default if the API is unreachable so the site never renders without a
  * version stamp.
  */
-export async function getLatestVersion(fallback = "v2.3.0"): Promise<string> {
+export async function getLatestVersion(fallback = "v2.7.0"): Promise<string> {
   const releases = await getGitHubReleases();
   return releases[0]?.tagName ?? fallback;
 }

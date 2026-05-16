@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 /**
  * MCP-as-headline section. The Model Context Protocol endpoint is the
- * genuinely new, distinctive capability of Lights Pi v2.2 — so it gets
+ * genuinely new, distinctive capability of Lights Pi — so it gets
  * tentpole treatment instead of one card buried in a grid of seven.
  *
  * Composition:
@@ -108,7 +108,7 @@ export function McpEndpoint() {
             </h2>
 
             <p className="mt-8 text-lg text-paper/70 leading-relaxed max-w-prose">
-              Lights Pi v2.2 exposes the entire control surface as a{" "}
+              Lights Pi exposes the entire control surface as a{" "}
               <a
                 href="https://modelcontextprotocol.io"
                 target="_blank"

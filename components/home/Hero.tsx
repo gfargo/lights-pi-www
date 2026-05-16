@@ -8,7 +8,7 @@ import { LightBeams } from "./LightBeams";
 interface HeroProps {
   /** Real-time GitHub star count, fetched server-side. */
   stars: number;
-  /** Latest release tag from GitHub, fetched server-side (e.g. "v2.3.0"). */
+  /** Latest release tag from GitHub, fetched server-side (e.g. "v2.7.0"). */
   version: string;
 }
 

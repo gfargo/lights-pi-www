@@ -69,64 +69,84 @@ const roadmap = [
     ]
   },
   {
-    status: "in-progress",
+    status: "completed",
     quarter: "Q2 2026",
     items: [
       {
-        title: "Version 2.1 Release",
-        description: "Persistent WebSocket architecture, .qxf fixture parser, enriched AI prompts",
+        title: "Version 2.1 — Persistent WebSocket",
+        description: "Single long-lived QLC+ connection on a background asyncio loop. Eliminates the CLOSE_WAIT socket-leak that crashed long sessions.",
         completed: true
       },
       {
         title: "AI Scene Generation",
-        description: "Generate lighting scenes using natural language with fixture-aware channel mapping",
-        completed: true
-      },
-      {
-        title: "Scene Save & Recall",
-        description: "Save AI-generated scenes permanently to the workspace with one click",
+        description: "Natural language → DMX with .qxf-aware channel mapping. Generated scenes apply live, with optional save.",
         completed: true
       },
       {
         title: "Fixture Definition Parser",
-        description: "Reads .qxf files for authoritative channel roles — no more guessing RGB vs warm/cool",
+        description: "Reads QLC+ .qxf files for authoritative channel roles — no more guessing RGB vs warm/cool/amber.",
         completed: true
       },
       {
-        title: "MCP Server (LLM Agent Access)",
-        description: "Streamable HTTP Model Context Protocol endpoint at :5001/mcp — connect Claude Desktop, ChatGPT, Cursor, or any MCP-capable agent to drive the rig",
+        title: "Version 2.2 — MCP Server",
+        description: "Streamable HTTP MCP endpoint at :5001/mcp. Claude Desktop, ChatGPT, Cursor, or any MCP-capable agent can drive the rig via structured tool calls.",
         completed: true
       },
       {
-        title: "Mobile App (PWA)",
-        description: "Progressive Web App for better mobile experience",
-        completed: false,
-        progress: 60
+        title: "Version 2.3 — Tier 1 (group + scene CRUD, safety primitives)",
+        description: "Group lifecycle (create/update/delete + fixture add/remove), scene management (describe/rename/duplicate/delete), blackout, identify_fixture, batch_action. 12 new MCP tools.",
+        completed: true
+      },
+      {
+        title: "Version 2.4 — Diagnostics surface",
+        description: "test_dmx (RGB sweep verification), get_logs (allowlisted systemd journals), get_system_info (Pi CPU temp / load / memory / disk / USB / service status). An agent can now triage a misbehaving rig without SSHing in.",
+        completed: true
+      },
+      {
+        title: "Version 2.5 — Kelvin white balance",
+        description: "color_temperature(kelvin, intensity?, groups?) with per-fixture-type dispatch (WWA / RGB / RGBA / RGBW). Studio operators can finally say '3200K tungsten' or '5600K daylight' and have it Just Work.",
+        completed: true
+      },
+      {
+        title: "Version 2.6 — Palette dispatch",
+        description: "palette({ group: color-or-kelvin, ... }) — three-point lighting in one call. Composes mixed Kelvin + color preset values.",
+        completed: true
+      },
+      {
+        title: "Version 2.7 — First-class strobe",
+        description: "strobe(rate, intensity?, groups?) — abstraction over per-fixture strobe channels, 0–20Hz with off support. No more set_channel with magic offsets.",
+        completed: true
       }
     ]
   },
   {
-    status: "planned",
+    status: "in-progress",
     quarter: "Q3 2026",
     items: [
       {
-        title: "Plugin System",
-        description: "Extensible plugin architecture for custom integrations",
+        title: "Chase / sequence support",
+        description: "Time-based programming — create, start, stop, and chain QLC+ chases. The biggest single capability unlock left in the roadmap. (Issue #4)",
+        completed: false,
+        progress: 0
+      },
+      {
+        title: "Scheduled scene activation",
+        description: "Cron-driven scheduling: 'turn on the work-light at 9am weekdays', 'fade to ambient at sunset'. (Issue #8)",
         completed: false
       },
       {
-        title: "Cloud Sync (Optional)",
-        description: "Optional cloud backup and sync for scenes",
+        title: "SSE event stream",
+        description: "Server-sent events so agents can watch the rig in real time instead of polling. (Issue #10)",
         completed: false
       },
       {
-        title: "Advanced Scheduling",
-        description: "Time-based scene automation and scheduling",
+        title: "Multi-workspace switching",
+        description: "Hot-swap between .qxw files for different productions or venues. (Issue #11)",
         completed: false
       },
       {
-        title: "MIDI Integration",
-        description: "Control lights via MIDI controllers",
+        title: "Audio-reactive mode",
+        description: "Beat-pulse and BPM-synced chases driven by audio input. (Issue #12)",
         completed: false
       }
     ]
