@@ -236,7 +236,7 @@ export default function HardwarePage() {
           <div className="flex flex-col sm:flex-row gap-x-8 gap-y-3">
             <Link
               href="/docs/quick-start"
-              onClick={() => trackEvent.clickGetStarted("hardware_cta")}
+              onClick={() => trackEvent.clickGetStarted("hardware")}
               className="group inline-flex items-center gap-3 text-paper font-mono uppercase tracking-widest text-sm border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
             >
               Quick-start guide

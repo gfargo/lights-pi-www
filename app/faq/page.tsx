@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -184,7 +186,13 @@ export default function FAQPage() {
                       className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden hover:shadow-md transition"
                     >
                       <button
-                        onClick={() => setOpenIndex(isOpen ? null : index)}
+                        onClick={() => {
+                          const nextOpen = !isOpen;
+                          setOpenIndex(nextOpen ? index : null);
+                          if (nextOpen) {
+                            trackEvent.expandFaq(category.category, faq.q);
+                          }
+                        }}
                         className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-800 transition"
                       >
                         <span className="font-semibold text-white pr-4">{faq.q}</span>
@@ -215,16 +223,18 @@ export default function FAQPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/community"
+              onClick={() => trackEvent.clickJoinCommunity("faq", "discord")}
               className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
             >
               Join Discord
             </a>
-            <a
+            <Link
               href="/docs"
+              onClick={() => trackEvent.clickViewDocs("faq")}
               className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
             >
               View Documentation
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -123,6 +123,7 @@ export function Hero({ stars, version }: HeroProps) {
               href="https://github.com/gfargo/lights-pi"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent.clickGitHubStars("hero", stars)}
               className="font-mono text-sm uppercase tracking-widest hover:text-paper transition-colors"
             >
               gfargo / lights-pi

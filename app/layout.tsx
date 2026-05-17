@@ -6,6 +6,9 @@ import { Footer } from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
+import { OutboundLinkTracker } from "@/components/analytics/OutboundLinkTracker";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { FlagsProvider } from "@/components/flags/flags-provider";
 import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
 import { getLatestVersion } from "@/lib/github";
@@ -98,6 +101,10 @@ export default async function RootLayout({
           <Footer version={version} />
           <Analytics />
           <SpeedInsights />
+          {/* Custom engagement trackers — see components/analytics/* */}
+          <PageViewTracker />
+          <ScrollDepthTracker />
+          <OutboundLinkTracker />
         </FlagsProvider>
       </body>
     </html>
