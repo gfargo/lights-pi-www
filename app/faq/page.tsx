@@ -123,7 +123,11 @@ export default function FAQPage() {
         },
         {
           q: "Does the web UI expose all 48 MCP tools, or just the AI chat?",
-          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover AI Control (chat + scenes + quick chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), and Diagnostics (Pi health cards, test_dmx button, log tail). The Groups drawer is now interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
+          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover Chat (agentic, see below), Quick Commands (one-shot chat + scenes + chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), and Diagnostics (Pi health cards, test_dmx button, log tail). The Groups drawer is interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
+        },
+        {
+          q: "Is there a chat interface like Claude or ChatGPT but for my lights?",
+          a: "Yes — v2.11 adds a Chat tab (now the default landing) where you can converse with an LLM that has access to ~39 lighting tools. It plans multi-step operations autonomously: 'set up three-point lighting with tungsten key, daylight fill, magenta back, and save it as photoshoot' → the agent calls list_groups → create_group (×3) → palette → snapshot_scene → reports back. Tool calls show inline (collapsed by default, click to expand args + result). Conversation persists across page reloads in localStorage. Backed by Anthropic's tool_use API or OpenAI's function calling — set AI_PROVIDER in .env. Ollama isn't supported for chat yet because tool-calling varies too much by model."
         },
         {
           q: "Can the agent help me debug when something's wrong?",
