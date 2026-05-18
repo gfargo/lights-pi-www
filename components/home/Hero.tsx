@@ -41,10 +41,22 @@ export function Hero({ stars, version }: HeroProps) {
       <div className="grain absolute inset-0" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 w-full">
-        {/* Mono eyebrow — sets the editorial register immediately */}
+        {/* Mono eyebrow — sets the editorial register immediately.
+            The version stamp sits directly over the additive-blended light
+            beams; default `.eyebrow` muted gray becomes unreadable against
+            the bright orange spotlight. Override with brighter paper colour
+            + an ink halo so the text reads as "lit from behind" rather than
+            "swallowed by the beam." Only this instance gets the override;
+            other eyebrows on the site sit on flat ink. */}
         <p
-          className="eyebrow load-reveal"
-          style={{ "--reveal-delay": "0.4s" } as React.CSSProperties}
+          className="eyebrow load-reveal relative z-10"
+          style={{
+            "--reveal-delay": "0.4s",
+            color: "var(--color-paper)",
+            opacity: 0.85,
+            textShadow:
+              "0 0 16px var(--color-ink), 0 0 8px var(--color-ink), 0 1px 2px rgba(0,0,0,0.8)",
+          } as React.CSSProperties}
         >
           Lights-Pi · {version}
         </p>
