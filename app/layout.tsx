@@ -41,6 +41,9 @@ export const metadata: Metadata = {
   description: "Open source, self-hosted DMX lighting controller. Control professional fixtures from any device on your network — or wire it into Claude, ChatGPT, or any MCP-capable LLM agent. No subscriptions, unlimited fixtures.",
   keywords: ["Raspberry Pi lighting controller", "DMX controller", "QLC+", "studio lighting", "open source", "MCP server", "Model Context Protocol", "LLM agent", "Claude Desktop lighting"],
   authors: [{ name: "Lights Pi Team" }],
+  alternates: {
+    canonical: "https://lights.griffen.codes",
+  },
   openGraph: {
     title: "Lights Pi - QLC+ Lighting Controller for the Raspberry Pi",
     description: "Open source, self-hosted DMX lighting controller. Control professional fixtures from any device on your network — or wire it into Claude, ChatGPT, or any MCP-capable LLM agent. No subscriptions, unlimited fixtures.",
