@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Github, Menu, X } from "lucide-react";
 import { useFlag } from "@/components/flags/flags-provider";
+import { SCENES } from "@/lib/scenes";
 import { trackEvent } from "@/lib/analytics";
 
 export function Navigation() {
@@ -31,33 +32,31 @@ export function Navigation() {
     ...(showDemo ? [{ href: "/demo", label: "Playground" }] : []),
     ...(showShowcase ? [{ href: "/showcase", label: "Showcase" }] : []),
     { href: "/docs", label: "Docs" },
-    { href: "/blog", label: "Blog" },
+    { href: "/roadmap", label: "Roadmap" },
   ];
 
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-ink/85 backdrop-blur-xl border-b border-rule"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 w-full z-50 bg-ink"
+        data-scrolled={isScrolled}
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="px-[var(--gutter)]">
           <div className="flex justify-between items-center h-16">
             <Link
               href="/"
               className="flex items-center gap-3 z-50"
               aria-label="Lights Pi home"
             >
-              {/* Wordmark — small filament dot + monospaced lockup */}
-              <span
-                aria-hidden
-                className="filament inline-block w-2 h-2 rounded-full bg-amber-tungsten"
-              />
-              <span className="font-mono uppercase tracking-widest text-paper text-sm">
-                lights-pi
+              {/* Wordmark — the eight-cell swatch + the name */}
+              <span aria-hidden className="swatch !gap-[2px] w-[34px] h-[18px]">
+                {SCENES[0].cells.map((c, i) => (
+                  <span key={i} style={{ backgroundColor: c }} />
+                ))}
+              </span>
+              <span className="font-display text-paper text-[20px] tracking-[-0.02em]">
+                Lights Pi
               </span>
             </Link>
 
@@ -71,7 +70,7 @@ export function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-mono uppercase tracking-widest text-xs text-paper/60 hover:text-paper transition-colors"
+                  className="text-[16px] font-medium text-paper/85 hover:text-paper transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -85,17 +84,17 @@ export function Navigation() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent.clickViewGitHub("navigation")}
-                className="text-paper/60 hover:text-paper transition-colors"
+                className="text-paper/85 hover:text-paper transition-colors p-2"
                 aria-label="View Lights Pi on GitHub"
               >
-                <Github className="w-4 h-4" aria-hidden="true" />
+                <Github className="w-5 h-5" aria-hidden="true" />
               </a>
               <Link
                 href="/quick-start"
                 onClick={() => trackEvent.clickGetStarted("navigation")}
-                className="font-mono uppercase tracking-widest text-xs text-amber-tungsten border-b border-amber-tungsten pb-0.5 hover:text-paper hover:border-paper transition-colors"
+                className="inline-flex items-center min-h-[40px] px-4 bg-amber-tungsten text-ink text-[16px] font-semibold hover:bg-paper transition-colors"
               >
-                Get started →
+                Build one
               </Link>
             </div>
 
@@ -132,13 +131,13 @@ export function Navigation() {
         <button
           aria-label="Close menu"
           tabIndex={isMobileMenuOpen ? 0 : -1}
-          className="absolute inset-0 bg-ink/85 backdrop-blur-md"
+          className="absolute inset-0 bg-ink/90"
           onClick={() => setIsMobileMenuOpen(false)}
         />
 
         {/* Panel — slides in from right */}
         <div
-          className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-ink border-l border-rule transition-transform duration-300 ease-out ${
+          className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-steel transition-transform duration-300 ease-out ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -159,13 +158,13 @@ export function Navigation() {
               ))}
             </nav>
 
-            <div className="pt-8 hairline flex flex-col gap-4">
+            <div className="pt-8 flex flex-col gap-5">
               <a
                 href="https://github.com/gfargo/lights-pi"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent.clickViewGitHub("mobile_navigation")}
-                className="flex items-center gap-3 font-mono uppercase tracking-widest text-xs text-paper/60 hover:text-paper transition-colors"
+                className="flex items-center gap-3 text-[16px] text-paper hover:text-amber-tungsten transition-colors"
                 aria-label="View Lights Pi on GitHub"
               >
                 <Github className="w-4 h-4" aria-hidden="true" />
@@ -177,9 +176,9 @@ export function Navigation() {
                   setIsMobileMenuOpen(false);
                   trackEvent.clickGetStarted("mobile_navigation");
                 }}
-                className="font-mono uppercase tracking-widest text-xs text-amber-tungsten border-b border-amber-tungsten pb-1 self-start hover:text-paper hover:border-paper transition-colors"
+                className="self-start inline-flex items-center min-h-[48px] px-5 bg-amber-tungsten text-ink text-[16px] font-semibold hover:bg-paper transition-colors"
               >
-                Get started →
+                Build one
               </Link>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -9,26 +9,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
 import { OutboundLinkTracker } from "@/components/analytics/OutboundLinkTracker";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
+import { RevealObserver } from "@/components/RevealObserver";
 import { FlagsProvider } from "@/components/flags/flags-provider";
 import { resolveAllFlags, pickClientFlags } from "@/lib/flags/runtime";
 import { getLatestVersion } from "@/lib/github";
 
-// Editorial-theatrical type system.
-// Fraunces (variable, with optical-size axis) for display.
-// Geist Sans for body. Geist Mono for technical / cue-sheet typography.
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-});
-
+// One typeface: Chillax (Fontshare, loaded in <head>) for display and text.
+// Geist Mono is kept only for real code blocks in the docs.
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
@@ -85,9 +72,15 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable}`}
+      className={geistMono.variable}
     >
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600&display=swap"
+        />
         <StructuredData />
       </head>
       <body className="bg-ink text-paper font-sans antialiased">
@@ -106,6 +99,7 @@ export default async function RootLayout({
           <SpeedInsights />
           {/* Custom engagement trackers — see components/analytics/* */}
           <PageViewTracker />
+          <RevealObserver />
           <ScrollDepthTracker />
           <OutboundLinkTracker />
         </FlagsProvider>

@@ -60,7 +60,7 @@ export default function FAQPage() {
         },
         {
           q: "How do updates work?",
-          a: "Updates are released on GitHub. You can pull the latest changes and run the update script. We follow semantic versioning."
+          a: "Releases are published on GitHub with notes. From your laptop, pull the latest code and run bash scripts/deploy.sh: it syncs the code to the Pi, installs any new Python dependencies and restarts the control server. QLC+ keeps the current look while it restarts. (./lightsctl.sh update only updates the Pi's OS packages.)"
         },
         {
           q: "Can I customize the interface?",
@@ -68,7 +68,23 @@ export default function FAQPage() {
         },
         {
           q: "What about security?",
-          a: "Lights Pi includes HTTPS setup, firewall configuration, and SSH key authentication. It's designed to be secure by default."
+          a: "The web UI can sit behind a shared password with a session cookie. The provisioning scripts set up a firewall and SSH key login, and HTTPS is available both on the LAN (https://lights.local) and over Tailscale with a real certificate that renews itself."
+        },
+        {
+          q: "Can I use a MIDI controller or OSC?",
+          a: "Yes, at the server level. Since v2.15 the control server listens for MIDI notes and CCs (mapped to actions in midi_mappings.json) and for OSC on UDP port 8000: /scene/<name>, /chase/<name>, /fixture/<id>/<channel>, /master, /cue/go and /blackout, with state sent back on /state/*. A MIDI tab with learn-to-bind and a ready-made TouchOSC layout are next on the roadmap."
+        },
+        {
+          q: "Can I reach the rig when I'm not in the studio?",
+          a: "Yes, over Tailscale. lightsctl tailscale-https install serves the control UI and QLC+ on your tailnet with a trusted certificate. Nothing is exposed to the public internet."
+        },
+        {
+          q: "Can I keep separate setups for different shows or rooms?",
+          a: "Yes. Since v2.16 you can keep several workspaces, one per production or venue, and switch between them from the Diagnostics tab. Fixture groups and the last look travel with each workspace."
+        },
+        {
+          q: "What happens if the control server loses its link to QLC+?",
+          a: "It repairs it. Since v2.16.2 a watchdog notices when commands to QLC+ stop completing, rebuilds the link and reconnects within seconds. /healthz reports qlc_bridge_ok, so a monitor can tell you when it happens."
         }
       ]
     },
@@ -125,11 +141,11 @@ export default function FAQPage() {
         },
         {
           q: "Does the web UI expose all 48 MCP tools, or just the AI chat?",
-          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover Chat (agentic, see below), Quick Commands (one-shot chat + scenes + chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), and Diagnostics (Pi health cards, test_dmx button, log tail). The Groups drawer is interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
+          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover Chat (agentic, see below), Quick Commands (one-shot chat + scenes + chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), Audio (BPM and beat detection from a USB mic), and Diagnostics (Pi health cards, test_dmx button, workspace switching, log tail). The Groups drawer is interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
         },
         {
           q: "Is there a chat interface like Claude or ChatGPT but for my lights?",
-          a: "Yes — v2.11 adds a Chat tab (now the default landing) where you can converse with an LLM that has access to ~39 lighting tools. It plans multi-step operations autonomously: 'set up three-point lighting with tungsten key, daylight fill, magenta back, and save it as photoshoot' → the agent calls list_groups → create_group (×3) → palette → snapshot_scene → reports back. Tool calls show inline (collapsed by default, click to expand args + result). Conversation persists across page reloads in localStorage. Backed by Anthropic's tool_use API or OpenAI's function calling — set AI_PROVIDER in .env. Ollama isn't supported for chat yet because tool-calling varies too much by model."
+          a: "Yes — the Chat tab lets you converse with an LLM that has access to all 48 lighting tools. It plans multi-step operations autonomously: 'set up three-point lighting with tungsten key, daylight fill, magenta back, and save it as photoshoot' → the agent calls list_groups → create_group (×3) → palette → snapshot_scene → reports back. Tool calls show inline (collapsed by default, click to expand args + result). Conversations are saved, so you can come back to them later. Backed by Anthropic's tool_use API or OpenAI's function calling — set AI_PROVIDER in .env. Ollama isn't supported for chat yet because tool-calling varies too much by model."
         },
         {
           q: "Can the agent help me debug when something's wrong?",

@@ -1,164 +1,89 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { Github, Star } from "lucide-react";
+import { SCENES } from "@/lib/scenes";
 import { trackEvent } from "@/lib/analytics";
-import { LightBeams } from "./LightBeams";
-
-interface HeroProps {
-  /** Real-time GitHub star count, fetched server-side. */
-  stars: number;
-  /** Latest release tag from GitHub, fetched server-side (e.g. "v2.9.0"). */
-  version: string;
-}
-
-function formatStars(n: number): string {
-  if (n >= 1000) return `${(n / 1000).toFixed(n >= 10_000 ? 0 : 1)}k`;
-  return String(n);
-}
+import { Swatch, SwatchButton } from "./Swatch";
 
 /**
- * Editorial-theatrical hero.
- *
- * Composition:
- *  - Hand-coded SVG light rig (LightBeams) projects three beams from a
- *    hairline truss, additive-blended so overlaps brighten.
- *  - Headline breaks across three lines, last line in italic tungsten amber.
- *  - "House lights up" load sequence — beams fade in 0.3s → 0.9s, then the
- *    text reveals top-down in coordination with the third beam.
- *  - Real GitHub stars (mono, tabular figures) sit on a hairline below the
- *    CTA group.
- *  - A single filament pulse in the bottom-right is the only motion that
- *    persists after the load reveal.
+ * Act I. The motif at its largest: the rig's eight fixtures as eight tall
+ * bars, cropped by the viewport, in the colours of a real scene. The scene
+ * buttons under the headline recolour them with the same per-fixture values
+ * the control server stores, and show the one call that recalls that scene.
  */
-export function Hero({ stars, version }: HeroProps) {
+export function Hero() {
+  const [active, setActive] = useState(SCENES[0]);
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-ink">
-      {/* Stage rig — pure SVG, additive blended */}
-      <LightBeams />
+    <section className="relative overflow-hidden bg-ink md:min-h-[100svh]" aria-labelledby="hero-title">
+      {/* The rig, enormous. Desktop: enters from the right. Phone: rises from the bottom. */}
+      <div className="absolute hidden md:block left-[54%] -top-[8vh] h-[116vh] w-[64vw]">
+        <Swatch cells={active.cells} className="h-full !gap-[14px]" label={`Eight fixtures in the ${active.name} scene`} />
+      </div>
 
-      {/* Film grain texture overlay — pure SVG noise, ~700 bytes */}
-      <div className="grain absolute inset-0" />
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 w-full">
-        {/* Mono eyebrow — sets the editorial register immediately.
-            The version stamp sits directly over the additive-blended light
-            beams; default `.eyebrow` muted gray becomes unreadable against
-            the bright orange spotlight. Override with brighter paper colour
-            + an ink halo so the text reads as "lit from behind" rather than
-            "swallowed by the beam." Only this instance gets the override;
-            other eyebrows on the site sit on flat ink. */}
-        <p
-          className="eyebrow load-reveal relative z-10"
-          style={{
-            "--reveal-delay": "0.4s",
-            color: "var(--color-paper)",
-            opacity: 0.85,
-            textShadow:
-              "0 0 16px var(--color-ink), 0 0 8px var(--color-ink), 0 1px 2px rgba(0,0,0,0.8)",
-          } as React.CSSProperties}
-        >
-          Lights-Pi · {version}
-        </p>
-
-        {/* Editorial display headline — staggered to land with the beams */}
-        <h1
-          className="font-display text-paper mt-8 max-w-5xl"
-          style={{ fontSize: "var(--text-display-xl)" }}
-        >
-          <span
-            className="load-reveal block"
-            style={{ "--reveal-delay": "0.55s" } as React.CSSProperties}
+      <div className="relative z-10 flex md:min-h-[100svh] flex-col justify-start md:justify-center pt-28 md:pt-16 pb-12 md:pb-16 px-[var(--gutter)]">
+        <div className="md:max-w-[46vw]">
+          <h1
+            id="hero-title"
+            className="font-display text-paper rise"
+            style={{ fontSize: "clamp(2.75rem, 6vw, 6rem)", textWrap: "balance" }}
           >
-            Stage lights,
-          </span>
-          <span
-            className="load-reveal block"
-            style={{ "--reveal-delay": "0.75s" } as React.CSSProperties}
+            Stage lights, run from&nbsp;a&nbsp;Pi.
+          </h1>
+          <p
+            className="mt-8 max-w-[34rem] text-paper rise"
+            style={{ fontSize: "var(--step-lead)", lineHeight: 1.45, ["--d" as string]: "80ms" }}
           >
-            on the network.
-          </span>
-          <span
-            className="load-reveal block italic"
-            style={{
-              "--reveal-delay": "1s",
-              color: "var(--color-amber-tungsten)",
-            } as React.CSSProperties}
-          >
-            Now they take instructions.
-          </span>
-        </h1>
+            Lights Pi turns a Raspberry Pi into the controller for your DMX rig. Run it from a phone,
+            a MIDI controller, OSC, or an AI agent. No cloud, no subscription.
+          </p>
 
-        {/* Subhead — MCP angle leads */}
-        <p
-          className="font-sans text-lg md:text-xl text-paper/70 mt-10 max-w-2xl leading-relaxed load-reveal"
-          style={{ "--reveal-delay": "1.2s" } as React.CSSProperties}
-        >
-          A headless QLC+ controller for the Raspberry Pi.
-          Drive your DMX rig from any browser on the network —
-          or hand the keys to{" "}
-          <span className="text-paper">Claude, ChatGPT, or any MCP-capable agent</span>{" "}
-          over the built-in Streamable HTTP endpoint.
-        </p>
-
-        {/* CTAs — text-forward, two flat links */}
-        <div
-          className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-x-10 gap-y-4 load-reveal"
-          style={{ "--reveal-delay": "1.4s" } as React.CSSProperties}
-        >
-          <Link
-            href="/quick-start"
-            onClick={() => trackEvent.clickGetStarted("hero")}
-            className="group inline-flex items-center gap-3 text-paper text-base font-mono uppercase tracking-widest border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
-          >
-            Start here
-            <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-          </Link>
-          <Link
-            href="/demo"
-            onClick={() => trackEvent.demoInteraction("hero_demo_click")}
-            className="group inline-flex items-center gap-3 text-paper/60 text-base font-mono uppercase tracking-widest hover:text-arc-cyan transition-colors"
-          >
-            <span className="arc inline-block w-2 h-2 rounded-full bg-arc-cyan" />
-            Try the playground
-          </Link>
-        </div>
-
-        {/* Real GitHub stars — no fake numbers, no inflated stats */}
-        <div
-          className="mt-20 hairline pt-6 max-w-2xl flex items-center justify-between gap-6 load-reveal"
-          style={{ "--reveal-delay": "1.6s" } as React.CSSProperties}
-        >
-          <div className="flex items-center gap-3 text-paper/50">
-            <Github className="w-4 h-4" aria-hidden />
-            <a
-              href="https://github.com/gfargo/lights-pi"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent.clickGitHubStars("hero", stars)}
-              className="font-mono text-sm uppercase tracking-widest hover:text-paper transition-colors"
-            >
-              gfargo / lights-pi
-            </a>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5 rise" style={{ ["--d" as string]: "160ms" }}>
+            <SwatchButton href="/quick-start" onClick={() => trackEvent.clickGetStarted("hero")}>
+              Build one
+            </SwatchButton>
+            <Link href="/docs" className="link-plain" onClick={() => trackEvent.clickViewDocs("hero")}>
+              Read the docs
+            </Link>
           </div>
-          <div className="flex items-center gap-2 text-paper">
-            <Star
-              className="w-3.5 h-3.5 text-amber-tungsten fill-amber-tungsten"
-              aria-hidden
-            />
-            <span className="font-mono text-sm tabular-nums">{formatStars(stars)}</span>
-            <span className="font-mono text-xs uppercase tracking-widest text-paper/40">
-              stars
-            </span>
+
+          {/* The live thing: recall a real scene on the rig above. */}
+          <div className="mt-12 md:mt-14 rise" style={{ ["--d" as string]: "240ms" }}>
+            <p className="text-paper" style={{ fontSize: "var(--step-body)" }} id="scene-picker-label">
+              Recall a scene on the rig
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2" role="group" aria-labelledby="scene-picker-label">
+              {SCENES.map((s) => {
+                const on = s.id === active.id;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => setActive(s)}
+                    className={`group flex min-h-[44px] flex-col justify-between gap-2 px-3 pt-2 pb-0 text-left transition-colors ${
+                      on ? "bg-paper text-ink" : "bg-steel text-paper hover:bg-[#222]"
+                    }`}
+                    style={{ fontSize: "var(--step-small)", fontWeight: 500 }}
+                  >
+                    <span>{s.name}</span>
+                    <Swatch cells={s.cells} className="h-[6px] w-[72px] !gap-[2px]" />
+                  </button>
+                );
+              })}
+            </div>
+            <p className="mt-4 text-paper/80" style={{ fontSize: "var(--step-small)" }}>
+              On your rig this is <code className="text-paper">POST /api/scenes/{active.id}/activate</code>, or one
+              tap in the app.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Single subtle ambient pulse, bottom-right — the only motion that
-          continues post-load */}
-      <div className="absolute bottom-10 right-10 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-paper/40 pointer-events-none">
-        <span className="filament inline-block w-1.5 h-1.5 rounded-full bg-amber-tungsten" />
-        live
+      {/* Phone: the rig rises from the bottom edge, cropped left, right and below. */}
+      <div aria-hidden="true" className="md:hidden relative -mx-[12vw] h-[42svh] -mb-[8svh]">
+        <Swatch cells={active.cells} className="h-full !gap-[8px]" />
       </div>
     </section>
   );

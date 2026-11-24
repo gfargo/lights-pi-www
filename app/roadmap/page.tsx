@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Roadmap — Lights Pi | Shipping cadence + what's next",
   description:
-    "Current shipping cadence for Lights Pi. The v2.13 era — AI scene generation, MCP server, agentic chat, mobile PWA — and what's queued for 2027.",
+    "What Lights Pi has shipped through v2.16 — MCP server, agentic chat, live sync, MIDI and OSC, workspaces, HTTPS over Tailscale — and what's next.",
   openGraph: {
     title: "Roadmap — Lights Pi",
     description: "Current shipping cadence and what's queued next.",
@@ -180,21 +180,15 @@ const roadmap: RoadmapQuarter[] = [
     ],
   },
   {
-    status: "in-progress",
-    quarter: "Q4 2026",
+    status: "completed",
+    quarter: "May 2026",
     heading: "Visual identity + foundations",
     items: [
       {
         title: "v2.13.0 — visual identity pass",
         description:
-          "Geist Sans/Mono, tungsten accent, animated tab indicator, mono eyebrow labels, filament dot. The interface finally feels like the product.",
+          "Geist Sans/Mono, tungsten accent, animated tab indicator. The interface finally feels like the product.",
         release: "v2.13.0",
-      },
-      {
-        title: "v2.13.1 — boot-init regression fix",
-        description:
-          "Boot initialization had been silently broken since v2.10. Fixed, plus diagnostics now distinguishes 'not installed' from 'inactive' for the systemd services.",
-        release: "v2.13.1",
       },
       {
         title: "v2.13.2 — tab URL persistence",
@@ -202,110 +196,137 @@ const roadmap: RoadmapQuarter[] = [
           "Active tab is now in the URL. Refresh, bookmark, or share a link to a specific view of the rig.",
         release: "v2.13.2",
       },
+      {
+        title: "v2.14.0 — cleanup pass",
+        description:
+          "Dead code removed, a Python linter gating CI, dependencies refreshed. Clears the way for the feature backlog.",
+        release: "v2.14.0",
+      },
+      {
+        title: "Server-rendered scene swatches",
+        description:
+          "Every scene shows a strip of its fixtures' colours, rendered from the channel values.",
+        issue: 37,
+      },
     ],
   },
   {
-    status: "planned",
-    quarter: "Q1 2027",
-    heading: "Hardware integration + reliability",
+    status: "completed",
+    quarter: "Jul 2026",
+    heading: "Live state, memory + new inputs",
     items: [
       {
-        title: "MIDI controller input",
+        title: "v2.14.1 — live event stream + chat memory",
         description:
-          "Map physical faders and pads (Akai MIDI Mix, Launchpad, etc.) to fixtures, groups, scenes, and chases. Top priority for the next thrust.",
+          "Every open phone and laptop sees rig changes as they happen. Chat conversations persist and can be searched.",
+        release: "v2.14.1",
+      },
+      {
+        title: "v2.14.2 — shared-password login",
+        description:
+          "A shared password and session cookie, so the rig no longer relies on 'it's only on the studio LAN'. Tap-tempo and backup fixes.",
+        release: "v2.14.2",
+      },
+      {
+        title: "v2.15.0 — MIDI + OSC backends",
+        description:
+          "MIDI notes and CCs, and OSC messages on UDP 8000, trigger scenes, chases, cues and blackout. Cue-list preview and stage-layout storage on the server.",
+        release: "v2.15.0",
+      },
+      {
+        title: "Tap tempo for chases",
+        description: "Tap the beat in and chase steps lock to it.",
+        issue: 35,
+      },
+      {
+        title: "Audio reactivity + BPM detection",
+        description: "Beat and BPM detection from a USB microphone for music-driven looks.",
+        issue: 28,
+      },
+      {
+        title: "Structured logging + health endpoint",
+        description: "JSON logs and a /healthz rollup of QLC+, the workspace and the control server.",
+        issue: 30,
+      },
+      {
+        title: "AI provider failover",
+        description: "Chat falls back between Anthropic and OpenAI when one is unavailable.",
+        issue: 33,
+      },
+    ],
+  },
+  {
+    status: "completed",
+    quarter: "Nov 2026",
+    heading: "Workspaces, remote access + reliability",
+    items: [
+      {
+        title: "v2.16.0 — multi-workspace switching",
+        description:
+          "Separate workspaces per production or venue. Trusted HTTPS over Tailscale. gunicorn + eventlet server. lights.local fixes for routers with IGMP snooping.",
+        release: "v2.16.0",
+      },
+      {
+        title: "v2.16.2 — the QLC+ link can't freeze",
+        description:
+          "Fixes a cross-thread lock bug that could stall every scene change, adds a watchdog that rebuilds a stuck link in seconds, and reports link health on /healthz.",
+        release: "v2.16.2",
+      },
+    ],
+  },
+  {
+    status: "in-progress",
+    quarter: "Now",
+    heading: "From backend to hands-on",
+    items: [
+      {
+        title: "MIDI mapping in the web UI",
+        description:
+          "The listener and mappings exist; next is a MIDI tab with learn-to-bind, verified against real controllers.",
         issue: 26,
       },
       {
-        title: "OSC support",
+        title: "OSC control surfaces",
         description:
-          "Talk to TouchOSC and QLab over OSC. Tablet-as-control-surface, plus integration with audio cue stacks already in use.",
+          "The OSC listener exists; next is a TouchOSC layout and testing with QLab cue stacks.",
         issue: 27,
-      },
-      {
-        title: "Authentication",
-        description:
-          "Shared password + session cookie. Stop relying on 'it's only on the studio LAN'.",
-        issue: 25,
-      },
-      {
-        title: "Integration test layer",
-        description:
-          "End-to-end coverage across Flask, MCP, and cue playback — not just unit tests against mocks.",
-        issue: 24,
-      },
-    ],
-  },
-  {
-    status: "planned",
-    quarter: "Q2 2027",
-    heading: "Polish + intelligence",
-    items: [
-      {
-        title: "Audio reactivity + BPM detection",
-        description:
-          "Beat-pulse and BPM-synced chases driven by audio input — for music videos and live performance.",
-        issue: 28,
       },
       {
         title: "Visual cue list timeline editor",
         description:
-          "Drag-and-drop timeline for arranging cues against an audio track. The missing tool for show building.",
+          "Preview and waveform endpoints are in; next is the drag-and-drop timeline against an audio track.",
         issue: 29,
       },
       {
-        title: "Structured logging + deep health endpoint",
+        title: "Visual stage layout editor",
         description:
-          "JSON logs, /healthz with USB/DMX/QLC+/MCP rollup. Observability that survives a long shoot day.",
-        issue: 30,
-      },
-      {
-        title: "Automated workspace backups",
-        description:
-          "Scheduled snapshots of fixtures, scenes, chases, cue lists. Rotated, restorable from the web UI.",
-        issue: 31,
-      },
-      {
-        title: "Chat memory + history persistence",
-        description:
-          "Agentic chat that remembers prior conversations and the state it left the rig in.",
-        issue: 32,
+          "Fixture positions are stored; next is dragging fixtures onto a stage map.",
+        issue: 36,
       },
     ],
   },
   {
-    status: "future",
-    quarter: "Beyond",
-    heading: "Power-user features",
+    status: "planned",
+    quarter: "Next",
+    heading: "Confidence",
     items: [
       {
-        title: "Provider failover (Anthropic ↔ OpenAI)",
+        title: "Integration test layer",
         description:
-          "Automatic failover between LLM providers. Production redundancy for the AI layer.",
-        issue: 33,
+          "Wider end-to-end coverage across Flask, MCP, and cue playback.",
+        issue: 24,
+      },
+      {
+        title: "Automated workspace backups",
+        description:
+          "Scheduled snapshots of fixtures, scenes, chases and cue lists, restorable from the web UI.",
+        issue: 31,
       },
       {
         title: "Mock DMX device",
         description:
           "Develop against a virtual rig — no Pi, no ENTTEC, no fixtures required.",
         issue: 34,
-      },
-      {
-        title: "Tap tempo for chases",
-        description:
-          "Tap a key in time with the music. Chase steps lock to the implied BPM.",
-        issue: 35,
-      },
-      {
-        title: "Visual stage layout editor",
-        description:
-          "Drag fixtures onto a stage map. Spatial reasoning for the agent + a faster mental model for humans.",
-        issue: 36,
-      },
-      {
-        title: "Server-rendered scene preview swatches",
-        description:
-          "Thumbnails for every saved scene, generated server-side from the channel values.",
-        issue: 37,
       },
     ],
   },
@@ -361,7 +382,7 @@ export default function RoadmapPage() {
               <span className="text-paper/30"> · </span>
               <span className="text-arc-cyan">{counts.planned} planned</span>
             </p>
-            <p className="mt-1">Latest · v2.13.2 · May 2026</p>
+            <p className="mt-1">Latest · v2.16.2 · Nov 2026</p>
           </div>
         </header>
 
