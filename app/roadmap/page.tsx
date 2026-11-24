@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { PageHead, SectionHead } from "@/components/PageHead";
 
 export const metadata = {
   title: "Roadmap — Lights Pi | Shipping cadence + what's next",
   description:
-    "Current shipping cadence for Lights Pi. The v2.13 era — AI scene generation, MCP server, agentic chat, mobile PWA — and what's queued for 2027.",
+    "What Lights Pi has shipped through v2.16 — MCP server, agentic chat, live sync, MIDI and OSC, workspaces, HTTPS over Tailscale — and what's next.",
   openGraph: {
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     title: "Roadmap — Lights Pi",
     description: "Current shipping cadence and what's queued next.",
     type: "website",
@@ -180,21 +182,15 @@ const roadmap: RoadmapQuarter[] = [
     ],
   },
   {
-    status: "in-progress",
-    quarter: "Q4 2026",
+    status: "completed",
+    quarter: "May 2026",
     heading: "Visual identity + foundations",
     items: [
       {
         title: "v2.13.0 — visual identity pass",
         description:
-          "Geist Sans/Mono, tungsten accent, animated tab indicator, mono eyebrow labels, filament dot. The interface finally feels like the product.",
+          "Geist Sans/Mono, tungsten accent, animated tab indicator. The interface finally feels like the product.",
         release: "v2.13.0",
-      },
-      {
-        title: "v2.13.1 — boot-init regression fix",
-        description:
-          "Boot initialization had been silently broken since v2.10. Fixed, plus diagnostics now distinguishes 'not installed' from 'inactive' for the systemd services.",
-        release: "v2.13.1",
       },
       {
         title: "v2.13.2 — tab URL persistence",
@@ -202,110 +198,137 @@ const roadmap: RoadmapQuarter[] = [
           "Active tab is now in the URL. Refresh, bookmark, or share a link to a specific view of the rig.",
         release: "v2.13.2",
       },
+      {
+        title: "v2.14.0 — cleanup pass",
+        description:
+          "Dead code removed, a Python linter gating CI, dependencies refreshed. Clears the way for the feature backlog.",
+        release: "v2.14.0",
+      },
+      {
+        title: "Server-rendered scene swatches",
+        description:
+          "Every scene shows a strip of its fixtures' colours, rendered from the channel values.",
+        issue: 37,
+      },
     ],
   },
   {
-    status: "planned",
-    quarter: "Q1 2027",
-    heading: "Hardware integration + reliability",
+    status: "completed",
+    quarter: "Jul 2026",
+    heading: "Live state, memory + new inputs",
     items: [
       {
-        title: "MIDI controller input",
+        title: "v2.14.1 — live event stream + chat memory",
         description:
-          "Map physical faders and pads (Akai MIDI Mix, Launchpad, etc.) to fixtures, groups, scenes, and chases. Top priority for the next thrust.",
+          "Every open phone and laptop sees rig changes as they happen. Chat conversations persist and can be searched.",
+        release: "v2.14.1",
+      },
+      {
+        title: "v2.14.2 — shared-password login",
+        description:
+          "A shared password and session cookie, so the rig no longer relies on 'it's only on the studio LAN'. Tap-tempo and backup fixes.",
+        release: "v2.14.2",
+      },
+      {
+        title: "v2.15.0 — MIDI + OSC backends",
+        description:
+          "MIDI notes and CCs, and OSC messages on UDP 8000, trigger scenes, chases, cues and blackout. Cue-list preview and stage-layout storage on the server.",
+        release: "v2.15.0",
+      },
+      {
+        title: "Tap tempo for chases",
+        description: "Tap the beat in and chase steps lock to it.",
+        issue: 35,
+      },
+      {
+        title: "Audio reactivity + BPM detection",
+        description: "Beat and BPM detection from a USB microphone for music-driven looks.",
+        issue: 28,
+      },
+      {
+        title: "Structured logging + health endpoint",
+        description: "JSON logs and a /healthz rollup of QLC+, the workspace and the control server.",
+        issue: 30,
+      },
+      {
+        title: "AI provider failover",
+        description: "Chat falls back between Anthropic and OpenAI when one is unavailable.",
+        issue: 33,
+      },
+    ],
+  },
+  {
+    status: "completed",
+    quarter: "Nov 2026",
+    heading: "Workspaces, remote access + reliability",
+    items: [
+      {
+        title: "v2.16.0 — multi-workspace switching",
+        description:
+          "Separate workspaces per production or venue. Trusted HTTPS over Tailscale. gunicorn + eventlet server. lights.local fixes for routers with IGMP snooping.",
+        release: "v2.16.0",
+      },
+      {
+        title: "v2.16.2 — the QLC+ link can't freeze",
+        description:
+          "Fixes a cross-thread lock bug that could stall every scene change, adds a watchdog that rebuilds a stuck link in seconds, and reports link health on /healthz.",
+        release: "v2.16.2",
+      },
+    ],
+  },
+  {
+    status: "in-progress",
+    quarter: "Now",
+    heading: "From backend to hands-on",
+    items: [
+      {
+        title: "MIDI mapping in the web UI",
+        description:
+          "The listener and mappings exist; next is a MIDI tab with learn-to-bind, verified against real controllers.",
         issue: 26,
       },
       {
-        title: "OSC support",
+        title: "OSC control surfaces",
         description:
-          "Talk to TouchOSC and QLab over OSC. Tablet-as-control-surface, plus integration with audio cue stacks already in use.",
+          "The OSC listener exists; next is a TouchOSC layout and testing with QLab cue stacks.",
         issue: 27,
-      },
-      {
-        title: "Authentication",
-        description:
-          "Shared password + session cookie. Stop relying on 'it's only on the studio LAN'.",
-        issue: 25,
-      },
-      {
-        title: "Integration test layer",
-        description:
-          "End-to-end coverage across Flask, MCP, and cue playback — not just unit tests against mocks.",
-        issue: 24,
-      },
-    ],
-  },
-  {
-    status: "planned",
-    quarter: "Q2 2027",
-    heading: "Polish + intelligence",
-    items: [
-      {
-        title: "Audio reactivity + BPM detection",
-        description:
-          "Beat-pulse and BPM-synced chases driven by audio input — for music videos and live performance.",
-        issue: 28,
       },
       {
         title: "Visual cue list timeline editor",
         description:
-          "Drag-and-drop timeline for arranging cues against an audio track. The missing tool for show building.",
+          "Preview and waveform endpoints are in; next is the drag-and-drop timeline against an audio track.",
         issue: 29,
       },
       {
-        title: "Structured logging + deep health endpoint",
+        title: "Visual stage layout editor",
         description:
-          "JSON logs, /healthz with USB/DMX/QLC+/MCP rollup. Observability that survives a long shoot day.",
-        issue: 30,
-      },
-      {
-        title: "Automated workspace backups",
-        description:
-          "Scheduled snapshots of fixtures, scenes, chases, cue lists. Rotated, restorable from the web UI.",
-        issue: 31,
-      },
-      {
-        title: "Chat memory + history persistence",
-        description:
-          "Agentic chat that remembers prior conversations and the state it left the rig in.",
-        issue: 32,
+          "Fixture positions are stored; next is dragging fixtures onto a stage map.",
+        issue: 36,
       },
     ],
   },
   {
-    status: "future",
-    quarter: "Beyond",
-    heading: "Power-user features",
+    status: "planned",
+    quarter: "Next",
+    heading: "Confidence",
     items: [
       {
-        title: "Provider failover (Anthropic ↔ OpenAI)",
+        title: "Integration test layer",
         description:
-          "Automatic failover between LLM providers. Production redundancy for the AI layer.",
-        issue: 33,
+          "Wider end-to-end coverage across Flask, MCP, and cue playback.",
+        issue: 24,
+      },
+      {
+        title: "Automated workspace backups",
+        description:
+          "Scheduled snapshots of fixtures, scenes, chases and cue lists, restorable from the web UI.",
+        issue: 31,
       },
       {
         title: "Mock DMX device",
         description:
           "Develop against a virtual rig — no Pi, no ENTTEC, no fixtures required.",
         issue: 34,
-      },
-      {
-        title: "Tap tempo for chases",
-        description:
-          "Tap a key in time with the music. Chase steps lock to the implied BPM.",
-        issue: 35,
-      },
-      {
-        title: "Visual stage layout editor",
-        description:
-          "Drag fixtures onto a stage map. Spatial reasoning for the agent + a faster mental model for humans.",
-        issue: 36,
-      },
-      {
-        title: "Server-rendered scene preview swatches",
-        description:
-          "Thumbnails for every saved scene, generated server-side from the channel values.",
-        issue: 37,
       },
     ],
   },
@@ -336,191 +359,157 @@ const recentlyShipped = roadmap
    Page
    ────────────────────────────────────────────────────────────────────────── */
 
+const body = { fontSize: "var(--step-body)", lineHeight: 1.55 } as const;
+
 export default function RoadmapPage() {
   return (
-    <div className="min-h-screen bg-ink pt-24 pb-16">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-
-        {/* ─────────────────────────────────────────── HEADER ─── */}
-        <header className="hairline pb-8 mb-16 grid lg:grid-cols-[1fr_auto] gap-6 items-end">
-          <div>
-            <p className="eyebrow">Roadmap · current</p>
-            <h1
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "var(--text-display-md)" }}
-            >
-              What&apos;s shipped. What&apos;s next.
-              <span className="block italic text-paper/40">
-                The current cadence, in plain print.
-              </span>
-            </h1>
-          </div>
-          <div className="font-mono text-xs uppercase tracking-widest text-paper/40 whitespace-nowrap text-right">
+    <div className="min-h-screen bg-ink px-[var(--gutter)] pb-[clamp(72px,9vw,140px)]">
+      <PageHead
+        scene={2}
+        label="Roadmap"
+        title="What's shipped, and what's next."
+        lead="The current cadence in plain print: every release so far, what's being built now and what's queued after it."
+        aside={
+          <>
             <p>
-              <span className="text-amber-tungsten">{counts.shipped} shipped</span>
-              <span className="text-paper/30"> · </span>
-              <span className="text-arc-cyan">{counts.planned} planned</span>
+              <span className="text-amber-tungsten font-medium">{counts.shipped} shipped</span>, {counts.planned} in
+              progress or planned
             </p>
-            <p className="mt-1">Latest · v2.13.2 · May 2026</p>
-          </div>
-        </header>
+            <p className="mt-1">Latest release v2.16.2, November 2026</p>
+          </>
+        }
+      />
 
-        {/* ─────────────────────────────── RECENTLY SHIPPED ─── */}
-        <section className="mb-20">
-          <div className="flex items-baseline justify-between mb-6">
-            <p className="eyebrow">Recently shipped</p>
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-              Last 3 releases
-            </p>
-          </div>
-          <div className="grid gap-px bg-rule sm:grid-cols-3">
-            {recentlyShipped.map((item) => (
-              <a
-                key={item.release}
-                href={`https://github.com/${REPO}/releases/tag/${item.release}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-ink p-6 hover:bg-steel/50 transition-colors"
+      {/* Recently shipped */}
+      <section className="mb-[clamp(72px,8vw,120px)]">
+        <SectionHead title="Recently shipped" note="The last three releases" />
+        <div className="grid gap-px bg-rule border-y border-rule md:grid-cols-3">
+          {recentlyShipped.map((item) => (
+            <a
+              key={item.release}
+              href={`https://github.com/${REPO}/releases/tag/${item.release}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-ink py-8 md:p-8 hover:bg-steel transition-colors"
+            >
+              <p className="text-amber-tungsten font-medium tabular-nums" style={body}>
+                {item.release}
+              </p>
+              <p
+                className="font-display text-paper mt-3 group-hover:text-amber-tungsten transition-colors"
+                style={{ fontSize: "var(--step-lead)", lineHeight: 1.15 }}
               >
-                <p className="font-mono text-xs uppercase tracking-widest text-amber-tungsten/70 group-hover:text-amber-tungsten transition-colors">
-                  {item.release}
-                </p>
-                <p className="font-display text-paper text-lg leading-tight mt-3 group-hover:text-amber-tungsten transition-colors">
-                  {item.title.replace(/^v\d+\.\d+(\.\d+)?\s*—\s*/, "")}
-                </p>
-                <p className="font-sans text-sm text-paper/50 mt-3 leading-snug line-clamp-3">
-                  {item.description}
-                </p>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* ─────────────────────────────────────────── LEGEND ─── */}
-        <section className="mb-12 grid grid-cols-2 sm:grid-cols-4 gap-px bg-rule">
-          <LegendCell status="completed" label="Shipped" />
-          <LegendCell status="in-progress" label="In progress" />
-          <LegendCell status="planned" label="Planned" />
-          <LegendCell status="future" label="Future" />
-        </section>
-
-        {/* ─────────────────────────────────────────── TIMELINE ─── */}
-        <section className="space-y-20">
-          {roadmap.map((quarter) => (
-            <QuarterBlock key={quarter.quarter} quarter={quarter} />
+                {item.title.replace(/^v\d+\.\d+(\.\d+)?\s*—\s*/, "")}
+              </p>
+              <p className="text-paper mt-3" style={body}>
+                {item.description}
+              </p>
+            </a>
           ))}
-        </section>
+        </div>
+      </section>
 
-        {/* ─────────────────────────────────────────── CTA ─── */}
-        <section className="hairline mt-24 pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <p className="eyebrow">Have a feature in mind?</p>
-            <h2
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-            >
-              File it. Or vote on what&apos;s queued.
-            </h2>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-x-8 gap-y-3">
-            <Link
-              href={`https://github.com/${REPO}/discussions`}
-              className="group inline-flex items-center gap-3 text-paper font-mono uppercase tracking-widest text-sm border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
-            >
-              Discussions
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-            <Link
-              href={`https://github.com/${REPO}/issues`}
-              className="group inline-flex items-center gap-3 text-paper/60 font-mono uppercase tracking-widest text-sm hover:text-paper transition-colors"
-            >
-              Open issues
-            </Link>
-          </div>
-        </section>
+      {/* Timeline */}
+      <section className="space-y-[clamp(56px,6vw,96px)]">
+        <ul className="flex flex-wrap gap-x-8 gap-y-3 text-paper" style={body} aria-label="Legend">
+          {(["completed", "in-progress", "planned"] as Status[]).map((s) => (
+            <li key={s} className="inline-flex items-center gap-3">
+              <StatusCell status={s} />
+              {STATUS_LABEL[s]}
+            </li>
+          ))}
+        </ul>
+        {roadmap.map((quarter) => (
+          <QuarterBlock key={quarter.quarter} quarter={quarter} />
+        ))}
+      </section>
 
-        {/* ─────────────────────────────────────────── FOOTNOTE ─── */}
-        <p className="mt-12 font-mono text-xs uppercase tracking-widest text-paper/30 text-center">
-          Subject to change · priorities shift with community input · last updated May 2026
-        </p>
-      </div>
+      {/* Next step */}
+      <section className="border-t border-rule mt-[clamp(72px,8vw,120px)] pt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+        <div>
+          <p className="text-paper font-medium" style={body}>
+            Have a feature in mind?
+          </p>
+          <h2 className="font-display text-paper mt-3 max-w-[18ch]" style={{ fontSize: "var(--step-head)" }}>
+            File it, or vote on what&apos;s queued.
+          </h2>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-4">
+          <Link href={`https://github.com/${REPO}/discussions`} className="link-plain">
+            Discussions →
+          </Link>
+          <Link href={`https://github.com/${REPO}/issues`} className="link-plain">
+            Open issues
+          </Link>
+        </div>
+      </section>
+
+      <p className="mt-12 text-paper/80" style={body}>
+        Subject to change: priorities shift with community input. Last updated November 2026.
+      </p>
     </div>
   );
 }
 
 /* ──────────────────────────────────────────────── presentational ── */
 
+const STATUS_LABEL: Record<Status, string> = {
+  completed: "Shipped",
+  "in-progress": "In progress",
+  planned: "Planned",
+  future: "Future",
+};
+
 function QuarterBlock({ quarter }: { quarter: RoadmapQuarter }) {
   return (
     <article>
-      <header className="hairline pb-4 mb-8 grid grid-cols-[1fr_auto] gap-6 items-baseline">
-        <div>
-          <p className="eyebrow flex items-center gap-3">
-            <StatusDot status={quarter.status} />
-            <span>{quarter.quarter}</span>
-            <span className="text-paper/30">·</span>
-            <StatusLabel status={quarter.status} />
-          </p>
-          <h2
-            className="font-display text-paper mt-3"
-            style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}
-          >
-            {quarter.heading}
-          </h2>
-        </div>
-        <p className="font-mono text-xs uppercase tracking-widest text-paper/40 whitespace-nowrap">
+      <div className="flex flex-wrap items-center gap-3 text-paper font-medium" style={body}>
+        <StatusCell status={quarter.status} />
+        <span>
+          {quarter.quarter}, {STATUS_LABEL[quarter.status].toLowerCase()}
+        </span>
+      </div>
+      <div className="mt-3 mb-6 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+        <h2 className="font-display text-paper" style={{ fontSize: "clamp(1.75rem, 1.2rem + 2vw, 2.75rem)" }}>
+          {quarter.heading}
+        </h2>
+        <p className="text-paper/80" style={body}>
           {quarter.items.length} item{quarter.items.length === 1 ? "" : "s"}
         </p>
-      </header>
+      </div>
 
-      <ul className="hairline">
+      <ul className="border-t border-rule">
         {quarter.items.map((item, i) => (
-          <ItemRow key={i} item={item} status={quarter.status} />
+          <ItemRow key={i} item={item} />
         ))}
       </ul>
     </article>
   );
 }
 
-function ItemRow({ item, status }: { item: RoadmapItem; status: Status }) {
+function ItemRow({ item }: { item: RoadmapItem }) {
   const href = item.release
     ? `https://github.com/${REPO}/releases/tag/${item.release}`
     : item.issue
       ? `https://github.com/${REPO}/issues/${item.issue}`
       : undefined;
 
-  const tag = item.release
-    ? item.release
-    : item.issue
-      ? `#${item.issue}`
-      : statusGlyph(status);
-
-  const tagAccent =
-    status === "completed" || status === "in-progress"
-      ? "text-amber-tungsten/70 group-hover:text-amber-tungsten"
-      : "text-arc-cyan/70 group-hover:text-arc-cyan";
+  const tag = item.release ?? (item.issue ? `#${item.issue}` : "");
 
   const content = (
-    <div className="grid grid-cols-[6rem_1fr_1.5rem] gap-6 py-5 border-b border-rule items-baseline">
-      <span
-        className={`font-mono text-xs uppercase tracking-widest tabular-nums ${tagAccent} transition-colors`}
-      >
+    <div className="grid grid-cols-[1fr_auto] md:grid-cols-[7rem_1fr_1.5rem] gap-x-6 gap-y-1 py-5 border-b border-rule items-baseline">
+      <span className="text-paper/80 tabular-nums md:order-none order-2" style={body}>
         {tag}
       </span>
-      <div>
-        <h3 className="font-display text-paper text-lg leading-tight group-hover:text-amber-tungsten transition-colors">
+      <div className="order-1 md:order-none">
+        <h3 className="text-paper font-medium group-hover:text-amber-tungsten transition-colors" style={body}>
           {item.title}
         </h3>
-        <p className="font-sans text-sm text-paper/60 mt-2 leading-snug max-w-2xl">
+        <p className="text-paper mt-1 max-w-[42rem]" style={body}>
           {item.description}
         </p>
       </div>
-      <span
-        aria-hidden
-        className="font-mono text-xs text-paper/30 group-hover:text-amber-tungsten transition-colors justify-self-end"
-      >
+      <span aria-hidden className="hidden md:block text-paper/80 group-hover:text-amber-tungsten transition-colors justify-self-end">
         {href ? "↗" : ""}
       </span>
     </div>
@@ -532,76 +521,20 @@ function ItemRow({ item, status }: { item: RoadmapItem; status: Status }) {
 
   return (
     <li className="group">
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block hover:bg-steel/30 transition-colors"
-      >
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block hover:bg-steel transition-colors">
         {content}
       </a>
     </li>
   );
 }
 
-function LegendCell({ status, label }: { status: Status; label: string }) {
-  return (
-    <div className="bg-ink p-5 flex items-center gap-3">
-      <StatusDot status={status} />
-      <span className="font-mono text-xs uppercase tracking-widest text-paper/60">
-        {label}
-      </span>
-    </div>
-  );
-}
-
-function StatusDot({ status }: { status: Status }) {
-  // Filament dot for shipped; arc dot for in-progress; hollow rings for future.
-  if (status === "completed") {
-    return (
-      <span
-        className="inline-block w-2 h-2 rounded-full bg-amber-tungsten filament"
-        aria-hidden
-      />
-    );
-  }
-  if (status === "in-progress") {
-    return (
-      <span
-        className="inline-block w-2 h-2 rounded-full bg-arc-cyan arc"
-        aria-hidden
-      />
-    );
-  }
-  if (status === "planned") {
-    return (
-      <span
-        className="inline-block w-2 h-2 rounded-full border border-arc-cyan/60"
-        aria-hidden
-      />
-    );
-  }
-  return (
-    <span
-      className="inline-block w-2 h-2 rounded-full border border-paper/30"
-      aria-hidden
-    />
-  );
-}
-
-function StatusLabel({ status }: { status: Status }) {
-  const label = {
-    completed: "Shipped",
-    "in-progress": "In progress",
-    planned: "Planned",
-    future: "Future",
-  }[status];
-  return <span className="text-paper/60">{label}</span>;
-}
-
-function statusGlyph(status: Status): string {
-  if (status === "completed") return "—";
-  if (status === "in-progress") return "···";
-  if (status === "planned") return "—";
-  return "—";
+/** One square swatch cell per status: lit amber for shipped, cyan in progress, an outline for later. */
+function StatusCell({ status }: { status: Status }) {
+  const cls =
+    status === "completed"
+      ? "bg-amber-tungsten"
+      : status === "in-progress"
+        ? "bg-arc-cyan"
+        : "border border-paper/60";
+  return <span aria-hidden className={`inline-block h-3 w-3 shrink-0 ${cls}`} />;
 }

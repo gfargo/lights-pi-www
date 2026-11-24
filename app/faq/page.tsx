@@ -2,15 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { PageHead } from "@/components/PageHead";
+import { SwatchButton } from "@/components/home/Swatch";
 import { trackEvent } from "@/lib/analytics";
+
+const body = { fontSize: "var(--step-body)", lineHeight: 1.55 } as const;
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs = [
     {
-      category: "Getting Started",
+      category: "Getting started",
       questions: [
         {
           q: "Do I need programming experience?",
@@ -60,7 +63,7 @@ export default function FAQPage() {
         },
         {
           q: "How do updates work?",
-          a: "Updates are released on GitHub. You can pull the latest changes and run the update script. We follow semantic versioning."
+          a: "Releases are published on GitHub with notes. From your laptop, pull the latest code and run bash scripts/deploy.sh: it syncs the code to the Pi, installs any new Python dependencies and restarts the control server. QLC+ keeps the current look while it restarts. (./lightsctl.sh update only updates the Pi's OS packages.)"
         },
         {
           q: "Can I customize the interface?",
@@ -68,7 +71,23 @@ export default function FAQPage() {
         },
         {
           q: "What about security?",
-          a: "Lights Pi includes HTTPS setup, firewall configuration, and SSH key authentication. It's designed to be secure by default."
+          a: "The web UI can sit behind a shared password with a session cookie. The provisioning scripts set up a firewall and SSH key login, and HTTPS is available both on the LAN (https://lights.local) and over Tailscale with a real certificate that renews itself."
+        },
+        {
+          q: "Can I use a MIDI controller or OSC?",
+          a: "Yes, at the server level. Since v2.15 the control server listens for MIDI notes and CCs (mapped to actions in midi_mappings.json) and for OSC on UDP port 8000: /scene/<name>, /chase/<name>, /fixture/<id>/<channel>, /master, /cue/go and /blackout, with state sent back on /state/*. A MIDI tab with learn-to-bind and a ready-made TouchOSC layout are next on the roadmap."
+        },
+        {
+          q: "Can I reach the rig when I'm not in the studio?",
+          a: "Yes, over Tailscale. lightsctl tailscale-https install serves the control UI and QLC+ on your tailnet with a trusted certificate. Nothing is exposed to the public internet."
+        },
+        {
+          q: "Can I keep separate setups for different shows or rooms?",
+          a: "Yes. Since v2.16 you can keep several workspaces, one per production or venue, and switch between them from the Diagnostics tab. Fixture groups and the last look travel with each workspace."
+        },
+        {
+          q: "What happens if the control server loses its link to QLC+?",
+          a: "It repairs it. Since v2.16.2 a watchdog notices when commands to QLC+ stop completing, rebuilds the link and reconnects within seconds. /healthz reports qlc_bridge_ok, so a monitor can tell you when it happens."
         }
       ]
     },
@@ -125,11 +144,11 @@ export default function FAQPage() {
         },
         {
           q: "Does the web UI expose all 48 MCP tools, or just the AI chat?",
-          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover Chat (agentic, see below), Quick Commands (one-shot chat + scenes + chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), and Diagnostics (Pi health cards, test_dmx button, log tail). The Groups drawer is interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
+          a: "As of v2.10 the web UI at lights.local:5000 has full feature parity with the MCP layer. Tabs cover Chat (agentic, see below), Quick Commands (one-shot chat + scenes + chips), Virtual Console (per-fixture sliders with Identify buttons), Cue Lists (build / GO / STOP with live elapsed-time indicators), Chases (visual scene-picker builder + start/stop), Quick Tools (Kelvin slider, strobe rate, palette assignment), Audio (BPM and beat detection from a USB mic), and Diagnostics (Pi health cards, test_dmx button, workspace switching, log tail). The Groups drawer is interactive — create / rename / delete groups inline. A red BLACKOUT button lives in the header at all times. Scene tiles have a hover menu for rename / duplicate / delete. No tool is API-only anymore — everything is reachable from the browser."
         },
         {
           q: "Is there a chat interface like Claude or ChatGPT but for my lights?",
-          a: "Yes — v2.11 adds a Chat tab (now the default landing) where you can converse with an LLM that has access to ~39 lighting tools. It plans multi-step operations autonomously: 'set up three-point lighting with tungsten key, daylight fill, magenta back, and save it as photoshoot' → the agent calls list_groups → create_group (×3) → palette → snapshot_scene → reports back. Tool calls show inline (collapsed by default, click to expand args + result). Conversation persists across page reloads in localStorage. Backed by Anthropic's tool_use API or OpenAI's function calling — set AI_PROVIDER in .env. Ollama isn't supported for chat yet because tool-calling varies too much by model."
+          a: "Yes — the Chat tab lets you converse with an LLM that has access to all 48 lighting tools. It plans multi-step operations autonomously: 'set up three-point lighting with tungsten key, daylight fill, magenta back, and save it as photoshoot' → the agent calls list_groups → create_group (×3) → palette → snapshot_scene → reports back. Tool calls show inline (collapsed by default, click to expand args + result). Conversations are saved, so you can come back to them later. Backed by Anthropic's tool_use API or OpenAI's function calling — set AI_PROVIDER in .env. Ollama isn't supported for chat yet because tool-calling varies too much by model."
         },
         {
           q: "Can the agent help me debug when something's wrong?",
@@ -161,83 +180,86 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4">
-            Frequently Asked <span className="text-gradient">Questions</span>
-          </h1>
-          <p className="text-xl text-gray-400">
-            Everything you need to know about Lights Pi
-          </p>
-        </div>
+    <div className="min-h-screen bg-ink px-[var(--gutter)] pb-[clamp(72px,9vw,140px)]">
+      <PageHead
+        scene={3}
+        label="FAQ"
+        title="Questions, answered."
+        lead="Everything people ask about Lights Pi: the hardware, the software, the MCP server and what to try when something won't respond."
+        aside={`${faqs.reduce((n, c) => n + c.questions.length, 0)} questions`}
+      />
 
-        <div className="space-y-12">
-          {faqs.map((category, catIndex) => (
-            <div key={catIndex}>
-              <h2 className="text-2xl font-bold mb-6 text-white">{category.category}</h2>
-              <div className="space-y-4">
-                {category.questions.map((faq, qIndex) => {
-                  const index = catIndex * 100 + qIndex;
-                  const isOpen = openIndex === index;
-                  return (
-                    <div
-                      key={qIndex}
-                      className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden hover:shadow-md transition"
+      <div className="space-y-[clamp(56px,6vw,96px)]">
+        {faqs.map((category, catIndex) => (
+          <section
+            key={catIndex}
+            className="grid lg:grid-cols-[minmax(0,18rem)_minmax(0,46rem)] gap-x-12 gap-y-6 border-t border-rule pt-8"
+          >
+            <h2
+              className="font-display text-paper lg:sticky lg:top-28 self-start"
+              style={{ fontSize: "var(--step-lead)", lineHeight: 1.15 }}
+            >
+              {category.category}
+            </h2>
+            <ul>
+              {category.questions.map((faq, qIndex) => {
+                const index = catIndex * 100 + qIndex;
+                const isOpen = openIndex === index;
+                const panelId = `faq-${index}`;
+                return (
+                  <li key={qIndex} className="border-b border-rule first:-mt-4">
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => {
+                        const nextOpen = !isOpen;
+                        setOpenIndex(nextOpen ? index : null);
+                        if (nextOpen) {
+                          trackEvent.expandFaq(category.category, faq.q);
+                        }
+                      }}
+                      className="group w-full py-4 flex items-baseline justify-between gap-6 text-left min-h-[48px]"
+                      style={body}
                     >
-                      <button
-                        onClick={() => {
-                          const nextOpen = !isOpen;
-                          setOpenIndex(nextOpen ? index : null);
-                          if (nextOpen) {
-                            trackEvent.expandFaq(category.category, faq.q);
-                          }
-                        }}
-                        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-800 transition"
-                      >
-                        <span className="font-semibold text-white pr-4">{faq.q}</span>
-                        <ChevronDown
-                          className={`w-5 h-5 text-gray-400 shrink-0 transition-transform ${
-                            isOpen ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                      {isOpen && (
-                        <div className="px-6 pb-4 text-gray-300">
-                          {faq.a}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 border border-purple-500/50 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-white">Still Have Questions?</h2>
-          <p className="text-gray-400 mb-6">
-            Join our community for help and support
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/community"
-              onClick={() => trackEvent.clickJoinCommunity("faq", "discord")}
-              className="bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
-            >
-              Join Discord
-            </a>
-            <Link
-              href="/docs"
-              onClick={() => trackEvent.clickViewDocs("faq")}
-              className="bg-gray-900 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition border border-purple-500/50"
-            >
-              View Documentation
-            </Link>
-          </div>
-        </div>
+                      <span className="font-medium text-paper group-hover:text-amber-tungsten transition-colors">
+                        {faq.q}
+                      </span>
+                      <span aria-hidden className="text-paper/80 shrink-0 w-4 text-center">
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <p id={panelId} className="pb-6 pr-10 text-paper" style={body}>
+                        {faq.a}
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
       </div>
+
+      <section className="border-t border-rule mt-[clamp(72px,8vw,120px)] pt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+        <div>
+          <h2 className="font-display text-paper" style={{ fontSize: "var(--step-head)" }}>
+            Still have questions?
+          </h2>
+          <p className="mt-4 text-paper max-w-[36rem]" style={body}>
+            Ask the community, or read the documentation.
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-5">
+          <SwatchButton href="/community" onClick={() => trackEvent.clickJoinCommunity("faq", "discord")}>
+            Join Discord
+          </SwatchButton>
+          <Link href="/docs" onClick={() => trackEvent.clickViewDocs("faq")} className="link-plain">
+            View documentation
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

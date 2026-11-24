@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
-import { Copy, Check } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 
 interface DocsCodeBlockProps {
@@ -12,9 +11,8 @@ interface DocsCodeBlockProps {
 }
 
 /**
- * Editorial code block — hairline border, mono caption label, copy button
- * only revealed on hover. Background stays consistent with the docs
- * surface (steel/30, not the syntax theme's default).
+ * Code block: hairline border, the language name and a copy button in the
+ * text face above the code, the code itself in mono on the steel surface.
  */
 export function DocsCodeBlock({ children, language }: DocsCodeBlockProps) {
   const [copied, setCopied] = useState(false)
@@ -27,25 +25,18 @@ export function DocsCodeBlock({ children, language }: DocsCodeBlockProps) {
   }
 
   return (
-    <div className="relative group my-6 border border-rule bg-steel/30 overflow-hidden">
+    <div className="relative group my-6 border border-rule bg-steel overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2 border-b border-rule">
-        <span className="font-mono text-xs uppercase tracking-widest text-paper/50">
-          {language && language !== "text" ? language : "snippet"}
+        <span className="text-paper/80 text-[15px]">
+          {language && language !== "text" ? language : "Snippet"}
         </span>
         <button
+          type="button"
           onClick={handleCopy}
-          className="font-mono text-xs uppercase tracking-widest text-paper/40 hover:text-amber-tungsten transition-colors opacity-0 group-hover:opacity-100 inline-flex items-center gap-1.5"
+          className="text-[15px] font-medium text-paper/80 hover:text-amber-tungsten transition-colors min-h-[32px] px-1"
           aria-label="Copy code"
         >
-          {copied ? (
-            <>
-              <Check className="w-3 h-3" /> Copied
-            </>
-          ) : (
-            <>
-              <Copy className="w-3 h-3" /> Copy
-            </>
-          )}
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
       <SyntaxHighlighter
@@ -57,6 +48,7 @@ export function DocsCodeBlock({ children, language }: DocsCodeBlockProps) {
           background: "transparent",
           fontSize: "0.875rem",
         }}
+        codeTagProps={{ style: { background: "transparent" } }}
         showLineNumbers={children.split("\n").length > 3}
       >
         {children}

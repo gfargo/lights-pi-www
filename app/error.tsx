@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Home, RefreshCw, AlertTriangle, Github } from "lucide-react";
 import { useEffect } from "react";
+import { PageHead } from "@/components/PageHead";
 
 export default function Error({
   error,
@@ -17,76 +17,41 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 flex items-center justify-center px-4">
-      <div className="max-w-2xl mx-auto text-center">
-        {/* Animated Error Icon */}
-        <div className="mb-8">
-          <div className="inline-flex space-x-4 mb-4">
-            <div className="w-20 h-20 rounded-full bg-red-500/20 animate-pulse flex items-center justify-center">
-              <AlertTriangle className="w-10 h-10 text-red-500" />
-            </div>
-            <div className="w-20 h-20 rounded-full bg-orange-500/20 animate-pulse delay-200 flex items-center justify-center">
-              <AlertTriangle className="w-10 h-10 text-orange-500" />
-            </div>
-            <div className="w-20 h-20 rounded-full bg-yellow-500/20 animate-pulse delay-500 flex items-center justify-center">
-              <AlertTriangle className="w-10 h-10 text-yellow-500" />
-            </div>
-          </div>
-        </div>
-
-        {/* Error Message */}
-        <h1 className="text-8xl md:text-9xl font-bold mb-4 text-gradient">500</h1>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-          Something Went Wrong
-        </h2>
-        <p className="text-xl text-gray-400 mb-12 max-w-lg mx-auto">
-          Our lights flickered and something broke. We&apos;re working on fixing it!
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <button
-            onClick={reset}
-            className="group flex items-center space-x-2 bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
-          >
-            <RefreshCw className="w-5 h-5" />
-            <span>Try Again</span>
+    <div className="min-h-[100svh] bg-ink px-[var(--gutter)] pb-[clamp(96px,12vw,180px)]">
+      <PageHead
+        scene={5}
+        label="Error"
+        title="Something tripped the breaker."
+        lead="This page failed to load. Try it again; if it keeps happening, tell us on GitHub."
+      >
+        <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <button type="button" onClick={reset} className="btn-swatch cursor-pointer">
+            <span>Try again</span>
+            <span aria-hidden="true">↻</span>
+            <span className="foot swatch" aria-hidden="true">
+              {Array.from({ length: 8 }, (_, i) => (
+                <span key={i} />
+              ))}
+            </span>
           </button>
-          <Link
-            href="/"
-            className="flex items-center space-x-2 bg-gray-800 text-gray-300 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition border border-gray-700 hover:bg-gray-700"
+          <a
+            href="https://github.com/gfargo/lights-pi/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-plain"
           >
-            <Home className="w-5 h-5" />
-            <span>Go Home</span>
+            Report it on GitHub
+          </a>
+          <Link href="/" className="link-plain">
+            Home
           </Link>
         </div>
-
-        {/* Error Details & Help */}
-        <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
-          <h3 className="text-lg font-semibold mb-4 text-white">
-            Need Help?
-          </h3>
-          <div className="space-y-3 text-left max-w-md mx-auto">
-            <p className="text-gray-400 text-sm">
-              If this problem persists, please report it on GitHub:
-            </p>
-            <a
-              href="https://github.com/gfargo/lights-pi/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-orange-500 hover:text-orange-400 transition p-2 rounded-lg hover:bg-gray-700"
-            >
-              <Github className="w-5 h-5" />
-              <span>Report Issue on GitHub</span>
-            </a>
-            {error.digest && (
-              <p className="text-xs text-gray-500 font-mono bg-gray-900 p-2 rounded">
-                Error ID: {error.digest}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
+        {error.digest ? (
+          <p className="mt-10 text-paper/80" style={{ fontSize: "var(--step-body)" }}>
+            Error ID {error.digest}. Include it in the report.
+          </p>
+        ) : null}
+      </PageHead>
     </div>
   );
 }

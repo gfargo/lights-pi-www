@@ -20,7 +20,7 @@ export function createPathResolver(rootDir: string = process.cwd()): PathResolve
     const tsconfigPath = path.join(rootDir, "tsconfig.json");
     
     let aliases: Record<string, string> = {};
-    let baseDir = rootDir;
+    const baseDir = rootDir;
     let hasSrcDir = false;
 
     // Try to read components.json first

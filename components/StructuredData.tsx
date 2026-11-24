@@ -4,7 +4,7 @@ export function StructuredData() {
     "@type": "Organization",
     "name": "Lights Pi",
     "url": "https://lights.griffen.codes",
-    "logo": "https://lights.griffen.codes/og-image.svg",
+    "logo": "https://lights.griffen.codes/favicon.svg",
     "description": "Open source Raspberry Pi lighting controller for DMX fixtures",
     "sameAs": [
       "https://github.com/gfargo/lights-pi",

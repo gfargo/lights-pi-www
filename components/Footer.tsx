@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Github } from "lucide-react";
 import { useFlag } from "@/components/flags/flags-provider";
+import { SCENES } from "@/lib/scenes";
 
 interface FooterProps {
   /** Latest release tag, fetched server-side and passed in by layout.tsx. */
@@ -10,78 +10,86 @@ interface FooterProps {
 }
 
 /**
- * Footer — editorial colophon. Four columns of mono links, hairline rules,
- * masthead-style production credit at the bottom.
+ * Footer — the mark, built large. LIGHTSPI is eight letters, one per
+ * fixture: each letter is knocked out of its own block in that fixture's
+ * colour from the Sunset scene, blocks of different heights on one baseline.
  */
+const LETTERS = ["L", "I", "G", "H", "T", "S", "P", "I"];
+const HEIGHTS = [100, 82, 92, 70, 88, 76, 96, 64];
+
 export function Footer({ version }: FooterProps) {
   const showShowcase = useFlag("enable-showcase");
+  const cells = SCENES[0].cells;
 
   return (
-    <footer className="bg-ink text-paper border-t border-rule">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
-        {/* Wordmark */}
-        <div className="flex items-end justify-between gap-6 hairline pb-8 mb-12">
-          <div className="flex items-center gap-3">
-            <span className="filament inline-block w-2 h-2 rounded-full bg-amber-tungsten" />
-            <span className="font-mono uppercase tracking-widest text-sm text-paper">
-              lights-pi
-            </span>
-          </div>
-          <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-            {version}
+    <footer className="bg-ink text-paper px-[var(--gutter)] pt-[clamp(72px,10vw,140px)] pb-10">
+      <div
+        aria-label="Lights Pi"
+        role="img"
+        className="flex items-end gap-[4px] h-[22svh] md:h-[34svh]"
+      >
+        {LETTERS.map((l, i) => (
+          <span
+            key={i}
+            aria-hidden="true"
+            className="flex-1 flex items-end justify-center overflow-hidden text-ink font-display"
+            style={{
+              backgroundColor: cells[i],
+              height: `${HEIGHTS[i]}%`,
+              fontSize: "clamp(2.5rem, 9vw, 9rem)",
+              lineHeight: 0.8,
+              paddingBottom: "0.08em",
+            }}
+          >
+            {l}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-14 grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10">
+        <Column className="md:col-span-2" label="Product" links={[
+          { href: "/quick-start", label: "Quick start" },
+          { href: "/hardware", label: "Hardware" },
+          { href: "/demo", label: "Playground" },
+          { href: "/docs", label: "Docs" },
+          { href: "/roadmap", label: "Roadmap" },
+        ]} />
+        <Column className="md:col-span-2" label="Community" links={[
+          { href: "https://github.com/gfargo/lights-pi", label: "GitHub", external: true },
+          { href: "https://discord.com/invite/KGu9nE9Ejx", label: "Discord", external: true },
+          ...(showShowcase ? [{ href: "/showcase", label: "Showcase" }] : []),
+          { href: "/contributing", label: "Contributing" },
+        ]} />
+        <Column className="md:col-span-2" label="Resources" links={[
+          { href: "/blog", label: "Blog" },
+          { href: "/use-cases", label: "Use cases" },
+          { href: "/comparison", label: "Comparison" },
+          { href: "/faq", label: "FAQ" },
+        ]} />
+        <Column className="md:col-span-2" label="Legal" links={[
+          { href: "https://opensource.org/licenses/MIT", label: "MIT licence", external: true },
+          { href: "/privacy", label: "Privacy" },
+        ]} />
+        <div className="col-span-2 md:col-span-4 text-paper" style={{ fontSize: "16px", lineHeight: 1.6 }}>
+          <p className="font-medium">Latest release {version}</p>
+          <p className="mt-3 text-paper/80">
+            Photographs via Wikimedia Commons:{" "}
+            <a className="underline" href="https://commons.wikimedia.org/wiki/File:Raspberry_Pi_4_Model_B_-_Side.jpg">Raspberry Pi 4</a> by Laserlicht,{" "}
+            <a className="underline" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>;{" "}
+            <a className="underline" href="https://commons.wikimedia.org/wiki/File:DMX_Cable.jpg">DMX Cable</a> by DJSparky,{" "}
+            <a className="underline" href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>;{" "}
+            <a className="underline" href="https://commons.wikimedia.org/wiki/File:Spotlight_(14871682502).jpg">Spotlight</a> by Blondinrikard Fröberg,{" "}
+            <a className="underline" href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>.
+            Interface screenshots and rig footage are of Lights Pi itself.
           </p>
         </div>
+      </div>
 
-        {/* Link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-          <Column label="Product" links={[
-            { href: "/quick-start", label: "Quick Start" },
-            { href: "/hardware", label: "Hardware" },
-            { href: "/demo", label: "Playground" },
-            { href: "/docs", label: "Docs" },
-            { href: "/roadmap", label: "Roadmap" },
-          ]} />
-
-          <Column
-            label="Community"
-            links={[
-              { href: "https://github.com/gfargo/lights-pi", label: "GitHub", external: true },
-              { href: "https://discord.com/invite/KGu9nE9Ejx", label: "Discord", external: true },
-              ...(showShowcase ? [{ href: "/showcase", label: "Showcase" }] : []),
-              { href: "/contributing", label: "Contributing" },
-            ]}
-          />
-
-          <Column label="Resources" links={[
-            { href: "/blog", label: "Blog" },
-            { href: "/use-cases", label: "Use Cases" },
-            { href: "/comparison", label: "Comparison" },
-            { href: "/faq", label: "FAQ" },
-          ]} />
-
-          <Column label="Legal" links={[
-            { href: "https://opensource.org/licenses/MIT", label: "MIT License", external: true },
-            { href: "/privacy", label: "Privacy" },
-          ]}>
-            <a
-              href="https://github.com/gfargo/lights-pi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-paper/60 hover:text-amber-tungsten transition-colors inline-flex"
-              aria-label="GitHub"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-          </Column>
-        </div>
-
-        {/* Colophon */}
-        <div className="hairline mt-16 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 font-mono text-xs uppercase tracking-widest text-paper/40">
-          <p>&copy; {new Date().getFullYear()} Lights Pi · MIT</p>
-          <p className="italic font-display normal-case text-paper/40 text-sm tracking-normal">
-            Set design by you. Lighting design by your agent.
-          </p>
-        </div>
+      <div className="mt-14 flex flex-wrap items-center justify-between gap-4 text-paper" style={{ fontSize: "16px" }}>
+        <p>&copy; {new Date().getFullYear()} Lights Pi · MIT</p>
+        <Link href="/quick-start" className="inline-flex items-center min-h-[44px] px-4 bg-paper text-ink font-semibold hover:bg-amber-tungsten transition-colors">
+          Build one
+        </Link>
       </div>
     </footer>
   );
@@ -93,42 +101,25 @@ interface ColumnLink {
   external?: boolean;
 }
 
-function Column({
-  label,
-  links,
-  children,
-}: {
-  label: string;
-  links: ColumnLink[];
-  children?: React.ReactNode;
-}) {
+function Column({ label, links, className = "" }: { label: string; links: ColumnLink[]; className?: string }) {
   return (
-    <div>
-      <p className="eyebrow">{label}</p>
-      <ul className="mt-5 space-y-3">
+    <nav aria-label={label} className={className}>
+      <p className="text-paper font-medium" style={{ fontSize: "16px" }}>{label}</p>
+      <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
           <li key={link.href}>
             {link.external ? (
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-sm text-paper/60 hover:text-amber-tungsten transition-colors"
-              >
+              <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-paper/80 hover:text-amber-tungsten transition-colors" style={{ fontSize: "16px" }}>
                 {link.label}
               </a>
             ) : (
-              <Link
-                href={link.href}
-                className="font-mono text-sm text-paper/60 hover:text-amber-tungsten transition-colors"
-              >
+              <Link href={link.href} className="text-paper/80 hover:text-amber-tungsten transition-colors" style={{ fontSize: "16px" }}>
                 {link.label}
               </Link>
             )}
           </li>
         ))}
       </ul>
-      {children && <div className="mt-6">{children}</div>}
-    </div>
+    </nav>
   );
 }
