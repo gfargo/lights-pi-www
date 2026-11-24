@@ -1,37 +1,27 @@
 # Scripts
 
-## OG Image Generation
+## Social cards
 
-### `generate-og-images.ts`
+`generate-og-images.ts` renders `scripts/og/card.html` with a local headless
+Chrome into:
 
-Automatically converts SVG social media card images to PNG format for maximum platform compatibility.
+- `public/og-image.png` (1200×630, Open Graph)
+- `public/twitter-card.png` (1200×600, Twitter / X)
 
-**Source files:**
-- `public/og-image.svg` → `public/og-image.png` (1200x630)
-- `public/twitter-card.svg` → `public/twitter-card.png` (1200x600)
-
-**Usage:**
+The card uses the site's typeface (Chillax, loaded from Fontshare) and the
+Sunset scene's swatch colours. The PNGs are committed; the build does not
+regenerate them, because Vercel's build image has no Chrome.
 
 ```bash
-# Manual generation
-npm run generate:og
-
-# Automatic generation (runs before build)
-npm run build
+npm run generate:og        # set CHROME_PATH if Chrome isn't in the usual place
 ```
 
-**How it works:**
-1. Reads SVG files from `public/` directory
-2. Uses Sharp to convert to high-quality PNG (95% quality, level 9 compression)
-3. Outputs PNG files to `public/` directory
-4. PNG files are gitignored and regenerated on each build
+To change the card, edit `scripts/og/card.html` (open it in a browser with
+`?h=630` or `?h=600` to preview), then run the command above and commit the
+PNGs.
 
-**Why PNG?**
-- Better platform compatibility (some social platforms don't support SVG)
-- Consistent rendering across all platforms
-- Recommended by OpenGraph best practices
+## Icons
 
-**Editing images:**
-1. Edit the SVG source files (`og-image.svg`, `twitter-card.svg`)
-2. Run `npm run generate:og` to regenerate PNGs
-3. Or just run `npm run build` - PNGs are auto-generated via prebuild hook
+The favicon and Apple touch icon are rendered by `app/icon.tsx` and
+`app/apple-icon.tsx` from `lib/icon-mark.tsx`. `public/favicon.svg` is the
+same mark as a static file (used as the schema.org logo).

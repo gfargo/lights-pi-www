@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  Social card source. Rendered to public/og-image.png (1200x630) and
+  public/twitter-card.png (1200x600) by scripts/generate-og-images.ts.
+  The height comes from the query string (?h=600). Same motif as the site:
+  the Sunset scene's eight fixture colours as a band of bars.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@500,600&display=block" rel="stylesheet">
+<style>
+  :root { --ink:#0A0A0A; --paper:#F1F1EE; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1200px; height:var(--h,630px); background:var(--ink); overflow:hidden; }
+  body { font-family:"Chillax", sans-serif; color:var(--paper); position:relative; }
+  .mark { position:absolute; left:64px; top:60px; display:flex; align-items:center; gap:16px; font-size:32px; font-weight:600; letter-spacing:-0.02em; }
+  .mark i { display:flex; gap:3px; width:60px; height:32px; }
+  .mark i b { flex:1; }
+  h1 { position:absolute; left:64px; bottom:118px; width:640px; font-size:96px; line-height:0.95; font-weight:600; letter-spacing:-0.04em; }
+  p { position:absolute; left:64px; bottom:60px; font-size:28px; font-weight:500; }
+  .band { position:absolute; right:0; top:0; bottom:0; width:430px; display:flex; align-items:flex-end; gap:6px; }
+  .band b { flex:1; }
+</style>
+</head>
+<body>
+  <div class="mark"><i id="mark"></i>Lights Pi</div>
+  <h1>Stage lights, run from a&nbsp;Pi.</h1>
+  <p>Open-source DMX control · lights.griffen.codes</p>
+  <div class="band" id="band"></div>
+<script>
+  const h = Number(new URLSearchParams(location.search).get("h")) || 630;
+  document.documentElement.style.setProperty("--h", h + "px");
+  const cells = ["#ff3c00","#ffff57","#ff3c00","#ff3c00","#dc1e50","#ff3c00","#dc1e50","#dc1e50"];
+  const heights = [100, 82, 92, 70, 88, 76, 96, 64];
+  for (const [i, c] of cells.entries()) {
+    const m = document.createElement("b"); m.style.background = c; document.getElementById("mark").append(m);
+    const b = document.createElement("b"); b.style.background = c; b.style.height = heights[i] + "%"; document.getElementById("band").append(b);
+  }
+</script>
+</body>
+</html>

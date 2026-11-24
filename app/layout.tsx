@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Lights Pi - QLC+ Lighting Controller",
+        alt: "Lights Pi: stage lights, run from a Pi. Open-source DMX control.",
         type: "image/png",
       },
     ],
