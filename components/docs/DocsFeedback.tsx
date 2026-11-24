@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowUpRight } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 
 interface DocsFeedbackProps {
@@ -11,10 +10,13 @@ interface DocsFeedbackProps {
 
 type FeedbackState = "idle" | "positive" | "negative"
 
+const body = { fontSize: "var(--step-body)", lineHeight: 1.55 } as const
+const inlineLink =
+  "text-paper underline decoration-amber-tungsten/60 decoration-2 underline-offset-4 hover:text-amber-tungsten hover:decoration-amber-tungsten transition-colors"
+
 /**
- * Editorial feedback prompt. Replaces the previous rounded-card design with
- * a hairline-divided section, mono labels, two flat text-button options
- * (Yes / No), and a follow-up message after submission.
+ * Feedback prompt at the foot of a doc page: a yes / no question, then a
+ * thank-you or three ways to get help.
  */
 export function DocsFeedback({ slug, wikiUrl }: DocsFeedbackProps) {
   const [state, setState] = useState<FeedbackState>("idle")
@@ -27,18 +29,14 @@ export function DocsFeedback({ slug, wikiUrl }: DocsFeedbackProps) {
 
   if (state === "positive") {
     return (
-      <section className="mt-16 hairline pt-8">
-        <p className="eyebrow text-amber-tungsten">Thanks for the feedback</p>
-        <p className="font-display italic text-paper/70 text-lg mt-4 max-w-2xl">
+      <section className="mt-16 border-t border-rule pt-8 max-w-[44rem]" aria-live="polite">
+        <p className="text-paper font-medium" style={body}>
+          Thanks for the feedback.
+        </p>
+        <p className="text-paper mt-2" style={body}>
           Help improve this page by{" "}
-          <a
-            href={`${wikiUrl}/_edit`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten inline-flex items-center gap-1 not-italic"
-          >
-            editing it on the wiki
-            <ArrowUpRight className="w-3.5 h-3.5" />
+          <a href={`${wikiUrl}/_edit`} target="_blank" rel="noopener noreferrer" className={inlineLink}>
+            editing it on the wiki ↗
           </a>
           .
         </p>
@@ -48,12 +46,14 @@ export function DocsFeedback({ slug, wikiUrl }: DocsFeedbackProps) {
 
   if (state === "negative") {
     return (
-      <section className="mt-16 hairline pt-8">
-        <p className="eyebrow">Sorry this page wasn&apos;t helpful</p>
-        <p className="font-display italic text-paper/70 text-lg mt-4 mb-8 max-w-2xl">
-          Three ways to get help — or to fix it yourself.
+      <section className="mt-16 border-t border-rule pt-8" aria-live="polite">
+        <p className="text-paper font-medium" style={body}>
+          Sorry this page wasn&apos;t helpful.
         </p>
-        <ul className="grid sm:grid-cols-3 gap-px bg-rule">
+        <p className="text-paper mt-2 mb-8" style={body}>
+          Three ways to get help, or to fix it yourself.
+        </p>
+        <ul className="grid sm:grid-cols-3 gap-px bg-rule border-y border-rule">
           <FeedbackOption
             label="Open an issue"
             note="Tell us what's broken"
@@ -78,19 +78,25 @@ export function DocsFeedback({ slug, wikiUrl }: DocsFeedbackProps) {
   }
 
   return (
-    <section className="mt-16 hairline pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <p className="eyebrow">Was this page helpful?</p>
-      <div className="flex gap-8 font-mono text-xs uppercase tracking-widest">
+    <section className="mt-16 border-t border-rule pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p className="text-paper font-medium" style={body}>
+        Was this page helpful?
+      </p>
+      <div className="flex gap-3">
         <button
+          type="button"
           onClick={() => handleFeedback(true)}
-          className="text-paper/60 hover:text-arc-cyan border-b border-paper/20 hover:border-arc-cyan pb-1 transition-colors"
+          className="min-h-[44px] px-5 border border-paper/40 text-paper font-medium hover:border-amber-tungsten hover:text-amber-tungsten transition-colors"
+          style={body}
           aria-label="Yes, this page was helpful"
         >
           Yes
         </button>
         <button
+          type="button"
           onClick={() => handleFeedback(false)}
-          className="text-paper/60 hover:text-amber-tungsten border-b border-paper/20 hover:border-amber-tungsten pb-1 transition-colors"
+          className="min-h-[44px] px-5 border border-paper/40 text-paper font-medium hover:border-amber-tungsten hover:text-amber-tungsten transition-colors"
+          style={body}
           aria-label="No, this page was not helpful"
         >
           No
@@ -118,15 +124,14 @@ function FeedbackOption({
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}
-        className="group block p-5 hover:bg-steel/30 transition-colors"
+        className="group block py-5 sm:px-5 hover:bg-steel transition-colors"
       >
-        <div className="flex items-center justify-between gap-3">
-          <span className="font-mono text-sm uppercase tracking-widest text-paper group-hover:text-amber-tungsten transition-colors">
-            {label}
-          </span>
-          <ArrowUpRight className="w-3.5 h-3.5 text-paper/30 group-hover:text-amber-tungsten transition-colors" />
-        </div>
-        <p className="font-display italic text-paper/40 mt-1 text-sm">{note}</p>
+        <span className="font-medium text-paper group-hover:text-amber-tungsten transition-colors" style={body}>
+          {label} ↗
+        </span>
+        <p className="text-paper/80 mt-1" style={body}>
+          {note}
+        </p>
       </a>
     </li>
   )

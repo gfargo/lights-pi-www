@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Github } from "lucide-react";
+import { PageHead } from "@/components/PageHead";
 
 export const metadata: Metadata = {
   title: "Contributing - Lights Pi",
@@ -9,23 +9,25 @@ export const metadata: Metadata = {
 
 export default function ContributingPage() {
   return (
-    <section className="min-h-screen bg-ink py-32">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
-        <p className="eyebrow">Community</p>
-        <h1
-          className="font-display text-paper mt-6"
-          style={{ fontSize: "var(--text-display-md)" }}
-        >
-          Contributing
-        </h1>
+    <div className="min-h-screen bg-ink px-[var(--gutter)] pb-[clamp(72px,9vw,140px)]">
+      <PageHead
+        scene={4}
+        label="Contributing"
+        title="Help build the rig."
+        lead="Lights Pi is open source and community-driven. Whether you're fixing a typo in the docs or adding a new MCP tool, contributions are welcome."
+        aside={
+          <a
+            href="https://github.com/gfargo/lights-pi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-plain"
+          >
+            gfargo/lights-pi on GitHub
+          </a>
+        }
+      />
 
-        <p className="mt-8 text-lg text-paper/70 leading-relaxed">
-          Lights Pi is open source and community-driven. Whether you&apos;re
-          fixing a typo in the docs or adding a new MCP tool, contributions
-          are welcome.
-        </p>
-
-        <div className="mt-16 space-y-12">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-px bg-rule border-y border-rule">
           <ContribSection
             title="Report a bug"
             description="Found something broken? Open an issue with steps to reproduce, your Pi model, and QLC+ version."
@@ -52,7 +54,7 @@ export default function ContributingPage() {
 
           <ContribSection
             title="Improve docs"
-            description="The documentation lives in the GitHub Wiki. Click 'Edit' on any wiki page to contribute directly — changes appear on this site within an hour."
+            description="The documentation lives in the GitHub Wiki. Choose Edit on any wiki page to contribute directly — changes appear on this site within an hour."
             link="/docs"
             linkLabel="Browse docs"
           />
@@ -64,21 +66,8 @@ export default function ContributingPage() {
             linkLabel="Join Discord"
             external
           />
-        </div>
-
-        <div className="hairline mt-20 pt-10 flex items-center gap-4">
-          <a
-            href="https://github.com/gfargo/lights-pi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-paper/60 hover:text-amber-tungsten transition-colors"
-          >
-            <Github className="w-4 h-4" aria-hidden />
-            gfargo/lights-pi
-          </a>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -101,15 +90,14 @@ function ContribSection({
     : { href: link };
 
   return (
-    <div className="border-t border-rule pt-8">
-      <h2 className="font-mono text-sm uppercase tracking-widest text-amber-tungsten">
+    <div className="bg-ink py-8 md:p-10 flex flex-col">
+      <h2 className="font-display text-paper" style={{ fontSize: "var(--step-lead)", lineHeight: 1.15 }}>
         {title}
       </h2>
-      <p className="mt-3 text-paper/70 leading-relaxed">{description}</p>
-      <LinkComp
-        {...linkProps}
-        className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-paper border-b border-paper/30 pb-0.5 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
-      >
+      <p className="mt-4 text-paper max-w-[36rem]" style={{ fontSize: "var(--step-body)", lineHeight: 1.55 }}>
+        {description}
+      </p>
+      <LinkComp {...linkProps} className="link-plain mt-6 self-start">
         {linkLabel} →
       </LinkComp>
     </div>

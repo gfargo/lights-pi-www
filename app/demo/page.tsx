@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { PageHead, SectionHead } from "@/components/PageHead";
+import { SwatchButton } from "@/components/home/Swatch";
 
 // The 3D rig is heavy (~145KB gzipped three.js). Lazy-load with no SSR.
 const DemoLightingRig = dynamic(
@@ -14,8 +16,8 @@ const DemoLightingRig = dynamic(
     ssr: false,
     loading: () => (
       <div className="w-full h-full flex items-center justify-center">
-        <span className="font-mono text-xs uppercase tracking-widest text-paper/30">
-          Loading rig…
+        <span className="text-paper/80" style={{ fontSize: "var(--step-body)" }}>
+          Loading the rig…
         </span>
       </div>
     ),
@@ -97,235 +99,204 @@ export default function DemoPage() {
   }, [current]);
 
   return (
-    <div className="min-h-screen bg-ink pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <header className="hairline pb-8 mb-12">
-          <p className="eyebrow">Playground</p>
-          <h1
-            className="font-display text-paper mt-3"
-            style={{ fontSize: "var(--text-display-md)" }}
+    <div className="min-h-screen bg-ink px-[var(--gutter)] pb-[clamp(72px,9vw,140px)]">
+      <PageHead
+        scene={0}
+        label="Playground"
+        title="Drive the rig and watch it respond."
+        lead="A simulated DMX rig: three fixtures hanging from a truss. Adjust colour and intensity to see the MCP tool call it would send to a real Lights Pi."
+      />
+
+      {/* Main: rig + controls */}
+      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-px bg-rule border-y border-rule">
+        {/* 3D rig viewport */}
+        <div className="bg-ink relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-auto lg:min-h-[640px] overflow-hidden">
+          <DemoLightingRig fixtures={fixtures} selectedIndex={selected} onSelectFixture={setSelected} />
+          <div
+            className="absolute top-4 left-4 text-paper font-medium flex items-center gap-2 pointer-events-none"
+            style={{ fontSize: "var(--step-small)" }}
           >
-            Drive the rig.
-            <span className="italic text-paper/40"> Watch it respond.</span>
-          </h1>
-          <p className="mt-4 text-lg text-paper/60 max-w-2xl leading-relaxed">
-            A simulated DMX rig — three fixtures hanging from a truss. Adjust
-            color and intensity to see how an MCP tool call would render on a
-            real Lights Pi setup.
-          </p>
-        </header>
-
-        {/* Main: rig + controls */}
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-px bg-rule">
-          {/* 3D rig viewport */}
-          <div className="bg-ink relative aspect-[5/4] lg:aspect-auto lg:min-h-[640px] overflow-hidden">
-            <DemoLightingRig
-              fixtures={fixtures}
-              selectedIndex={selected}
-              onSelectFixture={setSelected}
-            />
-            {/* Viewport label */}
-            <div className="absolute top-4 left-4 font-mono text-xs uppercase tracking-widest text-paper/40 flex items-center gap-3">
-              <span className="filament inline-block w-1.5 h-1.5 rounded-full bg-amber-tungsten" />
-              rehearsal · live
-            </div>
-            <div className="absolute bottom-4 left-4 font-mono text-xs text-paper/30">
-              Click a fixture to select
-            </div>
-            <div className="absolute bottom-4 right-4 font-mono text-xs uppercase tracking-widest text-paper/30">
-              {fixtures.length} fixtures · 1 universe
-            </div>
+            <span className="filament inline-block w-2 h-2 bg-amber-tungsten" aria-hidden />
+            Live rehearsal
           </div>
-
-          {/* Control panel */}
-          <div className="bg-ink p-8 lg:p-10 flex flex-col gap-10">
-            {/* Fixture selector */}
-            <div>
-              <p className="eyebrow">Selected fixture</p>
-              <div className="mt-3 grid grid-cols-3 gap-px bg-rule">
-                {fixtures.map((f, i) => (
-                  <button
-                    key={f.id}
-                    onClick={() => setSelected(i)}
-                    className={`bg-ink py-4 transition-colors text-left px-4 ${
-                      selected === i ? "" : "hover:bg-steel/40"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="inline-block w-2 h-2 rounded-full"
-                        style={{ backgroundColor: f.color }}
-                      />
-                      <span
-                        className={`font-mono text-xs uppercase tracking-widest ${
-                          selected === i ? "text-amber-tungsten" : "text-paper/50"
-                        }`}
-                      >
-                        {f.name}
-                      </span>
-                    </div>
-                    <div className="mt-2 font-mono text-[10px] text-paper/30 tabular-nums">
-                      ch · {(i * 7) + 1}–{(i * 7) + 7}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* RGB sliders */}
-            <div>
-              <div className="flex items-baseline justify-between">
-                <p className="eyebrow">Channel</p>
-                <p className="font-mono text-xs text-paper/40 tabular-nums uppercase tracking-widest">
-                  {current.color}
-                </p>
-              </div>
-              <div className="mt-6 space-y-5">
-                <Slider label="Red"   value={rgb.r} max={255} onChange={(v) => setChannel("r", v)} accent="#FF3B30" />
-                <Slider label="Green" value={rgb.g} max={255} onChange={(v) => setChannel("g", v)} accent="#34C759" />
-                <Slider label="Blue"  value={rgb.b} max={255} onChange={(v) => setChannel("b", v)} accent="#0A84FF" />
-              </div>
-            </div>
-
-            {/* Intensity */}
-            <div>
-              <div className="flex items-baseline justify-between">
-                <p className="eyebrow">Intensity</p>
-                <p className="font-mono text-xs text-paper/40 tabular-nums uppercase tracking-widest">
-                  {Math.round(current.intensity * 100)}%
-                </p>
-              </div>
-              <div className="mt-6">
-                <Slider
-                  label="Master"
-                  value={Math.round(current.intensity * 100)}
-                  max={100}
-                  onChange={(v) => updateCurrent({ intensity: v / 100 })}
-                  accent="#FF6A1F"
-                />
-              </div>
-            </div>
-
-            {/* Presets */}
-            <div>
-              <p className="eyebrow">Presets</p>
-              <div className="mt-4 grid grid-cols-2 gap-px bg-rule">
-                {PRESETS.map((p) => (
-                  <button
-                    key={p.name}
-                    onClick={() => applyPreset(p)}
-                    className="bg-ink px-4 py-3 text-left hover:bg-steel/40 transition-colors group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="inline-block w-3 h-3"
-                        style={{ backgroundColor: p.color }}
-                      />
-                      <span className="font-mono text-xs uppercase tracking-widest text-paper/80 group-hover:text-amber-tungsten transition-colors">
-                        {p.name}
-                      </span>
-                    </div>
-                    <p className="font-display italic text-[13px] text-paper/30 mt-1">
-                      {p.hint}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div
+            className="absolute bottom-4 left-4 right-4 flex flex-wrap justify-between gap-2 text-paper/80 pointer-events-none"
+            style={{ fontSize: "var(--step-small)" }}
+          >
+            <span>Click a fixture to select it</span>
+            <span>
+              {fixtures.length} fixtures, 1 universe
+            </span>
           </div>
         </div>
 
-        {/* Live MCP-call preview */}
-        <section className="mt-16 hairline pt-12">
-          <p className="eyebrow">What this would do on a real rig</p>
-          <div className="mt-4 border border-rule bg-steel/30 overflow-hidden">
-            <div className="flex items-center justify-between px-5 py-3 border-b border-rule">
-              <span className="font-mono text-xs uppercase tracking-widest text-paper/50">
-                POST /api/action · lights.local:5000
-              </span>
-              <span className="font-mono text-xs text-paper/30">live preview</span>
-            </div>
-            <pre className="font-mono text-sm text-paper px-5 py-6 whitespace-pre-wrap break-words leading-relaxed">
-{`→ ${mcpCall}`}
-            </pre>
-            <div className="px-5 pb-5 font-mono text-xs text-arc-cyan flex items-center gap-3">
-              <span className="text-arc-cyan/60">✓</span>
-              <span>Would apply to {fixtures.length} fixture{fixtures.length === 1 ? "" : "s"} in real time</span>
-              <span className="text-paper/30">· est. 47ms</span>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="mt-20 hairline pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        {/* Control panel */}
+        <div className="bg-ink py-8 lg:p-10 flex flex-col gap-10" style={body}>
+          {/* Fixture selector */}
           <div>
-            <p className="eyebrow">Ready for real fixtures?</p>
-            <h2
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-            >
-              The build is ten minutes.
-            </h2>
+            <p className="text-paper font-medium">Selected fixture</p>
+            <div className="mt-3 grid grid-cols-3 gap-px bg-rule border border-rule">
+              {fixtures.map((f, i) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  aria-pressed={selected === i}
+                  onClick={() => setSelected(i)}
+                  className={`py-3 px-3 sm:px-4 text-left transition-colors ${
+                    selected === i ? "bg-steel" : "bg-ink hover:bg-steel"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <span aria-hidden className="inline-block w-3 h-3 shrink-0" style={{ backgroundColor: f.color }} />
+                    <span className={`font-medium capitalize ${selected === i ? "text-amber-tungsten" : "text-paper"}`}>
+                      {f.name}
+                    </span>
+                  </span>
+                  <span className="mt-1 block text-paper/80 tabular-nums" style={{ fontSize: "var(--step-small)" }}>
+                    Ch <span className="font-mono">{i * 7 + 1}–{i * 7 + 7}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-x-8 gap-y-3">
-            <Link
-              href="/quick-start"
-              className="group inline-flex items-center gap-3 text-paper font-mono uppercase tracking-widest text-sm border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
-            >
-              Start the build
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
-            <Link
-              href="/hardware"
-              className="group inline-flex items-center gap-3 text-paper/60 font-mono uppercase tracking-widest text-sm hover:text-paper transition-colors"
-            >
-              Hardware guide
-            </Link>
+
+          {/* RGB sliders */}
+          <div>
+            <div className="flex items-baseline justify-between">
+              <p className="text-paper font-medium">Colour</p>
+              <p className="font-mono text-paper/80 tabular-nums" style={{ fontSize: "var(--step-small)" }}>
+                {current.color}
+              </p>
+            </div>
+            <div className="mt-4 space-y-4">
+              <Slider label="Red" value={rgb.r} max={255} onChange={(v) => setChannel("r", v)} accent="#FF3B30" />
+              <Slider label="Green" value={rgb.g} max={255} onChange={(v) => setChannel("g", v)} accent="#34C759" />
+              <Slider label="Blue" value={rgb.b} max={255} onChange={(v) => setChannel("b", v)} accent="#0A84FF" />
+            </div>
           </div>
-        </section>
+
+          {/* Intensity */}
+          <div>
+            <p className="text-paper font-medium">Intensity</p>
+            <div className="mt-4">
+              <Slider
+                label="Master"
+                value={Math.round(current.intensity * 100)}
+                max={100}
+                unit="%"
+                onChange={(v) => updateCurrent({ intensity: v / 100 })}
+                accent="#FF6A1F"
+              />
+            </div>
+          </div>
+
+          {/* Presets */}
+          <div>
+            <p className="text-paper font-medium">Presets</p>
+            <div className="mt-3 grid grid-cols-2 gap-px bg-rule border border-rule">
+              {PRESETS.map((p) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  onClick={() => applyPreset(p)}
+                  className="bg-ink px-3 sm:px-4 py-3 text-left hover:bg-steel transition-colors group"
+                >
+                  <span className="flex items-center gap-2">
+                    <span aria-hidden className="inline-block w-3 h-3 shrink-0" style={{ backgroundColor: p.color }} />
+                    <span className="font-medium text-paper group-hover:text-amber-tungsten transition-colors">
+                      {p.name}
+                    </span>
+                  </span>
+                  <span className="block text-paper/80 mt-1" style={{ fontSize: "var(--step-small)" }}>
+                    {p.hint}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Live MCP-call preview */}
+      <section className="mt-[clamp(56px,6vw,96px)]">
+        <SectionHead title="What this would do on a real rig" note="Updates as you move the sliders" />
+        <div className="border border-rule bg-steel overflow-hidden max-w-[56rem]">
+          <div className="px-5 py-3 border-b border-rule text-paper/80" style={{ fontSize: "var(--step-small)" }}>
+            <span className="font-mono">POST /api/action</span> on <span className="font-mono">lights.local:5000</span>
+          </div>
+          <pre className="font-mono text-[15px] text-paper px-5 py-6 whitespace-pre-wrap break-words leading-relaxed">
+{`→ ${mcpCall}`}
+          </pre>
+          <p className="px-5 pb-5 text-paper" style={body}>
+            Would apply to {fixtures.length} fixture{fixtures.length === 1 ? "" : "s"} in real time.
+          </p>
+        </div>
+      </section>
+
+      {/* Next step */}
+      <section className="border-t border-rule mt-[clamp(72px,8vw,120px)] pt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+        <div>
+          <p className="text-paper font-medium" style={body}>
+            Ready for real fixtures?
+          </p>
+          <h2 className="font-display text-paper mt-3" style={{ fontSize: "var(--step-head)" }}>
+            The build takes ten minutes.
+          </h2>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-5">
+          <SwatchButton href="/quick-start">Start the build</SwatchButton>
+          <Link href="/hardware" className="link-plain">
+            Hardware guide
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
+
+const body = { fontSize: "var(--step-body)", lineHeight: 1.5 } as const;
 
 function Slider({
   label,
   value,
   max,
+  unit = "",
   onChange,
   accent,
 }: {
   label: string;
   value: number;
   max: number;
+  unit?: string;
   onChange: (v: number) => void;
   accent: string;
 }) {
+  const id = `slider-${label.toLowerCase()}`;
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-2">
-        <label className="font-mono text-xs uppercase tracking-widest text-paper/60">
+      <div className="flex items-baseline justify-between mb-1">
+        <label htmlFor={id} className="text-paper/80">
           {label}
         </label>
-        <span className="font-mono text-xs tabular-nums text-paper/80">
+        <span className="tabular-nums text-paper">
           {value}
+          {unit}
         </span>
       </div>
       <input
+        id={id}
         type="range"
         min={0}
         max={max}
         value={value}
         onChange={(e) => onChange(parseInt(e.target.value, 10))}
-        className="w-full h-1 appearance-none cursor-pointer bg-rule"
+        className="w-full h-1.5 appearance-none cursor-pointer bg-rule"
         style={
           {
-            // Track gradient — filled to the current value
+            // Filled track up to the current value (a fill, not a decorative gradient)
             background: `linear-gradient(to right, ${accent} 0%, ${accent} ${(value / max) * 100}%, var(--color-rule) ${(value / max) * 100}%, var(--color-rule) 100%)`,
           } as React.CSSProperties
         }
-        aria-label={label}
       />
     </div>
   );

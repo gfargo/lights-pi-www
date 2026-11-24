@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
 
 interface SidebarCategory {
   slug: string
@@ -17,8 +16,8 @@ interface DocsSidebarClientProps {
 }
 
 /**
- * Editorial docs sidebar. Hairline rules between categories, mono labels,
- * an underlined active state in tungsten amber.
+ * Docs sidebar. Categories as plain sentence-case headings, pages as a
+ * list, the current page marked with an amber cell and amber text.
  */
 export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
   const pathname = usePathname()
@@ -30,26 +29,20 @@ export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
     <nav aria-label="Documentation navigation">
       <Link
         href="/docs"
-        className="block mb-10 group"
+        onClick={() => setMobileOpen(false)}
+        className="block mb-8 font-display text-paper hover:text-amber-tungsten transition-colors"
+        style={{ fontSize: "var(--step-lead)", lineHeight: 1.15 }}
       >
-        <p className="eyebrow group-hover:text-amber-tungsten transition-colors">
-          Documentation
-        </p>
-        <span className="font-display text-paper text-2xl leading-tight group-hover:text-amber-tungsten transition-colors mt-1 block">
-          Index ↗
-        </span>
+        Documentation
       </Link>
 
-      <div className="space-y-10">
-        {categories.map((category, ci) => (
-          <div key={category.slug} className="hairline pt-4">
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/40 mb-4 tabular-nums">
-              <span className="text-amber-tungsten/70">
-                {String(ci + 1).padStart(2, "0")}
-              </span>
-              <span className="ml-3">{category.title}</span>
+      <div className="space-y-8">
+        {categories.map((category) => (
+          <div key={category.slug} className="border-t border-rule pt-4">
+            <p className="text-paper font-medium mb-2" style={{ fontSize: "var(--step-body)" }}>
+              {category.title}
             </p>
-            <ul className="space-y-1">
+            <ul>
               {category.docs.map((doc) => {
                 const isActive = doc.slug === currentSlug
                 return (
@@ -58,12 +51,14 @@ export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
                       href={`/docs/${doc.slug}`}
                       onClick={() => setMobileOpen(false)}
                       aria-current={isActive ? "page" : undefined}
-                      className={`block py-1.5 font-sans text-sm transition-colors ${
-                        isActive
-                          ? "text-amber-tungsten border-l-2 border-amber-tungsten pl-3"
-                          : "text-paper/60 hover:text-paper pl-3 border-l-2 border-transparent"
+                      className={`flex items-center gap-3 py-1.5 text-[16px] leading-snug transition-colors ${
+                        isActive ? "text-amber-tungsten font-medium" : "text-paper/80 hover:text-paper"
                       }`}
                     >
+                      <span
+                        aria-hidden
+                        className={`h-2.5 w-2.5 shrink-0 ${isActive ? "bg-amber-tungsten" : "bg-rule"}`}
+                      />
                       {doc.title}
                     </Link>
                   </li>
@@ -79,17 +74,19 @@ export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-4">
+      <aside className="hidden lg:block w-64 shrink-0 sticky top-0 self-start max-h-screen overflow-y-auto pt-[clamp(104px,12vw,168px)] pb-10 pr-2">
         {sidebarContent}
       </aside>
 
-      {/* Mobile FAB */}
+      {/* Mobile trigger */}
       <button
+        type="button"
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed bottom-6 right-6 z-50 w-12 h-12 bg-ink border border-amber-tungsten text-amber-tungsten flex items-center justify-center hover:bg-amber-tungsten hover:text-ink transition-colors"
+        className="lg:hidden fixed bottom-5 right-4 z-40 min-h-[48px] px-5 bg-paper text-ink font-medium hover:bg-amber-tungsten transition-colors"
+        style={{ fontSize: "var(--step-body)" }}
         aria-label="Open documentation menu"
       >
-        <Menu className="w-5 h-5" />
+        Contents
       </button>
 
       {/* Mobile overlay */}
@@ -102,22 +99,23 @@ export function DocsSidebarClient({ categories }: DocsSidebarClientProps) {
         <button
           aria-label="Close menu"
           tabIndex={mobileOpen ? 0 : -1}
-          className="absolute inset-0 bg-ink/85 backdrop-blur-md"
+          className="absolute inset-0 bg-ink/90"
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute left-0 top-0 bottom-0 w-80 bg-ink border-r border-rule overflow-y-auto transition-transform duration-300 ease-out ${
+          className={`absolute left-0 top-0 bottom-0 w-[min(20rem,88vw)] bg-ink border-r border-rule overflow-y-auto transition-transform duration-300 ease-out ${
             mobileOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between px-6 py-5 hairline">
-            <span className="eyebrow">Documentation</span>
+          <div className="flex items-center justify-end px-4 py-3 border-b border-rule">
             <button
+              type="button"
               onClick={() => setMobileOpen(false)}
-              className="text-paper/60 hover:text-amber-tungsten transition-colors"
+              tabIndex={mobileOpen ? 0 : -1}
+              className="min-h-[44px] px-2 text-paper hover:text-amber-tungsten transition-colors font-medium"
               aria-label="Close menu"
             >
-              <X className="w-5 h-5" />
+              Close
             </button>
           </div>
           <div className="p-6">{sidebarContent}</div>

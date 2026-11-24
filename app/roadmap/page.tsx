@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { PageHead, SectionHead } from "@/components/PageHead";
 
 export const metadata = {
   title: "Roadmap — Lights Pi | Shipping cadence + what's next",
   description:
     "What Lights Pi has shipped through v2.16 — MCP server, agentic chat, live sync, MIDI and OSC, workspaces, HTTPS over Tailscale — and what's next.",
   openGraph: {
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     title: "Roadmap — Lights Pi",
     description: "Current shipping cadence and what's queued next.",
     type: "website",
@@ -357,191 +359,157 @@ const recentlyShipped = roadmap
    Page
    ────────────────────────────────────────────────────────────────────────── */
 
+const body = { fontSize: "var(--step-body)", lineHeight: 1.55 } as const;
+
 export default function RoadmapPage() {
   return (
-    <div className="min-h-screen bg-ink pt-24 pb-16">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-
-        {/* ─────────────────────────────────────────── HEADER ─── */}
-        <header className="hairline pb-8 mb-16 grid lg:grid-cols-[1fr_auto] gap-6 items-end">
-          <div>
-            <p className="eyebrow">Roadmap · current</p>
-            <h1
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "var(--text-display-md)" }}
-            >
-              What&apos;s shipped. What&apos;s next.
-              <span className="block italic text-paper/40">
-                The current cadence, in plain print.
-              </span>
-            </h1>
-          </div>
-          <div className="font-mono text-xs uppercase tracking-widest text-paper/40 whitespace-nowrap text-right">
+    <div className="min-h-screen bg-ink px-[var(--gutter)] pb-[clamp(72px,9vw,140px)]">
+      <PageHead
+        scene={2}
+        label="Roadmap"
+        title="What's shipped, and what's next."
+        lead="The current cadence in plain print: every release so far, what's being built now and what's queued after it."
+        aside={
+          <>
             <p>
-              <span className="text-amber-tungsten">{counts.shipped} shipped</span>
-              <span className="text-paper/30"> · </span>
-              <span className="text-arc-cyan">{counts.planned} planned</span>
+              <span className="text-amber-tungsten font-medium">{counts.shipped} shipped</span>, {counts.planned} in
+              progress or planned
             </p>
-            <p className="mt-1">Latest · v2.16.2 · Nov 2026</p>
-          </div>
-        </header>
+            <p className="mt-1">Latest release v2.16.2, November 2026</p>
+          </>
+        }
+      />
 
-        {/* ─────────────────────────────── RECENTLY SHIPPED ─── */}
-        <section className="mb-20">
-          <div className="flex items-baseline justify-between mb-6">
-            <p className="eyebrow">Recently shipped</p>
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-              Last 3 releases
-            </p>
-          </div>
-          <div className="grid gap-px bg-rule sm:grid-cols-3">
-            {recentlyShipped.map((item) => (
-              <a
-                key={item.release}
-                href={`https://github.com/${REPO}/releases/tag/${item.release}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-ink p-6 hover:bg-steel/50 transition-colors"
+      {/* Recently shipped */}
+      <section className="mb-[clamp(72px,8vw,120px)]">
+        <SectionHead title="Recently shipped" note="The last three releases" />
+        <div className="grid gap-px bg-rule border-y border-rule md:grid-cols-3">
+          {recentlyShipped.map((item) => (
+            <a
+              key={item.release}
+              href={`https://github.com/${REPO}/releases/tag/${item.release}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-ink py-8 md:p-8 hover:bg-steel transition-colors"
+            >
+              <p className="text-amber-tungsten font-medium tabular-nums" style={body}>
+                {item.release}
+              </p>
+              <p
+                className="font-display text-paper mt-3 group-hover:text-amber-tungsten transition-colors"
+                style={{ fontSize: "var(--step-lead)", lineHeight: 1.15 }}
               >
-                <p className="font-mono text-xs uppercase tracking-widest text-amber-tungsten/70 group-hover:text-amber-tungsten transition-colors">
-                  {item.release}
-                </p>
-                <p className="font-display text-paper text-lg leading-tight mt-3 group-hover:text-amber-tungsten transition-colors">
-                  {item.title.replace(/^v\d+\.\d+(\.\d+)?\s*—\s*/, "")}
-                </p>
-                <p className="font-sans text-sm text-paper/50 mt-3 leading-snug line-clamp-3">
-                  {item.description}
-                </p>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* ─────────────────────────────────────────── LEGEND ─── */}
-        <section className="mb-12 grid grid-cols-2 sm:grid-cols-4 gap-px bg-rule">
-          <LegendCell status="completed" label="Shipped" />
-          <LegendCell status="in-progress" label="In progress" />
-          <LegendCell status="planned" label="Planned" />
-          <LegendCell status="future" label="Future" />
-        </section>
-
-        {/* ─────────────────────────────────────────── TIMELINE ─── */}
-        <section className="space-y-20">
-          {roadmap.map((quarter) => (
-            <QuarterBlock key={quarter.quarter} quarter={quarter} />
+                {item.title.replace(/^v\d+\.\d+(\.\d+)?\s*—\s*/, "")}
+              </p>
+              <p className="text-paper mt-3" style={body}>
+                {item.description}
+              </p>
+            </a>
           ))}
-        </section>
+        </div>
+      </section>
 
-        {/* ─────────────────────────────────────────── CTA ─── */}
-        <section className="hairline mt-24 pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <p className="eyebrow">Have a feature in mind?</p>
-            <h2
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-            >
-              File it. Or vote on what&apos;s queued.
-            </h2>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-x-8 gap-y-3">
-            <Link
-              href={`https://github.com/${REPO}/discussions`}
-              className="group inline-flex items-center gap-3 text-paper font-mono uppercase tracking-widest text-sm border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
-            >
-              Discussions
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-            <Link
-              href={`https://github.com/${REPO}/issues`}
-              className="group inline-flex items-center gap-3 text-paper/60 font-mono uppercase tracking-widest text-sm hover:text-paper transition-colors"
-            >
-              Open issues
-            </Link>
-          </div>
-        </section>
+      {/* Timeline */}
+      <section className="space-y-[clamp(56px,6vw,96px)]">
+        <ul className="flex flex-wrap gap-x-8 gap-y-3 text-paper" style={body} aria-label="Legend">
+          {(["completed", "in-progress", "planned"] as Status[]).map((s) => (
+            <li key={s} className="inline-flex items-center gap-3">
+              <StatusCell status={s} />
+              {STATUS_LABEL[s]}
+            </li>
+          ))}
+        </ul>
+        {roadmap.map((quarter) => (
+          <QuarterBlock key={quarter.quarter} quarter={quarter} />
+        ))}
+      </section>
 
-        {/* ─────────────────────────────────────────── FOOTNOTE ─── */}
-        <p className="mt-12 font-mono text-xs uppercase tracking-widest text-paper/30 text-center">
-          Subject to change · priorities shift with community input · last updated May 2026
-        </p>
-      </div>
+      {/* Next step */}
+      <section className="border-t border-rule mt-[clamp(72px,8vw,120px)] pt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+        <div>
+          <p className="text-paper font-medium" style={body}>
+            Have a feature in mind?
+          </p>
+          <h2 className="font-display text-paper mt-3 max-w-[18ch]" style={{ fontSize: "var(--step-head)" }}>
+            File it, or vote on what&apos;s queued.
+          </h2>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-4">
+          <Link href={`https://github.com/${REPO}/discussions`} className="link-plain">
+            Discussions →
+          </Link>
+          <Link href={`https://github.com/${REPO}/issues`} className="link-plain">
+            Open issues
+          </Link>
+        </div>
+      </section>
+
+      <p className="mt-12 text-paper/80" style={body}>
+        Subject to change: priorities shift with community input. Last updated November 2026.
+      </p>
     </div>
   );
 }
 
 /* ──────────────────────────────────────────────── presentational ── */
 
+const STATUS_LABEL: Record<Status, string> = {
+  completed: "Shipped",
+  "in-progress": "In progress",
+  planned: "Planned",
+  future: "Future",
+};
+
 function QuarterBlock({ quarter }: { quarter: RoadmapQuarter }) {
   return (
     <article>
-      <header className="hairline pb-4 mb-8 grid grid-cols-[1fr_auto] gap-6 items-baseline">
-        <div>
-          <p className="eyebrow flex items-center gap-3">
-            <StatusDot status={quarter.status} />
-            <span>{quarter.quarter}</span>
-            <span className="text-paper/30">·</span>
-            <StatusLabel status={quarter.status} />
-          </p>
-          <h2
-            className="font-display text-paper mt-3"
-            style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}
-          >
-            {quarter.heading}
-          </h2>
-        </div>
-        <p className="font-mono text-xs uppercase tracking-widest text-paper/40 whitespace-nowrap">
+      <div className="flex flex-wrap items-center gap-3 text-paper font-medium" style={body}>
+        <StatusCell status={quarter.status} />
+        <span>
+          {quarter.quarter}, {STATUS_LABEL[quarter.status].toLowerCase()}
+        </span>
+      </div>
+      <div className="mt-3 mb-6 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+        <h2 className="font-display text-paper" style={{ fontSize: "clamp(1.75rem, 1.2rem + 2vw, 2.75rem)" }}>
+          {quarter.heading}
+        </h2>
+        <p className="text-paper/80" style={body}>
           {quarter.items.length} item{quarter.items.length === 1 ? "" : "s"}
         </p>
-      </header>
+      </div>
 
-      <ul className="hairline">
+      <ul className="border-t border-rule">
         {quarter.items.map((item, i) => (
-          <ItemRow key={i} item={item} status={quarter.status} />
+          <ItemRow key={i} item={item} />
         ))}
       </ul>
     </article>
   );
 }
 
-function ItemRow({ item, status }: { item: RoadmapItem; status: Status }) {
+function ItemRow({ item }: { item: RoadmapItem }) {
   const href = item.release
     ? `https://github.com/${REPO}/releases/tag/${item.release}`
     : item.issue
       ? `https://github.com/${REPO}/issues/${item.issue}`
       : undefined;
 
-  const tag = item.release
-    ? item.release
-    : item.issue
-      ? `#${item.issue}`
-      : statusGlyph(status);
-
-  const tagAccent =
-    status === "completed" || status === "in-progress"
-      ? "text-amber-tungsten/70 group-hover:text-amber-tungsten"
-      : "text-arc-cyan/70 group-hover:text-arc-cyan";
+  const tag = item.release ?? (item.issue ? `#${item.issue}` : "");
 
   const content = (
-    <div className="grid grid-cols-[6rem_1fr_1.5rem] gap-6 py-5 border-b border-rule items-baseline">
-      <span
-        className={`font-mono text-xs uppercase tracking-widest tabular-nums ${tagAccent} transition-colors`}
-      >
+    <div className="grid grid-cols-[1fr_auto] md:grid-cols-[7rem_1fr_1.5rem] gap-x-6 gap-y-1 py-5 border-b border-rule items-baseline">
+      <span className="text-paper/80 tabular-nums md:order-none order-2" style={body}>
         {tag}
       </span>
-      <div>
-        <h3 className="font-display text-paper text-lg leading-tight group-hover:text-amber-tungsten transition-colors">
+      <div className="order-1 md:order-none">
+        <h3 className="text-paper font-medium group-hover:text-amber-tungsten transition-colors" style={body}>
           {item.title}
         </h3>
-        <p className="font-sans text-sm text-paper/60 mt-2 leading-snug max-w-2xl">
+        <p className="text-paper mt-1 max-w-[42rem]" style={body}>
           {item.description}
         </p>
       </div>
-      <span
-        aria-hidden
-        className="font-mono text-xs text-paper/30 group-hover:text-amber-tungsten transition-colors justify-self-end"
-      >
+      <span aria-hidden className="hidden md:block text-paper/80 group-hover:text-amber-tungsten transition-colors justify-self-end">
         {href ? "↗" : ""}
       </span>
     </div>
@@ -553,76 +521,20 @@ function ItemRow({ item, status }: { item: RoadmapItem; status: Status }) {
 
   return (
     <li className="group">
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block hover:bg-steel/30 transition-colors"
-      >
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block hover:bg-steel transition-colors">
         {content}
       </a>
     </li>
   );
 }
 
-function LegendCell({ status, label }: { status: Status; label: string }) {
-  return (
-    <div className="bg-ink p-5 flex items-center gap-3">
-      <StatusDot status={status} />
-      <span className="font-mono text-xs uppercase tracking-widest text-paper/60">
-        {label}
-      </span>
-    </div>
-  );
-}
-
-function StatusDot({ status }: { status: Status }) {
-  // Filament dot for shipped; arc dot for in-progress; hollow rings for future.
-  if (status === "completed") {
-    return (
-      <span
-        className="inline-block w-2 h-2 rounded-full bg-amber-tungsten filament"
-        aria-hidden
-      />
-    );
-  }
-  if (status === "in-progress") {
-    return (
-      <span
-        className="inline-block w-2 h-2 rounded-full bg-arc-cyan arc"
-        aria-hidden
-      />
-    );
-  }
-  if (status === "planned") {
-    return (
-      <span
-        className="inline-block w-2 h-2 rounded-full border border-arc-cyan/60"
-        aria-hidden
-      />
-    );
-  }
-  return (
-    <span
-      className="inline-block w-2 h-2 rounded-full border border-paper/30"
-      aria-hidden
-    />
-  );
-}
-
-function StatusLabel({ status }: { status: Status }) {
-  const label = {
-    completed: "Shipped",
-    "in-progress": "In progress",
-    planned: "Planned",
-    future: "Future",
-  }[status];
-  return <span className="text-paper/60">{label}</span>;
-}
-
-function statusGlyph(status: Status): string {
-  if (status === "completed") return "—";
-  if (status === "in-progress") return "···";
-  if (status === "planned") return "—";
-  return "—";
+/** One square swatch cell per status: lit amber for shipped, cyan in progress, an outline for later. */
+function StatusCell({ status }: { status: Status }) {
+  const cls =
+    status === "completed"
+      ? "bg-amber-tungsten"
+      : status === "in-progress"
+        ? "bg-arc-cyan"
+        : "border border-paper/60";
+  return <span aria-hidden className={`inline-block h-3 w-3 shrink-0 ${cls}`} />;
 }

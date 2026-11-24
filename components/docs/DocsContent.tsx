@@ -3,7 +3,6 @@
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
 import { DocsCodeBlock } from "./DocsCodeBlock"
 
 interface DocsContentProps {
@@ -11,13 +10,13 @@ interface DocsContentProps {
 }
 
 /**
- * Editorial prose styling for docs content. Display serif for h1/h2/h3,
- * mono for h4, generous leading on body, hairline rules on h2 and tables,
- * tungsten amber for links.
+ * Prose styling for docs content: the display face for headings, full-paper
+ * body text at reading size, hairlines on h2 and tables, underlined links.
+ * Code (inline and blocks) stays in mono.
  */
 export function DocsContent({ content }: DocsContentProps) {
   return (
-    <div className="docs-prose max-w-3xl">
+    <div className="docs-prose max-w-[44rem]">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -34,7 +33,7 @@ export function DocsContent({ content }: DocsContentProps) {
             <h2
               id={headingToId(children)}
               className="font-display text-paper leading-tight mt-16 mb-5 pb-3 border-b border-rule scroll-mt-24"
-              style={{ fontSize: "clamp(1.625rem, 3vw, 2rem)" }}
+              style={{ fontSize: "clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem)" }}
             >
               {children}
             </h2>
@@ -51,13 +50,14 @@ export function DocsContent({ content }: DocsContentProps) {
           h4: ({ children }) => (
             <h4
               id={headingToId(children)}
-              className="font-mono text-xs uppercase tracking-widest text-amber-tungsten mt-8 mb-3 scroll-mt-24"
+              className="font-medium text-paper mt-8 mb-3 scroll-mt-24"
+              style={{ fontSize: "var(--step-body)" }}
             >
               {children}
             </h4>
           ),
           p: ({ children }) => (
-            <p className="font-sans text-paper/80 leading-relaxed mb-5 text-[17px]">
+            <p className="text-paper mb-5" style={{ fontSize: "var(--step-body)", lineHeight: 1.65 }}>
               {children}
             </p>
           ),
@@ -69,7 +69,7 @@ export function DocsContent({ content }: DocsContentProps) {
               return (
                 <Link
                   href={href}
-                  className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten transition-colors"
+                  className="text-paper underline decoration-amber-tungsten/60 decoration-2 underline-offset-4 hover:text-amber-tungsten hover:decoration-amber-tungsten transition-colors"
                 >
                   {children}
                 </Link>
@@ -83,10 +83,10 @@ export function DocsContent({ content }: DocsContentProps) {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten transition-colors inline-flex items-center gap-1"
+                  className="text-paper underline decoration-amber-tungsten/60 decoration-2 underline-offset-4 hover:text-amber-tungsten hover:decoration-amber-tungsten transition-colors inline-flex items-center gap-1"
                 >
                   {children}
-                  <ArrowUpRight className="w-3 h-3" />
+                  <span aria-hidden>↗</span>
                 </a>
               )
             }
@@ -95,56 +95,43 @@ export function DocsContent({ content }: DocsContentProps) {
             return (
               <Link
                 href={href}
-                className="text-amber-tungsten border-b border-amber-tungsten/40 hover:border-amber-tungsten transition-colors"
+                className="text-paper underline decoration-amber-tungsten/60 decoration-2 underline-offset-4 hover:text-amber-tungsten hover:decoration-amber-tungsten transition-colors"
               >
                 {children}
               </Link>
             )
           },
           ul: ({ children }) => (
-            <ul className="mb-5 space-y-2 text-paper/80 list-none pl-0">
+            <ul className="mb-5 space-y-2 text-paper list-disc pl-6 marker:text-paper/50" style={{ fontSize: "var(--step-body)", lineHeight: 1.6 }}>
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="mb-5 space-y-2 text-paper/80 list-decimal pl-6 marker:text-paper/40 marker:font-mono marker:text-sm">
+            <ol className="mb-5 space-y-2 text-paper list-decimal pl-6 marker:text-paper/70" style={{ fontSize: "var(--step-body)", lineHeight: 1.6 }}>
               {children}
             </ol>
           ),
-          li: ({ children, ...rest }) => {
-            // Check if we're in an ordered list — keep default list marker
-            // Otherwise, render with our custom mono · bullet
-            const isOrdered = (rest as { ordered?: boolean }).ordered;
-            if (isOrdered) {
-              return <li className="leading-relaxed pl-1">{children}</li>;
-            }
-            return (
-              <li className="grid grid-cols-[1.25rem_1fr] gap-2 leading-relaxed">
-                <span aria-hidden className="text-paper/30 font-mono">·</span>
-                <span>{children}</span>
-              </li>
-            );
-          },
+          li: ({ children }) => <li className="pl-1">{children}</li>,
           blockquote: ({ children }) => (
-            <blockquote className="border-l-2 border-amber-tungsten pl-5 py-1 my-6 font-display italic text-paper/70 text-lg">
+            <blockquote className="border-l-2 border-amber-tungsten pl-5 py-1 my-6 text-paper [&>p:last-child]:mb-0">
               {children}
             </blockquote>
           ),
           table: ({ children }) => (
             <div className="overflow-x-auto my-8 border-y border-rule">
-              <table className="w-full border-collapse text-sm">{children}</table>
+              <table className="w-full border-collapse text-[16px]">{children}</table>
             </div>
           ),
           thead: ({ children }) => (
             <thead className="border-b border-rule">{children}</thead>
           ),
           th: ({ children }) => (
-            <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-paper/60">
+            <th className="text-left py-3 px-4 font-medium text-paper align-bottom">
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className="py-3 px-4 text-paper/80 border-b border-rule">
+            <td className="py-3 px-4 text-paper border-b border-rule align-top">
               {children}
             </td>
           ),
@@ -162,7 +149,7 @@ export function DocsContent({ content }: DocsContentProps) {
 
             return (
               <code
-                className="font-mono text-[0.9em] text-amber-tungsten bg-steel/60 px-1.5 py-0.5 border border-rule"
+                className="font-mono text-[0.88em] text-paper bg-steel px-1.5 py-0.5 border border-rule break-words"
                 {...props}
               >
                 {children}

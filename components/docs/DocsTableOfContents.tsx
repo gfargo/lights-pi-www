@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 interface TocItem {
   id: string
@@ -18,7 +18,8 @@ interface DocsTableOfContentsProps {
  */
 export function DocsTableOfContents({ content }: DocsTableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("")
-  const headings = extractHeadings(content)
+  // Memoised: a fresh array each render re-ran the observer effect in a loop.
+  const headings = useMemo(() => extractHeadings(content), [content])
 
   useEffect(() => {
     if (headings.length === 0) return
@@ -46,9 +47,11 @@ export function DocsTableOfContents({ content }: DocsTableOfContentsProps) {
   if (headings.length < 3) return null // Don't show TOC for very short pages
 
   return (
-    <aside className="hidden xl:block w-56 shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pl-4">
+    <aside className="hidden xl:block w-56 shrink-0 sticky top-0 self-start max-h-screen overflow-y-auto pt-[clamp(104px,12vw,168px)] pb-10">
       <nav aria-label="Table of contents">
-        <p className="eyebrow mb-4">On this page</p>
+        <p className="text-paper font-medium mb-4" style={{ fontSize: "var(--step-body)" }}>
+          On this page
+        </p>
         <ul className="space-y-2">
           {headings.map((heading) => (
             <li
@@ -57,10 +60,10 @@ export function DocsTableOfContents({ content }: DocsTableOfContentsProps) {
             >
               <a
                 href={`#${heading.id}`}
-                className={`block font-sans text-sm leading-snug transition-colors border-l-2 pl-3 -ml-px ${
+                className={`block text-[16px] leading-snug transition-colors border-l-2 pl-3 -ml-px ${
                   activeId === heading.id
                     ? "text-amber-tungsten border-amber-tungsten"
-                    : "text-paper/50 hover:text-paper border-transparent"
+                    : "text-paper/80 hover:text-paper border-transparent"
                 }`}
               >
                 {heading.text}

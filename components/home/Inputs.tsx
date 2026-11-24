@@ -8,7 +8,7 @@ import { SCENES } from "@/lib/scenes";
 const INPUTS = [
   { name: "Phone", detail: "Any browser on the network, installable as an app", cell: SCENES[0].cells[0] },
   { name: "Agent", detail: "Claude, ChatGPT, Cursor or your own agent, over MCP with 48 tools", cell: SCENES[3].cells[0] },
-  { name: "MIDI", detail: "Map controller notes and CCs to scenes and chases", cell: SCENES[2].cells[0] },
+  { name: "MIDI", detail: "Map controller notes and CCs to scenes and chases through the API", cell: SCENES[2].cells[0] },
   { name: "OSC", detail: "/scene, /chase, /cue/go and /blackout on UDP 8000", cell: SCENES[4].cells[0] },
   { name: "Anywhere", detail: "Trusted HTTPS over Tailscale, behind a password", cell: SCENES[1].cells[0] },
 ];

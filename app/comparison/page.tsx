@@ -1,271 +1,175 @@
-import { Check, X, DollarSign } from "lucide-react";
+import Link from "next/link";
+import { PageHead, SectionHead } from "@/components/PageHead";
+import { Swatch, SwatchButton } from "@/components/home/Swatch";
+import { SCENES } from "@/lib/scenes";
 
 export const metadata = {
   title: "Comparison - Lights Pi",
-  description: "Compare Lights Pi with commercial lighting controllers and cloud services",
+  description:
+    "How Lights Pi compares with commercial DMX consoles and app-based smart lighting: cost, fixtures, offline use, control surfaces and where each is the better choice.",
 };
 
-const commercialControllers = [
+const COLUMNS = ["Commercial DMX consoles", "App-based smart lighting", "Lights Pi"] as const;
+
+/** One row per question. Cells in COLUMNS order. Kept to claims we can stand behind. */
+const ROWS: { feature: string; cells: [string, string, string] }[] = [
   {
-    name: "Martin M-PC",
-    price: "$500+",
-    pros: ["Professional features", "Industry standard", "Good support"],
-    cons: ["Expensive", "Windows only", "Complex setup"],
-    lightsPiAdvantage: "Cost-effective, cross-platform, simple setup"
+    feature: "Up-front cost",
+    cells: [
+      "Typically $500 to $5,000 for a desk",
+      "A hub or bridge, plus the vendor's own bulbs",
+      "About $125 minimum, $230 recommended",
+    ],
   },
   {
-    name: "Chamsys MagicQ",
-    price: "Free / $500+",
-    pros: ["Powerful features", "Industry standard", "Free tier available"],
-    cons: ["Steep learning curve", "Complex interface", "Desktop only"],
-    lightsPiAdvantage: "Simpler interface, web-based, mobile-friendly"
+    feature: "Ongoing cost",
+    cells: ["None", "Usually none; some features need an account", "None. MIT-licensed, no account"],
   },
   {
-    name: "DMXControl",
-    price: "Free",
-    pros: ["Free", "Windows/Linux support", "Active community"],
-    cons: ["Desktop only", "Complex setup", "Limited mobile access"],
-    lightsPiAdvantage: "Web-based, works on any device, simpler setup"
-  }
+    feature: "Fixtures",
+    cells: ["Any DMX fixture", "The vendor's own fixtures", "Any DMX fixture QLC+ has a profile for, or one you define"],
+  },
+  {
+    feature: "Runs without the internet",
+    cells: ["Yes", "Varies; remote control usually goes through the vendor's cloud", "Yes. Remote access is optional, over Tailscale"],
+  },
+  {
+    feature: "Where you control it",
+    cells: ["At the desk, sometimes a vendor app", "The vendor's phone app", "Any browser on the network, installable as an app"],
+  },
+  {
+    feature: "Other inputs",
+    cells: ["MIDI, timecode and network protocols, varies by desk", "Voice assistants and the vendor's integrations", "HTTP API, OSC, MIDI, and MCP with 48 tools for AI agents"],
+  },
+  {
+    feature: "Physical faders",
+    cells: ["Yes, that is the point", "No", "No. Touch faders in the virtual console"],
+  },
+  {
+    feature: "Source code",
+    cells: ["Closed", "Closed", "Open, on GitHub"],
+  },
 ];
 
-const cloudServices = [
+const PICKS = [
   {
-    name: "Philips Hue",
-    price: "$50/month",
-    pros: ["Easy setup", "Mobile app", "Smart home integration"],
-    cons: ["Subscription required", "Limited to Hue fixtures", "Cloud dependent"],
-    lightsPiAdvantage: "No subscription, any DMX fixture, self-hosted"
+    title: "When a console is the better choice",
+    body: "Large rigs, moving heads by the dozen, busking a show on physical faders, or a venue where an operator already knows a particular desk. A dedicated console is built for that, and Lights Pi does not try to be one.",
+    cell: SCENES[5].cells[0],
   },
   {
-    name: "LIFX Cloud",
-    price: "$20/month",
-    pros: ["Mobile app", "Easy to use", "Color control"],
-    cons: ["Subscription required", "Proprietary fixtures", "Internet required"],
-    lightsPiAdvantage: "No subscription, open standard, works offline"
-  }
+    title: "When an app is enough",
+    body: "A few smart bulbs at home with no DMX fixtures in sight. A smart-lighting app is simpler to set up, and you do not need a Pi or a DMX interface.",
+    cell: SCENES[1].cells[0],
+  },
+  {
+    title: "Where Lights Pi fits",
+    body: "Studios, streams, small venues and classrooms with real DMX fixtures, where you want saved scenes on a phone, cue lists for a running order, and an API or an AI agent that can drive the rig, without paying for a desk.",
+    cell: SCENES[2].cells[0],
+  },
 ];
 
 export default function ComparisonPage() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4">
-            How Lights Pi <span className="text-gradient">Compares</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            See how Lights Pi stacks up against commercial controllers and cloud services
-          </p>
-        </div>
+    <div className="bg-ink px-[var(--gutter)] pb-[clamp(96px,12vw,180px)]">
+      <PageHead
+        scene={2}
+        label="Comparison"
+        title="Where it fits, and where it doesn't."
+        lead="Lights Pi sits between a lighting desk and a smart-bulb app: real DMX fixtures, controlled from a phone, for the price of a Pi and an interface."
+      />
 
-        {/* Feature Matrix */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold mb-8">Feature Comparison</h2>
-          <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden shadow-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-linear-to-r from-orange-500/20 to-blue-500/20">
-                  <tr>
-                    <th className="text-left py-4 px-6 font-bold text-white">Feature</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-400">Commercial</th>
-                    <th className="text-center py-4 px-6 font-bold text-gray-400">Cloud Service</th>
-                    <th className="text-center py-4 px-6 font-bold bg-linear-to-r from-orange-500 to-blue-500 text-white">
-                      Lights Pi
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-700">
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Initial Cost</td>
-                    <td className="py-4 px-6 text-center text-gray-400">$500-$5,000</td>
-                    <td className="py-4 px-6 text-center text-gray-400">$0-$100</td>
-                    <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">$35-$150</td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Monthly Cost</td>
-                    <td className="py-4 px-6 text-center text-gray-400">$0</td>
-                    <td className="py-4 px-6 text-center text-gray-400">$10-$50</td>
-                    <td className="py-4 px-6 text-center font-bold text-green-600 bg-gray-900">$0</td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Self-Hosted</td>
-                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Open Source</td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Web Interface</td>
-                    <td className="py-4 px-6 text-center text-gray-400">Varies</td>
-                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Mobile Control</td>
-                    <td className="py-4 px-6 text-center text-gray-400">Varies</td>
-                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Offline Operation</td>
-                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Any DMX Fixture</td>
-                    <td className="py-4 px-6 text-center"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">Customizable</td>
-                    <td className="py-4 px-6 text-center text-gray-400">Limited</td>
-                    <td className="py-4 px-6 text-center"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="hover:bg-gray-800">
-                    <td className="py-4 px-6 font-medium text-white">API Access</td>
-                    <td className="py-4 px-6 text-center text-gray-400">Varies</td>
-                    <td className="py-4 px-6 text-center text-gray-400">Limited</td>
-                    <td className="py-4 px-6 text-center bg-gray-900"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <section aria-labelledby="matrix-title">
+        <SectionHead id="matrix-title" title="Side by side" />
 
-        {/* vs Commercial Controllers */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold mb-8">vs Commercial Controllers</h2>
-          <div className="space-y-6">
-            {commercialControllers.map((controller, index) => (
-              <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{controller.name}</h3>
-                    <div className="flex items-center text-gray-400">
-                      <DollarSign className="w-5 h-5 mr-1" />
-                      <span className="font-semibold">{controller.price}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-bold text-green-500 mb-3">Pros</h4>
-                    <ul className="space-y-2">
-                      {controller.pros.map((pro, i) => (
-                        <li key={i} className="flex items-start text-gray-300">
-                          <Check className="w-4 h-4 text-green-500 mr-2 shrink-0 mt-0.5" />
-                          {pro}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-red-700 mb-3">Cons</h4>
-                    <ul className="space-y-2">
-                      {controller.cons.map((con, i) => (
-                        <li key={i} className="flex items-start text-gray-300">
-                          <X className="w-4 h-4 text-red-500 mr-2 shrink-0 mt-0.5" />
-                          {con}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="bg-linear-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
-                    <h4 className="font-bold text-orange-500 mb-2">Lights Pi Advantage</h4>
-                    <p className="text-gray-300">{controller.lightsPiAdvantage}</p>
-                  </div>
-                </div>
-              </div>
+        <div role="table" aria-label="Lights Pi compared with commercial DMX consoles and app-based smart lighting">
+          <div role="row" className="hidden md:grid md:grid-cols-[minmax(10rem,14rem)_1fr_1fr_1fr] md:items-end gap-x-8 pb-4">
+            <span role="columnheader">
+              <span className="sr-only">Question</span>
+            </span>
+            {COLUMNS.map((c, i) => (
+              <span
+                key={c}
+                role="columnheader"
+                className="font-medium text-paper"
+                style={{ fontSize: "var(--step-body)" }}
+              >
+                {i === 2 ? (
+                  <>
+                    <Swatch cells={SCENES[2].cells} className="h-2 w-full max-w-[12rem] mb-3 !gap-[2px]" />
+                    {c}
+                  </>
+                ) : (
+                  c
+                )}
+              </span>
             ))}
           </div>
-        </div>
 
-        {/* vs Cloud Services */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold mb-8">vs Cloud Services</h2>
-          <div className="space-y-6">
-            {cloudServices.map((service, index) => (
-              <div key={index} className="bg-gray-900 rounded-2xl border border-gray-700 p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{service.name}</h3>
-                    <div className="flex items-center text-gray-400">
-                      <DollarSign className="w-5 h-5 mr-1" />
-                      <span className="font-semibold">{service.price}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-bold text-green-500 mb-3">Pros</h4>
-                    <ul className="space-y-2">
-                      {service.pros.map((pro, i) => (
-                        <li key={i} className="flex items-start text-gray-300">
-                          <Check className="w-4 h-4 text-green-500 mr-2 shrink-0 mt-0.5" />
-                          {pro}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-red-700 mb-3">Cons</h4>
-                    <ul className="space-y-2">
-                      {service.cons.map((con, i) => (
-                        <li key={i} className="flex items-start text-gray-300">
-                          <X className="w-4 h-4 text-red-500 mr-2 shrink-0 mt-0.5" />
-                          {con}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="bg-linear-to-br from-orange-500/20 to-blue-500/20 rounded-xl p-4 border border-orange-500/50">
-                    <h4 className="font-bold text-orange-500 mb-2">Lights Pi Advantage</h4>
-                    <p className="text-gray-300">{service.lightsPiAdvantage}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {ROWS.map((row) => (
+            <div
+              key={row.feature}
+              role="row"
+              className="grid grid-cols-1 md:grid-cols-[minmax(10rem,14rem)_1fr_1fr_1fr] gap-x-8 gap-y-2 py-5 border-t border-paper/15"
+            >
+              <span role="rowheader" className="font-medium text-paper" style={{ fontSize: "var(--step-body)" }}>
+                {row.feature}
+              </span>
+              {row.cells.map((cell, i) => (
+                <span
+                  key={i}
+                  role="cell"
+                  className={i === 2 ? "text-paper font-medium" : "text-paper/80"}
+                  style={{ fontSize: "var(--step-body)", lineHeight: 1.45 }}
+                >
+                  <span className="md:hidden text-paper/80 font-normal">{COLUMNS[i]}: </span>
+                  {cell}
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
+        <p className="mt-6 max-w-[40rem] text-paper/80" style={{ fontSize: "var(--step-body)" }}>
+          Console and app columns describe the categories in general; individual products differ. Lights Pi&apos;s
+          hardware prices come from the <Link href="/hardware" className="underline underline-offset-4">hardware guide</Link>.
+        </p>
+      </section>
 
-        {/* Cost Savings */}
-        <div className="bg-linear-to-r from-green-600 to-emerald-600 rounded-2xl p-12 text-center text-white">
-          <h2 className="text-4xl font-bold mb-4">Save Thousands</h2>
-          <p className="text-2xl mb-8 text-white/90">
-            Lights Pi can save you <span className="font-bold">$4,850+</span> in the first year
-          </p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div className="text-3xl font-bold mb-2">$0</div>
-              <div className="text-white/90">Monthly fees</div>
+      <section aria-labelledby="picks-title" className="mt-[clamp(96px,12vw,180px)]">
+        <SectionHead id="picks-title" title="Picking one" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+          {PICKS.map((p) => (
+            <div key={p.title}>
+              <span aria-hidden="true" className="block h-3 w-12 mb-6" style={{ backgroundColor: p.cell }} />
+              <h3 className="font-display text-paper" style={{ fontSize: "var(--step-lead)", lineHeight: 1.2 }}>
+                {p.title}
+              </h3>
+              <p className="mt-4 text-paper" style={{ fontSize: "var(--step-body)", lineHeight: 1.6 }}>
+                {p.body}
+              </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div className="text-3xl font-bold mb-2">$35-150</div>
-              <div className="text-white/90">One-time cost</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div className="text-3xl font-bold mb-2">∞</div>
-              <div className="text-white/90">Fixture limit</div>
-            </div>
-          </div>
-          <a
-            href="/quick-start"
-            className="inline-block bg-gray-900 text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
-          >
-            Get Started Now
-          </a>
+          ))}
         </div>
-      </div>
+      </section>
+
+      <section aria-labelledby="comparison-close" className="mt-[clamp(96px,12vw,180px)]">
+        <h2
+          id="comparison-close"
+          className="font-display text-paper max-w-[18ch]"
+          style={{ fontSize: "var(--step-head)", textWrap: "balance" }}
+        >
+          From $125, once.
+        </h2>
+        <p className="mt-6 max-w-[36rem] text-paper" style={{ fontSize: "var(--step-body)", lineHeight: 1.6 }}>
+          A Pi, a USB DMX interface and a cable. The software is free, with no subscription and no per-fixture licence.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <SwatchButton href="/quick-start">Start the build</SwatchButton>
+          <Link href="/hardware" className="link-plain">
+            See the hardware guide
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

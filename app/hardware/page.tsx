@@ -1,173 +1,122 @@
 "use client";
 
-import { Cpu, Usb, Cable, Shield, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 import { shoppingList, costSummary, setups } from "@/lib/hardware-catalog";
+import { PageHead, SectionHead } from "@/components/PageHead";
+import { SCENES } from "@/lib/scenes";
+import { Swatch, SwatchButton } from "@/components/home/Swatch";
+
+const body = { fontSize: "var(--step-body)", lineHeight: 1.55 } as const;
 
 export default function HardwarePage() {
   return (
-    <div className="min-h-screen bg-ink pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="min-h-screen bg-ink px-[var(--gutter)] pb-[clamp(72px,9vw,140px)]">
+      <PageHead
+        scene={0}
+        label="Hardware"
+        title="The bill of materials."
+        lead="Buy it once and own it. A Raspberry Pi, a USB-to-DMX interface and a few cables are all the rig needs."
+        aside="Prices checked March 2026"
+      />
 
-        {/* ─────────────────────────────────────────── HEADER ─── */}
-        <header className="hairline pb-8 mb-16 grid lg:grid-cols-[1fr_auto] gap-6 items-end">
-          <div>
-            <p className="eyebrow">Hardware</p>
-            <h1
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "var(--text-display-md)" }}
+      {/* Shopping list */}
+      <section className="mb-[clamp(72px,8vw,120px)]">
+        <SectionHead title="The shopping list" note={`${shoppingList.length} items`} />
+
+        <div className="border-t border-rule">
+          {/* Column heads, wide screens only */}
+          <div
+            className="hidden md:grid grid-cols-[1.6fr_1.4fr_6rem_8rem_1.5rem] gap-6 py-4 border-b border-rule text-paper/80 font-medium"
+            style={body}
+          >
+            <span>Item</span>
+            <span>What it does</span>
+            <span className="text-right">Price</span>
+            <span>Priority</span>
+            <span className="sr-only">Link</span>
+          </div>
+
+          {shoppingList.map((item, i) => (
+            <a
+              key={i}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent.clickShoppingItem(item.item, item.price)}
+              className="group grid grid-cols-[1fr_auto] md:grid-cols-[1.6fr_1.4fr_6rem_8rem_1.5rem] gap-x-6 gap-y-1 py-5 border-b border-rule hover:bg-steel transition-colors items-baseline"
+              style={body}
             >
-              The bill of materials.
-              <span className="block italic text-paper/40">
-                Buy it once. Own it forever.
+              <span className="font-medium text-paper group-hover:text-amber-tungsten transition-colors">
+                {item.item}
               </span>
-            </h1>
-          </div>
-          <p className="font-mono text-xs uppercase tracking-widest text-paper/40 whitespace-nowrap">
-            Prices verified · Mar 2026
-          </p>
-        </header>
-
-        {/* ────────────────────────────────────── SHOPPING LIST ─── */}
-        <section className="mb-24">
-          <div className="flex items-baseline justify-between mb-8">
-            <p className="eyebrow">Complete shopping list</p>
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-              {shoppingList.length} items
-            </p>
-          </div>
-
-          {/* Editorial table — hairline rows, mono, no card chrome */}
-          <div className="hairline">
-            {/* Column heads */}
-            <div className="grid grid-cols-[1.6fr_1.4fr_5rem_8rem_2rem] gap-4 py-3 hairline font-mono text-xs uppercase tracking-widest text-paper/40">
-              <span>Item</span>
-              <span>Purpose</span>
-              <span className="text-right">Price</span>
-              <span className="text-center">Priority</span>
-              <span className="text-right">↗</span>
-            </div>
-
-            {shoppingList.map((item, i) => (
-              <a
-                key={i}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent.clickShoppingItem(item.item, item.price)}
-                className="group grid grid-cols-[1.6fr_1.4fr_5rem_8rem_2rem] gap-4 py-5 border-b border-rule hover:bg-steel/30 transition-colors items-baseline"
-              >
-                <span className="font-display text-paper text-lg leading-tight group-hover:text-amber-tungsten transition-colors">
-                  {item.item}
-                </span>
-                <span className="font-sans text-paper/60 text-sm leading-tight">
-                  {item.purpose}
-                </span>
-                <span className="font-mono text-paper tabular-nums text-right">
-                  {item.price}
-                </span>
+              <span className="text-paper order-3 md:order-none col-span-2 md:col-span-1">{item.purpose}</span>
+              <span className="text-paper text-right tabular-nums order-2 md:order-none">{item.price}</span>
+              <span className="order-4 md:order-none col-span-2 md:col-span-1">
                 <PriorityTag priority={item.priority} />
-                <ExternalLink className="w-3.5 h-3.5 text-paper/30 group-hover:text-amber-tungsten transition-colors justify-self-end" />
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* ─────────────────────────────────── COST SUMMARY ─── */}
-        <section className="mb-24">
-          <div className="flex items-baseline justify-between mb-8">
-            <p className="eyebrow">Three ways to fly it</p>
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-              From budget to wireless
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-px bg-rule">
-            <CostCell
-              label={costSummary.minimum.label}
-              price={costSummary.minimum.price}
-              note={costSummary.minimum.note}
-              tone="dim"
-            />
-            <CostCell
-              label={costSummary.recommended.label}
-              price={costSummary.recommended.price}
-              note={costSummary.recommended.note}
-              tone="signature"
-            />
-            <CostCell
-              label={costSummary.wireless.label}
-              price={costSummary.wireless.price}
-              note={costSummary.wireless.note}
-              tone="cool"
-            />
-          </div>
-        </section>
-
-        {/* ────────────────────────────────── EXAMPLE SETUPS ─── */}
-        <section className="mb-24">
-          <div className="flex items-baseline justify-between mb-8">
-            <p className="eyebrow">Example setups</p>
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/40">
-              03 configurations
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-px bg-rule">
-            {setups.map((setup, i) => (
-              <article
-                key={setup.name}
-                className="bg-ink p-10 group hover:bg-steel/30 transition-colors"
+              </span>
+              <span
+                aria-hidden
+                className="hidden md:block text-paper/80 group-hover:text-amber-tungsten transition-colors justify-self-end"
               >
-                <span
-                  className="font-mono text-amber-tungsten/60 group-hover:text-amber-tungsten transition-colors"
-                  style={{ fontSize: "2rem", lineHeight: 1 }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3
-                  className="font-display text-paper mt-8"
-                  style={{ fontSize: "2rem", lineHeight: 1.05 }}
-                >
-                  {setup.name}
-                </h3>
-                <p className="font-mono text-paper/50 mt-3 tabular-nums">
-                  {setup.price}
-                </p>
-                <ul className="mt-8 hairline pt-6 space-y-2">
-                  {setup.items.map((item, idx) => (
-                    <li
-                      key={idx}
-                      className="grid grid-cols-[1rem_1fr] gap-3 font-mono text-sm text-paper/70 leading-snug"
-                    >
-                      <span className="text-paper/30">·</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
+                ↗
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
 
-        {/* ─────────────────────────────── DEEP DIVES ─── */}
-        <section className="mb-24 space-y-px bg-rule">
+      {/* Cost summary */}
+      <section className="mb-[clamp(72px,8vw,120px)]">
+        <SectionHead title="Three ways to build it" note="From budget to wireless" />
+        <div className="grid md:grid-cols-3 gap-px bg-rule border-y border-rule">
+          <CostCell scene={SCENES[5].cells} {...costSummary.minimum} />
+          <CostCell scene={SCENES[0].cells} {...costSummary.recommended} highlight />
+          <CostCell scene={SCENES[1].cells} {...costSummary.wireless} />
+        </div>
+      </section>
+
+      {/* Example setups */}
+      <section className="mb-[clamp(72px,8vw,120px)]">
+        <SectionHead title="Example setups" note={`${setups.length} configurations`} />
+        <div className="grid md:grid-cols-3 gap-px bg-rule border-y border-rule">
+          {setups.map((setup) => (
+            <article key={setup.name} className="bg-ink py-8 md:p-10">
+              <h3 className="font-display text-paper" style={{ fontSize: "var(--step-lead)", lineHeight: 1.1 }}>
+                {setup.name}
+              </h3>
+              <p className="text-paper/80 mt-2 tabular-nums" style={body}>
+                {setup.price}
+              </p>
+              <ul className="mt-6 border-t border-rule pt-5 space-y-2 text-paper" style={body}>
+                {setup.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Choosing the parts */}
+      <section className="mb-[clamp(72px,8vw,120px)]">
+        <SectionHead title="Choosing the parts" />
+        <div className="border-t border-rule">
           <DeepDive
-            kicker="Selection · 01"
-            icon={Cpu}
             title="Raspberry Pi"
-            lede="Both the Pi 3B+ and the Pi 4 work great for Lights Pi. The Pi 4 has more headroom; the 3B+ keeps the bill of materials lighter."
+            lede="Both the Pi 3B+ and the Pi 4 work well for Lights Pi. The Pi 4 has more headroom; the 3B+ keeps the bill of materials lighter."
             columns={[
               {
-                heading: "Choose Pi 4 if",
+                heading: "Choose the Pi 4 if",
                 bullets: [
                   "You have 10+ fixtures",
-                  "You want faster web interface",
+                  "You want a faster web interface",
                   "You plan to run additional services",
                   "You want to keep the MCP server snappy",
                 ],
               },
               {
-                heading: "Choose Pi 3B+ if",
+                heading: "Choose the Pi 3B+ if",
                 bullets: [
                   "You're on a budget",
                   "You have fewer than 10 fixtures",
@@ -179,13 +128,11 @@ export default function HardwarePage() {
           />
 
           <DeepDive
-            kicker="Selection · 02"
-            icon={Usb}
             title="ENTTEC DMX interface"
             lede="ENTTEC makes the most widely supported USB-to-DMX interfaces for QLC+. Two models, two budgets."
             columns={[
               {
-                heading: "Open DMX USB · $67",
+                heading: "Open DMX USB, $67",
                 bullets: [
                   "Entry-level, open-source hardware",
                   "Great for small setups and getting started",
@@ -194,7 +141,7 @@ export default function HardwarePage() {
                 ],
               },
               {
-                heading: "DMX USB Pro · $130",
+                heading: "DMX USB Pro, $130",
                 bullets: [
                   "Professional-grade, faster frame rates",
                   "RDM support for device discovery",
@@ -203,14 +150,10 @@ export default function HardwarePage() {
                 ],
               },
             ]}
-            warning={{
-              text: "Avoid counterfeits. Buy from B&H Photo, Amazon (sold by ENTTEC), or authorized dealers — counterfeit units may not work properly with QLC+.",
-            }}
+            warning="Avoid counterfeits. Buy from B&H Photo, Amazon (sold by ENTTEC), or authorized dealers — counterfeit units may not work properly with QLC+."
           />
 
           <DeepDive
-            kicker="Selection · 03"
-            icon={Cable}
             title="DMX cables"
             lede="Use proper DMX cable, not microphone cable. Most fixtures use 3-pin XLR; some pro fixtures use 5-pin. Cable quality matters on long runs."
             bullets={[
@@ -220,37 +163,28 @@ export default function HardwarePage() {
               "ENTTEC interfaces use 5-pin — to connect to a 3-pin fixture (e.g. Chauvet D-Fi Hub 2) you'll need a 5-to-3 converter cable",
             ]}
           />
-        </section>
+        </div>
+      </section>
 
-        {/* ─────────────────────────────────── CTA ─── */}
-        <section className="hairline pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <p className="eyebrow">Got the parts?</p>
-            <h2
-              className="font-display text-paper mt-3"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-            >
-              Ten minutes to first light.
-            </h2>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-x-8 gap-y-3">
-            <Link
-              href="/docs/quick-start"
-              onClick={() => trackEvent.clickGetStarted("hardware")}
-              className="group inline-flex items-center gap-3 text-paper font-mono uppercase tracking-widest text-sm border-b border-paper pb-1 hover:text-amber-tungsten hover:border-amber-tungsten transition-colors"
-            >
-              Quick-start guide
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
-            <Link
-              href="/docs/hardware-setup"
-              className="group inline-flex items-center gap-3 text-paper/60 font-mono uppercase tracking-widest text-sm hover:text-paper transition-colors"
-            >
-              Hardware setup docs
-            </Link>
-          </div>
-        </section>
-      </div>
+      {/* Next step */}
+      <section className="border-t border-rule pt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+        <div>
+          <p className="text-paper font-medium" style={body}>
+            Got the parts?
+          </p>
+          <h2 className="font-display text-paper mt-3" style={{ fontSize: "var(--step-head)" }}>
+            Ten minutes to first light.
+          </h2>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-5">
+          <SwatchButton href="/docs/quick-start" onClick={() => trackEvent.clickGetStarted("hardware")}>
+            Quick-start guide
+          </SwatchButton>
+          <Link href="/docs/hardware-setup" className="link-plain">
+            Hardware setup docs
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
@@ -258,48 +192,43 @@ export default function HardwarePage() {
 /* ──────────────────────────────────────────────── presentational ── */
 
 function PriorityTag({ priority }: { priority: string }) {
-  const styles: Record<string, string> = {
-    Required:    "text-amber-tungsten",
-    Recommended: "text-arc-cyan",
-    Alternative: "text-paper/50",
-    Optional:    "text-paper/40",
-  };
-  return (
-    <span className={`font-mono text-xs uppercase tracking-widest text-center ${styles[priority] ?? "text-paper/50"}`}>
-      {priority}
-    </span>
-  );
+  if (priority === "Required") {
+    return (
+      <span className="inline-flex items-center gap-2 text-amber-tungsten font-medium">
+        <span aria-hidden className="inline-block h-3 w-3 bg-amber-tungsten" />
+        Required
+      </span>
+    );
+  }
+  return <span className="text-paper/80">{priority}</span>;
 }
 
 function CostCell({
   label,
   price,
   note,
-  tone,
+  scene,
+  highlight = false,
 }: {
   label: string;
   price: string;
   note: string;
-  tone: "dim" | "signature" | "cool";
+  scene: string[];
+  highlight?: boolean;
 }) {
-  const accent = {
-    dim:       "text-paper/40",
-    signature: "text-amber-tungsten",
-    cool:      "text-arc-cyan",
-  }[tone];
   return (
-    <div className="bg-ink p-10">
-      <p className={`eyebrow ${accent}`}>{label}</p>
+    <div className="bg-ink py-8 md:p-10">
+      <Swatch cells={scene} className="h-2 w-28 !gap-[3px]" />
+      <p className={`mt-5 font-medium ${highlight ? "text-amber-tungsten" : "text-paper"}`} style={body}>
+        {label}
+      </p>
       <div
-        className="font-display text-paper mt-6 leading-none"
-        style={{
-          fontSize: "clamp(3rem, 6vw, 5rem)",
-          letterSpacing: "-0.03em",
-        }}
+        className="font-display text-paper mt-3 leading-none tabular-nums"
+        style={{ fontSize: "clamp(3rem, 6vw, 5rem)", letterSpacing: "-0.03em" }}
       >
         {price}
       </div>
-      <p className="font-mono text-xs uppercase tracking-widest text-paper/40 mt-6">
+      <p className="text-paper/80 mt-5" style={body}>
         {note}
       </p>
     </div>
@@ -307,87 +236,59 @@ function CostCell({
 }
 
 function DeepDive({
-  kicker,
-  icon: Icon,
   title,
   lede,
   columns,
   bullets,
   warning,
 }: {
-  kicker: string;
-  icon: React.ComponentType<{ className?: string }>;
   title: string;
   lede: string;
   columns?: { heading: string; bullets: string[] }[];
   bullets?: string[];
-  warning?: { text: string };
+  warning?: string;
 }) {
   return (
-    <article className="bg-ink p-10 lg:p-14">
-      <div className="grid lg:grid-cols-[12rem_1fr] gap-x-10 gap-y-6">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-amber-tungsten/70">
-            {kicker}
+    <article className="border-b border-rule py-10 md:py-14 grid lg:grid-cols-[minmax(0,20rem)_1fr] gap-x-12 gap-y-6">
+      <h3 className="font-display text-paper" style={{ fontSize: "var(--step-lead)", lineHeight: 1.1 }}>
+        {title}
+      </h3>
+
+      <div>
+        <p className="text-paper max-w-[42rem]" style={{ fontSize: "var(--step-lead)", lineHeight: 1.45 }}>
+          {lede}
+        </p>
+
+        {columns && (
+          <div className="grid md:grid-cols-2 gap-10 mt-10 max-w-4xl">
+            {columns.map((col) => (
+              <div key={col.heading}>
+                <p className="text-paper font-medium pb-3 mb-4 border-b border-rule" style={body}>
+                  {col.heading}
+                </p>
+                <ul className="space-y-2 list-disc pl-5 marker:text-paper/50 text-paper" style={body}>
+                  {col.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {bullets && (
+          <ul className="mt-8 space-y-2 max-w-[42rem] list-disc pl-5 marker:text-paper/50 text-paper" style={body}>
+            {bullets.map((b, i) => (
+              <li key={i}>{b}</li>
+            ))}
+          </ul>
+        )}
+
+        {warning && (
+          <p className="mt-8 max-w-[42rem] border-l-2 border-amber-tungsten pl-4 text-paper" style={body}>
+            {warning}
           </p>
-          <Icon className="w-6 h-6 text-amber-tungsten mt-6" aria-hidden />
-        </div>
-
-        <div>
-          <h3
-            className="font-display text-paper"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.05 }}
-          >
-            {title}
-          </h3>
-          <p className="mt-4 text-lg text-paper/70 leading-relaxed max-w-3xl">
-            {lede}
-          </p>
-
-          {columns && (
-            <div className="grid md:grid-cols-2 gap-12 mt-10 max-w-4xl">
-              {columns.map((col) => (
-                <div key={col.heading}>
-                  <p className="font-mono text-xs uppercase tracking-widest text-paper/50 mb-4 hairline pb-3 border-b border-rule">
-                    {col.heading}
-                  </p>
-                  <ul className="space-y-2">
-                    {col.bullets.map((b, i) => (
-                      <li
-                        key={i}
-                        className="grid grid-cols-[1rem_1fr] gap-3 font-sans text-paper/75 leading-relaxed"
-                      >
-                        <span className="text-paper/30">·</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {bullets && (
-            <ul className="mt-8 space-y-2 max-w-3xl">
-              {bullets.map((b, i) => (
-                <li
-                  key={i}
-                  className="grid grid-cols-[1rem_1fr] gap-3 font-sans text-paper/75 leading-relaxed"
-                >
-                  <span className="text-paper/30">·</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {warning && (
-            <div className="mt-8 flex items-start gap-3 max-w-3xl border-l-2 border-amber-tungsten pl-4 py-1">
-              <Shield className="w-4 h-4 text-amber-tungsten shrink-0 mt-1" aria-hidden />
-              <p className="text-sm text-paper/70 leading-relaxed">{warning.text}</p>
-            </div>
-          )}
-        </div>
+        )}
       </div>
     </article>
   );

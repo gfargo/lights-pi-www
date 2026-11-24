@@ -1,95 +1,35 @@
 import Link from "next/link";
-import { Home, Search, ArrowLeft, Lightbulb } from "lucide-react";
 import type { Metadata } from "next";
+import { PageHead } from "@/components/PageHead";
+import { SwatchButton } from "@/components/home/Swatch";
 
 export const metadata: Metadata = {
   title: "404 - Page Not Found | Lights Pi",
-  description: "The page you're looking for doesn't exist. Return to Lights Pi homepage or browse our documentation.",
+  description: "The page you're looking for doesn't exist. Return to the Lights Pi homepage, the quick start or the docs.",
 };
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-800 flex items-center justify-center px-4">
-      <div className="max-w-2xl mx-auto text-center">
-        {/* Animated 404 */}
-        <div className="mb-8">
-          <div className="inline-flex space-x-4 mb-4">
-            <div className="w-20 h-20 rounded-full bg-orange-500/20 animate-pulse flex items-center justify-center">
-              <Lightbulb className="w-10 h-10 text-orange-500" />
-            </div>
-            <div className="w-20 h-20 rounded-full bg-blue-500/20 animate-pulse delay-200 flex items-center justify-center">
-              <Lightbulb className="w-10 h-10 text-blue-500" />
-            </div>
-            <div className="w-20 h-20 rounded-full bg-pink-500/20 animate-pulse delay-500 flex items-center justify-center">
-              <Lightbulb className="w-10 h-10 text-pink-500" />
-            </div>
-          </div>
-        </div>
-
-        {/* Error Message */}
-        <h1 className="text-8xl md:text-9xl font-bold mb-4 text-gradient">404</h1>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-          Page Not Found
-        </h2>
-        <p className="text-xl text-gray-400 mb-12 max-w-lg mx-auto">
-          Looks like this page is in the dark. Let&apos;s get you back to the light!
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Link
-            href="/"
-            className="group flex items-center space-x-2 bg-linear-to-r from-orange-500 to-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
-          >
-            <Home className="w-5 h-5" />
-            <span>Go Home</span>
+    <div className="min-h-[100svh] bg-ink px-[var(--gutter)] pb-[clamp(96px,12vw,180px)]">
+      <PageHead
+        scene={4}
+        label="404"
+        title="This page is dark."
+        lead="Nothing is patched to this address. It may have moved, or the link may be wrong."
+      >
+        <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <SwatchButton href="/quick-start">Start the build</SwatchButton>
+          <Link href="/hardware" className="link-plain">
+            Hardware
           </Link>
-          <Link
-            href="/docs"
-            className="flex items-center space-x-2 bg-gray-800 text-gray-300 px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition border border-gray-700 hover:bg-gray-700"
-          >
-            <Search className="w-5 h-5" />
-            <span>Browse Docs</span>
+          <Link href="/docs" className="link-plain">
+            Docs
+          </Link>
+          <Link href="/" className="link-plain">
+            Home
           </Link>
         </div>
-
-        {/* Helpful Links */}
-        <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
-          <h3 className="text-lg font-semibold mb-4 text-white">
-            Popular Pages
-          </h3>
-          <div className="grid sm:grid-cols-2 gap-3 text-left">
-            <Link
-              href="/quick-start"
-              className="flex items-center space-x-2 text-gray-300 hover:text-orange-500 transition p-2 rounded-lg hover:bg-gray-700"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Quick Start Guide</span>
-            </Link>
-            <Link
-              href="/hardware"
-              className="flex items-center space-x-2 text-gray-300 hover:text-orange-500 transition p-2 rounded-lg hover:bg-gray-700"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Hardware Setup</span>
-            </Link>
-            <Link
-              href="/demo"
-              className="flex items-center space-x-2 text-gray-300 hover:text-orange-500 transition p-2 rounded-lg hover:bg-gray-700"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Interactive Demo</span>
-            </Link>
-            <Link
-              href="/showcase"
-              className="flex items-center space-x-2 text-gray-300 hover:text-orange-500 transition p-2 rounded-lg hover:bg-gray-700"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Showcase Gallery</span>
-            </Link>
-          </div>
-        </div>
-      </div>
+      </PageHead>
     </div>
   );
 }

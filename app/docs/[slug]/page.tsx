@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ArrowUpRight, Clock } from "lucide-react"
+import { Swatch } from "@/components/home/Swatch"
+import { SCENES } from "@/lib/scenes"
 import type { Metadata } from "next"
 import {
     getDocs,
@@ -18,6 +19,8 @@ import { DocsPageView } from "@/components/docs/DocsPageView"
 import { DocsTableOfContents } from "@/components/docs/DocsTableOfContents"
 
 export const revalidate = 3600
+
+const body = { fontSize: "var(--step-body)", lineHeight: 1.55 } as const
 
 // ---------------------------------------------------------------------------
 // Static generation
@@ -51,6 +54,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: `/docs/${slug}` },
     openGraph: {
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
       type: "article",
       title: `${doc.title} | Lights Pi Docs`,
       description,
@@ -81,7 +85,7 @@ export default async function DocPage({
   const readingTime = rawContent ? getReadingTime(rawContent) : null
 
   return (
-    <div className="flex gap-12">
+    <div className="flex gap-12 xl:gap-16">
       <article className="flex-1 min-w-0">
         {/* JSON-LD Structured Data */}
         <script
@@ -108,39 +112,31 @@ export default async function DocPage({
           }}
         />
 
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 mb-8 font-mono text-xs uppercase tracking-widest">
-          <Link href="/docs" className="text-paper/40 hover:text-amber-tungsten transition-colors">
-            Docs
-          </Link>
-          <span className="text-paper/20">/</span>
-          <span className="text-paper/70">{doc.title}</span>
-        </nav>
-
-        {/* Title block */}
-        <header className="hairline pb-8 mb-12">
-          <p className="eyebrow">Documentation</p>
+        {/* Title block: a smaller PageHead */}
+        <header className="pt-[clamp(104px,12vw,168px)] pb-10 mb-10 border-b border-rule">
+          <Swatch cells={SCENES[5].cells} className="h-3 w-full max-w-[22rem] !gap-[3px]" />
+          <nav aria-label="Breadcrumb" className="mt-8 flex flex-wrap items-center gap-2 text-paper" style={body}>
+            <Link href="/docs" className="font-medium hover:text-amber-tungsten transition-colors">
+              Documentation
+            </Link>
+            <span aria-hidden className="text-paper/70">/</span>
+            <span className="text-paper/80">{doc.title}</span>
+          </nav>
           <h1
-            className="font-display text-paper mt-3"
-            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+            className="font-display text-paper mt-3 max-w-[20ch]"
+            style={{ fontSize: "clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem)", textWrap: "balance" }}
           >
             {doc.title}
           </h1>
-          <div className="mt-6 flex items-center gap-x-6 gap-y-2 flex-wrap font-mono text-xs uppercase tracking-widest text-paper/40">
-            {readingTime && (
-              <span className="inline-flex items-center gap-2">
-                <Clock className="w-3 h-3" />
-                {readingTime} min read
-              </span>
-            )}
+          <div className="mt-6 flex items-center gap-x-8 gap-y-2 flex-wrap text-paper/80" style={body}>
+            {readingTime && <span>{readingTime} min read</span>}
             <a
               href={`${doc.wikiUrl}/_edit`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-amber-tungsten transition-colors"
+              className="text-paper underline decoration-paper/40 decoration-2 underline-offset-4 hover:decoration-amber-tungsten transition-colors"
             >
-              Edit on GitHub
-              <ArrowUpRight className="w-3 h-3" />
+              Edit on GitHub ↗
             </a>
           </div>
         </header>
@@ -149,18 +145,12 @@ export default async function DocPage({
         {content ? (
           <DocsContent content={content} />
         ) : (
-          <div className="border border-rule bg-steel/30 p-8 text-center">
-            <p className="font-display italic text-paper/60 text-lg">
+          <div className="border border-rule bg-steel p-8">
+            <p className="text-paper" style={body}>
               This page&apos;s content couldn&apos;t be loaded from the wiki.
             </p>
-            <a
-              href={doc.wikiUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 font-mono uppercase tracking-widest text-xs text-amber-tungsten border-b border-amber-tungsten pb-1 hover:text-paper hover:border-paper transition-colors"
-            >
-              View on Wiki
-              <ArrowUpRight className="w-3.5 h-3.5" />
+            <a href={doc.wikiUrl} target="_blank" rel="noopener noreferrer" className="link-plain mt-6 inline-block">
+              View on the wiki ↗
             </a>
           </div>
         )}
