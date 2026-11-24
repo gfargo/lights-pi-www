@@ -78,11 +78,9 @@ export function Footer({ version }: FooterProps) {
             <a className="underline" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>;{" "}
             <a className="underline" href="https://commons.wikimedia.org/wiki/File:DMX_Cable.jpg">DMX Cable</a> by DJSparky,{" "}
             <a className="underline" href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>;{" "}
-            <a className="underline" href="https://commons.wikimedia.org/wiki/File:Pink_and_blue_stage_lighting.jpg">Pink and blue stage lighting</a> by James,{" "}
-            <a className="underline" href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>;{" "}
             <a className="underline" href="https://commons.wikimedia.org/wiki/File:Spotlight_(14871682502).jpg">Spotlight</a> by Blondinrikard Fröberg,{" "}
             <a className="underline" href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>.
-            Interface screenshots are of Lights Pi itself.
+            Interface screenshots and rig footage are of Lights Pi itself.
           </p>
         </div>
       </div>
