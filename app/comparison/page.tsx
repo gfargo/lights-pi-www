@@ -18,7 +18,7 @@ const ROWS: { feature: string; cells: [string, string, string] }[] = [
     cells: [
       "Typically $500 to $5,000 for a desk",
       "A hub or bridge, plus the vendor's own bulbs",
-      "About $125 minimum, $230 recommended",
+      "About $145 minimum, $285 recommended",
     ],
   },
   {
@@ -158,7 +158,7 @@ export default function ComparisonPage() {
           className="font-display text-paper max-w-[18ch]"
           style={{ fontSize: "var(--step-head)", textWrap: "balance" }}
         >
-          From $125, once.
+          From $145, once.
         </h2>
         <p className="mt-6 max-w-[36rem] text-paper" style={{ fontSize: "var(--step-body)", lineHeight: 1.6 }}>
           A Pi, a USB DMX interface and a cable. The software is free, with no subscription and no per-fixture licence.

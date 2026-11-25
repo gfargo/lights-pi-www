@@ -1,11 +1,24 @@
 /**
  * Hardware catalog for the Lights Pi shopping list.
  *
- * All product links, prices, and metadata live here so they can be
- * swapped to affiliate / referral links in one place later.
+ * All product links, prices, and metadata live here. Amazon links carry
+ * the Associates tag through `amazon()`, so the tag lives in one place.
  *
- * Prices were last verified: March 2026
+ * Prices were last verified on Amazon: November 2026
  */
+
+/** Amazon Associates tracking ID (SiteStripe → Tracking ID). */
+export const AMAZON_TAG = "griffencodes-20";
+
+/** A product page link with the Associates tag. */
+export function amazon(asin: string): string {
+  return `https://www.amazon.com/dp/${asin}?tag=${AMAZON_TAG}`;
+}
+
+/** True when a link earns an affiliate commission (rendered rel="sponsored"). */
+export function isAffiliate(link: string): boolean {
+  return link.includes(`tag=${AMAZON_TAG}`);
+}
 
 export type Priority = "Required" | "Recommended" | "Alternative" | "Optional";
 
@@ -17,7 +30,7 @@ export interface Product {
   /** Price string shown to users (e.g. "$40" or "$60–150") */
   price: string;
   priority: Priority;
-  /** Buy link — swap these for affiliate URLs when ready */
+  /** Buy link: amazon(asin) for affiliate links, or a plain URL */
   link: string;
 }
 
@@ -31,82 +44,96 @@ export interface SetupTier {
 // ─── Shopping List ───────────────────────────────────────────────
 export const shoppingList: Product[] = [
   {
-    item: "Raspberry Pi 4 (4 GB)",
+    item: "Raspberry Pi 4 (4 GB), official resellers",
     purpose: "Main controller",
     price: "$65",
     priority: "Required",
     link: "https://www.raspberrypi.com/products/raspberry-pi-4-model-b/",
   },
   {
-    item: "Raspberry Pi 3B+",
+    item: "Raspberry Pi 4 (4 GB), on Amazon",
+    purpose: "Same board, often faster delivery",
+    price: "$137",
+    priority: "Alternative",
+    link: amazon("B09TTNF8BT"),
+  },
+  {
+    item: "Raspberry Pi 3B+, official resellers",
     purpose: "Budget alternative",
     price: "$40",
     priority: "Alternative",
     link: "https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/",
   },
   {
-    item: "MicroSD Card (32 GB)",
-    purpose: "OS storage",
-    price: "$8",
+    item: "Raspberry Pi 3B+, on Amazon",
+    purpose: "Budget alternative",
+    price: "$53",
+    priority: "Alternative",
+    link: amazon("B07P4LSDYV"),
+  },
+  {
+    item: "SanDisk High Endurance microSD (32 GB)",
+    purpose: "OS storage, built for constant writes",
+    price: "$22",
     priority: "Required",
-    link: "https://www.amazon.com/s?k=microsd+card+32gb",
+    link: amazon("B07P14QHB7"),
   },
   {
     item: "ENTTEC Open DMX USB",
     purpose: "DMX interface (entry-level)",
-    price: "$67",
+    price: "$72",
     priority: "Alternative",
-    link: "https://www.amazon.com/Open-DMX-USB-Interface-Controller/dp/B00O9RY664",
+    link: amazon("B00O9RY664"),
   },
   {
     item: "ENTTEC DMX USB Pro",
     purpose: "DMX interface (recommended)",
-    price: "$130",
+    price: "$176",
     priority: "Required",
-    link: "https://www.amazon.com/ENTTEC-DMX-USB-512-Ch-Interface/dp/B077VW1DJH",
+    link: amazon("B077VW1DJH"),
   },
   {
-    item: "Power Supply (USB-C / Micro-USB)",
-    purpose: "Pi power",
+    item: "CanaKit 3.5A USB-C Power Supply",
+    purpose: "Pi 4 power (a Pi 3B+ takes micro-USB)",
     price: "$10",
     priority: "Required",
-    link: "https://www.raspberrypi.com/products/type-c-power-supply/",
+    link: amazon("B07TYQRXTK"),
   },
   {
-    item: "DMX Cable (3-pin XLR)",
+    item: "DMX Cable, 3-pin, 25 ft (2-pack)",
     purpose: "Fixture connection",
-    price: "$10–15",
+    price: "$23",
     priority: "Required",
-    link: "https://www.amazon.com/s?k=dmx+cable+3+pin",
+    link: amazon("B0H26B96R9"),
   },
   {
-    item: "Wireless DMX System",
-    purpose: "Cable-free setup",
-    price: "$60–200",
+    item: "Chauvet D-Fi Hub 2 (wireless DMX)",
+    purpose: "Cable-free setup, transmit or receive",
+    price: "$152",
     priority: "Optional",
-    link: "https://www.amazon.com/s?k=wireless+dmx+transmitter+receiver",
+    link: amazon("B0FXGXG8C1"),
   },
   {
-    item: "Case for Raspberry Pi",
+    item: "Official Raspberry Pi 4 Case",
     purpose: "Protection",
-    price: "$7–15",
+    price: "$10",
     priority: "Recommended",
-    link: "https://www.amazon.com/s?k=raspberry+pi+4+case",
+    link: amazon("B07WQ5G6YY"),
   },
 ];
 
 // ─── Cost Summary ────────────────────────────────────────────────
 export const costSummary = {
-  minimum: { label: "Minimum Setup", price: "~$125", note: "Pi 3B+ + Open DMX USB" },
-  recommended: { label: "Recommended Setup", price: "~$230", note: "Pi 4 + DMX USB Pro + case" },
-  wireless: { label: "With Wireless DMX", price: "~$300–430", note: "Full wireless setup" },
+  minimum: { label: "Minimum Setup", price: "~$145", note: "Pi 3B+ + Open DMX USB" },
+  recommended: { label: "Recommended Setup", price: "~$285", note: "Pi 4 + DMX USB Pro + case" },
+  wireless: { label: "With Wireless DMX", price: "~$435", note: "Recommended + D-Fi Hub 2" },
 } as const;
 
 // ─── Example Setups ──────────────────────────────────────────────
 export const setups: SetupTier[] = [
   {
     name: "Budget Setup",
-    price: "$125",
+    price: "$145 + lights",
     items: [
       "Raspberry Pi 3B+",
       "ENTTEC Open DMX USB",

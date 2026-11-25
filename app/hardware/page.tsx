@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
-import { shoppingList, costSummary, setups } from "@/lib/hardware-catalog";
+import { shoppingList, costSummary, setups, isAffiliate } from "@/lib/hardware-catalog";
 import { PageHead, SectionHead } from "@/components/PageHead";
 import { SCENES } from "@/lib/scenes";
 import { Swatch, SwatchButton } from "@/components/home/Swatch";
@@ -17,7 +17,7 @@ export default function HardwarePage() {
         label="Hardware"
         title="The bill of materials."
         lead="Buy it once and own it. A Raspberry Pi, a USB-to-DMX interface and a few cables are all the rig needs."
-        aside="Prices checked March 2026"
+        aside="Prices checked November 2026"
       />
 
       {/* Shopping list */}
@@ -42,7 +42,7 @@ export default function HardwarePage() {
               key={i}
               href={item.link}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={isAffiliate(item.link) ? "sponsored noopener noreferrer" : "noopener noreferrer"}
               onClick={() => trackEvent.clickShoppingItem(item.item, item.price)}
               className="group grid grid-cols-[1fr_auto] md:grid-cols-[1.6fr_1.4fr_6rem_8rem_1.5rem] gap-x-6 gap-y-1 py-5 border-b border-rule hover:bg-steel transition-colors items-baseline"
               style={body}
@@ -64,6 +64,10 @@ export default function HardwarePage() {
             </a>
           ))}
         </div>
+        <p className="mt-4 text-paper/80" style={body}>
+          As an Amazon Associate, Lights Pi earns from qualifying purchases. Amazon links cost you nothing extra and help
+          keep the project going.
+        </p>
       </section>
 
       {/* Cost summary */}
@@ -132,7 +136,7 @@ export default function HardwarePage() {
             lede="ENTTEC makes the most widely supported USB-to-DMX interfaces for QLC+. Two models, two budgets."
             columns={[
               {
-                heading: "Open DMX USB, $67",
+                heading: "Open DMX USB, $72",
                 bullets: [
                   "Entry-level, open-source hardware",
                   "Great for small setups and getting started",
@@ -141,7 +145,7 @@ export default function HardwarePage() {
                 ],
               },
               {
-                heading: "DMX USB Pro, $130",
+                heading: "DMX USB Pro, $176",
                 bullets: [
                   "Professional-grade, faster frame rates",
                   "RDM support for device discovery",

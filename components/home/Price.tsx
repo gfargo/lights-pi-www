@@ -5,11 +5,11 @@ import { Swatch } from "./Swatch";
 /**
  * Act VII. The price, very large. One bill of materials; the software is free.
  */
-// The minimum build, from lib/hardware-catalog.ts (prices checked March 2026).
+// The minimum build, from lib/hardware-catalog.ts (prices checked November 2026).
 const LINES = [
   ["Raspberry Pi 3B+", "$40"],
-  ["ENTTEC Open DMX USB", "$67"],
-  ["32 GB microSD card", "$8"],
+  ["ENTTEC Open DMX USB", "$72"],
+  ["32 GB microSD card", "$22"],
   ["Power supply", "$10"],
   ["Lights Pi, QLC+ and the MCP server", "free"],
 ];
@@ -24,7 +24,7 @@ export function Price() {
           </h2>
           <p className="mt-5 text-paper rise" style={{ fontSize: "var(--step-body)", lineHeight: 1.55, ["--d" as string]: "80ms" }}>
             The hardware, once. The software is MIT-licensed: no subscription, no per-fixture licence, no account.
-            That is the minimum build; the recommended Pi 4 with an ENTTEC DMX USB Pro and a case is about $230.
+            That is the minimum build; the recommended Pi 4 with an ENTTEC DMX USB Pro and a case is about $285.
           </p>
         </div>
 
@@ -33,9 +33,9 @@ export function Price() {
             <p
               className="font-display text-paper"
               style={{ fontSize: "clamp(7.5rem, 16vw, 15rem)", lineHeight: 0.85, letterSpacing: "-0.05em", fontVariantNumeric: "tabular-nums" }}
-              aria-label="From 125 dollars"
+              aria-label="From 144 dollars"
             >
-              <span style={{ fontSize: "0.5em", verticalAlign: "0.62em" }}>$</span>125
+              <span style={{ fontSize: "0.5em", verticalAlign: "0.62em" }}>$</span>144
             </p>
             <Swatch
               cells={SCENES[0].cells}
