@@ -42,7 +42,7 @@ const useCases = [
     uses: [
       "Named scenes per setup or per client",
       "White balance matched across fixtures",
-      "Virtual console for fine per-channel trims",
+      "The Console tab for fine per-channel trims",
     ],
     fixtures: "Four to six LED panels, background and strip lights",
   },
@@ -79,7 +79,7 @@ const useCases = [
     description:
       "A complete DMX rig per bench for the price of the controller and a fixture or two. Students see every channel of every fixture, labelled from its profile, and learn what a scene actually is.",
     uses: [
-      "Virtual console labelled from QLC+ fixture profiles",
+      "A console labelled from QLC+ fixture profiles",
       "QLC+ underneath, an open-source engine used on real shows",
       "All of it open source, to read and change",
     ],

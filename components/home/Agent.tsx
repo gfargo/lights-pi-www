@@ -42,12 +42,12 @@ export function Agent() {
         </div>
 
         <div className="lg:col-span-7 lg:col-start-6">
-          <div className="shutter bg-ink aspect-[1928/1095]">
+          <div className="shutter bg-ink aspect-[2496/1550]">
             <Image
               src="/images/ui/chat-desktop-crop.png"
               alt="The Lights Pi Chat tab: a conversation list, suggested prompts such as Three-point lighting and Sunset cue list, and the message box."
-              width={1928}
-              height={1095}
+              width={2496}
+              height={1550}
               sizes="(min-width: 1024px) 56vw, 100vw"
               loading="eager"
               className="w-full h-auto"

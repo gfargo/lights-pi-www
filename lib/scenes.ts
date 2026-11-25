@@ -1,7 +1,7 @@
 /**
  * Real scenes from a Lights Pi studio workspace: eight fixtures, each scene's
  * per-fixture colour exactly as the control server renders it in the scene
- * swatch (Quick Commands tab). The homepage motif is built from these strips.
+ * swatch (Scenes tab). The homepage motif is built from these strips.
  */
 export interface Scene {
   id: number;
