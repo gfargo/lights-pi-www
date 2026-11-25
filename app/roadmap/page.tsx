@@ -399,7 +399,7 @@ export default function RoadmapPage() {
                 className="font-display text-paper mt-3 group-hover:text-amber-tungsten transition-colors"
                 style={{ fontSize: "var(--step-lead)", lineHeight: 1.15 }}
               >
-                {item.title.replace(/^v\d+\.\d+(\.\d+)?\s*—\s*/, "")}
+                {((t) => t.charAt(0).toUpperCase() + t.slice(1))(item.title.replace(/^v\d+\.\d+(\.\d+)?\s*—\s*/, ""))}
               </p>
               <p className="text-paper mt-3" style={body}>
                 {item.description}
