@@ -71,7 +71,7 @@ export async function getGitHubRepoStats(): Promise<GitHubRepoStats> {
  * default if the API is unreachable so the site never renders without a
  * version stamp.
  */
-export async function getLatestVersion(fallback = "v2.16.2"): Promise<string> {
+export async function getLatestVersion(fallback = "v2.17.0"): Promise<string> {
   const releases = await getGitHubReleases();
   return releases[0]?.tagName ?? fallback;
 }
@@ -132,17 +132,46 @@ export function releaseToPost(release: GitHubRelease): BlogPost {
   };
 }
 
-function extractExcerpt(body: string): string {
-  // Remove markdown headers and get first paragraph
-  const lines = body.split("\n").filter(line => !line.startsWith("#"));
-  const firstParagraph = lines.find(line => line.trim().length > 0) || "";
-  
-  // Limit to 150 characters
-  if (firstParagraph.length > 150) {
-    return firstParagraph.substring(0, 147) + "...";
+/** Strip inline markdown so an excerpt reads as plain text. */
+export function plainText(md: string): string {
+  return md
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/(\*\*|__)(.+?)\1/g, "$2")
+    .replace(/(\*|_)(\S.*?)\1/g, "$2")
+    .replace(/^\s*(?:[-*+]|\d+\.|>)\s+/, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractExcerpt(body: string, max = 180): string {
+  // The first prose paragraph: skip headings, lists, code fences and blank lines.
+  const para: string[] = [];
+  let fence = false;
+  for (const raw of body.split("\n")) {
+    const line = raw.trim();
+    if (line.startsWith("```")) { fence = !fence; if (para.length) break; continue; }
+    if (fence) continue;
+    if (!line) { if (para.length) break; continue; }
+    if (/^(#|[-*+]\s|\d+\.\s|\|)/.test(line)) { if (para.length) break; continue; }
+    para.push(line);
   }
-  
-  return firstParagraph;
+  if (!para.length) {
+    // Notes that open with headings or bullets: use the first real line instead.
+    const lines = body.split("\n").map((l) => l.trim());
+    const bullets = lines.filter((l) => /^([-*+]|\d+\.)\s/.test(l)).slice(0, 3)
+      .map((l) => plainText(l).replace(/\s*\(?https?:\/\/\S+\)?/g, "").replace(/[.;]$/, ""));
+    if (bullets.length) para.push(bullets.join("; ") + ".");
+    else {
+      const head = lines.find((l) => l.startsWith("#"));
+      if (head) para.push(head.replace(/^#+\s*/, ""));
+    }
+  }
+  const text = plainText(para.join(" "));
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  return cut.slice(0, Math.max(cut.lastIndexOf(" "), max - 30)).replace(/[,;:.\s]+$/, "") + "…";
 }
 
 function calculateReadTime(body: string): string {

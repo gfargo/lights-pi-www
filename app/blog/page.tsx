@@ -158,7 +158,7 @@ function PostRow({ post }: { post: BlogPost }) {
         >
           {post.title}
         </h3>
-        <p className="mt-2 text-paper max-w-[42rem]">{post.excerpt}</p>
+        {post.excerpt ? <p className="mt-2 text-paper max-w-[42rem]">{post.excerpt}</p> : null}
       </div>
       <div className="text-paper/80 whitespace-nowrap">
         {post.readTime}
