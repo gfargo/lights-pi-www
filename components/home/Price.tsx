@@ -7,7 +7,7 @@ import { Swatch } from "./Swatch";
  */
 // The minimum build, from lib/hardware-catalog.ts (prices checked November 2026).
 const LINES = [
-  ["Raspberry Pi 3B+", "$40"],
+  ["Raspberry Pi 3B+", "$55"],
   ["ENTTEC Open DMX USB", "$72"],
   ["32 GB microSD card", "$22"],
   ["Power supply", "$10"],
@@ -33,9 +33,9 @@ export function Price() {
             <p
               className="font-display text-paper"
               style={{ fontSize: "clamp(7.5rem, 16vw, 15rem)", lineHeight: 0.85, letterSpacing: "-0.05em", fontVariantNumeric: "tabular-nums" }}
-              aria-label="From 144 dollars"
+              aria-label="From 159 dollars"
             >
-              <span style={{ fontSize: "0.5em", verticalAlign: "0.62em" }}>$</span>144
+              <span style={{ fontSize: "0.5em", verticalAlign: "0.62em" }}>$</span>159
             </p>
             <Swatch
               cells={SCENES[0].cells}

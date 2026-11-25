@@ -15,7 +15,7 @@ import { Close } from "@/components/home/Close";
  *  4. Board   — it is built for real shows: cue lists, chases, console, health.
  *  5. Kelvin  — the one control that shows what fixtures do, at poster size.
  *  6. Build   — ten minutes from parts to light.
- *  7. Price   — from $145, once; the software is free.
+ *  7. Price   — from $160, once; the software is free.
  *  8. Close   — build it this weekend.
  */
 export default function Home() {

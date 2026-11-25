@@ -60,7 +60,7 @@ export const shoppingList: Product[] = [
   {
     item: "Raspberry Pi 3B+, official resellers",
     purpose: "Budget alternative",
-    price: "$40",
+    price: "$55",
     priority: "Alternative",
     link: "https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/",
   },
@@ -124,7 +124,7 @@ export const shoppingList: Product[] = [
 
 // ─── Cost Summary ────────────────────────────────────────────────
 export const costSummary = {
-  minimum: { label: "Minimum Setup", price: "~$145", note: "Pi 3B+ + Open DMX USB" },
+  minimum: { label: "Minimum Setup", price: "~$160", note: "Pi 3B+ + Open DMX USB" },
   recommended: { label: "Recommended Setup", price: "~$340", note: "Pi 4 + DMX USB Pro + case" },
   wireless: { label: "With Wireless DMX", price: "~$490", note: "Recommended + D-Fi Hub 2" },
 } as const;
@@ -133,7 +133,7 @@ export const costSummary = {
 export const setups: SetupTier[] = [
   {
     name: "Budget Setup",
-    price: "$145 + lights",
+    price: "$160 + lights",
     items: [
       "Raspberry Pi 3B+",
       "ENTTEC Open DMX USB",
