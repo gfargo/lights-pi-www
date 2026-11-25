@@ -24,7 +24,7 @@ export function Price() {
           </h2>
           <p className="mt-5 text-paper rise" style={{ fontSize: "var(--step-body)", lineHeight: 1.55, ["--d" as string]: "80ms" }}>
             The hardware, once. The software is MIT-licensed: no subscription, no per-fixture licence, no account.
-            That is the minimum build; the recommended Pi 4 with an ENTTEC DMX USB Pro and a case is about $285.
+            That is the minimum build; the recommended Pi 4 with an ENTTEC DMX USB Pro and a case is about $340.
           </p>
         </div>
 

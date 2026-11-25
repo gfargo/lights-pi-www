@@ -18,7 +18,7 @@ const ROWS: { feature: string; cells: [string, string, string] }[] = [
     cells: [
       "Typically $500 to $5,000 for a desk",
       "A hub or bridge, plus the vendor's own bulbs",
-      "About $145 minimum, $285 recommended",
+      "About $145 minimum, $340 recommended",
     ],
   },
   {

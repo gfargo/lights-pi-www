@@ -46,7 +46,7 @@ export const shoppingList: Product[] = [
   {
     item: "Raspberry Pi 4 (4 GB), official resellers",
     purpose: "Main controller",
-    price: "$65",
+    price: "$120",
     priority: "Required",
     link: "https://www.raspberrypi.com/products/raspberry-pi-4-model-b/",
   },
@@ -125,8 +125,8 @@ export const shoppingList: Product[] = [
 // ─── Cost Summary ────────────────────────────────────────────────
 export const costSummary = {
   minimum: { label: "Minimum Setup", price: "~$145", note: "Pi 3B+ + Open DMX USB" },
-  recommended: { label: "Recommended Setup", price: "~$285", note: "Pi 4 + DMX USB Pro + case" },
-  wireless: { label: "With Wireless DMX", price: "~$435", note: "Recommended + D-Fi Hub 2" },
+  recommended: { label: "Recommended Setup", price: "~$340", note: "Pi 4 + DMX USB Pro + case" },
+  wireless: { label: "With Wireless DMX", price: "~$490", note: "Recommended + D-Fi Hub 2" },
 } as const;
 
 // ─── Example Setups ──────────────────────────────────────────────
@@ -144,7 +144,7 @@ export const setups: SetupTier[] = [
   },
   {
     name: "Creator Setup",
-    price: "$400",
+    price: "$600",
     items: [
       "Raspberry Pi 4 (4 GB)",
       "ENTTEC DMX USB Pro",

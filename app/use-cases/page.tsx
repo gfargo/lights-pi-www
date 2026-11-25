@@ -6,7 +6,7 @@ import { SCENES } from "@/lib/scenes";
 export const metadata = {
   title: "Use Cases - Lights Pi | Real-World Applications",
   description:
-    "Where a Pi-based DMX controller fits: video and photo studios, live streams, small venues, classrooms and home rooms. The controller is about $145 to $285; fixtures are extra.",
+    "Where a Pi-based DMX controller fits: video and photo studios, live streams, small venues, classrooms and home rooms. The controller is about $145 to $340; fixtures are extra.",
   openGraph: {
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     title: "Use Cases - Lights Pi",
@@ -110,7 +110,7 @@ export default function UseCasesPage() {
         lead="The same Pi can run a YouTube set, a wedding and a classroom bench. Here is where it fits and what each room tends to use."
         aside={
           <p className="max-w-[20rem]">
-            The controller is about $145, or $285 for the recommended build. Fixtures are extra.
+            The controller is about $145, or $340 for the recommended build. Fixtures are extra.
           </p>
         }
       />
