@@ -16,8 +16,8 @@ export function Agent() {
           </h2>
           <p className="mt-6 text-paper rise" style={{ fontSize: "var(--step-body)", lineHeight: 1.55, ["--d" as string]: "80ms" }}>
             The Pi serves a Model Context Protocol endpoint on port 5001. Point Claude Desktop, ChatGPT, Cursor or your
-            own agent at it and the whole rig becomes 48 tools: scenes, groups, colour temperature, chases, cue lists,
-            diagnostics. The built-in Chat tab runs the same agent from any browser.
+            own agent at it and the whole rig becomes 57 tools: scenes, groups, colour temperature, chases, cue lists,
+            audio, diagnostics. The built-in Chat tab runs the same agent from any browser.
           </p>
 
           <pre

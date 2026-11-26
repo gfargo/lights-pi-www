@@ -22,10 +22,10 @@ const TILES: Tile[] = [
     shot: { src: "/images/ui/chases-desktop-crop.png", w: 2496, h: 680, alt: "Chases tab with Sunset drift and Club pulse, a Tap tempo button and Start and Stop controls.", style: { width: "118%", left: "6%", top: "-12%" } },
   },
   {
-    area: "a-q", size: "t-big", name: "Cue lists",
-    line: "Cues at absolute timestamps. Press Go when the audio rolls.",
+    area: "a-q", size: "t-big", name: "Cue list timeline",
+    line: "Drag cues over the song's waveform. Scrub to preview any moment on the rig.",
     bg: "#f1f1ee", ink: "#0a0a0a",
-    shot: { src: "/images/ui/cuelists-desktop-crop.png", w: 2496, h: 680, alt: "Cue lists tab with Intro, six cues over thirty seconds, and Interview open, each with a Go button.", style: { width: "150%", left: "8%", top: "10%" } },
+    shot: { src: "/images/ui/cuelists-desktop-crop.png", w: 2496, h: 1156, alt: "Cue list timeline for Album launch: ten scene cues as colour blocks under the track's waveform, the Sunset cue selected at 0:48 and the cursor at 0:58.", style: { width: "150%", left: "8%", top: "8%" } },
   },
   {
     area: "a-v", size: "t-big", name: "Console",
@@ -50,6 +50,12 @@ const TILES: Tile[] = [
     line: "Temperature, DMX USB and all four services.",
     bg: "#00c8b4", ink: "#0a0a0a",
     shot: { src: "/images/ui/diag-desktop-crop.png", w: 2496, h: 2080, alt: "Pi health panel on a live rig: CPU 66.6°C, load 1.04, DMX USB connected, 4 of 4 services active.", style: { width: "250%", left: "-6%", top: 0, translate: "0 -18%" } },
+  },
+  {
+    area: "a-s", size: "t-big", name: "Stage plan",
+    line: "Your room with every fixture in its live colour. Pick a few and light just those.",
+    bg: "#1e50ff", ink: "#ffffff",
+    shot: { src: "/images/ui/stage-desktop-crop.png", w: 2496, h: 1788, alt: "Stage tab: an 8 by 5 metre room with five SlimPAR fixtures in their live Sunset colours, aim arrows and a Light these button.", style: { width: "80%", left: "10%", top: 0, translate: "0 -21%" } },
   },
 ];
 
@@ -85,6 +91,35 @@ export function Board() {
             </figcaption>
           </figure>
         ))}
+
+        {/* Bands to fixtures: the Audio tab's three band meters, built at poster size. */}
+        <figure className="a-b t-wide rise" style={{ backgroundColor: "#161616" }}>
+          <div
+            data-ui
+            aria-hidden="true"
+            className="absolute left-[20px] right-[20px] top-[14%] grid grid-cols-3 gap-[0.6em] text-paper"
+            style={{ fontSize: "clamp(14px, 1.4vw, 20px)" }}
+          >
+            {[
+              { name: "Bass", colour: "#ff1800", level: 0.82 },
+              { name: "Mids", colour: "#ff9600", level: 0.55 },
+              { name: "Highs", colour: "#288cff", level: 0.34 },
+            ].map((band) => (
+              <div key={band.name}>
+                <span className="block font-medium">{band.name}</span>
+                <span className="mt-[0.4em] block h-[0.7em] bg-white/10">
+                  <span className="block h-full" style={{ width: `${band.level * 100}%`, backgroundColor: band.colour }} />
+                </span>
+              </div>
+            ))}
+          </div>
+          <figcaption className="cap" style={{ backgroundColor: "#161616", color: "#f1f1ee" }}>
+            <span className="block font-medium" style={{ fontSize: "18px" }}>Bands to fixtures</span>
+            <span className="block mt-1" style={{ fontSize: "16px", lineHeight: 1.4 }}>
+              Plug in a USB mic. Bass, mids and highs each drive their own fixtures.
+            </span>
+          </figcaption>
+        </figure>
 
         {/* Workspaces: the real switcher, built at poster size. */}
         <figure className="a-w t-wide rise" style={{ backgroundColor: "#f1f1ee" }}>

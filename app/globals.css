@@ -371,12 +371,16 @@
       "q q q q q q v v v p p p"
       "q q q q q q v v v p p p"
       "t t t d d d w w w w w w"
-      "t t t d d d w w w w w w";
+      "t t t d d d w w w w w w"
+      "s s s s s s s b b b b b"
+      "s s s s s s s b b b b b"
+      "s s s s s s s b b b b b";
   }
   .board .t-wide, .board .t-big, .board .t-sm { grid-column: auto; grid-row: auto; }
   .board .a-h { grid-area: h; } .board .a-c { grid-area: c; } .board .a-q { grid-area: q; }
   .board .a-v { grid-area: v; } .board .a-p { grid-area: p; } .board .a-t { grid-area: t; }
   .board .a-d { grid-area: d; } .board .a-w { grid-area: w; }
+  .board .a-s { grid-area: s; } .board .a-b { grid-area: b; }
 }
 .board .shot { position: absolute; max-width: none; height: auto; transition: transform 0.7s var(--ease-out); }
 .board > *:hover .shot { transform: translate(-6px, 6px); }

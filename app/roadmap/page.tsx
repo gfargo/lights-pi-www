@@ -4,7 +4,7 @@ import { PageHead, SectionHead } from "@/components/PageHead";
 export const metadata = {
   title: "Roadmap — Lights Pi | Shipping cadence + what's next",
   description:
-    "What Lights Pi has shipped through v2.16 — MCP server, agentic chat, live sync, MIDI and OSC, workspaces, HTTPS over Tailscale — and what's next.",
+    "What Lights Pi has shipped through v2.19 — MCP server, agentic chat, a Stage plan, a cue timeline, audio-reactive lighting, MIDI and OSC, workspaces, HTTPS over Tailscale — and what's next.",
   openGraph: {
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     title: "Roadmap — Lights Pi",
@@ -274,6 +274,42 @@ const roadmap: RoadmapQuarter[] = [
           "Fixes a cross-thread lock bug that could stall every scene change, adds a watchdog that rebuilds a stuck link in seconds, and reports link health on /healthz.",
         release: "v2.16.2",
       },
+      {
+        title: "v2.17.0 — branded, thumb-first control UI",
+        description:
+          "Your own logo and accent colour per install. On a phone, scenes and Blackout sit under your thumb with a bottom tab bar.",
+        release: "v2.17.0",
+      },
+      {
+        title: "v2.18.0 — the Stage plan",
+        description:
+          "A plan of the room with every fixture in its live colour. Drag fixtures into place, select a few and make them a group.",
+        release: "v2.18.0",
+      },
+      {
+        title: "v2.18.1 — Stage commands, OSC panel, sound-reactive light",
+        description:
+          "Pick fixtures on the plan and aim commands at just those. An OSC panel with feedback to TouchOSC. Lights flash on kicks and snares, and colour follows loudness.",
+        release: "v2.18.1",
+      },
+      {
+        title: "v2.19.0 — cue timeline + bands to fixtures",
+        description:
+          "Drag cues along a timeline over the show's waveform and scrub to preview any moment. Bass, mids and highs each drive their own fixtures.",
+        release: "v2.19.0",
+      },
+      {
+        title: "Automated workspace backups",
+        description:
+          "Nightly snapshots of fixtures, scenes, chases and cue lists, pruned to a daily, weekly and monthly set.",
+        issue: 31,
+      },
+      {
+        title: "Mock DMX device",
+        description:
+          "Develop against a virtual rig with MOCK_DMX=1 — no Pi, no ENTTEC, no fixtures required.",
+        issue: 34,
+      },
     ],
   },
   {
@@ -290,45 +326,14 @@ const roadmap: RoadmapQuarter[] = [
       {
         title: "OSC control surfaces",
         description:
-          "The OSC listener exists; next is a TouchOSC layout and testing with QLab cue stacks.",
+          "The OSC panel and feedback are in; a TouchOSC layout built from your workspace is waiting on a tablet check, then QLab cue stacks.",
         issue: 27,
       },
       {
-        title: "Visual cue list timeline editor",
+        title: "Sound-reactive light, tried with a real mic",
         description:
-          "Preview and waveform endpoints are in; next is the drag-and-drop timeline against an audio track.",
-        issue: 29,
-      },
-      {
-        title: "Visual stage layout editor",
-        description:
-          "Fixture positions are stored; next is dragging fixtures onto a stage map.",
-        issue: 36,
-      },
-    ],
-  },
-  {
-    status: "planned",
-    quarter: "Next",
-    heading: "Confidence",
-    items: [
-      {
-        title: "Integration test layer",
-        description:
-          "Wider end-to-end coverage across Flask, MCP, and cue playback.",
-        issue: 24,
-      },
-      {
-        title: "Automated workspace backups",
-        description:
-          "Scheduled snapshots of fixtures, scenes, chases and cue lists, restorable from the web UI.",
-        issue: 31,
-      },
-      {
-        title: "Mock DMX device",
-        description:
-          "Develop against a virtual rig — no Pi, no ENTTEC, no fixtures required.",
-        issue: 34,
+          "Every mode is built: flash on hits, colour follows loudness, bands to fixtures. Next is tuning against a real microphone in the room.",
+        issue: 12,
       },
     ],
   },
@@ -375,7 +380,7 @@ export default function RoadmapPage() {
               <span className="text-amber-tungsten font-medium">{counts.shipped} shipped</span>, {counts.planned} in
               progress or planned
             </p>
-            <p className="mt-1">Latest release v2.16.2, November 2026</p>
+            <p className="mt-1">Latest release v2.19.0, November 2026</p>
           </>
         }
       />

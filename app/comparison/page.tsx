@@ -39,7 +39,7 @@ const ROWS: { feature: string; cells: [string, string, string] }[] = [
   },
   {
     feature: "Other inputs",
-    cells: ["MIDI, timecode and network protocols, varies by desk", "Voice assistants and the vendor's integrations", "HTTP API, OSC, MIDI, and MCP with 48 tools for AI agents"],
+    cells: ["MIDI, timecode and network protocols, varies by desk", "Voice assistants and the vendor's integrations", "HTTP API, OSC, MIDI, and MCP with 57 tools for AI agents"],
   },
   {
     feature: "Physical faders",
